@@ -51,6 +51,10 @@ Windows / AMD Ryzen 7 5800H；JS release 构建；每库打开 100 次、预热 
 
 0.1.0 的 JSONL 重编码会改变大整数；新增原文嵌入与数值回归。signaling NaN 原始位问题经过实际失败复现再修复，失败日志保留在 verification/regressions。五轮完整记录见 [ITERATIONS.md](ITERATIONS.md)，不删除失败历史来制造全程通过的印象。
 
+[第二次 Windows CI](https://github.com/HhWw96/moonmmdb/actions/runs/35110232483)在 Node.js 24.20.0 下出现合法 payload 上限样本的 V8 heap OOM（20/21），原报告保留为 `verification/regressions/windows-ci-boundary-heap-128.json`。本机 Node.js 24.13.0 在原 128 MiB 限制下连续 12 次通过，因此未宣称本机重现了该崩溃；以 256 MiB 运行时，完整查询后的 JS heap 观测约 144.9 MiB，说明序列化后的运行时存储明显大于 2 MiB 解码载荷预算。
+
+边界检查现对预期成功的合法记录提供 256 MiB V8 old-space；预期拒绝的文件和 8 个恶意样例继续使用 128 MiB，所有用例保留 8 秒超时及原结果断言。此修正只调整测试进程预算，没有放宽库的载荷/深度/值数限制。两档都不是操作系统 RSS 上限，实际峰值可更高；不承诺合法 2 MiB 记录可在 128 MiB 进程内处理。
+
 ## 未验证或未完成
 
 - Native 的 MSVC 路径、Linux/macOS 与更新版 MoonBit 工具链：尚未执行；本机固定 GCC 工具链已验证，见 [补充报告](NATIVE_PRODUCTION.md)。
