@@ -1,0 +1,4 @@
+{"ip":"1.0.0.1","path":"/home","bytes":1024}
+{"ip":"1.0.0.2","path":"/api/items","bytes":2048}
+{"ip":"1.128.0.1","path":"/health","bytes":64}
+{"ip":"255.255.255.255","path":"/unknown","bytes":0}
