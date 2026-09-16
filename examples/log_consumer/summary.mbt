@@ -7,19 +7,18 @@ pub fn summarize(reader : @mmdb.Reader, ips : Array[String]) -> Json {
   let mut without_asn = 0
   for ip in ips {
     try {
-      let result = reader.lookup(ip)
-      match result.value {
-        None => not_found = not_found + 1
-        Some(value) => {
+      let result = reader.project(ip, ["/autonomous_system_number"])
+      if !result.record_found {
+        not_found = not_found + 1
+      } else {
           found = found + 1
-          match value.get("autonomous_system_number") {
+          match result.fields[0].1 {
             Some(Unsigned32(asn)) => {
               let key = asn.to_string()
               counts[key] = counts.get(key).unwrap_or(0) + 1
             }
             _ => without_asn = without_asn + 1
           }
-        }
       }
     } catch { _ => errors = errors + 1 }
   }

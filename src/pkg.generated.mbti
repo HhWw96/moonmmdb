@@ -45,11 +45,19 @@ pub(all) struct Metadata {
   raw : Value
 } derive(Eq, @debug.Debug)
 
+pub(all) struct Projection {
+  record_found : Bool
+  prefix_length : Int
+  fields : Array[(String, Value?)]
+} derive(Eq, @debug.Debug)
+pub fn Projection::to_json(Self) -> Json
+
 pub struct Reader {
   // private fields
 }
 pub fn Reader::lookup(Self, String) -> Lookup raise MmdbError
 pub fn Reader::metadata(Self) -> Metadata
+pub fn Reader::project(Self, String, Array[String]) -> Projection raise MmdbError
 
 pub(all) enum Value {
   Text(String)
@@ -65,6 +73,7 @@ pub(all) enum Value {
   List(Array[Value])
   Object(Array[(String, Value)])
 } derive(Eq, @debug.Debug)
+pub fn Value::at_pointer(Self, String) -> Self? raise MmdbError
 pub fn Value::get(Self, String) -> Self?
 pub fn Value::text(Self) -> String?
 pub fn Value::to_tagged_json(Self) -> Json

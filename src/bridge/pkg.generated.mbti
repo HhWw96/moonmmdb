@@ -8,6 +8,8 @@ pub fn metadata(Handle) -> String
 
 pub fn open_database(Bytes) -> Handle
 
+pub fn project(Handle, String, Array[String]) -> String
+
 // Errors
 
 // Types and methods

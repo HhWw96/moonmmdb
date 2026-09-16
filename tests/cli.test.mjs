@@ -39,6 +39,24 @@ test('multiple queries distinguish misses and errors with error precedence', () 
   assert.equal(result.rows[2].code, 'invalid-ip');
 });
 
+test('field projection supports real country and coordinate paths without hiding missing fields', () => {
+  const result = cli(['project',fixture('GeoIP2-City-Test.mmdb'),'2001:218::','/country/iso_code','/location/latitude','/absent']);
+  assert.equal(result.code,0);
+  assert.equal(result.rows[0].fields['/country/iso_code'].value.value,'JP');
+  assert.equal(result.rows[0].fields['/location/latitude'].value.type,'float64');
+  assert.equal(result.rows[0].fields['/absent'].status,'missing');
+  assert.equal(cli(['project',db,'1.1.1.3','/bad~2']).rows[0].code,'invalid-path');
+  assert.equal(cli(['project',fixture('MaxMind-DB-test-ipv4-24.mmdb'),'255.255.255.255','/ip']).code,1);
+});
+
+test('enrichment can select only ASN fields while preserving a missing-field status', () => {
+  const result = cli(['enrich',fixture('GeoLite2-ASN-Test.mmdb'),'examples/access.jsonl','--field','/autonomous_system_number','--field','/absent']);
+  assert.equal(result.code,1);
+  assert.equal(result.rows[0].mmdb.fields['/autonomous_system_number'].value.value,'15169');
+  assert.equal(result.rows[0].mmdb.fields['/absent'].status,'missing');
+  assert.equal(result.rows[0].mmdb.record,undefined);
+});
+
 test('opening snapshots mutable host bytes and independent handles remain valid', () => {
   const bytes = readFileSync(db);
   const first = open_database(bytes);

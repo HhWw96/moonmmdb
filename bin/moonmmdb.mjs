@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 // Host I/O only. MMDB parsing, traversal, typed results and diagnostics are MoonBit.
 import { openSync, fstatSync, readSync, closeSync } from 'node:fs';
-import { open_database, metadata, lookup } from '../dist/core.mjs';
+import { open_database, metadata, lookup, project } from '../dist/core.mjs';
 
 const help = `MoonMMDB 0.1.0 — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
-  node bin/moonmmdb.mjs enrich DATABASE.mmdb INPUT.jsonl
+  node bin/moonmmdb.mjs project DATABASE.mmdb IP POINTER [POINTER ...]
+  node bin/moonmmdb.mjs enrich DATABASE.mmdb INPUT.jsonl [--field POINTER ...]
   node bin/moonmmdb.mjs --help | --version
 
 enrich expects one JSON object per line with an "ip" string; output keeps the
 input under "input" and puts the lookup under "mmdb". Maximum 10,000 records.
 Queries return typed JSON; integer values are strings and bytes are hex.
+Pointers use /country/iso_code, /array/0, ~0 for ~ and ~1 for /. Up to 64 paths.
+Projection decodes one complete bounded record. Missing fields are explicit.
 Exit codes: 0 all found/opened; 1 at least one not_found; 2 any input/read/query error.
 Database maximum 256 MiB; JSONL maximum 8 MiB. No DNS or remote database downloads.
 `;
@@ -48,15 +51,21 @@ try {
   if (command === '--help' && !database) await write(help);
   else if (command === '--version' && !database) await write('0.1.0\n');
   else {
-    if (!['metadata', 'lookup', 'enrich'].includes(command) || !database ||
+    if (!['metadata', 'lookup', 'project', 'enrich'].includes(command) || !database ||
       (command === 'metadata' && args.length !== 0) ||
       (command === 'lookup' && (args.length === 0 || args.length > 10000)) ||
-      (command === 'enrich' && args.length !== 1)) throw new Error('Invalid arguments. Use --help.');
+      (command === 'project' && (args.length < 2 || args.length > 65)) ||
+      (command === 'enrich' && (args.length < 1 || args.length > 129 || args.length % 2 !== 1 || args.some((arg,index) => index % 2 === 1 && arg !== '--field')))) throw new Error('Invalid arguments. Use --help.');
+    const paths = command === 'enrich' ? args.filter((_, index) => index > 0 && index % 2 === 0) : [];
     const reader = open_database(readBounded(database, 268435456));
     const info = JSON.parse(metadata(reader));
     if (info.status === 'error' || command === 'metadata') {
       await emit(info);
       process.exitCode = statusCode(info);
+    } else if (command === 'project') {
+      const result = JSON.parse(project(reader, args[0], args.slice(1)));
+      await emit({ip:args[0], ...result});
+      process.exitCode = statusCode(result);
     } else if (command === 'lookup') {
       let code = 0;
       for (const ip of args) {
@@ -81,7 +90,7 @@ try {
           code = 2;
           continue;
         }
-        const result = JSON.parse(lookup(reader, input.ip));
+        const result = JSON.parse(paths.length ? project(reader, input.ip, paths) : lookup(reader, input.ip));
         // Validation above does not authorize re-encoding customer numbers.
         // Embed the validated original JSON object to retain integer/exponent tokens.
         await write(`{"line":${index + 1},"input":${lines[index]},"mmdb":${JSON.stringify(result)}}\n`);

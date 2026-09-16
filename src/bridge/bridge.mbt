@@ -39,3 +39,15 @@ pub fn lookup(handle : Handle, ip : String) -> String {
     None => handle.error.unwrap()
   }
 }
+
+///|
+#export_name("project")
+pub fn project(handle : Handle, ip : String, paths : Array[String]) -> String {
+  match handle.reader {
+    Some(reader) =>
+      reader.project(ip, paths).to_json().stringify() catch {
+        e => e.to_json().stringify()
+      }
+    None => handle.error.unwrap()
+  }
+}
