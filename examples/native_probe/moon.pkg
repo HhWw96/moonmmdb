@@ -1,0 +1,13 @@
+import {
+  "WeiR-h/moonmmdb" @mmdb,
+  "moonbitlang/core/env",
+  "moonbitlang/core/json",
+  "moonbitlang/core/encoding/utf8",
+}
+
+pkgtype(kind: "executable")
+
+options(
+  "native-stub": [ "io.c" ],
+  link: { "native": { "cc-link-flags": "-lshell32" } },
+)

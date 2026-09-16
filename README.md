@@ -2,7 +2,7 @@
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**当前版本：0.2.0。五轮本地迭代版，尚未发布 GitHub / Mooncakes，也未提交赛事复审。** “原生”指查询和解码使用 MoonBit 实现；已验证 JavaScript 与 Wasm GC 后端，Native 后端尚未验证。[五轮修改与问题记录](docs/ITERATIONS.md)
+**当前版本：0.2.0。五轮本地迭代版，尚未发布 GitHub / Mooncakes，也未提交赛事复审。** 查询和解码使用 MoonBit 实现；已验证 JavaScript、Wasm GC 及固定工具链下的 Windows x64 Native 后端。新增两套真实 DB-IP Lite 数据库对照。[五轮修改记录](docs/ITERATIONS.md) · [Native 与真实数据库验证](docs/NATIVE_PRODUCTION.md)
 
 读取调用方提供的数据库，返回 IP 对应的记录、匹配前缀和明确错误。无需在线查询服务；国家、ASN 或组织自定义字段由数据库决定。随项目提供的是官方人工测试数据，**不代表这些 IP 当前的真实归属**。
 
@@ -72,7 +72,7 @@ node scripts/consumer-verify.mjs
 - 越界、截断、非法类型、坏指针、循环和资源预算错误。
 - 离线 CLI、JSONL 日志字段补充和独立 MoonBit ASN 汇总示例。
 
-当前不提供数据库写入、自动下载更新、整库遍历、惰性字段解码、内存映射、在线 IP 情报或网页界面。字段提取先完整解码一次，再选择输出，错误和资源预算不能被跳过。已经验证约 31 MB、65,536 网段的合成库；完整 GeoLite2/GeoIP2 大库与真实生产负载尚未验证。详见 [支持矩阵](docs/SUPPORT.md)。
+当前不提供数据库写入、自动更新、整库遍历、惰性字段解码、内存映射、在线 IP 情报或网页界面。字段提取先完整解码一次，再选择输出，错误和资源预算不能被跳过。已经验证约 31 MB、65,536 网段的合成库，以及约 8.3 MB Country 和 127.3 MB City 两套真实 DB-IP Lite 库的确定性抽样查询；付费 GeoIP2 大库与长期生产服务负载尚未验证。详见 [支持矩阵](docs/SUPPORT.md)。
 
 从 0.1.0 升级：MoonBit `Real32` / `Real64` 现在携带 `Float32Value` / `Float64Value`，使用 `.bits` 获取原始位，`.number()` 获取运算值，避免 signaling NaN 转换改变原始位。CLI 的浮点 JSON 结构不变。
 
@@ -94,6 +94,16 @@ node scripts/release-verify.mjs
 测试数据固定到 MaxMind-DB 提交 `7fcd868842970b2d0657af799807cbe722fb738d`，原始字节和 SHA-256 已随库保存。重新获取可运行 `python scripts/prepare-fixtures.py`，它核对整个归档散列值；生成测试源码后用 `moon fmt` 整理格式。
 
 本地验证结果与限制见 [验证报告](docs/VERIFICATION.md)。GitHub Actions 配置已经准备，尚无远端运行结果。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
+
+Windows Native 与真实数据库补充验证（需 Python 3.12 参考环境，首次下载工具链和数据）：
+
+```text
+python scripts/setup-native-windows.py
+python scripts/download-production.py
+node scripts/extended-verify.mjs
+```
+
+也可把 Python 可执行文件路径作为 extended-verify.mjs 的第一个参数传入。该流程重新执行完整发布验证，再执行 Native、宿主路径、官方异常样例与真实库对照，将源码、EXE、JS 和报告散列值绑定到 extended.json。数据来源和工具链固定版本见 [补充报告](docs/NATIVE_PRODUCTION.md)。下载辅助脚本只用于验证，不是运行时自动更新功能。
 
 ## 来源与生态边界
 

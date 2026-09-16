@@ -52,4 +52,8 @@ project 允许 1–64 个不同路径，每个最长 2,048 个 UTF-16 码元、1
 
 ## 后端
 
-已在 Windows 的 JavaScript、Wasm GC 后端执行核心测试。CLI 使用 Node.js，属于 JS 后端。Native 本轮因本机没有 C 编译器而未能建立构建计划；没有将其标为通过。未声称支持 Linux/macOS 实机、浏览器 UI、WASI Component 或全数据库规模负载。
+已在 Windows 的 JavaScript、Wasm GC 和 Native 后端执行核心测试。Native 范围为 Windows x64、MoonBit 0.10.11、GCC 16.2.0，调试与发布各 18 组通过；另有独立消费者及 29 个异常/边界文件验证。当前 MoonBit nightly 文档推荐的 Windows MSVC 路径尚未验证；不能外推为最新工具链支持。
+
+产品 CLI 仍使用 Node.js。独立 Native 文件验证程序见 examples/native_probe，宿主 C 代码只负责路径、文件与计时，核心 MMDB 包不依赖 C 读取器。实际运行已覆盖中文、空格及非 BMP 字符路径。未验证 Linux/macOS 实机、浏览器 UI 或 WASI Component。
+
+Native 与 JS 分别读取完整的 DB-IP Lite 2026-09 Country（8,340,464 字节）与 City（127,339,927 字节）文件，每库抽查 5,000 地址，与 maxminddb 3.2.0 Python/C 参考一致。结果是抽样读取正确性证据，不是全记录、真实定位准确率、商业数据库或长期服务稳定性证明。[详细范围与复现](NATIVE_PRODUCTION.md)

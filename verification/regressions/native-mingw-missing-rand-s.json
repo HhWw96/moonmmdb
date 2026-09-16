@@ -1,0 +1,14 @@
+{
+  "started": "2026-09-16T13:48:42.454Z",
+  "status": "failed",
+  "platform": "win32",
+  "arch": "x64",
+  "compiler_override": "C:\\Users\\何浩然\\Desktop\\Competition\\MoonBit 黑客松\\MoonMMDB\\verification\\local\\toolchains\\extracted\\w64devkit\\bin\\gcc.exe",
+  "source_sha256": "0166b815e9b90db52c3bdeb6617e1b6c250022c1e71e6238243819bd1ade53aa",
+  "steps": [],
+  "toolchain": "moon 0.1.20260827 (d0aaa07 2026-08-27) ~\\Desktop\\Competition\\MoonBit 黑客松\\MoonAPI Check\\.tools\\moon\\bin\\moon.exe\nmoonc v0.10.11+6ff76a5f9 (2026-08-28) ~\\Desktop\\Competition\\MoonBit 黑客松\\MoonAPI Check\\.tools\\moon\\bin\\moonc.exe\nmoonrun 0.1.20260827 (d0aaa07 2026-08-27) ~\\Desktop\\Competition\\MoonBit 黑客松\\MoonAPI Check\\.tools\\moon\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg\n",
+  "c_compiler": "gcc.exe (GCC) 16.2.0\r\nCopyright (C) 2026 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.",
+  "c_compiler_sha256": "9a52de3e3af8f4896e963c4b68ed159f049954775decb20e421cd75d51aab6ed",
+  "error": "MoonBit failed (1): C:\\Users\\何浩然\\Desktop\\Competition\\MoonBit 黑客松\\MoonAPI Check\\.tools\\moon\\lib\\runtime\\env.c: In function 'moonbit_rt_get_random':\nC:\\Users\\何浩然\\Desktop\\Competition\\MoonBit 黑客松\\MoonAPI Check\\.tools\\moon\\lib\\runtime\\env.c:181:9: error: implicit declaration of function 'rand_s'; did you mean 'rand'? [-Wimplicit-function-declaration]\n  181 |     if (rand_s(&word) != 0) return -1;\n      |         ^~~~~~\n      |         rand\n",
+  "finished": "2026-09-16T13:48:47.685Z"
+}

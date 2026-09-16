@@ -8,6 +8,8 @@
     "test": "node scripts/test.mjs",
     "verify": "node scripts/verify.mjs",
     "verify:release": "node scripts/release-verify.mjs",
+    "verify:native": "node scripts/native-verify.mjs",
+    "verify:extended": "node scripts/extended-verify.mjs",
     "demo": "node scripts/demo.mjs"
   },
   "engines": {"node": ">=22"}

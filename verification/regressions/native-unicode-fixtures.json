@@ -1,0 +1,272 @@
+{
+  "started": "2026-09-16T14:00:27.604203+00:00",
+  "status": "failed",
+  "executable_sha256": "cf30add88d33dc99c6a92ce9a6eb087b67f73696848321b761a0b44986443fd5",
+  "results": [
+    {
+      "file": "MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "payload-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "payload-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "payload-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "payload-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "payload-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "group": "adversarial",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-deep-array-nesting.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "depth-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-deep-nesting.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "depth-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-metadata-marker-only.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-offset-integer-overflow.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-oversized-array.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-oversized-map.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-separator-record-max-left.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "invalid-tree-pointer",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-separator-record-min-left.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "invalid-tree-pointer",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-separator-record-min-right.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "invalid-tree-pointer",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "libmaxminddb-uint64-max-epoch.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": null,
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "cyclic-data-structure.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "invalid-bytes-length.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "invalid-data-record-offset.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "invalid-utf8",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "invalid-map-key-length.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "invalid-string-length.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "metadata-is-an-uint128.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "unexpected-bytes.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "out-of-bounds",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "bad-unicode-in-map-key.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "invalid-separator",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": null,
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-value-limit.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "group": "boundary",
+      "passed": false,
+      "expected_code": "value-limit",
+      "actual_status": "error",
+      "actual_code": "host-input-error",
+      "exit_code": 2
+    }
+  ],
+  "limits": "8 seconds per process; MoonMMDB default decode limits. No OS RSS cap asserted.",
+  "cases": 29,
+  "passed": 0,
+  "finished": "2026-09-16T14:00:28.253998+00:00"
+}

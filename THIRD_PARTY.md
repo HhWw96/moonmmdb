@@ -7,6 +7,9 @@
 | 嵌入测试字节 | 同上 | src/fixtures_wbtest.mbt、examples/log_consumer/fixture.mbt 为脚本生成，保留来源标记，不作为原创代码行数宣传 |
 | Python 参考读取器 | maxminddb 3.2.0，https://github.com/maxmind/MaxMind-DB-Reader-python | Apache-2.0；仅在验证环境使用，不作为运行时依赖 |
 | MoonBit core | 官方工具链 core 包 | Apache-2.0；使用 UTF-8、JSON、数值等基础能力 |
+| 真实验证数据库 | DB-IP Lite Country / City，2026-09；https://db-ip.com/db/lite.php | CC BY 4.0；署名 IP Geolocation by DB-IP https://db-ip.com/；原始数据库只存本地忽略目录，工程交付包包含来源与固定散列值及下载脚本 |
+| Native C 编译工具 | w64devkit 2.10.0 / GCC 16.2.0；https://github.com/skeeto/w64devkit/releases/tag/v2.10.0 | 外部验证工具，不捆绑工具链；各组件遵循上游各自许可证，GCC 运行库例外按上游条款适用 |
+| 编译工具解压器 | 7-Zip Reduced 26.03；https://www.7-zip.org/ | 仅在忽略目录解压固定散列值的工具归档，不作为项目运行时依赖 |
 
 MaxMind 测试数据版权归 MaxMind, Inc.。原始文件的散列值在 tests/fixtures/manifest.json 与 adversarial/manifest.json。项目未捆绑生产 GeoLite2/GeoIP2 全量数据库。
 

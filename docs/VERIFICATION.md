@@ -15,6 +15,8 @@
 | 合成规模库 | 31,064,069 字节，65,536 个 /16 网段，28 位节点；5,000 次完整记录及前缀与 Python / 数学预期一致 |
 | 确定性变异 | 2,048 份截断/位修改输入，无未处理崩溃；1,212 份可打开、836 份在打开阶段拒绝 |
 | 独立 MoonBit 消费者 | 本地 workspace 的独立模块，JS/Wasm GC 各 1 组 ASN 汇总测试通过 |
+| Windows x64 Native 补充 | 固定 MoonBit 0.10.11 + GCC 16.2.0；核心 debug/release 各 18 组，独立消费者 1 组，29 个官方异常/边界文件通过 |
+| 真实 DB-IP Lite 补充 | 2026-09 Country / City 各 5,000 地址；Native 与 JS 的完整记录、前缀和 7 字段投影全部与参考一致；Python/C 在该样本也无分歧 |
 
 原始运行记录位于 `verification/local`。`npm run verify` 重新生成各步骤日志；参考、归档消费和性能分别由对应脚本生成记录。正式交付时的汇总和归档复验结果见交付包内的 `DELIVERY.json`。
 
@@ -49,7 +51,7 @@ Windows / AMD Ryzen 7 5800H；JS release 构建；每库打开 100 次、预热 
 
 ## 未验证或未完成
 
-- Native 后端：本机无 cl/cc/gcc/clang，构建计划失败；不得标为通过。
+- Native 的 MSVC 路径、Linux/macOS 与更新版 MoonBit 工具链：尚未执行；本机固定 GCC 工具链已验证，见 [补充报告](NATIVE_PRODUCTION.md)。
 - GitHub 远端 CI、Linux/macOS 实机与 Mooncakes 注册表安装：尚未执行。
-- 全量真实数据库、长期服务稳定性、mmap、真实业务用户与 MoonCap 集成：尚未验证或实现。
+- 真实数据库每条记录穷举、付费 GeoIP2 数据库、真实定位准确率、长期服务稳定性、mmap、真实业务用户与 MoonCap 集成：尚未验证或实现。
 - 主办方初审、最终验收、奖励支持及奖项：没有结果。

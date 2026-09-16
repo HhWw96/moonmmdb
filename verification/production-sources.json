@@ -1,0 +1,32 @@
+[
+  {
+    "file": "dbip-country-lite-2026-09.mmdb",
+    "url": "https://dbip.mirror.framasoft.org/files/dbip-country-lite-2026-09.mmdb.gz",
+    "official_download": "https://download.db-ip.com/free/dbip-country-lite-2026-09.mmdb.gz",
+    "official_page": "https://db-ip.com/db/download/ip-to-country-lite",
+    "retrieved_at": "2026-09-16T13:35:26.663217+00:00",
+    "bytes": 8340464,
+    "md5": "d4c12ea6949d09b6a975084ea405d51c",
+    "sha1": "385d4ab1e08417634a0a64921ac0e9c15c4c5e8a",
+    "sha256": "d284ae2e7427fe33d83465e1506b2b21aae47eb8a9b099f8f4dac6a98c99f041",
+    "gzip_sha256": "cb0578ce59f569f2c933bb40feb820804a334855a60739011b0a89cab1d6e4ed",
+    "license": "CC BY 4.0",
+    "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
+    "origin_note": "Official download returned HTTP 403; public Framasoft mirror bytes checked against official uncompressed SHA1."
+  },
+  {
+    "file": "dbip-city-lite-2026-09.mmdb",
+    "url": "https://dbip.mirror.framasoft.org/files/dbip-city-lite-2026-09.mmdb.gz",
+    "official_download": "https://download.db-ip.com/free/dbip-city-lite-2026-09.mmdb.gz",
+    "official_page": "https://db-ip.com/db/download/ip-to-city-lite",
+    "retrieved_at": "2026-09-16T13:39:15.173152+00:00",
+    "bytes": 127339927,
+    "md5": "8a0a03f5b9098ba9f2e28f920473d6c1",
+    "sha1": "6ea870a637b5460023643fc18fdea84dcea14b9c",
+    "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+    "gzip_sha256": "c5d05b35a45c3eea0cadc728c8f5ad751693d4e270529b731442172a73f05954",
+    "license": "CC BY 4.0",
+    "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
+    "origin_note": "Official download returned HTTP 403; public Framasoft mirror bytes checked against official uncompressed SHA1."
+  }
+]

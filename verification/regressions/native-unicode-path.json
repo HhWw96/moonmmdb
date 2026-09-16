@@ -1,0 +1,12 @@
+{
+  "started": "2026-09-16T14:00:23.484446+00:00",
+  "status": "failed",
+  "databases": [],
+  "seed": "0x50524f44",
+  "reference": "maxminddb 3.2.0 Python MODE_MEMORY and C MODE_MMAP_EXT",
+  "limits": "Deterministic sampled lookup correctness on real DB-IP Lite data. Not verification of real-world geolocation accuracy, every database record, paid GeoIP products or long-running service stability.",
+  "native_executable_sha256": "cf30add88d33dc99c6a92ce9a6eb087b67f73696848321b761a0b44986443fd5",
+  "js_core_sha256": "4926cd3da7f49f8327ae60911e2b1b3c1e4739bd8ec382d978acaa2a223eee8b",
+  "error": "native worker failed: {\"status\":\"error\",\"code\":\"host-input-error\",\"io_code\":1}\n",
+  "finished": "2026-09-16T14:00:24.910359+00:00"
+}

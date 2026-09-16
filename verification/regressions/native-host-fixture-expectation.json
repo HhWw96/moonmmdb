@@ -1,0 +1,29 @@
+{
+  "started": "2026-09-16T14:10:31.351518+00:00",
+  "status": "failed",
+  "executable_sha256": "7c4adeb8b4d03b30f6a8936aa31ef44d8e01730d0dd0b609a532fa4744c273aa",
+  "cases": [
+    {
+      "name": "unicode-and-astral-paths-crlf-portable-exe",
+      "passed": false,
+      "exit_code": 0
+    },
+    {
+      "name": "missing-file",
+      "passed": true,
+      "exit_code": 2
+    },
+    {
+      "name": "host-size-cap",
+      "passed": true,
+      "exit_code": 2
+    },
+    {
+      "name": "invalid-ip-list-encoding",
+      "passed": true,
+      "exit_code": 2
+    }
+  ],
+  "scope": "Windows x64 EXE copied to a new Unicode/space/astral path; PATH contains only Windows System32. This is a verification transport, not the Node CLI.",
+  "finished": "2026-09-16T14:10:31.697452+00:00"
+}
