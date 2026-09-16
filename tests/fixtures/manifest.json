@@ -1,0 +1,83 @@
+{
+  "source": "https://codeload.github.com/maxmind/MaxMind-DB/zip/7fcd868842970b2d0657af799807cbe722fb738d",
+  "commit": "7fcd868842970b2d0657af799807cbe722fb738d",
+  "archive_sha256": "2aad1dc1c439b91e5cb455a9bf61d2984d1590a2db17a09886c1de0d9e6af15e",
+  "license": "Apache-2.0 OR MIT",
+  "files": [
+    {
+      "file": "MaxMind-DB-test-ipv4-24.mmdb",
+      "bytes": 1285,
+      "sha256": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02"
+    },
+    {
+      "file": "MaxMind-DB-test-ipv4-28.mmdb",
+      "bytes": 1448,
+      "sha256": "fd0102ee5e1b72b17d00ee01599547e641186f6561f037b91f5df6102416dbb4"
+    },
+    {
+      "file": "MaxMind-DB-test-ipv4-32.mmdb",
+      "bytes": 1611,
+      "sha256": "5924cfd66a7c84ebdb5b45fe94f1efc4e468ff7bf2b39693b37e4c391d89d73a"
+    },
+    {
+      "file": "MaxMind-DB-test-ipv6-24.mmdb",
+      "bytes": 2794,
+      "sha256": "599f1555ce3a568c2d4ad965332dcba87d0d109297636f1b595241247263d98b"
+    },
+    {
+      "file": "MaxMind-DB-test-ipv6-28.mmdb",
+      "bytes": 3209,
+      "sha256": "45681de9db4e09948780a4142782616bd0c3096d4d03b372ed62f007cc5f63b2"
+    },
+    {
+      "file": "MaxMind-DB-test-ipv6-32.mmdb",
+      "bytes": 3624,
+      "sha256": "fe96ba60cbdbecf88151735012407ae9b0638d54ff5a9658238f45aa595564ec"
+    },
+    {
+      "file": "MaxMind-DB-test-decoder.mmdb",
+      "bytes": 3188,
+      "sha256": "1b34970ee2f8b05c03a478e90b8e5266a01ea2f9385f361bfd3d31edd8d4ce3a"
+    },
+    {
+      "file": "GeoIP2-City-Test.mmdb",
+      "bytes": 22569,
+      "sha256": "ed972738e4e03a3e56e12041a6af4d91592249d110f7e4a647e5f2fa0e639c09"
+    },
+    {
+      "file": "GeoLite2-ASN-Test.mmdb",
+      "bytes": 12653,
+      "sha256": "75901b98ed6e58d3bd41af9985044b747a7ec0be1369f930c24f5e044427181a"
+    },
+    {
+      "file": "MaxMind-DB-test-mixed-24.mmdb",
+      "bytes": 3048,
+      "sha256": "f934da8fe7ec4a98dc6bf3bb7b8dbc982316571d221877c79c477eacd0585160"
+    },
+    {
+      "file": "MaxMind-DB-test-mixed-28.mmdb",
+      "bytes": 3492,
+      "sha256": "52b07052973df356468086ae04c30f8e62e40c551f718b64cfa11e7baa5c88b5"
+    },
+    {
+      "file": "MaxMind-DB-test-mixed-32.mmdb",
+      "bytes": 3936,
+      "sha256": "d5f282353e3c7a96be5fbdc5c2b76d9dbff458cde2bc758af6fa19dec57e438a"
+    },
+    {
+      "file": "MaxMind-DB-test-metadata-pointers.mmdb",
+      "bytes": 2249,
+      "sha256": "bab16f958603ff3d926b9e7b9e2fbf94324eac34f5f2d4e7b7750ffd504211c7"
+    },
+    {
+      "file": "MaxMind-DB-no-ipv4-search-tree.mmdb",
+      "bytes": 616,
+      "sha256": "92130dcf5bed199177da541c53ec410de3a2f778091bdaf882ba71280ad01c07"
+    },
+    {
+      "file": "MaxMind-DB-string-value-entries.mmdb",
+      "bytes": 1334,
+      "sha256": "205b089624faf6226d6d2056ede619993a50695f74de9157c7e064af6a9c3703"
+    }
+  ]
+}
