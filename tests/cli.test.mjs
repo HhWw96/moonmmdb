@@ -1,0 +1,81 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { resolve, join } from 'node:path';
+import { spawnSync } from 'node:child_process';
+import { root } from '../scripts/moon.mjs';
+import { open_database, lookup, metadata } from '../dist/core.mjs';
+const fixtures = resolve(root, 'tests/fixtures');
+const fixture = name => join(fixtures, name);
+const db = fixture('MaxMind-DB-test-decoder.mmdb');
+
+function cli(args) {
+  const result = spawnSync(process.execPath, [resolve(root, 'bin/moonmmdb.mjs'), ...args], {cwd: root, encoding:'utf8', timeout:10000, maxBuffer:4*1024*1024});
+  assert.equal(result.error, undefined);
+  return {code:result.status, stderr:result.stderr, text:result.stdout, rows: result.stdout.trim() ? result.stdout.trim().split('\n').map(s => {try{return JSON.parse(s);}catch{return s;}}) : []};
+}
+
+test('help and version require no database or network', () => {
+  assert.match(cli(['--help']).text, /offline MaxMind DB/);
+  assert.equal(cli(['--version']).text.trim(), '0.1.0');
+  assert.equal(cli([]).code, 2);
+});
+
+test('open metadata and preserve exact rich query values', () => {
+  assert.equal(cli(['metadata', db]).rows[0].status, 'opened');
+  const result = cli(['lookup', db, '1.1.1.3']);
+  assert.equal(result.code, 0);
+  assert.equal(result.rows[0].record.value.uint128.value, '1329227995784915872903807060280344576');
+  assert.equal(result.rows[0].record.value.bytes.value, '0000002a');
+});
+
+test('multiple queries distinguish misses and errors with error precedence', () => {
+  const path = fixture('MaxMind-DB-test-ipv4-24.mmdb');
+  assert.equal(cli(['lookup', path, '255.255.255.255']).code, 1);
+  const result = cli(['lookup', path, '1.1.1.1', '255.255.255.255', 'bad-ip']);
+  assert.equal(result.code, 2);
+  assert.deepEqual(result.rows.map(r => r.status), ['found','not_found','error']);
+  assert.equal(result.rows[2].code, 'invalid-ip');
+});
+
+test('opening snapshots mutable host bytes and independent handles remain valid', () => {
+  const bytes = readFileSync(db);
+  const first = open_database(bytes);
+  const other = open_database(readFileSync(fixture('MaxMind-DB-test-ipv4-28.mmdb')));
+  bytes.fill(0);
+  assert.equal(JSON.parse(lookup(first, '1.1.1.3')).record.value.uint128.type, 'uint128');
+  assert.equal(JSON.parse(lookup(other, '1.1.1.3')).prefix_length, 31);
+  assert.equal(JSON.parse(metadata(first)).status, 'opened');
+});
+
+test('host input failures and paths containing Unicode are explicit', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'moonmmdb-test-'));
+  try {
+    const path = join(temp, '示例 数据库.mmdb');
+    writeFileSync(path, readFileSync(db));
+    assert.equal(cli(['lookup', path, '1.1.1.3']).code, 0);
+    assert.equal(cli(['metadata', join(temp, 'missing.mmdb')]).code, 2);
+    assert.equal(cli(['metadata', temp]).code, 2);
+    writeFileSync(path, Buffer.from('not a database'));
+    assert.equal(cli(['metadata', path]).rows[0].code, 'missing-metadata');
+  } finally { rmSync(temp, {recursive:true, force:true}); }
+});
+
+test('JSONL enrichment preserves input, diagnoses each bad line and keeps errors', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'moonmmdb-enrich-'));
+  try {
+    const path = join(temp, 'access.jsonl');
+    writeFileSync(path, '{"ip":"1.1.1.3","path":"/home"}\nnot json\n{"ip":"bad"}\n');
+    const result = cli(['enrich', db, path]);
+    assert.equal(result.code, 2);
+    assert.equal(result.rows.length, 3);
+    assert.equal(result.rows[0].input.path, '/home');
+    assert.equal(result.rows[0].mmdb.status, 'found');
+    assert.equal(result.rows[1].line, 2);
+    assert.equal(result.rows[1].code, 'invalid-jsonl');
+    assert.equal(result.rows[2].mmdb.code, 'invalid-ip');
+    writeFileSync(path, Buffer.from([0xff]));
+    assert.equal(cli(['enrich', db, path]).code, 2);
+  } finally { rmSync(temp, {recursive:true, force:true}); }
+});

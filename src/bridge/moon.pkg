@@ -1,0 +1,10 @@
+import {
+  "WeiR-h/moonmmdb" @mmdb,
+  "moonbitlang/core/json",
+}
+
+pkgtype(kind: "foreign_library")
+
+options(
+  link: { "js": { "format": "esm" } },
+)
