@@ -38,8 +38,14 @@ test "all numeric types retain width sign precision and floating bits" {
     Unsigned128("340282366920938463463374607431768211455"),
   )
   assert_eq(decode_sample(b"\x00\x03"), Unsigned128("0"))
-  assert_eq(decode_sample(b"\x68\x3f\xf0\x00\x00\x00\x00\x00\x00"), Real64(1.0))
-  assert_eq(decode_sample(b"\x04\x08\x3f\x80\x00\x00"), Real32(1.0))
+  assert_eq(
+    decode_sample(b"\x68\x3f\xf0\x00\x00\x00\x00\x00\x00"),
+    Real64({ bits: 0x3ff0000000000000, }),
+  )
+  assert_eq(
+    decode_sample(b"\x04\x08\x3f\x80\x00\x00"),
+    Real32({ bits: 0x3f800000, }),
+  )
   let json = decode_sample(b"\x68\x80\x00\x00\x00\x00\x00\x00\x00").to_tagged_json()
   assert_true(json.stringify().contains("8000000000000000"))
 }
@@ -116,4 +122,91 @@ test "pointer and container failures are bounded" {
   decode_error(b"\x01\x04\x01\x04\x40", "depth-limit", limits=shallow)
   let work = { ..Limits::default(), max_values: 4, }
   decode_error(b"\x02\x04\x01\x04\x40\x01\x04\x40", "value-limit", limits=work)
+}
+
+///|
+test "signaling NaN payload bits survive decoding and JSON output" {
+  let single = decode_sample(b"\x04\x08\x7f\x80\x00\x01")
+    .to_tagged_json()
+    .stringify()
+  assert_true(single.contains("7f800001"))
+  let double = decode_sample(b"\x68\x7f\xf0\x00\x00\x00\x00\x00\x01")
+    .to_tagged_json()
+    .stringify()
+  assert_true(double.contains("7ff0000000000001"))
+}
+
+///|
+test "floating bit containers retain signs infinities and both NaN classes" {
+  for
+    bits in [
+      0U, 0x80000000, 0x7f800000, 0xff800000, 0x7f800001, 0x7fc00001, 0xff800123,
+    ] {
+    let encoded = Bytes::from_array([
+      4,
+      8,
+      (bits >> 24).to_byte(),
+      (bits >> 16).to_byte(),
+      (bits >> 8).to_byte(),
+      bits.to_byte(),
+    ])
+    assert_eq(decode_sample(encoded), Real32({ bits, }))
+    assert_true(
+      decode_sample(encoded)
+      .to_tagged_json()
+      .stringify()
+      .contains(bits.to_string(radix=16)),
+    )
+  }
+  let one : Float32Value = { bits: 0x3f800000, }
+  assert_eq(one.number(), 1.0F)
+  let one : Float64Value = { bits: 0x3ff0000000000000, }
+  assert_eq(one.number(), 1.0)
+}
+
+///|
+test "size extension boundaries include empty and exact budget limits" {
+  for size in [0, 28, 29, 284, 285, 65820, 65821] {
+    let header : Array[Byte] = if size < 29 {
+      [(0x40 + size).to_byte()]
+    } else if size < 285 {
+      [0x5d, (size - 29).to_byte()]
+    } else if size < 65821 {
+      [0x5e, ((size - 285) >> 8).to_byte(), (size - 285).to_byte()]
+    } else {
+      [0x5f, 0, 0, 0]
+    }
+    let data = Bytes::makei(header.length() + size, i => {
+      if i < header.length() {
+        header[i]
+      } else {
+        120
+      }
+    })
+    assert_eq(decode_sample(data), Text("x".repeat(size)))
+    if size > 0 {
+      assert_eq(
+        decode_sample(data, limits={
+          ..Limits::default(),
+          max_payload_bytes: size,
+        }),
+        Text("x".repeat(size)),
+      )
+      decode_error(data, "payload-limit", limits={
+        ..Limits::default(),
+        max_payload_bytes: size - 1,
+      })
+    }
+  }
+  assert_eq(
+    decode_sample(b"\x02\x04\x40\x40", limits={
+      ..Limits::default(),
+      max_values: 3,
+    }),
+    List([Text(""), Text("")]),
+  )
+  decode_error(b"\x02\x04\x40\x40", "value-limit", limits={
+    ..Limits::default(),
+    max_values: 2,
+  })
 }

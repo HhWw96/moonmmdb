@@ -28,14 +28,14 @@ pub fn Value::to_tagged_json(self : Value) -> Json {
     Real32(n) =>
       {
         "type": "float32",
-        "value": n.to_string().to_json(),
-        "bits": n.reinterpret_as_uint().to_string(radix=16).to_json(),
+        "value": n.number().to_string().to_json(),
+        "bits": n.bits.to_string(radix=16).to_json(),
       }
     Real64(n) =>
       {
         "type": "float64",
-        "value": n.to_string().to_json(),
-        "bits": n.reinterpret_as_uint64().to_string(radix=16).to_json(),
+        "value": n.number().to_string().to_json(),
+        "bits": n.bits.to_string(radix=16).to_json(),
       }
     List(items) =>
       tagged("array", Json::array(items.map(item => item.to_tagged_json())))

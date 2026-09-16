@@ -15,11 +15,32 @@ pub(all) enum Value {
   Signed32(Int)
   Unsigned64(UInt64)
   Unsigned128(String)
-  Real32(Float)
-  Real64(Double)
+  Real32(Float32Value)
+  Real64(Float64Value)
   List(Array[Value])
   Object(Array[(String, Value)])
 } derive(Eq, @debug.Debug)
+
+///|
+/// Keep encoded bits authoritative; converting a signaling NaN can quiet it.
+pub(all) struct Float32Value {
+  bits : UInt
+} derive(Eq, @debug.Debug)
+
+///|
+pub fn Float32Value::number(self : Float32Value) -> Float {
+  Float::reinterpret_from_uint(self.bits)
+}
+
+///|
+pub(all) struct Float64Value {
+  bits : UInt64
+} derive(Eq, @debug.Debug)
+
+///|
+pub fn Float64Value::number(self : Float64Value) -> Double {
+  self.bits.reinterpret_as_double()
+}
 
 ///|
 /// Limits apply independently to each open or lookup operation.

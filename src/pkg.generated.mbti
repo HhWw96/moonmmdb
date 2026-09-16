@@ -20,6 +20,16 @@ pub fn MmdbError::offset(Self) -> Int
 pub fn MmdbError::to_json(Self) -> Json
 
 // Types and methods
+pub(all) struct Float32Value {
+  bits : UInt
+} derive(Eq, @debug.Debug)
+pub fn Float32Value::number(Self) -> Float
+
+pub(all) struct Float64Value {
+  bits : UInt64
+} derive(Eq, @debug.Debug)
+pub fn Float64Value::number(Self) -> Double
+
 pub(all) struct Limits {
   max_depth : Int
   max_values : Int
@@ -68,8 +78,8 @@ pub(all) enum Value {
   Signed32(Int)
   Unsigned64(UInt64)
   Unsigned128(String)
-  Real32(Float)
-  Real64(Double)
+  Real32(Float32Value)
+  Real64(Float64Value)
   List(Array[Value])
   Object(Array[(String, Value)])
 } derive(Eq, @debug.Debug)

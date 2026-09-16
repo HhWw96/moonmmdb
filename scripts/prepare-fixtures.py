@@ -23,6 +23,26 @@ ADVERSARIAL = {
     'MaxMind-DB-test-decoder-payload-limit-over.mmdb':'payload-limit',
     'MaxMind-DB-test-decoder-value-limit-over.mmdb':'value-limit',
 }
+BOUNDARIES = {
+    'libmaxminddb/libmaxminddb-deep-array-nesting.mmdb': ('1.1.1.1','depth-limit'),
+    'libmaxminddb/libmaxminddb-deep-nesting.mmdb': ('1.1.1.1','depth-limit'),
+    'libmaxminddb/libmaxminddb-metadata-marker-only.mmdb': ('1.1.1.1','out-of-bounds'),
+    'libmaxminddb/libmaxminddb-offset-integer-overflow.mmdb': ('1.1.1.1','out-of-bounds'),
+    'libmaxminddb/libmaxminddb-oversized-array.mmdb': ('1.1.1.1','value-limit'),
+    'libmaxminddb/libmaxminddb-oversized-map.mmdb': ('1.1.1.1','value-limit'),
+    'libmaxminddb/libmaxminddb-separator-record-max-left.mmdb': ('1.1.1.1','invalid-tree-pointer'),
+    'libmaxminddb/libmaxminddb-separator-record-min-left.mmdb': ('1.1.1.1','invalid-tree-pointer'),
+    'libmaxminddb/libmaxminddb-separator-record-min-right.mmdb': ('128.0.0.1','invalid-tree-pointer'),
+    'libmaxminddb/libmaxminddb-uint64-max-epoch.mmdb': ('1.1.1.1',None),
+    'maxminddb-golang/cyclic-data-structure.mmdb': ('1.1.1.1','out-of-bounds'),
+    'maxminddb-golang/invalid-bytes-length.mmdb': ('1.1.1.1','out-of-bounds'),
+    'maxminddb-golang/invalid-data-record-offset.mmdb': ('1.1.1.1','invalid-utf8'),
+    'maxminddb-golang/invalid-map-key-length.mmdb': ('1.1.1.1','out-of-bounds'),
+    'maxminddb-golang/invalid-string-length.mmdb': ('1.1.1.1','out-of-bounds'),
+    'maxminddb-golang/metadata-is-an-uint128.mmdb': ('1.1.1.1','out-of-bounds'),
+    'maxminddb-golang/unexpected-bytes.mmdb': ('1.1.1.1','out-of-bounds'),
+    'maxminddb-python/bad-unicode-in-map-key.mmdb': ('1.1.1.1','invalid-separator'),
+}
 
 def main():
     parser = argparse.ArgumentParser()
@@ -57,6 +77,17 @@ def main():
             (adversarial/file).write_bytes(data)
             bad_manifest.append({'file':file,'expected_code':code,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
         (adversarial/'manifest.json').write_text(json.dumps(bad_manifest,indent=2)+'\n',encoding='utf-8')
+        boundary = target / 'boundary'
+        boundary.mkdir(exist_ok=True)
+        boundary_manifest = []
+        cases = [('bad-data/'+path, ip, code) for path,(ip,code) in BOUNDARIES.items()]
+        cases += [('test-data/MaxMind-DB-test-decoder-'+suffix+'.mmdb','1.1.1.1',code) for suffix,code in [('payload-limit',None),('value-limit','value-limit'),('value-limit-pointer-heavy','value-limit')]]
+        for source,ip,code in cases:
+            file = source.split('/')[-1]
+            data = archive.read(names[source])
+            (boundary/file).write_bytes(data)
+            boundary_manifest.append({'file':file,'source_path':source,'ip':ip,'expected_code':code,'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()})
+        (boundary/'manifest.json').write_text(json.dumps(boundary_manifest,indent=2)+'\n',encoding='utf-8')
     (target / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
     (ROOT / 'src' / 'fixtures_wbtest.mbt').write_text('\n'.join(generated), encoding='utf-8')
     consumer = ROOT / 'examples/log_consumer'

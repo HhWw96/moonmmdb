@@ -1,0 +1,3 @@
+[WeiR-h/moonmmdb] test decode_wbtest.mbt:122 ("signaling NaN payload bits survive decoding and JSON output") failed: src/decode_wbtest.mbt:124:3-124:43@WeiR-h/moonmmdb FAILED: `false` is not true
+Total tests: 16, passed: 15, failed: 1.
+MoonBit failed (2): 

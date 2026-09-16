@@ -215,14 +215,13 @@ fn decode_value(
         Blob(ctx.data[pos:end].to_owned())
       }
     }
-    3 => Real64(uint_be(ctx, pos, size).reinterpret_as_double())
+    3 => Real64({ bits: uint_be(ctx, pos, size), })
     5 => Unsigned16(uint_be(ctx, pos, size).to_uint())
     6 => Unsigned32(uint_be(ctx, pos, size).to_uint())
     8 => Signed32(uint_be(ctx, pos, size).to_int())
     9 => Unsigned64(uint_be(ctx, pos, size))
     10 => Unsigned128(decimal_bytes(ctx.data, pos, size))
-    15 =>
-      Real32(Float::reinterpret_from_uint(uint_be(ctx, pos, size).to_uint()))
+    15 => Real32({ bits: uint_be(ctx, pos, size).to_uint(), })
     _ => raise MmdbError("unsupported-type", offset, "Unsupported MMDB scalar")
   }
   (value, end)
