@@ -8,6 +8,8 @@ import {
 // Values
 pub fn open_bytes(Bytes, limits? : Limits) -> Reader raise MmdbError
 
+pub fn validate_paths(Array[String]) -> Unit raise MmdbError
+
 pub fn version() -> String
 
 // Errors

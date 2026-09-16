@@ -51,3 +51,15 @@ pub fn project(handle : Handle, ip : String, paths : Array[String]) -> String {
     None => handle.error.unwrap()
   }
 }
+
+///|
+#export_name("validate_paths")
+pub fn validate_paths(paths : Array[String]) -> String {
+  try {
+    @mmdb.validate_paths(paths)
+    let result : Json = { "status": "valid" }
+    result.stringify()
+  } catch {
+    e => e.to_json().stringify()
+  }
+}

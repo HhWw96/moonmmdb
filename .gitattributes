@@ -1,5 +1,6 @@
 * text=auto
 *.mbt text eol=lf
+*.mbti text eol=lf
 *.mjs text eol=lf
 *.py text eol=lf
 *.md text eol=lf

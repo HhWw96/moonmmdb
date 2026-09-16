@@ -140,13 +140,9 @@ fn charge_selection(
 }
 
 ///|
-/// Decode once under the normal per-record budget, then select 1..64 paths.
-/// This is projection of a validated record, not lazy or partial decoding.
-pub fn Reader::project(
-  self : Reader,
-  ip : String,
+fn projection_paths(
   paths : Array[String],
-) -> Projection raise MmdbError {
+) -> Array[Array[String]] raise MmdbError {
   if paths.is_empty() || paths.length() > 64 {
     raise MmdbError("path-limit", -1, "Expected 1 to 64 field paths")
   }
@@ -159,6 +155,24 @@ pub fn Reader::project(
     seen[path] = true
     parsed.push(pointer_tokens(path))
   }
+  parsed
+}
+
+///|
+/// Validate a projection configuration even before any records arrive.
+pub fn validate_paths(paths : Array[String]) -> Unit raise MmdbError {
+  ignore(projection_paths(paths))
+}
+
+///|
+/// Decode once under the normal per-record budget, then select 1..64 paths.
+/// This is projection of a validated record, not lazy or partial decoding.
+pub fn Reader::project(
+  self : Reader,
+  ip : String,
+  paths : Array[String],
+) -> Projection raise MmdbError {
+  let parsed = projection_paths(paths)
   let record = self.lookup(ip)
   // Charge repeated selections too; overlapping paths cannot multiply output freely.
   let budget = {

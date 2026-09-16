@@ -36,18 +36,13 @@ jobs:
           set -euo pipefail
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
-      - name: Core, CLI, consumer and hostile input verification
-        run: node scripts/verify.mjs
       - name: Install independent reference
         run: python -m pip install --target .reference-deps -r requirements-reference.txt
-      - name: Compare actual MoonBit build with reference readers
-        run: python scripts/reference-verify.py
-      - name: Verify archive from a fresh consumer
-        run: python scripts/package-verify.py
-      - name: Save performance conditions and results
-        run: node scripts/benchmark.mjs
+      - name: Verify sources, references, scale, package and performance together
+        run: node scripts/release-verify.mjs
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:
           name: moonmmdb-evidence-${{ matrix.os }}
           path: verification/local/
+          compression-level: 6

@@ -3,6 +3,7 @@ import datetime
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import subprocess
@@ -29,7 +30,11 @@ try:
         env['MOON_HOME']=moon_home
         env['PATH']=str(Path(moon_home)/'bin')+os.pathsep+env.get('PATH','')
     run([moon,'package'],env=env)
-    archive=max((ROOT/'_build/publish').glob('*.zip'),key=lambda p:p.stat().st_mtime_ns)
+    manifest=(ROOT/'moon.mod').read_text(encoding='utf-8')
+    module=re.search(r'^name\s*=\s*"([^"]+)"',manifest,re.M).group(1)
+    version=re.search(r'^version\s*=\s*"([^"]+)"',manifest,re.M).group(1)
+    archive=ROOT/'_build/publish'/(module.replace('/','-')+'-'+version+'.zip')
+    if not archive.is_file(): raise RuntimeError('Expected newly packaged module was not produced')
     report['archive']=archive.name
     report['sha256']=hashlib.sha256(archive.read_bytes()).hexdigest()
     parent=ROOT/'verification/local'

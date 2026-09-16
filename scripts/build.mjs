@@ -4,4 +4,4 @@ import { root, runMoon } from './moon.mjs';
 runMoon(['build', '--target', 'js', '--release']);
 mkdirSync(resolve(root, 'dist'), {recursive: true});
 copyFileSync(resolve(root, '_build/js/release/build/bridge/bridge.js'), resolve(root, 'dist/core.mjs'));
-console.log('Built MoonMMDB 0.1.0 (MoonBit core, JavaScript target).');
+console.log('Built MoonMMDB 0.2.0 (MoonBit core, JavaScript target).');

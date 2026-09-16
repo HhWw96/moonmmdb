@@ -1,4 +1,4 @@
-# 0.1.0 支持范围
+# 0.2.0 支持范围
 
 ## 格式与查询
 
@@ -17,7 +17,7 @@
 
 ## 类型与 JSON
 
-Value 区分 Text、Blob、Boolean、Unsigned16/32/64/128、Signed32、Real32/64、List、Object。UInt128 使用精确十进制字符串；UInt64 使用 MoonBit UInt64。map 保留原条目顺序；重复 key 被本读取器策略拒绝，不宣称所有此类编码都违反格式。
+Value 区分 Text、Blob、Boolean、Unsigned16/32/64/128、Signed32、Real32/64、List、Object。UInt128 使用精确十进制字符串；UInt64 使用 MoonBit UInt64。Real32 / Real64 携带 Float32Value / Float64Value：bits 保存原始位，number() 提供运算数值。这是相对 0.1.0 的类型变更，可保留 signaling NaN 的原始位。map 保留原条目顺序；重复 key 被本读取器策略拒绝，不宣称所有此类编码都违反格式。
 
 CLI 使用带类型 JSON，例如 `{"type":"uint128","value":"340282366920938463463374607431768211455"}`。所有整数的 value 都是字符串；字符串与布尔保留对应 JSON 类型；bytes 是小写十六进制；map 的 value 是对象，array 的 value 是数组。浮点包含 type、展示用 value 字符串、精确 bits 十六进制，可保留非有限值和负零。
 
@@ -36,13 +36,19 @@ JSON 编码是 MoonMMDB 的接口约定，不保证与其他 CLI 的无类型输
 
 Reader 打开时保存输入快照，避免 JS 宿主修改原始 Uint8Array 后使已验证布局失效；这会增加打开时间和一份数据库存储。当前未做缓存、mmap 或惰性字段解码。
 
-CLI 固定数据库上限 256 MiB、JSONL 上限 8 MiB 和 10,000 条。JSONL 输入逐行输出，某行错误不撤销此前输出，最终退出码 2 表示整次运行存在错误。消费者不能只看最后一行判断成功。
+CLI 固定数据库上限 256 MiB、JSONL 上限 8 MiB 和 10,000 条。JSONL 文件在限额内完整读入，每行等待输出写入完成；某行错误不撤销此前输出，最终退出码 2 表示整次运行存在错误。消费者不能只看最后一行判断成功。已验证的原 JSON 对象直接嵌入结果，数值不经过重新编码；取 ip 时遵循 JSON.parse 的重复键取末值行为，下游应采用一致的 JSON 解释方式。输出管道失败记录在 stderr，退出码 2。
+
+## 字段提取
+
+`Value.at_pointer`、`Reader.project`、`validate_paths` 使用 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901) 字符串形式，支持 `/country/iso_code`、`/array/0`、空路径（根记录）、~0 与 ~1。不提供 URI fragment 形式；数组前导零、负数、越界或非数字下标作为未解析字段。不存在的键、标量的子字段返回 None / missing；语法错误返回 invalid-path。对象键按原字符比较，不做 Unicode 归一化。
+
+project 允许 1–64 个不同路径，每个最长 2,048 个 UTF-16 码元、128 段；超出返回 path-limit。先完整解码并验证记录一次，再选字段。每条结果保留 record_found / prefix_length，字段缺失独立表达。投影全部字段的值数与载荷另用一份同额预算，重叠路径重复计数，不允许借多次输出放大载荷。这个预算针对数据内容，不是 JSON 输出长度或进程总 RSS。CLI enrich 在读取记录前验证路径，因此空文件不会掩盖错误配置。
 
 ## 错误
 
 主要 code：invalid-ip、ip-version-mismatch、missing-metadata、invalid-metadata、unsupported-version、unsupported-record-size、invalid-layout、invalid-separator、invalid-tree、invalid-tree-pointer、out-of-bounds、invalid-size、invalid-utf8、invalid-map-key、duplicate-key、unsupported-type、pointer-to-pointer、pointer-cycle、depth-limit、value-limit、payload-limit、file-limit、invalid-limits。CLI 的 host-input-error 与 invalid-jsonl 属于宿主输入层。
 
-offset 以整份文件的字节位置计数；无法定位到具体编码字段的树/非文件错误返回 -1。错误不会转为 not_found 或部分记录。
+新增 code：invalid-path、path-limit、host-output-error。offset 以整份文件的字节位置计数；无法定位到具体编码字段的树/路径/非文件错误返回 -1。错误不会转为 not_found 或部分记录。
 
 ## 后端
 

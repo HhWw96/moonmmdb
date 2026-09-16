@@ -10,6 +10,8 @@ pub fn open_database(Bytes) -> Handle
 
 pub fn project(Handle, String, Array[String]) -> String
 
+pub fn validate_paths(Array[String]) -> String
+
 // Errors
 
 // Types and methods

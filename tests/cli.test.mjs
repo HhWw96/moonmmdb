@@ -18,7 +18,7 @@ function cli(args) {
 
 test('help and version require no database or network', () => {
   assert.match(cli(['--help']).text, /offline MaxMind DB/);
-  assert.equal(cli(['--version']).text.trim(), '0.1.0');
+  assert.equal(cli(['--version']).text.trim(), '0.2.0');
   assert.equal(cli([]).code, 2);
 });
 
@@ -55,6 +55,18 @@ test('enrichment can select only ASN fields while preserving a missing-field sta
   assert.equal(result.rows[0].mmdb.fields['/autonomous_system_number'].value.value,'15169');
   assert.equal(result.rows[0].mmdb.fields['/absent'].status,'missing');
   assert.equal(result.rows[0].mmdb.record,undefined);
+});
+
+test('invalid enrichment field configuration fails even with an empty input file', () => {
+  const temp=mkdtempSync(join(tmpdir(),'moonmmdb-empty-'));
+  try {
+    const file=join(temp,'empty.jsonl');
+    writeFileSync(file,'');
+    assert.equal(cli(['enrich',db,file]).code,0);
+    const result=cli(['enrich',db,file,'--field','/bad~2']);
+    assert.equal(result.code,2);
+    assert.equal(result.rows[0].code,'invalid-path');
+  } finally {rmSync(temp,{recursive:true,force:true});}
 });
 
 test('opening snapshots mutable host bytes and independent handles remain valid', () => {

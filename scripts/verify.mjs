@@ -10,8 +10,9 @@ const steps=[
   ['wasm-check',['scripts/moon.mjs','check','--target','wasm-gc','--deny-warn']],
   ['wasm-tests',['scripts/moon.mjs','test','--target','wasm-gc','--deny-warn']],
   ['build',['scripts/build.mjs']],
-  ['cli-tests',['--test','tests/cli.test.mjs']],
+  ['cli-tests',['--test','tests/cli.test.mjs','tests/evidence.test.mjs']],
   ['adversarial',['scripts/adversarial-verify.mjs']],
+  ['boundary',['scripts/boundary-verify.mjs']],
   ['mutation',['scripts/mutation-verify.mjs']],
   ['consumer',['scripts/consumer-verify.mjs']],
   ['scenarios',['scripts/demo.mjs']],
@@ -19,6 +20,7 @@ const steps=[
 const output=resolve(root,'verification/local');
 mkdirSync(output,{recursive:true});
 const evidence={started:new Date().toISOString(),platform:process.platform,node:process.version,status:'running',steps:[]};
+writeFileSync(resolve(output,'verification.json'),JSON.stringify(evidence,null,2)+'\n');
 for (const [name,args] of steps) {
   console.log('Verify: '+name);
   const result=spawnSync(process.execPath,args,{cwd:root,encoding:'utf8',timeout:60000,maxBuffer:16*1024*1024});

@@ -92,7 +92,7 @@ pub(all) struct Lookup {
 
 ///|
 pub fn version() -> String {
-  "0.1.0"
+  "0.2.0"
 }
 
 ///|

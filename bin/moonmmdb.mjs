@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 // Host I/O only. MMDB parsing, traversal, typed results and diagnostics are MoonBit.
 import { openSync, fstatSync, readSync, closeSync } from 'node:fs';
-import { open_database, metadata, lookup, project } from '../dist/core.mjs';
+import { open_database, metadata, lookup, project, validate_paths } from '../dist/core.mjs';
 
-const help = `MoonMMDB 0.1.0 — offline MaxMind DB reader
+const help = `MoonMMDB 0.2.0 — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
@@ -49,7 +49,7 @@ function statusCode(value) { return value.status === 'error' ? 2 : value.status 
 try {
   const [command, database, ...args] = process.argv.slice(2);
   if (command === '--help' && !database) await write(help);
-  else if (command === '--version' && !database) await write('0.1.0\n');
+  else if (command === '--version' && !database) await write('0.2.0\n');
   else {
     if (!['metadata', 'lookup', 'project', 'enrich'].includes(command) || !database ||
       (command === 'metadata' && args.length !== 0) ||
@@ -57,6 +57,14 @@ try {
       (command === 'project' && (args.length < 2 || args.length > 65)) ||
       (command === 'enrich' && (args.length < 1 || args.length > 129 || args.length % 2 !== 1 || args.some((arg,index) => index % 2 === 1 && arg !== '--field')))) throw new Error('Invalid arguments. Use --help.');
     const paths = command === 'enrich' ? args.filter((_, index) => index > 0 && index % 2 === 0) : [];
+    if(paths.length) {
+      const validation=JSON.parse(validate_paths(paths));
+      if(validation.status==='error') {
+        await emit(validation);
+        process.exitCode=2;
+      }
+    }
+    if(process.exitCode!==2) {
     const reader = open_database(readBounded(database, 268435456));
     const info = JSON.parse(metadata(reader));
     if (info.status === 'error' || command === 'metadata') {
@@ -97,6 +105,7 @@ try {
         code = Math.max(code, statusCode(result));
       }
       process.exitCode = code;
+    }
     }
   }
 } catch (error) {
