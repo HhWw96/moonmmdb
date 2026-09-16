@@ -1,8 +1,8 @@
 ///|
 /// The host keeps an opaque handle; errors travel as JSON, never partial records.
 pub struct Handle {
-  reader : @mmdb.Reader?
-  error : String?
+  priv reader : @mmdb.Reader?
+  priv error : String?
 }
 
 ///|

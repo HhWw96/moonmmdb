@@ -55,11 +55,11 @@ pub(all) struct Metadata {
 ///|
 /// Opaque, reusable reader; opening validates metadata and section boundaries.
 pub struct Reader {
-  data : Bytes
-  meta : Metadata
-  tree_end : Int
-  data_end : Int
-  limits : Limits
+  priv data : Bytes
+  priv meta : Metadata
+  priv tree_end : Int
+  priv data_end : Int
+  priv limits : Limits
 }
 
 ///|

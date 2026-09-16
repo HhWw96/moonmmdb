@@ -1,0 +1,20 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "WeiR-h/moonmmdb/bridge"
+
+// Values
+pub fn lookup(Handle, String) -> String
+
+pub fn metadata(Handle) -> String
+
+pub fn open_database(Bytes) -> Handle
+
+// Errors
+
+// Types and methods
+pub struct Handle {
+  // private fields
+}
+
+// Type aliases
+
+// Traits

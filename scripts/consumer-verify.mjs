@@ -6,6 +6,7 @@ let status='passed';
 try {
   for (const target of ['js','wasm-gc']) {
     const output=runMoon(['test','-p','local/moonmmdb_log_example','--target',target,'--deny-warn'],resolve(root,'examples/log_consumer'),true);
+    if (!output.includes('Total tests: 1, passed: 1, failed: 0.')) throw new Error('Expected consumer test did not execute: '+output);
     results.push({target,status:'passed',output});
   }
 } catch(error) { status='failed'; results.push({status,error:error.message}); }
