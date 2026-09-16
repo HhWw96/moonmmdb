@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
-import { spawnSync } from 'node:child_process';
+import { spawnSync, spawn } from 'node:child_process';
 import { root } from '../scripts/moon.mjs';
 import { open_database, lookup, metadata } from '../dist/core.mjs';
 const fixtures = resolve(root, 'tests/fixtures');
@@ -77,5 +77,42 @@ test('JSONL enrichment preserves input, diagnoses each bad line and keeps errors
     assert.equal(result.rows[2].mmdb.code, 'invalid-ip');
     writeFileSync(path, Buffer.from([0xff]));
     assert.equal(cli(['enrich', db, path]).code, 2);
+  } finally { rmSync(temp, {recursive:true, force:true}); }
+});
+
+test('JSONL retains original integer exponent negative-zero and escaped-string tokens', () => {
+  const temp = mkdtempSync(join(tmpdir(), 'moonmmdb-exact-'));
+  try {
+    const path = join(temp, 'exact.jsonl');
+    const original = '{"ip":"1.1.1.3","id":9007199254740993,"huge":1e400,"zero":-0,"nested":{"n":18446744073709551615},"escaped":"\\u4e2d"}';
+    writeFileSync(path, original + '\r\n');
+    const result = cli(['enrich', db, path]);
+    assert.equal(result.code, 0);
+    assert.ok(result.text.includes('"input":' + original + ',"mmdb":'));
+  } finally { rmSync(temp, {recursive:true, force:true}); }
+});
+
+test('slow output consumer receives every row and a closed pipe reports an output error', {timeout:20000}, async () => {
+  const temp = mkdtempSync(join(tmpdir(), 'moonmmdb-stream-'));
+  try {
+    const path = join(temp, 'bulk.jsonl');
+    writeFileSync(path, ('{"ip":"1.1.1.3","padding":"' + 'x'.repeat(4096) + '"}\n').repeat(1000));
+    for (const closeEarly of [false, true]) {
+      const child = spawn(process.execPath, [resolve(root,'bin/moonmmdb.mjs'),'enrich',db,path], {cwd:root});
+      let stdout = '', stderr = '';
+      child.stderr.setEncoding('utf8').on('data', data => {stderr += data;});
+      child.stdout.setEncoding('utf8');
+      child.stdout.pause();
+      const resumed = setTimeout(() => child.stdout.resume(), 100);
+      child.stdout.on('data', data => {
+        if (closeEarly) child.stdout.destroy();
+        else stdout += data;
+      });
+      const code = await new Promise((resolve, reject) => {child.on('error',reject); child.on('close',resolve);});
+      clearTimeout(resumed);
+      assert.equal(code, closeEarly ? 2 : 0, stderr);
+      if (closeEarly) assert.equal(JSON.parse(stderr).code,'host-output-error');
+      else assert.equal(stdout.trim().split('\n').length,1000);
+    }
   } finally { rmSync(temp, {recursive:true, force:true}); }
 });

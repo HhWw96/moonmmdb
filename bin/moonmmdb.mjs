@@ -34,13 +34,19 @@ function readBounded(path, limit) {
   } finally { closeSync(fd); }
 }
 
-function emit(value) { process.stdout.write(JSON.stringify(value) + '\n'); }
+// Await completion of every row: a slow consumer must not queue an entire run.
+class OutputError extends Error {}
+process.stdout.on('error', () => {}); // The write callback reports stream failures.
+async function write(text) {
+  await new Promise((resolve, reject) => process.stdout.write(text, error => error ? reject(new OutputError(error.message)) : resolve()));
+}
+async function emit(value) { await write(JSON.stringify(value) + '\n'); }
 function statusCode(value) { return value.status === 'error' ? 2 : value.status === 'not_found' ? 1 : 0; }
 
 try {
   const [command, database, ...args] = process.argv.slice(2);
-  if (command === '--help' && !database) process.stdout.write(help);
-  else if (command === '--version' && !database) process.stdout.write('0.1.0\n');
+  if (command === '--help' && !database) await write(help);
+  else if (command === '--version' && !database) await write('0.1.0\n');
   else {
     if (!['metadata', 'lookup', 'enrich'].includes(command) || !database ||
       (command === 'metadata' && args.length !== 0) ||
@@ -49,13 +55,13 @@ try {
     const reader = open_database(readBounded(database, 268435456));
     const info = JSON.parse(metadata(reader));
     if (info.status === 'error' || command === 'metadata') {
-      emit(info);
+      await emit(info);
       process.exitCode = statusCode(info);
     } else if (command === 'lookup') {
       let code = 0;
       for (const ip of args) {
         const result = JSON.parse(lookup(reader, ip));
-        emit({ip, ...result});
+        await emit({ip, ...result});
         code = Math.max(code, statusCode(result));
       }
       process.exitCode = code;
@@ -66,21 +72,30 @@ try {
       if (lines.length > 10000) throw new Error('JSONL exceeds 10,000 records');
       let code = 0;
       for (let index = 0; index < lines.length; index++) {
+        let input;
         try {
-          const input = JSON.parse(lines[index]);
+          input = JSON.parse(lines[index]);
           if (!input || typeof input !== 'object' || Array.isArray(input) || typeof input.ip !== 'string') throw new Error('Expected an object with an ip string');
-          const result = JSON.parse(lookup(reader, input.ip));
-          emit({line: index + 1, input, mmdb: result});
-          code = Math.max(code, statusCode(result));
         } catch (error) {
-          emit({line: index + 1, status: 'error', code: 'invalid-jsonl', message: error.message});
+          await emit({line: index + 1, status: 'error', code: 'invalid-jsonl', message: error.message});
           code = 2;
+          continue;
         }
+        const result = JSON.parse(lookup(reader, input.ip));
+        // Validation above does not authorize re-encoding customer numbers.
+        // Embed the validated original JSON object to retain integer/exponent tokens.
+        await write(`{"line":${index + 1},"input":${lines[index]},"mmdb":${JSON.stringify(result)}}\n`);
+        code = Math.max(code, statusCode(result));
       }
       process.exitCode = code;
     }
   }
 } catch (error) {
-  emit({status: 'error', code: 'host-input-error', message: error.message});
   process.exitCode = 2;
+  const diagnostic = {status:'error', code:error instanceof OutputError ? 'host-output-error' : 'host-input-error', message:error.message};
+  if (error instanceof OutputError) process.stderr.write(JSON.stringify(diagnostic) + '\n');
+  else {
+    try { await emit(diagnostic); }
+    catch (outputError) { process.stderr.write(JSON.stringify({status:'error',code:'host-output-error',message:outputError.message}) + '\n'); }
+  }
 }
