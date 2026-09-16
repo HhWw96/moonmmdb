@@ -1,5 +1,5 @@
 import {
-  "WeiR-h/moonmmdb" @mmdb,
+  "HhWw96/moonmmdb" @mmdb,
   "moonbitlang/core/env",
   "moonbitlang/core/json",
   "moonbitlang/core/encoding/utf8",

@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "WeiR-h/moonmmdb/bridge"
+package "HhWw96/moonmmdb/bridge"
 
 // Values
 pub fn lookup(Handle, String) -> String

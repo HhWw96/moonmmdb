@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "WeiR-h/moonmmdb"
+package "HhWw96/moonmmdb"
 
 import {
   "moonbitlang/core/debug",

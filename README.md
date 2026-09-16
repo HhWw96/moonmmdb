@@ -47,10 +47,10 @@ node bin/moonmmdb.mjs enrich tests/fixtures/GeoLite2-ASN-Test.mmdb examples/acce
 
 ## 在 MoonBit 中使用
 
-核心包名为 `WeiR-h/moonmmdb`。发布前使用本地 workspace，完整例子在 `examples/log_consumer`；它有独立的 `moon.mod`，只调用核心公开接口。
+核心包名为 `HhWw96/moonmmdb`。发布前使用本地 workspace，完整例子在 `examples/log_consumer`；它有独立的 `moon.mod`，只调用核心公开接口。
 
 ```moonbit
-// moon.pkg: import { "WeiR-h/moonmmdb" @mmdb }
+// moon.pkg: import { "HhWw96/moonmmdb" @mmdb }
 let reader = @mmdb.open_bytes(database_bytes)
 let result = reader.lookup("1.0.0.1")
 match result.value {
