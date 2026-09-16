@@ -100,7 +100,7 @@ node scripts/release-verify.mjs
 
 测试数据固定到 MaxMind-DB 提交 `7fcd868842970b2d0657af799807cbe722fb738d`，原始字节和 SHA-256 已随库保存。重新获取可运行 `python scripts/prepare-fixtures.py`，它核对整个归档散列值；生成测试源码后用 `moon fmt` 整理格式。
 
-本地验证结果与限制见 [验证报告](docs/VERIFICATION.md)。GitHub Actions 配置已经准备，尚无远端运行结果。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
+本地验证结果与限制见 [验证报告](docs/VERIFICATION.md)。[首次 GitHub Actions 验证](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 上均通过，覆盖 JS/Wasm GC、独立参考、规模对照和隔离包消费；[后续运行状态](https://github.com/HhWw96/moonmmdb/actions)。Native 和真实数据库测试属于另行执行的本地补充验证。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
 
 Windows Native 与真实数据库补充验证（需 Python 3.12 参考环境，首次下载工具链和数据）：
 

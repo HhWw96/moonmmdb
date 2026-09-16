@@ -2,6 +2,8 @@
 
 日期：2026-09-16。平台：Windows x64；Node.js 24.13.0；MoonBit 编译器 v0.10.11+6ff76a5f9。
 
+公开仓库：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)。[首次远端验证](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)对应提交 `d54f05b93c3d737ca0092301cf39979ff89ba9c9`，Ubuntu 与 Windows 均成功执行 release-verify，包含 JS/Wasm GC 核心、CLI、参考、规模与包消费测试。远端 CI 没有执行 Native 或下载两套真实 DB-IP 大库；它们的结果属于下文的本地补充验证。
+
 ## 已实际执行的检查
 
 | 检查 | 范围与结果 |
@@ -52,6 +54,6 @@ Windows / AMD Ryzen 7 5800H；JS release 构建；每库打开 100 次、预热 
 ## 未验证或未完成
 
 - Native 的 MSVC 路径、Linux/macOS 与更新版 MoonBit 工具链：尚未执行；本机固定 GCC 工具链已验证，见 [补充报告](NATIVE_PRODUCTION.md)。
-- GitHub 远端 CI、Linux/macOS 实机与 Mooncakes 注册表安装：尚未执行。
+- Linux Native、macOS 与 Mooncakes 注册表安装：尚未执行。Ubuntu / Windows 的 JS/Wasm GC 远端 CI 已通过，见上方链接。
 - 真实数据库每条记录穷举、付费 GeoIP2 数据库、真实定位准确率、长期服务稳定性、mmap、真实业务用户与 MoonCap 集成：尚未验证或实现。
 - 主办方初审、最终验收、奖励支持及奖项：没有结果。

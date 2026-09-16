@@ -26,8 +26,8 @@
 
 ## 尚需完成的外部事项
 
-- GitHub 发布目标：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，发布完成以远端代码与提交历史可见为准。
-- 实际执行远端 CI，检查全新环境复现结果。
+已完成 GitHub 公开发布：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，源码与本地提交历史均可见。[首次远端 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 两个环境通过。仍需完成：
+
 - 发布 Mooncakes 并从注册表安装验证。
 - 根据本人理解人工撰写一页 Markdown 申报书，更新报名问卷并取得回执。
 - 由赛方给出初审、验收及奖项结果。
