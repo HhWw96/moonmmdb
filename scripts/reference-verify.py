@@ -62,6 +62,17 @@ def main():
                 value, prefix = reader.get_with_prefix_len(ip)
                 requests.append({'file':file,'ip':ip})
                 expected.append(('lookup',value,prefix))
+                paths=['/ip','/autonomous_system_number','/country/iso_code','/location/latitude','/array/1','/uint128','/absent']
+                fields={}
+                for path in paths:
+                    selected=value
+                    for token in path[1:].split('/'):
+                        if isinstance(selected,dict): selected=selected.get(token)
+                        elif isinstance(selected,list) and token.isdecimal() and int(token)<len(selected): selected=selected[int(token)]
+                        else: selected=None
+                    fields[path]=selected
+                requests.append({'file':file,'ip':ip,'operation':'project','paths':paths})
+                expected.append(('project',value is not None,prefix,fields))
     run = subprocess.run([os.environ.get('NODE','node'),str(ROOT/'scripts/query-driver.mjs')], input=json.dumps(requests), text=True, capture_output=True, encoding='utf-8', timeout=90)
     if run.returncode: raise RuntimeError(run.stderr)
     actual = json.loads(run.stdout)
@@ -73,6 +84,13 @@ def main():
                 assert got['status'] == 'opened'
                 normalized = plain(got['metadata'])
                 assert all(normalized.get(k) == v for k,v in exp[1].items())
+            elif exp[0]=='project':
+                assert got['status']==('found' if exp[1] else 'not_found')
+                assert got['prefix_length']==exp[2]
+                assert set(got['fields'])==set(exp[3])
+                for path,value in exp[3].items():
+                    assert got['fields'][path]['status']==('missing' if value is None else 'present')
+                    if value is not None: assert plain(got['fields'][path]['value'])==value
             else:
                 assert got['status'] == ('not_found' if exp[1] is None else 'found')
                 assert got['prefix_length'] == exp[2]

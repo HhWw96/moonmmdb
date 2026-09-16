@@ -1,0 +1,15 @@
+import {readFileSync} from 'node:fs';
+import {createHash} from 'node:crypto';
+import {open_database,metadata,lookup} from '../dist/core.mjs';
+const {file,ips}=JSON.parse(readFileSync(0,'utf8'));
+const bytes=readFileSync(file);
+const start=performance.now();
+const h=open_database(bytes);
+const m=JSON.parse(metadata(h));
+if(m.status!=='opened') throw new Error(JSON.stringify(m));
+const initialization_ms=performance.now()-start;
+for(const ip of ips.slice(0,200)) lookup(h,ip);
+const queryStart=performance.now();
+const rows=ips.map(ip=>JSON.parse(lookup(h,ip)));
+const elapsed_ms=performance.now()-queryStart;
+process.stdout.write(JSON.stringify({initialization_ms,query_count:ips.length,elapsed_ms,mean_us:elapsed_ms*1000/ips.length,rss_bytes:process.memoryUsage().rss,max_rss_kib:process.resourceUsage().maxRSS,core_sha256:createHash('sha256').update(readFileSync(new URL('../dist/core.mjs',import.meta.url))).digest('hex'),rows}));
