@@ -2,13 +2,20 @@
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**当前版本：0.2.0。五轮本地迭代版，尚未发布 GitHub / Mooncakes，也未提交赛事复审。** 查询和解码使用 MoonBit 实现；已验证 JavaScript、Wasm GC 及固定工具链下的 Windows x64 Native 后端。新增两套真实 DB-IP Lite 数据库对照。[五轮修改记录](docs/ITERATIONS.md) · [Native 与真实数据库验证](docs/NATIVE_PRODUCTION.md)
+**当前版本：0.2.0。** 查询和解码使用 MoonBit 实现；已验证 JavaScript、Wasm GC 及固定工具链下的 Windows x64 Native 后端，以及两套真实 DB-IP Lite 数据库。Mooncakes 注册表发布和赛事复审尚未完成。[五轮修改记录](docs/ITERATIONS.md) · [Native 与真实数据库验证](docs/NATIVE_PRODUCTION.md)
+
+源码仓库：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)。
 
 读取调用方提供的数据库，返回 IP 对应的记录、匹配前缀和明确错误。无需在线查询服务；国家、ASN 或组织自定义字段由数据库决定。随项目提供的是官方人工测试数据，**不代表这些 IP 当前的真实归属**。
 
 ## 立即试用
 
-需要 Node.js 22+ 和 MoonBit 工具链。本轮使用 Node.js 24.13.0、`moonc v0.10.11+6ff76a5f9`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；本机已有忽略提交的 `.local-toolchain.json`，可以直接运行。
+需要 Node.js 22+ 和 MoonBit 工具链。本轮使用 Node.js 24.13.0、`moonc v0.10.11+6ff76a5f9`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；个人工具链配置 `.local-toolchain.json` 不随仓库提交。
+
+```text
+git clone https://github.com/HhWw96/moonmmdb.git
+cd moonmmdb
+```
 
 在本项目目录执行：
 
