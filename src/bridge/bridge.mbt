@@ -63,3 +63,49 @@ pub fn validate_paths(paths : Array[String]) -> String {
     e => e.to_json().stringify()
   }
 }
+
+///|
+pub struct SelectionHandle {
+  priv selector : @mmdb.FieldSelector?
+  priv error : String?
+}
+
+///|
+#export_name("prepare_fields")
+pub fn prepare_fields(paths : Array[String]) -> SelectionHandle {
+  { selector: Some(@mmdb.prepare_fields(paths)), error: None, } catch {
+    e => { selector: None, error: Some(e.to_json().stringify()), }
+  }
+}
+
+///|
+#export_name("selection_status")
+pub fn selection_status(selection : SelectionHandle) -> String {
+  match selection.error {
+    Some(error) => error
+    None => {
+      let result : Json = { "status": "valid" }
+      result.stringify()
+    }
+  }
+}
+
+///|
+#export_name("project_prepared")
+pub fn project_prepared(
+  handle : Handle,
+  ip : String,
+  selection : SelectionHandle,
+) -> String {
+  match selection.selector {
+    None => selection.error.unwrap()
+    Some(selector) =>
+      match handle.reader {
+        Some(reader) =>
+          reader.project_prepared(ip, selector).to_json().stringify() catch {
+            e => e.to_json().stringify()
+          }
+        None => handle.error.unwrap()
+      }
+  }
+}

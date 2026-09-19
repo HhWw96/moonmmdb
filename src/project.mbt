@@ -165,6 +165,20 @@ pub fn validate_paths(paths : Array[String]) -> Unit raise MmdbError {
 }
 
 ///|
+/// Opaque, reusable selection configuration, independent of a database or result.
+pub struct FieldSelector {
+  priv paths : Array[String]
+  priv tokens : Array[Array[String]]
+}
+
+///|
+/// Parse and validate once; snapshot the caller's array for stable reuse.
+pub fn prepare_fields(paths : Array[String]) -> FieldSelector raise MmdbError {
+  let tokens = projection_paths(paths)
+  { paths: paths.map(path => path), tokens, }
+}
+
+///|
 /// Decode once under the normal per-record budget, then select 1..64 paths.
 /// This is projection of a validated record, not lazy or partial decoding.
 pub fn Reader::project(
@@ -172,7 +186,18 @@ pub fn Reader::project(
   ip : String,
   paths : Array[String],
 ) -> Projection raise MmdbError {
-  let parsed = projection_paths(paths)
+  self.project_prepared(ip, prepare_fields(paths))
+}
+
+///|
+/// Reuse validated paths; decoding and selection budgets reset for every call.
+pub fn Reader::project_prepared(
+  self : Reader,
+  ip : String,
+  selector : FieldSelector,
+) -> Projection raise MmdbError {
+  let paths = selector.paths
+  let parsed = selector.tokens
   let record = self.lookup(ip)
   // Charge repeated selections too; overlapping paths cannot multiply output freely.
   let budget = {

@@ -8,6 +8,8 @@ import {
 // Values
 pub fn open_bytes(Bytes, limits? : Limits) -> Reader raise MmdbError
 
+pub fn prepare_fields(Array[String]) -> FieldSelector raise MmdbError
+
 pub fn validate_paths(Array[String]) -> Unit raise MmdbError
 
 pub fn version() -> String
@@ -22,6 +24,10 @@ pub fn MmdbError::offset(Self) -> Int
 pub fn MmdbError::to_json(Self) -> Json
 
 // Types and methods
+pub struct FieldSelector {
+  // private fields
+}
+
 pub(all) struct Float32Value {
   bits : UInt
 } derive(Eq, @debug.Debug)
@@ -70,6 +76,7 @@ pub struct Reader {
 pub fn Reader::lookup(Self, String) -> Lookup raise MmdbError
 pub fn Reader::metadata(Self) -> Metadata
 pub fn Reader::project(Self, String, Array[String]) -> Projection raise MmdbError
+pub fn Reader::project_prepared(Self, String, FieldSelector) -> Projection raise MmdbError
 
 pub(all) enum Value {
   Text(String)

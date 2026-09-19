@@ -8,7 +8,13 @@ pub fn metadata(Handle) -> String
 
 pub fn open_database(Bytes) -> Handle
 
+pub fn prepare_fields(Array[String]) -> SelectionHandle
+
 pub fn project(Handle, String, Array[String]) -> String
+
+pub fn project_prepared(Handle, String, SelectionHandle) -> String
+
+pub fn selection_status(SelectionHandle) -> String
 
 pub fn validate_paths(Array[String]) -> String
 
@@ -16,6 +22,10 @@ pub fn validate_paths(Array[String]) -> String
 
 // Types and methods
 pub struct Handle {
+  // private fields
+}
+
+pub struct SelectionHandle {
   // private fields
 }
 
