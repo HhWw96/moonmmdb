@@ -13,7 +13,8 @@ mkdirSync(resolve(root,'verification/local'),{recursive:true});
 try {
   writeFileSync(resolve(directory,'moon.mod'),'name = "local/registry_consumer"\nversion = "0.0.0"\nlicense = "Apache-2.0"\n');
   writeFileSync(resolve(directory,'moon.pkg'),'import { "HhWw96/moonmmdb" @mmdb }\n');
-  copyFileSync(resolve(root,'examples/log_consumer/fixture.mbt'),resolve(directory,'fixture.mbt'));
+  copyFileSync(resolve(root,'examples/log_consumer/fixture.mbt'),resolve(directory,'fixture_wbtest.mbt'));
+  writeFileSync(resolve(directory,'consumer.mbt'),'///|\npub fn installed_version() -> String { @mmdb.version() }\n');
   writeFileSync(resolve(directory,'consumer_wbtest.mbt'),`///|\ntest "registry version and exact ASN query" {\n  assert_eq(@mmdb.version(), "${version}")\n  let reader = @mmdb.open_bytes(asn_fixture())\n  let selected = reader.project("1.0.0.1", ["/autonomous_system_number"])\n  assert_true(selected.record_found)\n  assert_eq(selected.fields[0].1, Some(@mmdb.Unsigned32(15169)))\n}\n`);
   if(version==='0.4.0') {
     const path=resolve(directory,'consumer_wbtest.mbt');

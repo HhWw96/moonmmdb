@@ -64,6 +64,9 @@ Python 参考、生产数据和 Windows Native 工具准备见 README。extended
 ## 发布门槛与状态
 
 - GitHub 稳定版 [v0.3.0](https://github.com/HhWw96/moonmmdb/releases/tag/v0.3.0) 已发布，对应提交 3838833；附件 SHA-256 为 `017e3dde90e7992d9cd14e8c5ce94a2b135ff209b58dc9ab3820adf709f5719a`。
-- v0.4.0 源码已公开，功能、独立验证和上述限定配置的持续查询已完成；默认配置首次 RSS 门槛未通过的限制仍保留。正式版本发布需完成 Mooncakes 流程和注册表复验，GitHub 0.4.0 先保留为待发布草稿。
-- Mooncakes 的 v0.3.0 / v0.4.0 发布和全新注册表安装尚未完成。准备好包、GitHub Release 或本地消费成功均不能代替该项结果。
+- v0.3.0 已发布到 Mooncakes，全新注册表消费项目的 JS / WasmGC 测试均通过。
+- [v0.4.0 已发布到 Mooncakes](https://mooncakes.io/docs/HhWw96/moonmmdb@0.4.0/)，全新目录从注册表安装后通过 JS / WasmGC 测试，核对版本、精确 ASN 结果与 Enricher 接口；没有本地 moon.work 替代依赖。两版本的实际回执见 [0.3.0](../verification/releases/0.4.0/registry-0.3.0.json) / [0.4.0](../verification/releases/0.4.0/registry-0.4.0.json)。
+- 发布验证修正了注册表消费脚本的测试文件归类；该脚本修正后的源码散列为 `b1576404b7bfe49439b23a82ee0da3e64be9b2e230911887308664aebd9f7121`，核心源码与 JS 产物未改变，前述查询及持续运行证据仍对应同一核心。回执中的路径已去除个人目录信息。
+- Mooncakes 0.4.0 上传源码包 SHA-256 为 `0773cf22cfe8bf6f6307745f42f6dbe98c69916c3a8963e049ff6a23d85567e4`。注册表保存打包时的说明快照，发布完成后的回执和状态说明在 GitHub 更新；GitHub 发布附件使用同一上传包。
+- 默认配置首次 RSS 门槛未通过的限制继续保留；正式发布不把限定配置的复验外推为所有默认运行环境通过。
 - 根据参赛者收到的通知，已通过报名初审；本报告不声称最终验收或获奖。

@@ -7,6 +7,7 @@
 - soak-default.json：默认 Node 配置，City＋Country，30 分钟；结果稳定，但 RSS 中位数增长门槛失败，原样保留。
 - soak-gc.json：City＋Country，采样前显式回收的 30 分钟诊断；不是产品默认 GC 行为。
 - soak-bounded.json：City＋ASN，固定 Node 堆参数的 30 分钟查询与序列化；不代表进程 RSS 上限。
+- registry-0.3.0.json / registry-0.4.0.json：Mooncakes 实际发布后，全新目录从注册表安装并通过 JS / WasmGC 消费验证；删除了个人目录路径，保留版本、时间、下载清单散列和测试结果。
 
 soak 报告中的 databases 保留字段选择、数据库 SHA-256 与构建时间。City＋ASN 复现配置为 examples/production-many.json；Country 诊断把第二个源改为 Country 数据库，并仅选择 /country/iso_code。机器环境和运行参数见报告。
 

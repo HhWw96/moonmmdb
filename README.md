@@ -2,7 +2,7 @@
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**当前源码版本：0.4.0。** 查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_4.md) · [支持范围](docs/SUPPORT.md)
+**当前发布版本：0.4.0。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.4.0/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_4.md) · [支持范围](docs/SUPPORT.md)
 
 从头演示三个离线场景并核对结果：[验收演示步骤](docs/DEMO_0_4.md)。正式发布与 Mooncakes 安装状态以版本验证页为准。
 
@@ -55,7 +55,13 @@ node examples/log_analytics/run.mjs tests/scenarios/geo.mmdb tests/scenarios/asn
 
 ## 在 MoonBit 中使用
 
-核心包名为 `HhWw96/moonmmdb`。发布前使用本地 workspace，完整例子在 `examples/log_consumer`；它有独立的 `moon.mod`，只调用核心公开接口。
+核心包名为 `HhWw96/moonmmdb`。在自己的 MoonBit 项目中从 Mooncakes 安装：
+
+```text
+moon add HhWw96/moonmmdb@0.4.0
+```
+
+完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_4.md)。
 
 ```moonbit
 // moon.pkg: import { "HhWw96/moonmmdb" @mmdb }

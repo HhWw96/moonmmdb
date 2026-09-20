@@ -31,9 +31,9 @@
 
 ## 尚需完成的外部事项
 
-已完成 GitHub 公开发布：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，源码与本地提交历史均可见。[首次远端 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 两个环境通过。仍需完成：
+已完成 GitHub 公开发布：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，源码与提交历史均可见。[首次远端 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 两个环境通过。外部交付与验收状态如下：
 
-- 发布 Mooncakes 并从注册表安装验证。
+- 已发布 [Mooncakes 0.4.0](https://mooncakes.io/docs/HhWw96/moonmmdb@0.4.0/)，0.3.0 / 0.4.0 均完成全新注册表安装及 JS / WasmGC 消费验证；回执见 [版本验证](VERIFICATION_0_4.md)。
 - 保持已通过初审的申报方向，提交与最终版本一致的成果。
 - 由赛方给出最终验收及奖项结果。
 
