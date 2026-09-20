@@ -7,11 +7,13 @@
 | 嵌入测试字节 | 同上 | src/fixtures_wbtest.mbt、examples/log_consumer/fixture.mbt 为脚本生成，保留来源标记，不作为原创代码行数宣传 |
 | Python 参考读取器 | maxminddb 3.2.0，https://github.com/maxmind/MaxMind-DB-Reader-python | Apache-2.0；仅在验证环境使用，不作为运行时依赖 |
 | MoonBit core | 官方工具链 core 包 | Apache-2.0；使用 UTF-8、JSON、数值等基础能力 |
-| 真实验证数据库 | DB-IP Lite Country / City，2026-09；https://db-ip.com/db/lite.php | CC BY 4.0；署名 IP Geolocation by DB-IP https://db-ip.com/；原始数据库只存本地忽略目录，工程交付包包含来源与固定散列值及下载脚本 |
+| 真实验证数据库 | DB-IP Lite Country / City / ASN，2026-09；https://db-ip.com/db/lite.php | CC BY 4.0；署名 IP Geolocation by DB-IP https://db-ip.com/；原始数据库只存本地忽略目录，工程交付包包含来源与固定散列值及下载脚本 |
 | Native C 编译工具 | w64devkit 2.10.0 / GCC 16.2.0；https://github.com/skeeto/w64devkit/releases/tag/v2.10.0 | 外部验证工具，不捆绑工具链；各组件遵循上游各自许可证，GCC 运行库例外按上游条款适用 |
 | 编译工具解压器 | 7-Zip Reduced 26.03；https://www.7-zip.org/ | 仅在忽略目录解压固定散列值的工具归档，不作为项目运行时依赖 |
 
 MaxMind 测试数据版权归 MaxMind, Inc.。原始文件的散列值在 tests/fixtures/manifest.json 与 adversarial/manifest.json。项目未捆绑生产 GeoLite2/GeoIP2 全量数据库。
+
+Country / City 使用 Framasoft 公共镜像，ASN 使用 lwpk110/free-geoip-databases 的 dbip-20260915 发布附件；ASN 原始文件的 SHA-1 与 MD5 均核对 DB-IP 官方下载页一致。镜像不是数据作者，三库均署名 DB-IP；实际 URL、原始文件 SHA-256、版本与获取时间保存在 verification/production-sources.json。
 
 代码参考规范与官方项目进行实现和验证，不宣称格式、查找树或 MMDB 算法为首创。AI 辅助参与代码、测试与说明的编写；参赛者需自行理解实现、核对许可并人工撰写最终申报材料。
 

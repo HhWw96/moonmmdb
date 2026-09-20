@@ -17,6 +17,7 @@ try {
     ['native-host',python,['scripts/native-host-verify.py','--native',executable]],
     ['native-fixtures',python,['scripts/native-fixtures.py','--native',executable]],
     ['production',python,['scripts/production-verify.py','--native',executable]],
+    ['enrichment-production',python,['scripts/enrichment-verify.py','--production','--native',executable]],
   ]) {
     console.log('Extended verification: '+name);
     const run=spawnSync(binary,args,{cwd:root,encoding:'utf8',timeout:600000,maxBuffer:16*1024*1024});
@@ -34,12 +35,14 @@ try {
   if(release.source_sha256!==report.source_sha256 || native.source_sha256!==report.source_sha256 || release.core_sha256!==report.core_sha256 || production.js_core_sha256!==report.core_sha256) throw new Error('Source or JS evidence binding mismatch');
   if(native.executable_sha256!==report.executable_sha256 || production.native_executable_sha256!==report.executable_sha256 || read('native-fixtures').executable_sha256!==report.executable_sha256 || read('native-host').executable_sha256!==report.executable_sha256) throw new Error('Native executable evidence binding mismatch');
   report.evidence={};
-  for(const name of ['release',...Object.keys(release.evidence),'native','native-host','native-fixtures','production']) {
+  for(const name of ['release',...Object.keys(release.evidence),'native','native-host','native-fixtures','production','enrichment-production']) {
     const hash=sha256(readFileSync(resolve(directory,name+'.json')));
     if(release.evidence[name] && release.evidence[name]!==hash) throw new Error('Release evidence changed: '+name);
     report.evidence[name]=hash;
   }
-  report.scope='Pinned Windows x64 MoonBit 0.10.11 + GCC 16.2.0; two real DB-IP Lite September 2026 files; deterministic sampled correctness, not full database certification or production service SLA.';
+  const joined=read('enrichment-production');
+  if(joined.core_sha256!==report.core_sha256 || joined.native_executable_sha256!==report.executable_sha256)throw new Error('Production enrichment evidence mismatch');
+  report.scope='Pinned Windows x64 MoonBit 0.10.11 + GCC 16.2.0; three real DB-IP Lite September 2026 files plus City/ASN joint lookup and analysis; deterministic sampled correctness, not full database certification or production service SLA.';
   report.status='passed';
 } catch(error) {report.status='failed';report.error=error.message;console.error(error.message);process.exitCode=1;}
 report.finished=new Date().toISOString();save();

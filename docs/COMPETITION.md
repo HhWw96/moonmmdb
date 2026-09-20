@@ -15,11 +15,11 @@
 - CLI 查询、字段路径提取与保留原始数字的 JSONL 字段补充；独立 MoonBit 模块消费与 ASN 汇总。
 - 固定版本官方样本、7,749 项独立参考比对、29 个官方资源/格式边界场景、变异输入测试及性能记录。
 - 约 31 MB / 65,536 网段合成规模库，5,000 次独立对照；源码、产物与证据散列绑定。
-- Windows x64 Native 在固定 MoonBit 0.10.11 + GCC 16.2.0 下验证；真实 DB-IP Lite Country / City 每库抽查 5,000 地址，Native、JS 与参考一致。见 [补充验证报告](NATIVE_PRODUCTION.md)。
+- Windows x64 Native 在固定 MoonBit 0.10.11 + GCC 16.2.0 下验证；真实 DB-IP Lite Country / City / ASN 每库抽查 5,000 地址，另对 City＋ASN 联合查询每库核对 7,114 地址，Native、JS 与独立参考一致。Linux Native 核心与分析模块进入 Ubuntu CI。见 [0.4.0 验证报告](VERIFICATION_0_4.md)。
 
 ## 三个完整预期使用场景
 
-1. 访问日志分析：读取 IP 字段，打开数据库一次并多次查询，再按 ASN 汇总。当前已经实现 JSONL 补充与独立模块汇总。
+1. 访问日志分析：读取 IP 字段，打开 City 与 ASN 库各一次并多次查询，再分别统计国家与 ASN Top 10。已实现多库 JSONL 补充、独立 MoonBit 模块汇总以及错误/缺失统计。
 2. 离线网络流量：由 MoonCap 等上游提取源/目的 IP，再调用本库补充 ASN/地域记录。当前仅为拟集成场景，没有上游采用证明。
 3. 组织内部标签：读取组织借助其他工具生成的 MMDB，查询机房、用途等字段。已提供人工 lab-a/lab-b 标签及更新影响演示，未声称已有企业部署。
 

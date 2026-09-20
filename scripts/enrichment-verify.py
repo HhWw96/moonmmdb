@@ -40,7 +40,7 @@ try:
         report['native_executable_sha256']=hashlib.sha256(Path(args.native).read_bytes()).hexdigest()
     for source in sources:
         with maxminddb.open_database(source['database'],maxminddb.MODE_MEMORY) as ref:
-            for ip,row in zip(ips,rows):
+            for row_index,(ip,row) in enumerate(zip(ips,rows)):
                 expected,prefix=ref.get_with_prefix_len(ip);actual=row['sources'][source['name']]
                 assert actual['prefix_length']==prefix,(ip,source['name'],'prefix')
                 assert actual['status']==('not_found' if expected is None else 'found')
@@ -50,7 +50,7 @@ try:
                     if value is not None:assert helper.plain(field['value'])==value,(ip,path)
                 report['checks']+=1
                 if native_rows is not None:
-                    n=native_rows[ips.index(ip)]['sources'][source['name']]
+                    n=native_rows[row_index]['sources'][source['name']]
                     assert n['status']==actual['status'] and n['prefix_length']==actual['prefix_length']
                     for path in source['fields']:assert n['fields'][path]==actual['fields'][path],(ip,path,'native')
                     report['native_checks']=report.get('native_checks',0)+1

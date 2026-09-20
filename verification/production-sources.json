@@ -28,5 +28,20 @@
     "license": "CC BY 4.0",
     "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
     "origin_note": "Official download returned HTTP 403; public Framasoft mirror bytes checked against official uncompressed SHA1."
+  },
+  {
+    "file": "dbip-asn-lite-2026-09.mmdb",
+    "url": "https://github.com/lwpk110/free-geoip-databases/releases/download/dbip-20260915/dbip-asn-lite-2026-09.mmdb",
+    "official_download": "https://download.db-ip.com/free/dbip-asn-lite-2026-09.mmdb.gz",
+    "official_page": "https://db-ip.com/db/download/ip-to-asn-lite",
+    "retrieved_at": "2026-09-20T02:39:09.847816+00:00",
+    "bytes": 9511026,
+    "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+    "sha1": "ed77172c63fcc2b949fd5e998a3575e13ab9ef1d",
+    "md5": "89762c245e79382df2bdf834b166c506",
+    "compression": "none",
+    "license": "CC BY 4.0",
+    "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
+    "origin_note": "Public lwpk110/free-geoip-databases mirror; original uncompressed bytes match DB-IP official SHA1 and MD5. Framasoft did not list ASN."
   }
 ]

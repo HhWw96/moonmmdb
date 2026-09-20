@@ -15,6 +15,11 @@ try {
   writeFileSync(resolve(directory,'moon.pkg'),'import { "HhWw96/moonmmdb" @mmdb }\n');
   copyFileSync(resolve(root,'examples/log_consumer/fixture.mbt'),resolve(directory,'fixture.mbt'));
   writeFileSync(resolve(directory,'consumer_wbtest.mbt'),`///|\ntest "registry version and exact ASN query" {\n  assert_eq(@mmdb.version(), "${version}")\n  let reader = @mmdb.open_bytes(asn_fixture())\n  let selected = reader.project("1.0.0.1", ["/autonomous_system_number"])\n  assert_true(selected.record_found)\n  assert_eq(selected.fields[0].1, Some(@mmdb.Unsigned32(15169)))\n}\n`);
+  if(version==='0.4.0') {
+    const path=resolve(directory,'consumer_wbtest.mbt');
+    const query=`  let fields = @mmdb.prepare_fields(["/autonomous_system_number"])\n  let joined = @mmdb.Enricher::new([{ name: "asn", reader, fields }])\n  let result = joined.lookup("1.0.0.1")\n  assert_eq(result.status_code(), 0)\n  assert_eq(result.sources[0].0, "asn")\n`;
+    writeFileSync(path,readFileSync(path,'utf8').replace(/}\n$/,query+'}\n'));
+  }
   report.steps.push({name:'add',output:runMoon(['add','HhWw96/moonmmdb@'+version],directory,true)});
   if(existsSync(resolve(directory,'moon.work')))throw new Error('Unexpected workspace override');
   const packagePath=resolve(directory,'.mooncakes/HhWw96/moonmmdb/moon.mod');

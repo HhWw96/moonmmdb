@@ -58,3 +58,16 @@ println(result.to_json().stringify())
 examples/log_analytics 是独立 MoonBit 模块，只使用公开 API。固定提取国家代码和 ASN，逐条汇总，所有计数用 UInt64 并输出十进制字符串；Top 10 按计数降序、同数量按键的字符串顺序排列。每个维度最多 10,000 个不同键，超限为 group-limit，停止后不输出成功统计。字段存在但类型不符合预期时计为错误，和缺失字段区分。requests 统计行数，valid_ips 统计合法 IP 的行数，不是去重 IP 数。
 
 更换为自己的 City 和 ASN 文件即可处理真实日志；原始生产数据库不随仓库或发布包分发。DB-IP 数据应保留 `IP Geolocation by DB-IP https://db-ip.com/` 署名。项目不据此推断真实个人身份、连接来源可信度或当前定位精度。
+
+## 固定真实数据库入口
+
+默认演示不联网。需要复现 2026-09 DB-IP City＋ASN 时，先执行下面的显式下载步骤；脚本核对固定散列值，再用独立配置读取自己的日志。
+
+```text
+python scripts/download-production.py
+node bin/moonmmdb.mjs enrich-many examples/production-many.json your-access.jsonl
+node examples/log_analytics/run.mjs verification/local/production/dbip-city-lite-2026-09.mmdb verification/local/production/dbip-asn-lite-2026-09.mmdb your-access.jsonl
+python scripts/enrichment-verify.py --production --native dist/moonmmdb-native-probe.exe
+```
+
+最后一条是验证入口，需要先按 README 准备 Python 参考环境并构建 Windows Native 验证程序；日常查询不依赖 Python 或 Native 程序。下载来源和许可证见 THIRD_PARTY.md 与 verification/production-sources.json；镜像附件不可用时会明确失败，不静默替换版本。

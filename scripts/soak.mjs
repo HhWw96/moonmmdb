@@ -9,6 +9,8 @@ import {enrich_ip} from '../dist/core.mjs';
 const config = process.argv[2];
 if (!config) throw new Error('Usage: node scripts/soak.mjs CONFIG [seconds >= 1800]');
 const seconds = Number(process.argv[3] || 1800);
+const reportName = process.argv[4] || 'soak';
+if (!/^[a-z0-9-]+$/.test(reportName)) throw new Error('Invalid report name');
 if (!Number.isInteger(seconds) || seconds < 1800 || seconds > 7200) throw new Error('Duration must be 1800..7200 seconds');
 const hash = bytes => createHash('sha256').update(bytes).digest('hex');
 const coreHash = () => hash(readFileSync(resolve(root,'dist/core.mjs')));
@@ -16,8 +18,11 @@ const startedHash = coreHash();
 const {handle,provenance} = loadMany(config);
 const ips = ['1.1.1.1','8.8.8.8','81.2.69.160','2001:4860:4860::8888','2606:4700:4700::1111','::1','10.0.0.1','255.255.255.255','bad-ip'];
 const expected = ips.map(ip=>enrich_ip(handle,ip));
+if (global.gc) global.gc();
 const report={started:new Date().toISOString(),status:'running',seconds,core_sha256:startedHash,databases:provenance,node:process.version,platform:process.platform,cpu:os.cpus()[0]?.model,ips,expected_sha256:expected.map(hash),queries:0,samples:[],scope:'Sustained JS core enrichment plus typed JSON serialization. Output stability against initial values; correctness is independently checked by enrichment-verify.py. Not host pipe or concurrent service load.'};
-const path=resolve(root,'verification/local/soak.json');
+report.exec_argv=process.execArgv;
+report.gc_mode=global.gc?'explicit collection at initialization and each memory sample':'runtime default';
+const path=resolve(root,'verification/local/'+reportName+'.json');
 const begin=performance.now(); let nextSample=0;
 try {
   while (performance.now()-begin < seconds*1000) {
@@ -28,7 +33,9 @@ try {
     }
     const elapsed=(performance.now()-begin)/1000;
     if(elapsed>=nextSample) {
-      report.samples.push({elapsed_seconds:elapsed,queries:report.queries,rss:process.memoryUsage().rss,heap_used:process.memoryUsage().heapUsed});
+      if(global.gc)global.gc();
+      const memory=process.memoryUsage();
+      report.samples.push({elapsed_seconds:elapsed,queries:report.queries,rss:memory.rss,heap_used:memory.heapUsed,heap_total:memory.heapTotal,external:memory.external,array_buffers:memory.arrayBuffers});
       writeFileSync(path,JSON.stringify(report,null,2)+'\n');
       console.log(JSON.stringify(report.samples.at(-1)));
       nextSample=elapsed+30;

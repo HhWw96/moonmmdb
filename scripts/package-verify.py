@@ -43,6 +43,12 @@ try:
     library=workspace/'library'
     library.mkdir()
     with zipfile.ZipFile(archive) as bundle:
+        forbidden=('.local-toolchain.json','.reference-deps/','verification/local/','node_modules/','/.git/','credentials.json')
+        for name in bundle.namelist():
+            if any(token in name for token in forbidden):raise RuntimeError('Private/generated file in package: '+name)
+        report['file_count']=len(bundle.namelist())
+        report['contains_scenario_licenses']=all(name in bundle.namelist() for name in ('LICENSE','THIRD_PARTY.md','tests/scenarios/manifest.json'))
+        if not report['contains_scenario_licenses']:raise RuntimeError('Package missing licenses or scenario provenance')
         for member in bundle.infolist():
             if not (library/member.filename).resolve().is_relative_to(library.resolve()): raise RuntimeError('Archive path escapes extraction root')
         bundle.extractall(library)

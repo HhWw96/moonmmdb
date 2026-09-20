@@ -66,8 +66,8 @@ CLI diff 未给 --field 时选择整个记录（空路径），只检查输入�
 
 ## 后端
 
-后端验证范围为 JavaScript、Wasm GC 及固定 Windows x64、MoonBit 0.10.11、GCC 16.2.0 的 Native。0.3.0 的检查结果见 [版本验证](VERIFICATION_0_3.md)，0.2.0 历史证据仍保留。当前 MoonBit nightly 文档推荐的 Windows MSVC 路径尚未验证；不能外推为最新工具链支持。
+后端验证范围为 JavaScript、Wasm GC 及固定 Windows x64、MoonBit 0.10.11、GCC 16.2.0 的 Native。Ubuntu CI 还运行 Linux Native 核心及独立分析模块测试；范围不含 Linux 产品 CLI。当前证据见 [0.4.0 验证](VERIFICATION_0_4.md)，0.2.0 / 0.3.0 历史证据保留。当前 MoonBit nightly 文档推荐的 Windows MSVC 路径尚未验证；不能外推为最新工具链支持。
 
-产品 CLI 仍使用 Node.js。独立 Native 文件验证程序见 examples/native_probe，宿主 C 代码只负责路径、文件与计时，核心 MMDB 包不依赖 C 读取器。实际运行已覆盖中文、空格及非 BMP 字符路径。未验证 Linux/macOS 实机、浏览器 UI 或 WASI Component。
+产品 CLI 仍使用 Node.js。独立 Native 文件验证程序见 examples/native_probe，宿主 C 代码只负责路径、文件与计时，核心 MMDB 包不依赖 C 读取器。Windows 实际运行已覆盖中文、空格及非 BMP 字符路径。未验证 macOS、Linux 文件宿主、浏览器 UI 或 WASI Component。
 
-Native 与 JS 分别读取完整的 DB-IP Lite 2026-09 Country（8,340,464 字节）与 City（127,339,927 字节）文件，每库抽查 5,000 地址，与 maxminddb 3.2.0 Python/C 参考一致。结果是抽样读取正确性证据，不是全记录、真实定位准确率、商业数据库或长期服务稳定性证明。[详细范围与复现](NATIVE_PRODUCTION.md)
+Windows Native 与 JS 分别读取完整的 DB-IP Lite 2026-09 Country（8,340,464 字节）、City（127,339,927 字节）与 ASN（9,511,026 字节）文件，每库抽查 5,000 地址。额外对 City＋ASN 联合查询每库抽查 7,114 地址，两个后端分别完成 14,228 次结果对照，并由独立 Python maxminddb 3.2.0 核对分析统计。结果是抽样读取正确性证据，不是全记录、真实定位准确率、商业数据库或长期服务稳定性证明。[当前证据与复现](VERIFICATION_0_4.md)

@@ -45,6 +45,14 @@ test('core bridge rejects mismatches and retains good sources beside errors',()=
   assert.equal(result.sources.geo.code,'ip-version-mismatch');assert.equal(result.sources.v6.status,'found');
   assert.equal(JSON.parse(enrich_ip(handle,'bad-ip')).code,'invalid-ip');
   assert.equal(JSON.parse(enrichment_status(prepare_enrichment(['a'],[open_database(new Uint8Array(2))],[selection]))).status,'error');
+  // Valid metadata can hide a damaged search path until lookup; isolate that source.
+  const damaged=Buffer.from(readFileSync(fixture('geo')));
+  damaged.fill(255,0,6);
+  const four=prepare_enrichment(['broken','second','third','fourth'],[open_database(damaged),good,good,good],[selection,selection,selection,selection]);
+  assert.equal(JSON.parse(enrichment_status(four)).status,'valid');
+  const isolated=JSON.parse(enrich_ip(four,'192.0.2.1'));
+  assert.equal(isolated.status,'error');assert.equal(isolated.sources.broken.status,'error');
+  for(const name of ['second','third','fourth']) assert.equal(isolated.sources[name].status,'found');
 });
 test('nested input errors do not hide later successes and truncation has no completion',()=>{
   const cfg=config([geo]);

@@ -8,6 +8,14 @@ for source in json.loads((ROOT/'verification/production-sources.json').read_text
     target=out/source['file']
     if target.exists() and hashlib.sha256(target.read_bytes()).hexdigest()==source['sha256']:
         print('Verified existing '+target.name,flush=True);continue
+    if source.get('compression')=='none':
+        temporary=target.with_suffix(target.suffix+'.part')
+        with urllib.request.urlopen(source['url'],timeout=60) as response,temporary.open('wb') as file:
+            while chunk:=response.read(262144):file.write(chunk)
+        if hashlib.sha256(temporary.read_bytes()).hexdigest()!=source['sha256']:raise RuntimeError('MMDB SHA-256 mismatch: '+target.name)
+        temporary.replace(target)
+        print('Verified '+target.name+'; IP Geolocation by DB-IP https://db-ip.com/ (CC BY 4.0)',flush=True)
+        continue
     compressed=out/(target.name+'.gz')
     if not compressed.exists() or hashlib.sha256(compressed.read_bytes()).hexdigest()!=source['gzip_sha256']:
         temporary=compressed.with_suffix(compressed.suffix+'.part')

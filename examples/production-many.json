@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "name": "geo",
+      "database": "../verification/local/production/dbip-city-lite-2026-09.mmdb",
+      "fields": ["/country/iso_code", "/city/names/en"]
+    },
+    {
+      "name": "asn",
+      "database": "../verification/local/production/dbip-asn-lite-2026-09.mmdb",
+      "fields": ["/autonomous_system_number", "/autonomous_system_organization"]
+    }
+  ]
+}

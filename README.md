@@ -24,7 +24,7 @@ npm run build
 npm run demo
 ```
 
-无 npm 运行时依赖，不需要 `npm install`。演示依次读取元数据、查询 IPv4/IPv6、补充日志字段，再运行独立 MoonBit 模块汇总 ASN。未命中样例的退出码 1 由演示脚本按预期处理。
+无 npm 运行时依赖，不需要 `npm install`。演示读取元数据、查询 IPv4/IPv6、补充日志字段，并运行多库联合查询、国家/ASN 统计和内部标签更新检查。未命中或发现差异的退出码 1 由演示脚本按预期处理。
 
 ```text
 node bin/moonmmdb.mjs metadata tests/fixtures/GeoLite2-ASN-Test.mmdb
@@ -93,7 +93,7 @@ node scripts/consumer-verify.mjs
 - 按名称组合 1—4 个数据源，分别保留结果、缺失状态和错误；配置错误在读取日志前返回。
 - 独立 MoonBit 日志分析模块：国家/ASN Top 10、精确计数和有界分组；人工内部标签与更新影响演示。
 
-当前不提供数据库写入、自动更新、整库遍历、惰性字段解码、内存映射、在线 IP 情报或网页界面。字段提取先完整解码一次，再选择输出，错误和资源预算不能被跳过。已经验证约 31 MB、65,536 网段的合成库，以及约 8.3 MB Country 和 127.3 MB City 两套真实 DB-IP Lite 库的确定性抽样查询；付费 GeoIP2 大库与长期生产服务负载尚未验证。详见 [支持矩阵](docs/SUPPORT.md)。
+当前不提供数据库写入、自动更新、整库遍历、惰性字段解码、内存映射、在线 IP 情报或网页界面。字段提取先完整解码一次，再选择输出，错误和资源预算不能被跳过。已经验证约 31 MB、65,536 网段的合成库，以及 DB-IP Lite 2026-09 Country、City、ASN 三库各 5,000 个地址的单源查询；City＋ASN 联合查询每库核对 7,114 个地址，JS 和 Windows Native 均与独立 Python 参考一致。付费 GeoIP2 大库与长期生产服务负载尚未验证。详见 [支持矩阵](docs/SUPPORT.md)。
 
 从 0.1.0 升级：MoonBit `Real32` / `Real64` 现在携带 `Float32Value` / `Float64Value`，使用 `.bits` 获取原始位，`.number()` 获取运算值，避免 signaling NaN 转换改变原始位。CLI 的浮点 JSON 结构不变。
 
@@ -114,7 +114,7 @@ node scripts/release-verify.mjs
 
 测试数据固定到 MaxMind-DB 提交 `7fcd868842970b2d0657af799807cbe722fb738d`，原始字节和 SHA-256 已随库保存。重新获取可运行 `python scripts/prepare-fixtures.py`，它核对整个归档散列值；生成测试源码后用 `moon fmt` 整理格式。
 
-本地验证结果与限制见 [验证报告](docs/VERIFICATION.md)。[首次 GitHub Actions 验证](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 上均通过，覆盖 JS/Wasm GC、独立参考、规模对照和隔离包消费；[后续运行状态](https://github.com/HhWw96/moonmmdb/actions)。Native 和真实数据库测试属于另行执行的本地补充验证。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
+本版本证据与限制见 [0.4.0 验证报告](docs/VERIFICATION_0_4.md)。[多库功能 GitHub Actions 验证](https://github.com/HhWw96/moonmmdb/actions/runs/35484457274)在 Ubuntu 与 Windows 上均通过，覆盖 JS/Wasm GC、独立参考、规模对照和隔离包消费，Ubuntu 另外执行 Linux Native 核心与分析模块测试；[后续运行状态](https://github.com/HhWw96/moonmmdb/actions)。Windows Native 宿主和真实数据库另行本地验证。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
 
 Windows Native 与真实数据库补充验证（需 Python 3.12 参考环境，首次下载工具链和数据）：
 
@@ -130,6 +130,6 @@ node scripts/extended-verify.mjs
 
 实现依据 [MMDB 规范](https://maxmind.github.io/MaxMind-DB/)，参考官方测试数据和读取器进行验证。MMDB 格式及查询算法不是本项目首创；本项目贡献是 MoonBit 实现、原生 API、资源限制、消费示例与验证工程。
 
-已有地理地址库、CIDR 规则工具和 PCAP 解析库分别负责相邻功能；本项目处理 MMDB 记录读取。MoonCap 集成与组织标签数据库是后续场景，目前未实现集成或取得第三方采用。详见 [参赛准备事实](docs/COMPETITION.md)。
+已有地理地址库、CIDR 规则工具和 PCAP 解析库分别负责相邻功能；本项目处理 MMDB 记录读取。已提供人工内部标签库的读取和更新影响示例；MoonCap 集成仍是后续场景，目前未取得第三方采用。详见 [参赛准备事实](docs/COMPETITION.md)。
 
 项目代码采用 Apache-2.0。官方测试数据保留 Apache-2.0 / MIT 许可文件；实际使用的数据库须另行确认使用权限。[第三方说明](THIRD_PARTY.md)
