@@ -1,0 +1,196 @@
+{
+  "started": "2026-09-20T02:56:52.454130+00:00",
+  "status": "passed",
+  "databases": [
+    {
+      "file": "dbip-country-lite-2026-09.mmdb",
+      "bytes": 8340464,
+      "source_sha256": "d284ae2e7427fe33d83465e1506b2b21aae47eb8a9b099f8f4dac6a98c99f041",
+      "backends": {
+        "native": {
+          "queries": 5000,
+          "record_checks": 5000,
+          "projection_checks": 5000,
+          "field_checks": 35000,
+          "metadata_checks": 1,
+          "open_ms": 9.15599999949336,
+          "query_loop_elapsed_ms": 834.0416000001132,
+          "measurement_scope": "Two lookups per address (full and projected), typed JSON serialization and output transport; not pure lookup benchmark."
+        },
+        "js": {
+          "queries": 5000,
+          "record_checks": 5000,
+          "projection_checks": 5000,
+          "field_checks": 35000,
+          "metadata_checks": 1,
+          "open_ms": 50.299200000000006,
+          "query_loop_elapsed_ms": 914.0508,
+          "measurement_scope": "Two lookups per address (full and projected), typed JSON serialization and output transport; not pure lookup benchmark."
+        }
+      },
+      "failures": [],
+      "metadata": {
+        "node_count": 1381760,
+        "record_size": 24,
+        "ip_version": 6,
+        "database_type": "DBIP-Country-Lite",
+        "binary_format_major_version": 2,
+        "binary_format_minor_version": 0,
+        "build_epoch": 1788226365,
+        "languages": [
+          "en",
+          "de",
+          "es",
+          "fr",
+          "ja",
+          "pt-BR",
+          "ru",
+          "zh-CN",
+          "fa",
+          "ko"
+        ],
+        "description": {
+          "en": "DB-IP.com - IP to Country",
+          "fr": "DB-IP.com - IP vers Pays"
+        }
+      },
+      "addresses": 5000,
+      "families": {
+        "4": 3870,
+        "6": 1130
+      },
+      "reference_found": 4801,
+      "failure_count": 0,
+      "status": "passed"
+    },
+    {
+      "file": "dbip-city-lite-2026-09.mmdb",
+      "bytes": 127339927,
+      "source_sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "backends": {
+        "native": {
+          "queries": 5000,
+          "record_checks": 5000,
+          "projection_checks": 5000,
+          "field_checks": 35000,
+          "metadata_checks": 1,
+          "open_ms": 192.4627999998629,
+          "query_loop_elapsed_ms": 1013.3333000000566,
+          "measurement_scope": "Two lookups per address (full and projected), typed JSON serialization and output transport; not pure lookup benchmark."
+        },
+        "js": {
+          "queries": 5000,
+          "record_checks": 5000,
+          "projection_checks": 5000,
+          "field_checks": 35000,
+          "metadata_checks": 1,
+          "open_ms": 670.2382,
+          "query_loop_elapsed_ms": 1264.8458,
+          "measurement_scope": "Two lookups per address (full and projected), typed JSON serialization and output transport; not pure lookup benchmark."
+        }
+      },
+      "failures": [],
+      "metadata": {
+        "node_count": 14346080,
+        "record_size": 28,
+        "ip_version": 6,
+        "database_type": "DBIP-City-Lite",
+        "binary_format_major_version": 2,
+        "binary_format_minor_version": 0,
+        "build_epoch": 1788226681,
+        "languages": [
+          "en",
+          "de",
+          "es",
+          "fr",
+          "ja",
+          "pt-BR",
+          "ru",
+          "zh-CN",
+          "fa",
+          "ko"
+        ],
+        "description": {
+          "en": "DB-IP.com - IP to City",
+          "fr": "DB-IP.com - IP vers Ville"
+        }
+      },
+      "addresses": 5000,
+      "families": {
+        "4": 3945,
+        "6": 1055
+      },
+      "reference_found": 4807,
+      "failure_count": 0,
+      "status": "passed"
+    },
+    {
+      "file": "dbip-asn-lite-2026-09.mmdb",
+      "bytes": 9511026,
+      "source_sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "backends": {
+        "native": {
+          "queries": 5000,
+          "record_checks": 5000,
+          "projection_checks": 5000,
+          "field_checks": 35000,
+          "metadata_checks": 1,
+          "open_ms": 9.551899999380112,
+          "query_loop_elapsed_ms": 222.5132999997586,
+          "measurement_scope": "Two lookups per address (full and projected), typed JSON serialization and output transport; not pure lookup benchmark."
+        },
+        "js": {
+          "queries": 5000,
+          "record_checks": 5000,
+          "projection_checks": 5000,
+          "field_checks": 35000,
+          "metadata_checks": 1,
+          "open_ms": 61.2943,
+          "query_loop_elapsed_ms": 412.34499999999997,
+          "measurement_scope": "Two lookups per address (full and projected), typed JSON serialization and output transport; not pure lookup benchmark."
+        }
+      },
+      "failures": [],
+      "metadata": {
+        "node_count": 1146501,
+        "record_size": 24,
+        "ip_version": 6,
+        "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+        "binary_format_major_version": 2,
+        "binary_format_minor_version": 0,
+        "build_epoch": 1788226697,
+        "languages": [
+          "en",
+          "de",
+          "es",
+          "fr",
+          "ja",
+          "pt-BR",
+          "ru",
+          "zh-CN",
+          "fa",
+          "ko"
+        ],
+        "description": {
+          "en": "DB-IP.com - IP to ASN",
+          "fr": "DB-IP.com - IP vers ASN"
+        }
+      },
+      "addresses": 5000,
+      "families": {
+        "4": 3916,
+        "6": 1084
+      },
+      "reference_found": 3105,
+      "failure_count": 0,
+      "status": "passed"
+    }
+  ],
+  "seed": "0x50524f44",
+  "reference": "maxminddb 3.2.0 Python MODE_MEMORY and C MODE_MMAP_EXT",
+  "limits": "Deterministic sampled lookup correctness on real DB-IP Lite data. Not verification of real-world geolocation accuracy, every database record, paid GeoIP products or long-running service stability.",
+  "native_executable_sha256": "95aeb3c0a16e433e39b3aa1099315c7ff0061c8140ae40b5cfec4ed00c11c6a3",
+  "js_core_sha256": "eeae0c1e805345377efcc99c994cfe88ae93347c5aec762d4e4ee8d2df57b1c7",
+  "failure_count": 0,
+  "finished": "2026-09-20T02:57:04.755831+00:00"
+}

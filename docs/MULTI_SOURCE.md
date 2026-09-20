@@ -57,6 +57,8 @@ println(result.to_json().stringify())
 
 examples/log_analytics 是独立 MoonBit 模块，只使用公开 API。固定提取国家代码和 ASN，逐条汇总，所有计数用 UInt64 并输出十进制字符串；Top 10 按计数降序、同数量按键的字符串顺序排列。每个维度最多 10,000 个不同键，超限为 group-limit，停止后不输出成功统计。字段存在但类型不符合预期时计为错误，和缺失字段区分。requests 统计行数，valid_ips 统计合法 IP 的行数，不是去重 IP 数。
 
+分析模块的 found 表示记录已命中，errors 同时包含查询错误和字段类型错误；命中但字段类型错误的记录会同时增加这两个计数。因此不能把 found、not_found、errors 简单相加作为请求总数，应使用 requests / valid_ips。
+
 更换为自己的 City 和 ASN 文件即可处理真实日志；原始生产数据库不随仓库或发布包分发。DB-IP 数据应保留 `IP Geolocation by DB-IP https://db-ip.com/` 署名。项目不据此推断真实个人身份、连接来源可信度或当前定位精度。
 
 ## 固定真实数据库入口
@@ -71,3 +73,5 @@ python scripts/enrichment-verify.py --production --native dist/moonmmdb-native-p
 ```
 
 最后一条是验证入口，需要先按 README 准备 Python 参考环境并构建 Windows Native 验证程序；日常查询不依赖 Python 或 Native 程序。下载来源和许可证见 THIRD_PARTY.md 与 verification/production-sources.json；镜像附件不可用时会明确失败，不静默替换版本。
+
+持续任务可显式选择本轮测试的 Node 堆配置：`node --max-old-space-size=64 --max-semi-space-size=4 bin/moonmmdb.mjs enrich-many examples/production-many.json your-access.jsonl`。这是已测 City＋ASN 小字段工作负载的运行配置，不是所有数据库/大字段的推荐上限；堆过小可能导致进程退出，也不限制 MMDB 缓冲区或总 RSS。持续运行结果与默认配置首次内存门槛失败均见版本验证文档。

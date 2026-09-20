@@ -4,6 +4,8 @@ MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格�
 
 **当前源码版本：0.4.0。** 查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_4.md) · [支持范围](docs/SUPPORT.md)
 
+从头演示三个离线场景并核对结果：[验收演示步骤](docs/DEMO_0_4.md)。正式发布与 Mooncakes 安装状态以版本验证页为准。
+
 源码仓库：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)。
 
 读取调用方提供的数据库，返回 IP 对应的记录、匹配前缀和明确错误。无需在线查询服务；国家、ASN 或组织自定义字段由数据库决定。随项目提供的是官方人工测试数据，**不代表这些 IP 当前的真实归属**。
