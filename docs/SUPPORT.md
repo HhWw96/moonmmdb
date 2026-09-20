@@ -1,4 +1,4 @@
-# 0.2.0 支持范围
+# 0.3.0 支持范围
 
 ## 格式与查询
 
@@ -36,7 +36,9 @@ JSON 编码是 MoonMMDB 的接口约定，不保证与其他 CLI 的无类型输
 
 Reader 打开时保存输入快照，避免 JS 宿主修改原始 Uint8Array 后使已验证布局失效；这会增加打开时间和一份数据库存储。当前未做缓存、mmap 或惰性字段解码。
 
-CLI 固定数据库上限 256 MiB、JSONL 上限 8 MiB 和 10,000 条。JSONL 文件在限额内完整读入，每行等待输出写入完成；某行错误不撤销此前输出，最终退出码 2 表示整次运行存在错误。消费者不能只看最后一行判断成功。已验证的原 JSON 对象直接嵌入结果，数值不经过重新编码；取 ip 时遵循 JSON.parse 的重复键取末值行为，下游应采用一致的 JSON 解释方式。输出管道失败记录在 stderr，退出码 2。
+CLI 数据库上限固定为每份 256 MiB。JSONL 从普通文件或标准输入逐行读取，默认总量 8 MiB、单行 8 MiB、10,000 行；总量可配置至 1 GiB，记录数可配置至 1,000,000，单行最多 8 MiB（包含 CR，不包含 LF）。等待每行输出完成后再继续处理。输入缓冲区有界，但数据库快照、解码结果和输出字符串仍占内存，这不是进程 RSS 上限。
+
+某行错误不撤销此前输出，最终退出码 2 表示运行存在错误。超限、损坏 UTF-8 或输出失败会停止读取；整次处理可能已产生部分输出。空白行是错误，最后一行可以没有换行；仅文件起始的 UTF-8 BOM 被移除。原 JSON 对象直接嵌入结果，数值不重新编码。默认取 /ip，可用 --ip-path 读取嵌套属性和数组；只访问对象自身属性，JSON.parse 的重复键取末值语义保持不变。输出管道失败尽可能记录在 stderr，退出码 2。
 
 ## 字段提取
 
@@ -44,15 +46,23 @@ CLI 固定数据库上限 256 MiB、JSONL 上限 8 MiB 和 10,000 条。JSONL �
 
 project 允许 1–64 个不同路径，每个最长 2,048 个 UTF-16 码元、128 段；超出返回 path-limit。先完整解码并验证记录一次，再选字段。每条结果保留 record_found / prefix_length，字段缺失独立表达。投影全部字段的值数与载荷另用一份同额预算，重叠路径重复计数，不允许借多次输出放大载荷。这个预算针对数据内容，不是 JSON 输出长度或进程总 RSS。CLI enrich 在读取记录前验证路径，因此空文件不会掩盖错误配置。
 
+prepare_fields 返回不透明 FieldSelector，保存路径数组的副本并预先解析路径。Reader.project_prepared 可跨查询和 Reader 复用选择器；不缓存数据库记录，修改调用方的配置数组或上一次返回结果不会污染下一次查询。Reader.project 作为兼容入口仍可使用。
+
+## 数据库差异检查
+
+Reader.compare / compare_prepared 对同一个 IP 查询两份 Reader，分别应用各自的解码与选择预算。返回 RecordDiff，独立报告 record_changed、prefix_changed 和 changed_fields，并包含 before / after 字段值。map 顺序不参与比较，数组顺序、整数类型、字节与浮点原始位参与比较。仅选择 /country/iso_code 时，不报告未选择的城市字段变化；命中状态与前缀仍参与比较，包括两侧均未命中但终止前缀不同的情况。
+
+CLI diff 未给 --field 时选择整个记录（空路径），只检查输入中的 IP，不枚举整个数据库。stdout 每行包含 input 与 diff，完成后 stderr 给出 processed / changed / unchanged / errors 汇总。退出码为 0 无差异、1 有差异、2 有错误；发生输入流中断时不输出完成汇总。数据库类型、构建时间等元数据不作为 IP 记录差异，可通过 metadata 单独检查。两份完整数据库与快照同时驻留内存。
+
 ## 错误
 
 主要 code：invalid-ip、ip-version-mismatch、missing-metadata、invalid-metadata、unsupported-version、unsupported-record-size、invalid-layout、invalid-separator、invalid-tree、invalid-tree-pointer、out-of-bounds、invalid-size、invalid-utf8、invalid-map-key、duplicate-key、unsupported-type、pointer-to-pointer、pointer-cycle、depth-limit、value-limit、payload-limit、file-limit、invalid-limits。CLI 的 host-input-error 与 invalid-jsonl 属于宿主输入层。
 
-新增 code：invalid-path、path-limit、host-output-error。offset 以整份文件的字节位置计数；无法定位到具体编码字段的树/路径/非文件错误返回 -1。错误不会转为 not_found 或部分记录。
+新增 code：invalid-path、path-limit、host-output-error；流式宿主还报告 input-limit、line-limit、record-limit、invalid-utf8，并在可定位时给出行号。offset 以整份文件的字节位置计数；无法定位到具体编码字段的树/路径/非文件错误返回 -1。错误不会转为 not_found 或无差异。
 
 ## 后端
 
-已在 Windows 的 JavaScript、Wasm GC 和 Native 后端执行核心测试。Native 范围为 Windows x64、MoonBit 0.10.11、GCC 16.2.0，调试与发布各 18 组通过；另有独立消费者及 29 个异常/边界文件验证。当前 MoonBit nightly 文档推荐的 Windows MSVC 路径尚未验证；不能外推为最新工具链支持。
+后端验证范围为 JavaScript、Wasm GC 及固定 Windows x64、MoonBit 0.10.11、GCC 16.2.0 的 Native。0.3.0 的检查结果见 [版本验证](VERIFICATION_0_3.md)，0.2.0 历史证据仍保留。当前 MoonBit nightly 文档推荐的 Windows MSVC 路径尚未验证；不能外推为最新工具链支持。
 
 产品 CLI 仍使用 Node.js。独立 Native 文件验证程序见 examples/native_probe，宿主 C 代码只负责路径、文件与计时，核心 MMDB 包不依赖 C 读取器。实际运行已覆盖中文、空格及非 BMP 字符路径。未验证 Linux/macOS 实机、浏览器 UI 或 WASI Component。
 

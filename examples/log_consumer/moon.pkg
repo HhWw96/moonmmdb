@@ -2,4 +2,5 @@ import {
   "HhWw96/moonmmdb" @mmdb,
   "moonbitlang/core/json",
 }
+
 pkgtype(kind: "executable")

@@ -2,6 +2,8 @@
 package "HhWw96/moonmmdb/bridge"
 
 // Values
+pub fn compare_prepared(Handle, Handle, String, SelectionHandle) -> String
+
 pub fn lookup(Handle, String) -> String
 
 pub fn metadata(Handle) -> String

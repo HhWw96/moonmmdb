@@ -109,3 +109,25 @@ pub fn project_prepared(
       }
   }
 }
+
+///|
+#export_name("compare_prepared")
+pub fn compare_prepared(
+  before : Handle,
+  after : Handle,
+  ip : String,
+  selection : SelectionHandle,
+) -> String {
+  match selection.selector {
+    None => selection.error.unwrap()
+    Some(selector) =>
+      match (before.reader, after.reader) {
+        (Some(a), Some(b)) =>
+          a.compare_prepared(b, ip, selector).to_json().stringify() catch {
+            e => e.to_json().stringify()
+          }
+        (None, _) => before.error.unwrap()
+        (_, None) => after.error.unwrap()
+      }
+  }
+}

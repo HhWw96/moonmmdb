@@ -6,6 +6,8 @@ const scenes = [
   ['IPv4/IPv6 查询', ['lookup','tests/fixtures/GeoIP2-City-Test.mmdb','2001:218::','81.2.69.160'], 0],
   ['国家与坐标字段提取', ['project','tests/fixtures/GeoIP2-City-Test.mmdb','2001:218::','/country/iso_code','/location/latitude','/absent'], 0],
   ['日志补充 ASN 字段（含一条未命中）', ['enrich','tests/fixtures/GeoLite2-ASN-Test.mmdb','examples/access.jsonl'], 1],
+  ['嵌套 IP 日志字段（含一条未命中）', ['enrich','tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb','examples/nested-access.jsonl','--ip-path','/client/ip','--field','/ip'], 1],
+  ['数据库更新检查（等价节点布局）', ['diff','tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb','tests/fixtures/MaxMind-DB-test-ipv4-32.mmdb','examples/database-check.jsonl'], 0],
 ];
 for (const [title,args,expected] of scenes) {
   console.log('\n'+title);

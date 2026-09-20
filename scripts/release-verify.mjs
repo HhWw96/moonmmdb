@@ -14,6 +14,7 @@ try {
   for(const [name,binary,args] of [
     ['verification',process.execPath,['scripts/verify.mjs']],
     ['reference',python,['scripts/reference-verify.py']],
+    ['comparison',python,['scripts/comparison-verify.py']],
     ['scale',python,['scripts/scale-verify.py']],
     ['package',python,['scripts/package-verify.py']],
     ['benchmark',process.execPath,['scripts/benchmark.mjs']],
@@ -31,7 +32,7 @@ try {
   if(sourceFingerprint()!==report.source_sha256) throw new Error('Sources changed during verification; rerun required');
   report.core_sha256=sha256(readFileSync(resolve(root,'dist/core.mjs')));
   report.evidence={};
-  for(const name of ['verification','reference','adversarial','boundary','mutation','consumer','scale','package','benchmark']) {
+  for(const name of ['verification','reference','comparison','adversarial','boundary','mutation','consumer','scale','package','benchmark']) {
     report.evidence[name]=sha256(readFileSync(resolve(root,'verification/local/'+name+'.json')));
   }
   report.status='passed';

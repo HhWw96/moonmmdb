@@ -1,6 +1,6 @@
 // Equivalent transport for the JS and Native production-corpus comparison.
 import {readFileSync} from 'node:fs';
-import {open_database,metadata,lookup,project} from '../dist/core.mjs';
+import {open_database,metadata,lookup,prepare_fields,project_prepared} from '../dist/core.mjs';
 const bytes=readFileSync(process.argv[2]);
 const ips=readFileSync(process.argv[3],'utf8').split(/\r?\n/).filter(Boolean);
 const start=performance.now();
@@ -13,6 +13,7 @@ if(opened.status!=='opened') process.exitCode=2;
 else {
   const paths=['/country/iso_code','/country/names/zh-CN','/city/names/en','/location/latitude','/autonomous_system_number','/autonomous_system_organization','/absent'];
   const queryStart=performance.now();
-  for(const ip of ips) await emit({ip,lookup:JSON.parse(lookup(reader,ip)),projection:JSON.parse(project(reader,ip,paths))});
+  const selector=prepare_fields(paths);
+  for(const ip of ips) await emit({ip,lookup:JSON.parse(lookup(reader,ip)),projection:JSON.parse(project_prepared(reader,ip,selector))});
   await emit({status:'complete',queries:ips.length,elapsed_ms:performance.now()-queryStart,rss_bytes:process.memoryUsage().rss});
 }

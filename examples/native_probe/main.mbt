@@ -66,9 +66,10 @@ fn main {
       "/autonomous_system_number", "/autonomous_system_organization", "/absent",
     ]
     let query_started = now_ms()
+    let selector = @mmdb.prepare_fields(paths)
     for ip in ips {
       let lookup = reader.lookup(ip).to_json() catch { e => e.to_json() }
-      let projection = reader.project(ip, paths).to_json() catch {
+      let projection = reader.project_prepared(ip, selector).to_json() catch {
           e => e.to_json()
         }
       let row : Json = {

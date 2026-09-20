@@ -1,9 +1,10 @@
 # 参赛准备事实（不是人工申报书）
 
-项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库，0.2.0。
+项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库，0.3.0。
 
 ## 已完成的技术贡献
 
+- 可复用 FieldSelector、标准输入流式日志处理与嵌套 IP 路径，以及按输入 IP 比较数据库更新的 MoonBit 核心接口和 diff 命令。使用示例见 [操作说明](OPERATIONS.md)，版本复验见 [0.3.0 验证范围](VERIFICATION_0_3.md)。
 - MoonBit 实现 MMDB 元数据、搜索树和类型解码；没有调用 C/Python/在线服务完成运行时查询。
 - 原生 Reader / Value / Lookup / Projection / MmdbError 接口，以及类型化 JSON；0.2.0 浮点容器类型变更见支持说明。
 - 值、深度和载荷预算；官方异常样例验证。
