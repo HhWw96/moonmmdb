@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "local/moonmmdb_log_analytics"
+
+// Values
+pub fn create_analytics(Bytes, Bytes) -> Analytics
+
+// Errors
+
+// Types and methods
+pub struct Analytics {
+  // private fields
+}
+pub fn Analytics::analytics_invalid(Self) -> Unit
+pub fn Analytics::analytics_push(Self, String) -> Unit
+pub fn Analytics::analytics_result(Self) -> String
+pub fn Analytics::analytics_status(Self) -> String
+
+type Counts
+
+// Type aliases
+
+// Traits

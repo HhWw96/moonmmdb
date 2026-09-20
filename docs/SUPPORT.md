@@ -1,4 +1,8 @@
-# 0.3.0 支持范围
+# 0.4.0 支持范围
+
+## 多库查询与分析
+
+Enricher 支持 1—4 个命名数据源；非法 IP 为整条输入错误，各库查询错误单独保留。单库投影与资源策略不变。enrich-many 先检查所有配置和数据库，再读取日志；单库和合计文件上限均为 256 MiB。完整处理结束才输出汇总，异常终止不会报告成功完成。配置、状态、退出码与独立分析模块限制见 [多库说明](MULTI_SOURCE.md)。新增 source-limit、invalid-source、duplicate-source、invalid-config 与分析示例的 group-limit 错误。
 
 ## 格式与查询
 

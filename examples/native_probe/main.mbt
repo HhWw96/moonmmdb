@@ -33,8 +33,8 @@ fn read_file(path : String, limit : Int) -> Bytes {
 ///|
 fn main {
   let args = @env.args()
-  if args.length() != 3 {
-    println("Usage: native_probe DATABASE.mmdb IPS.txt")
+  if args.length() != 3 && args.length() != 4 {
+    println("Usage: native_probe DATABASE.mmdb IPS.txt [SECOND.mmdb]")
     exit_process(2)
   }
   let bytes = read_file(host_arg(1, args[1]), 268435456)
@@ -67,6 +67,20 @@ fn main {
     ]
     let query_started = now_ms()
     let selector = @mmdb.prepare_fields(paths)
+    let joint = if args.length() == 4 {
+      Some(
+        @mmdb.Enricher::new([
+          { name: "geo", reader, fields: selector, },
+          {
+            name: "asn",
+            reader: @mmdb.open_bytes(read_file(host_arg(3, args[3]), 268435456)),
+            fields: selector,
+          },
+        ]),
+      )
+    } else {
+      None
+    }
     for ip in ips {
       let lookup = reader.lookup(ip).to_json() catch { e => e.to_json() }
       let projection = reader.project_prepared(ip, selector).to_json() catch {
@@ -76,6 +90,13 @@ fn main {
         "ip": ip.to_json(),
         "lookup": lookup,
         "projection": projection,
+        "enrichment": match joint {
+          Some(enricher) =>
+            enricher.lookup(ip).to_json() catch {
+              e => e.to_json()
+            }
+          None => Json::null()
+        },
       }
       println(row.stringify())
     }

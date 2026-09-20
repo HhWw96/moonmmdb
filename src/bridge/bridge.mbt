@@ -131,3 +131,58 @@ pub fn compare_prepared(
       }
   }
 }
+
+///|
+pub struct EnrichmentHandle {
+  priv enricher : @mmdb.Enricher?
+  priv error : String?
+}
+
+///|
+#export_name("prepare_enrichment")
+pub fn prepare_enrichment(
+  names : Array[String],
+  readers : Array[Handle],
+  fields : Array[SelectionHandle],
+) -> EnrichmentHandle {
+  try {
+    if names.length() != readers.length() || names.length() != fields.length() {
+      return {
+        enricher: None,
+        error: Some(
+          "{\"status\":\"error\",\"code\":\"invalid-source\",\"offset\":-1,\"message\":\"Source arrays must have equal lengths\"}",
+        ),
+      }
+    }
+    let sources : Array[@mmdb.EnrichmentSource] = []
+    for i in 0..<names.length() {
+      match (readers[i].reader, fields[i].selector) {
+        (Some(reader), Some(selector)) =>
+          sources.push({ name: names[i], reader, fields: selector, })
+        (None, _) => return { enricher: None, error: readers[i].error, }
+        (_, None) => return { enricher: None, error: fields[i].error, }
+      }
+    }
+    { enricher: Some(@mmdb.Enricher::new(sources)), error: None, }
+  } catch {
+    e => { enricher: None, error: Some(e.to_json().stringify()), }
+  }
+}
+
+///|
+#export_name("enrichment_status")
+pub fn enrichment_status(handle : EnrichmentHandle) -> String {
+  handle.error.unwrap_or("{\"status\":\"valid\"}")
+}
+
+///|
+#export_name("enrich_ip")
+pub fn enrich_ip(handle : EnrichmentHandle, ip : String) -> String {
+  match handle.enricher {
+    Some(enricher) =>
+      enricher.lookup(ip).to_json().stringify() catch {
+        e => e.to_json().stringify()
+      }
+    None => handle.error.unwrap()
+  }
+}

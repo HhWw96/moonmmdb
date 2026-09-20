@@ -1,4 +1,4 @@
-name = "local/moonmmdb_log_example"
+name = "local/moonmmdb_log_analytics"
 
 version = "0.0.0"
 

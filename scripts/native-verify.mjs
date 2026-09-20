@@ -36,9 +36,10 @@ try {
     report.compatibility={macro:'_CRT_RAND_S',reason:'Expose MinGW CRT rand_s declaration required by pinned MoonBit runtime',launcher_sha256:sha256(readFileSync(launcher)),runtime_modified:false};
   }
   run('probe-format',['fmt','--check'],resolve(root,'examples/native_probe'));
-  run('debug',['test','--target','native','-p','HhWw96/moonmmdb','--deny-warn'],root,26);
-  run('release',['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn'],root,26);
+  run('debug',['test','--target','native','-p','HhWw96/moonmmdb','--deny-warn'],root,30);
+  run('release',['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn'],root,30);
   run('consumer',['test','--target','native','--release','-p','local/moonmmdb_log_example','--deny-warn'],resolve(root,'examples/log_consumer'),1);
+  run('analytics',['test','--target','native','--release','-p','local/moonmmdb_log_analytics','--deny-warn'],resolve(root,'examples/log_analytics'),4);
   run('probe',['build','.','--target','native','--release','--deny-warn'],resolve(root,'examples/native_probe'));
   const executable=resolve(root,'examples/native_probe/_build/native/release/build/local/moonmmdb_native_probe/moonmmdb_native_probe.exe');
   if(!existsSync(executable)) throw new Error('Native output executable was not found at expected path');

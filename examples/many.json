@@ -1,0 +1,1 @@
+{"version":1,"sources":[{"name":"geo","database":"../tests/scenarios/geo.mmdb","fields":["/country/iso_code"]},{"name":"asn","database":"../tests/scenarios/asn.mmdb","fields":["/autonomous_system_number"]},{"name":"tags","database":"../tests/scenarios/tags.mmdb","fields":["/site","/purpose"]}]}

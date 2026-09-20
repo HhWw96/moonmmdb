@@ -3,14 +3,16 @@
 import { openSync, fstatSync, readSync, closeSync } from 'node:fs';
 import { open_database, metadata, lookup, project, validate_paths, prepare_fields, selection_status, project_prepared, compare_prepared } from '../dist/core.mjs';
 import { InputError, streamOptions, inputSelector, openInput, boundedLines } from './jsonl.mjs';
+import { enrichMany } from './many.mjs';
 
-const help = `MoonMMDB 0.3.0 — offline MaxMind DB reader
+const help = `MoonMMDB 0.4.0 — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
   node bin/moonmmdb.mjs project DATABASE.mmdb IP POINTER [POINTER ...]
   node bin/moonmmdb.mjs enrich DATABASE.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs diff BEFORE.mmdb AFTER.mmdb INPUT.jsonl|- [OPTIONS]
+  node bin/moonmmdb.mjs enrich-many CONFIG.json INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs --help | --version
 
 Stream options:
@@ -62,8 +64,12 @@ function statusCode(value) { return value.status === 'error' ? 2 : value.status 
 
 async function main() {
   const [command, database, ...args] = process.argv.slice(2);
+  if (command === 'enrich-many') {
+    process.exitCode = await enrichMany(process.argv.slice(3), write);
+    return;
+  }
   if (command === '--help' && !database) { await write(help); return; }
-  if (command === '--version' && !database) { await write('0.3.0\n'); return; }
+  if (command === '--version' && !database) { await write('0.4.0\n'); return; }
   if (!['metadata', 'lookup', 'project', 'enrich', 'diff'].includes(command) || !database ||
     (command === 'metadata' && args.length !== 0) ||
     (command === 'lookup' && (args.length === 0 || args.length > 10000)) ||

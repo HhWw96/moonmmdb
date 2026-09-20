@@ -1,6 +1,8 @@
 name = "HhWw96/moonmmdb"
 
-version = "0.3.0"
+version = "0.4.0"
+
+repository = "https://github.com/HhWw96/moonmmdb"
 
 source = "src"
 

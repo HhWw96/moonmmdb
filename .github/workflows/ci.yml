@@ -40,6 +40,14 @@ jobs:
         run: python -m pip install --target .reference-deps -r requirements-reference.txt
       - name: Verify sources, references, scale, package and performance together
         run: node scripts/release-verify.mjs
+      - name: Linux Native core and independent analytics consumer
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          node scripts/moon.mjs test --target native -p HhWw96/moonmmdb --deny-warn
+          node scripts/moon.mjs test --target native --release -p HhWw96/moonmmdb --deny-warn
+          node --input-type=module -e "import {runMoon} from './scripts/moon.mjs'; runMoon(['test','--target','native','--release','-p','local/moonmmdb_log_analytics','--deny-warn'],'examples/log_analytics');"
       - uses: actions/upload-artifact@v7.0.1
         if: always()
         with:

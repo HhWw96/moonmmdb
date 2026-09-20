@@ -4,11 +4,17 @@ package "HhWw96/moonmmdb/bridge"
 // Values
 pub fn compare_prepared(Handle, Handle, String, SelectionHandle) -> String
 
+pub fn enrich_ip(EnrichmentHandle, String) -> String
+
+pub fn enrichment_status(EnrichmentHandle) -> String
+
 pub fn lookup(Handle, String) -> String
 
 pub fn metadata(Handle) -> String
 
 pub fn open_database(Bytes) -> Handle
+
+pub fn prepare_enrichment(Array[String], Array[Handle], Array[SelectionHandle]) -> EnrichmentHandle
 
 pub fn prepare_fields(Array[String]) -> SelectionHandle
 
@@ -23,6 +29,10 @@ pub fn validate_paths(Array[String]) -> String
 // Errors
 
 // Types and methods
+pub struct EnrichmentHandle {
+  // private fields
+}
+
 pub struct Handle {
   // private fields
 }

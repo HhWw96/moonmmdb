@@ -8,6 +8,8 @@ const scenes = [
   ['日志补充 ASN 字段（含一条未命中）', ['enrich','tests/fixtures/GeoLite2-ASN-Test.mmdb','examples/access.jsonl'], 1],
   ['嵌套 IP 日志字段（含一条未命中）', ['enrich','tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb','examples/nested-access.jsonl','--ip-path','/client/ip','--field','/ip'], 1],
   ['数据库更新检查（等价节点布局）', ['diff','tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb','tests/fixtures/MaxMind-DB-test-ipv4-32.mmdb','examples/database-check.jsonl'], 0],
+  ['联合地域、ASN 与内部标签（人工样例）', ['enrich-many','examples/many.json','examples/analysis-access.jsonl'],1],
+  ['内部标签更新影响（人工样例）', ['diff','tests/scenarios/tags.mmdb','tests/scenarios/tags-updated.mmdb','examples/analysis-access.jsonl','--field','/site'],1],
 ];
 for (const [title,args,expected] of scenes) {
   console.log('\n'+title);
@@ -16,3 +18,5 @@ for (const [title,args,expected] of scenes) {
 }
 console.log('\n独立 MoonBit 消费模块汇总：');
 runMoon(['run','.','--target','js'],resolve(root,'examples/log_consumer'));
+const analysis=spawnSync(process.execPath,['examples/log_analytics/run.mjs','tests/scenarios/geo.mmdb','tests/scenarios/asn.mmdb','examples/analysis-access.jsonl'],{cwd:root,stdio:'inherit'});
+if(analysis.status!==1) throw new Error('Unexpected analytics demo result');

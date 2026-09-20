@@ -14,3 +14,5 @@
 MaxMind 测试数据版权归 MaxMind, Inc.。原始文件的散列值在 tests/fixtures/manifest.json 与 adversarial/manifest.json。项目未捆绑生产 GeoLite2/GeoIP2 全量数据库。
 
 代码参考规范与官方项目进行实现和验证，不宣称格式、查找树或 MMDB 算法为首创。AI 辅助参与代码、测试与说明的编写；参赛者需自行理解实现、核对许可并人工撰写最终申报材料。
+
+tests/scenarios 中的四份数据库由本项目 scripts/prepare-scenarios.py 确定性生成，按项目 Apache-2.0 许可提供；生成脚本只支持测试语料，不是公开 MMDB 写入功能。它们使用文档用途地址和人工标签，不包含真实企业信息，独立参考验证其读取结果。

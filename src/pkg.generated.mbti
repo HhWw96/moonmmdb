@@ -24,6 +24,24 @@ pub fn MmdbError::offset(Self) -> Int
 pub fn MmdbError::to_json(Self) -> Json
 
 // Types and methods
+pub struct Enricher {
+  // private fields
+}
+pub fn Enricher::lookup(Self, String) -> Enrichment raise MmdbError
+pub fn Enricher::new(Array[EnrichmentSource]) -> Self raise MmdbError
+
+pub(all) struct Enrichment {
+  sources : Array[(String, SourceResult)]
+} derive(@debug.Debug)
+pub fn Enrichment::status_code(Self) -> Int
+pub fn Enrichment::to_json(Self) -> Json
+
+pub(all) struct EnrichmentSource {
+  name : String
+  reader : Reader
+  fields : FieldSelector
+}
+
 pub struct FieldSelector {
   // private fields
 }
@@ -89,6 +107,11 @@ pub(all) struct RecordDiff {
 } derive(Eq, @debug.Debug)
 pub fn RecordDiff::changed(Self) -> Bool
 pub fn RecordDiff::to_json(Self) -> Json
+
+pub(all) enum SourceResult {
+  Selected(Projection)
+  Failed(MmdbError)
+} derive(@debug.Debug)
 
 pub(all) enum Value {
   Text(String)

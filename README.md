@@ -2,7 +2,7 @@
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**当前版本：0.3.0。** 查询、解码、字段选择和数据库差异检查使用 MoonBit 实现。支持复用字段选择配置、流式日志补充与数据库更新抽查。[实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_3.md) · [支持范围](docs/SUPPORT.md)
+**当前源码版本：0.4.0。** 查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_4.md) · [支持范围](docs/SUPPORT.md)
 
 源码仓库：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)。
 
@@ -35,6 +35,8 @@ node bin/moonmmdb.mjs enrich tests/fixtures/GeoLite2-ASN-Test.mmdb examples/acce
 node bin/moonmmdb.mjs enrich tests/fixtures/GeoLite2-ASN-Test.mmdb examples/access.jsonl --field /autonomous_system_number
 node bin/moonmmdb.mjs enrich tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb examples/nested-access.jsonl --ip-path /client/ip --field /ip
 node bin/moonmmdb.mjs diff tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb tests/fixtures/MaxMind-DB-test-ipv4-32.mmdb examples/database-check.jsonl
+node bin/moonmmdb.mjs enrich-many examples/many.json examples/analysis-access.jsonl
+node examples/log_analytics/run.mjs tests/scenarios/geo.mmdb tests/scenarios/asn.mmdb examples/analysis-access.jsonl
 ```
 
 换成自己的 `.mmdb` 路径即可查询自己的数据库。路径含空格时加引号。`enrich` 默认读取每行对象的 `ip` 字符串，可用 `--ip-path /client/ip` 指定嵌套字段，输入路径 `-` 表示标准输入。逐行输出保留原对象，并增加查询结果；错误行单独报告，最终退出码不会被后面的成功记录覆盖。默认最多 8 MiB、10,000 行，可按需提高总输入和记录上限，详见操作示例。
@@ -88,6 +90,8 @@ node scripts/consumer-verify.mjs
 - 可复用 FieldSelector，配置与返回结果独立，查询仍使用自己的资源预算。
 - 标准输入和文件流式处理、嵌套 IP 字段、可配置的输入/单行/记录上限。
 - 按输入 IP 比较两份数据库的命中状态、匹配前缀和字段值，提供差异明细及汇总。
+- 按名称组合 1—4 个数据源，分别保留结果、缺失状态和错误；配置错误在读取日志前返回。
+- 独立 MoonBit 日志分析模块：国家/ASN Top 10、精确计数和有界分组；人工内部标签与更新影响演示。
 
 当前不提供数据库写入、自动更新、整库遍历、惰性字段解码、内存映射、在线 IP 情报或网页界面。字段提取先完整解码一次，再选择输出，错误和资源预算不能被跳过。已经验证约 31 MB、65,536 网段的合成库，以及约 8.3 MB Country 和 127.3 MB City 两套真实 DB-IP Lite 库的确定性抽样查询；付费 GeoIP2 大库与长期生产服务负载尚未验证。详见 [支持矩阵](docs/SUPPORT.md)。
 
