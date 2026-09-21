@@ -12,6 +12,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 python scripts/setup-native-windows.py
 node scripts/native-build.mjs
 node scripts/native-cli-verify.mjs
+python scripts/inspection-fixtures.py
 python scripts/native-package.py
 ```
 
@@ -26,7 +27,7 @@ SHA-256 来自固定 `moonbitlang/x@0.5.5`。该版本 crypto 包的旧数组构
 - Native JSON 嵌套上限为 128；这是显式资源限制。固定 MoonBit 解析器还要求 Unicode 代理项转义成对：如 `"\ud800"`、`"\udfff"` 会成为 invalid-jsonl 错误行，而 Node JSON.parse 接受它们。正确配对的 `"\ud800\udc00"` 与普通 Unicode 均可使用。这是明确的输入兼容边界，不宣称任意 JSON 完全等价。坏配置直接终止，坏日志按行报错；非法 UTF-8、传输失败或资源超限终止整次处理。
 - 数据库合计上限 256 MiB；打开过程中存在宿主字节、Reader 快照、解码及输出分配，不能把文件上限写成内存上限。
 - 输出发生阻塞时等待消费者；管道提前关闭时退出 2，不写完成汇总。EOF 为正常输入终止；不能从 EOF 判断上游进程的业务状态。
-- 本轮不提供 Native enrich、diff、analytics、mmap、网段遍历、自动下载和更新功能。
+- 本轮不提供 Native enrich、diff、analytics、mmap、自动下载和更新功能。
 
 ## 验证入口
 
@@ -37,6 +38,7 @@ python -m pip install --target .reference-deps -r requirements-reference.txt
 python scripts/download-production.py
 python scripts/native-production-verify.py
 python scripts/native-soak.py
+python scripts/inspection-fixtures.py
 python scripts/native-package.py
 ```
 

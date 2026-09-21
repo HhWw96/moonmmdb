@@ -1,5 +1,5 @@
 import {spawn,spawnSync} from 'node:child_process';
-import {readFileSync,writeFileSync} from 'node:fs';
+import {readFileSync,writeFileSync,mkdirSync,copyFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {createInterface} from 'node:readline';
 import assert from 'node:assert/strict';
@@ -35,7 +35,11 @@ async function stream(name,flags,{slow=false,close=false,code=0,count=131072}={}
   } finally {clearTimeout(timer);if(child.exitCode===null)child.kill();}
 }
 try {
+  const unicode=resolve(root,'verification/local/中文 路径 😀');mkdirSync(unicode,{recursive:true});
+  const unicodeFile=resolve(unicode,'数据库 😀.mmdb');copyFileSync(resolve(root,'tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb'),unicodeFile);
   for(const [name,args] of [
+    ['Unicode networks',['networks',unicodeFile,'1.1.1.0/30']],
+    ['Unicode validation',['validate',unicodeFile,'--decode-data']],
     ['clipping',['networks','tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb','1.1.1.3/32']],
     ['all structure',['validate','tests/fixtures/MaxMind-DB-test-mixed-28.mmdb']],
     ['decode',['validate','tests/fixtures/GeoIP2-City-Test.mmdb','--decode-data']],
@@ -49,7 +53,7 @@ try {
   ])check(name,()=>{
     const actual=run(args);assert(!actual.error,actual.error);
     if(native){const js=spawnSync(process.execPath,[resolve(root,'bin/moonmmdb.mjs'),...args],{cwd:root,encoding:'utf8',timeout:30000});assert.equal(actual.status,js.status);assert.deepEqual(normalize(actual.stdout),normalize(js.stdout));assert.deepEqual(normalize(actual.stderr),normalize(js.stderr));}
-    else assert.equal(actual.status,['clipping','all structure','decode'].includes(name)?0:2);
+    else assert.equal(actual.status,['clipping','all structure','decode','Unicode networks','Unicode validation'].includes(name)?0:2);
   });
   check('hidden corruption is outside successful lookup',()=>assert.equal(run(['lookup','verification/local/inspection-hidden-corruption.mmdb','1.1.1.1']).status,0));
   await stream('131072 records throughput',['--max-records','131072']);

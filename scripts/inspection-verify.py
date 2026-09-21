@@ -81,7 +81,7 @@ def check_networks(path,cidr,expected,reference):
     assert len(rows)==len(expected),(path,cidr,len(rows),len(expected))
     for row,network in zip(rows,expected):
         assert ipaddress.ip_network(row['network'])==network,(path,row['network'],str(network))
-        for ip in (network.network_address,network.broadcast_address):
+        for ip in (network.network_address,network.broadcast_address,type(network.network_address)((int(network.network_address)+int(network.broadcast_address))//2)):
             assert plain(row['value'])==reference.get(str(ip)),(path,str(ip))
             report['network_checks']+=1
     assert len(errors)==1 and errors[0]['status']=='summary' and errors[0]['records']==len(rows)

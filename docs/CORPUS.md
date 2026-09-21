@@ -27,7 +27,7 @@ python scripts/corpus-verify.py --native
 
 - Python 3.2.0 遍历两个 Anonymous 数据库时会在 IPv6 别名处抛出 host-bits-set 错误。此时从固定官方 source-data JSON 生成地址边界，仍使用其独立 `get_with_prefix_len` 获取答案；不以 MoonMMDB 结果生成预期值。
 - `decode-path-shared-budget` 样本含重复 map 键。MoonMMDB 按既有策略返回 duplicate-key；本库没有局部惰性解码接口，不能声称已经验证了上游局部解码共享预算的全部行为。
-- `corrupt-search-tree` 的根节点直接命中记录；不可达节点的损坏不会被逐 IP 查询访问。逐 IP 检查仅确认可达结果；0.6.0 新增 validate 检查全部物理树节点，可发现这类不可达损坏。仍不把 open 成功描述为全树合法性认证。
+- `corrupt-search-tree` 这个固定样本的根节点直接命中记录，另外 99 个不可达节点指回根。0.6.0 逐节点检查确认这些引用在当前范围内有效、没有循环，报告 valid 且 unreachable_nodes=99；不能仅凭文件名判定损坏。另用明确人工构造的不可达分隔区指针和循环样例验证拒绝行为。
 - 本库解码工作计数包含指针等控制工作，部分边界样本会比上游平面值计数更早拒绝；策略差异保留在支持文档中。
 
 报告输出 `verification/local/corpus.json` 和 `corpus-native.json`。JS 完整回归及 Windows/Linux Native CI 都运行此检查；新语料不能仅下载而不执行。
