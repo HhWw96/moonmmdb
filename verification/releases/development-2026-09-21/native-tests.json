@@ -1,0 +1,50 @@
+{
+  "started": "2026-09-21T05:28:23.146Z",
+  "finished": "2026-09-21T05:30:04.279Z",
+  "status": "passed",
+  "platform": "win32",
+  "arch": "x64",
+  "source_sha256": "8845586f059c2257b0105543e68a88efb0f28d5bdc3b19ea533ce53bda319a76",
+  "steps": [
+    {
+      "name": "probe-format",
+      "passed": true,
+      "expected_tests": null
+    },
+    {
+      "name": "debug",
+      "passed": true,
+      "expected_tests": 31
+    },
+    {
+      "name": "release",
+      "passed": true,
+      "expected_tests": 31
+    },
+    {
+      "name": "geo",
+      "passed": true,
+      "expected_tests": 8
+    },
+    {
+      "name": "typed-consumer",
+      "passed": true,
+      "expected_tests": 1
+    },
+    {
+      "name": "consumer",
+      "passed": true,
+      "expected_tests": 1
+    },
+    {
+      "name": "analytics",
+      "passed": true,
+      "expected_tests": 4
+    },
+    {
+      "name": "probe",
+      "passed": true,
+      "expected_tests": null
+    }
+  ]
+}

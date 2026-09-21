@@ -1,0 +1,70 @@
+{
+  "started": "2026-09-21T05:26:31.290Z",
+  "status": "passed",
+  "source_sha256": "8845586f059c2257b0105543e68a88efb0f28d5bdc3b19ea533ce53bda319a76",
+  "steps": [
+    {
+      "name": "verification",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "corpus",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "typed",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "comparison",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "enrichment",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "scale",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "package",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "benchmark",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "core_sha256": "eeae0c1e805345377efcc99c994cfe88ae93347c5aec762d4e4ee8d2df57b1c7",
+  "evidence": {
+    "verification": "4c62a6064c3ab6ee68a9e612b59e19427fcc0bcc41a20c58a74b59196aca0391",
+    "api-compat": "98341ae9f28b7a75bcd52f993b714d67eb910815c42d4b167948ae86b342579d",
+    "reference": "073d364894728e533ffcd737a43b7d9381aec1591f343ac5508ecd623d55b12e",
+    "corpus": "048a385adbd12030e2cad9291a97e77c83fcb4a518f47c52556c1bd46133cffd",
+    "typed": "ed4ff7de0e25d0d93e2dd2a023999b84c47a2d6815296fe7d6b065d7bec504b3",
+    "comparison": "43c2d62d4c46a9fe9cd2966f7f25ff1a004b9440ad05754955999f15cedab5d2",
+    "enrichment": "d6c07e4a4942b6a3325dd423d26779c314b325d96955cd9710a486105dae7e00",
+    "adversarial": "66e64c63f445e9ecab62ffe33814e510ed4e759557eb9cce2052a555cd342483",
+    "boundary": "be123c35f7a41482c4e646224c6118a596acc877475ea9dd322cc82a3f443129",
+    "mutation": "b99ae5ba294b36f846b64a0dc9449b8cf4063b9048bd60c89367c3675eba48d2",
+    "consumer": "0b83cf05199f4f0aa0fff85a9c89d61d5cf2c74a411ce2ad5d1a531fc8a267ed",
+    "scale": "46b69281e809fe3612d9b9508beb4a0bcfec3f9754b612d649db914d10599791",
+    "package": "90cd121ad393bfdc60e2901c4b38ea28216655dc9ec3fea478ee971b9691ab79",
+    "benchmark": "318f065c986e3778006f77725933eede257df661318e74664b167e2cc561aa2b"
+  },
+  "finished": "2026-09-21T05:28:08.874Z"
+}

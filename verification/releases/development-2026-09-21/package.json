@@ -1,0 +1,10 @@
+{
+  "started": "2026-09-21T05:27:57.246296+00:00",
+  "status": "passed",
+  "scope": "Fresh local workspace importing a newly extracted moon package, not Mooncakes registry installation.",
+  "archive": "HhWw96-moonmmdb-0.5.0.zip",
+  "sha256": "b7f3de7dda44736b7288a7fd7caf326a9ce652de093c209fb59fd0aaa34b4451",
+  "file_count": 307,
+  "contains_scenario_licenses": true,
+  "finished": "2026-09-21T05:28:06.968427+00:00"
+}

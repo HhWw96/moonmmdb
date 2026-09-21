@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "baseline": "0.5.0",
+  "scope": "Existing public declarations, imports and checked-in interface freshness. Behavior is covered separately by regression tests.",
+  "packages": [
+    {
+      "path": "src/pkg.generated.mbti",
+      "issues": [],
+      "existing": 44,
+      "added": []
+    },
+    {
+      "path": "src/bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 15,
+      "added": []
+    }
+  ]
+}
