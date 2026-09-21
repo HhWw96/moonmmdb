@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.0 — 待发布
+## 0.5.0 — 2026-09-21
 
 - 增加 Windows/Linux x64 Native metadata、lookup、project 和 enrich-many 命令。
 - 增加 Unicode 文件路径、有界 JSONL 输入、同步输出等待、错误退出及完成汇总。

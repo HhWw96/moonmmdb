@@ -60,7 +60,7 @@ v0.4.0 默认 Node 配置曾超过 RSS 增长门槛；此限制继续保留。�
 
 ## 发布
 
-验证门槛已通过，正在完成 Mooncakes 上传、全新目录安装及 GitHub Release 发布。完成前仍以 v0.4.0 为已公开稳定版本。本次原始 CI 压缩包的 SHA-256：
+验证门槛已通过，Mooncakes 0.5.0 已上传并完成全新目录安装，JS/WasmGC 均通过精确 ASN 查询及 Enricher 消费测试；没有本地 workspace 替代。注册表下载包与上传包逐字节散列一致。GitHub Release 正在发布，最终状态见 [发布回执](../verification/releases/0.5.0/publication.json)。本次原始 CI 压缩包的 SHA-256：
 
 | 文件 | SHA-256 |
 |---|---|

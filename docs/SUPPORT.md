@@ -1,6 +1,6 @@
 # 支持范围
 
-v0.4.0 稳定能力见本页；v0.5.0 Native 产品宿主正在验收，新增范围与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_5.md)。
+v0.5.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_5.md)。
 
 ## 多库查询与分析
 
@@ -68,8 +68,8 @@ CLI diff 未给 --field 时选择整个记录（空路径），只检查输入�
 
 ## 后端
 
-后端验证范围为 JavaScript、Wasm GC 及固定 Windows x64、MoonBit 0.10.11、GCC 16.2.0 的 Native。Ubuntu CI 还运行 Linux Native 核心及独立分析模块测试；范围不含 Linux 产品 CLI。当前证据见 [0.4.0 验证](VERIFICATION_0_4.md)，0.2.0 / 0.3.0 历史证据保留。当前 MoonBit nightly 文档推荐的 Windows MSVC 路径尚未验证；不能外推为最新工具链支持。
+后端验证范围为 JavaScript、WasmGC 及固定 MoonBit 0.10.11 的 Windows/Linux x64 Native。Windows 使用 GCC 16.2.0；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、MSVC、macOS、ARM64、Alpine、浏览器 UI 或 WASI Component 支持。
 
-产品 CLI 仍使用 Node.js。独立 Native 文件验证程序见 examples/native_probe，宿主 C 代码只负责路径、文件与计时，核心 MMDB 包不依赖 C 读取器。Windows 实际运行已覆盖中文、空格及非 BMP 字符路径。未验证 macOS、Linux 文件宿主、浏览器 UI 或 WASI Component。
+Native 产品提供 metadata、lookup、project、enrich-many；Node.js 保留 enrich、diff 和分析示例等完整功能。Native 的参数、JSON、查询与统计在 MoonBit 实现，C 只负责宿主输入输出，不依赖 C/Python MMDB 读取器。Unicode 路径、十万行流式输入、慢消费者与提前关闭管道已在 Windows/Linux 验证。Native JSON 上限 128 层，拒绝未配对 Unicode 代理项转义，其他边界见 [Native 说明](NATIVE_CLI.md)。
 
-Windows Native 与 JS 分别读取完整的 DB-IP Lite 2026-09 Country（8,340,464 字节）、City（127,339,927 字节）与 ASN（9,511,026 字节）文件，每库抽查 5,000 地址。额外对 City＋ASN 联合查询每库抽查 7,114 地址，两个后端分别完成 14,228 次结果对照，并由独立 Python maxminddb 3.2.0 核对分析统计。结果是抽样读取正确性证据，不是全记录、真实定位准确率、商业数据库或长期服务稳定性证明。[当前证据与复现](VERIFICATION_0_4.md)
+两个平台的实际 Native CLI 分别完成 City＋ASN 每库 7,114 个确定性地址、共 14,228 次独立 Python 参考对照；各完成 30 分钟 / 900,000 行持续运行。报告包含二进制、源码、数据库散列与环境。此前 Country/City/ASN 各 5,000 地址的单库证据仍见 [0.4.0 报告](VERIFICATION_0_4.md)；新增产品证据见 [0.5.0 报告](VERIFICATION_0_5.md)。抽样与限速持续运行不代表全记录正确性、定位准确率、商业数据库或长期生产部署；v0.4.0 默认 Node RSS 门槛失败记录继续保留。
