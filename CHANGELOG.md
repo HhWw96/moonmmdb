@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.5.0 — 待发布
+
+- 增加 Windows/Linux x64 Native metadata、lookup、project 和 enrich-many 命令。
+- 增加 Unicode 文件路径、有界 JSONL 输入、同步输出等待、错误退出及完成汇总。
+- 联合查询保留原始数字，输出各源统计、数据库类型、构建时间和 SHA-256。
+- 增加 Native 命令兼容性、真实 City＋ASN 对照、流式与持续运行验证，以及隔离解压包检查。
+- 提供跨平台构建、产物校验清单和受验证结果约束的发布流程。
+
 ## 0.4.0 — 2026-09-20
 
 - 增加 Enricher 多库联合查询接口，按源隔离字段、未命中和错误。

@@ -1,0 +1,10 @@
+{
+  "version": "0.5.0",
+  "source_commit": "4115070136db3a568e63d5a7704b62e73d8fb23d",
+  "native_run": "https://github.com/HhWw96/moonmmdb/actions/runs/35554063542",
+  "regression_run": "https://github.com/HhWw96/moonmmdb/actions/runs/35554063512",
+  "archives": {
+    "moonmmdb-0.5.0-linux-x64.tar.gz": "61da6cfed11e95f39d191ade49e5fc20dcdbcfe8ed95a241d7f111f90f3a8bbc",
+    "moonmmdb-0.5.0-windows-x64.zip": "43998e32df43d62114227fd7df8feea813649f1780347c025540241ea8419583"
+  }
+}

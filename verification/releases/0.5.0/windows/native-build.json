@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "platform": "win32",
+  "arch": "x64",
+  "toolchain": "moon 0.1.20260827 (d0aaa07 2026-08-27) ~\\.moon\\bin\\moon.exe\nmoonc v0.10.11+6ff76a5f9 (2026-08-28) ~\\.moon\\bin\\moonc.exe\nmoonrun 0.1.20260827 (d0aaa07 2026-08-27) ~\\.moon\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg\n",
+  "compiler": {
+    "compiler": "D:\\a\\moonmmdb\\moonmmdb\\verification\\local\\toolchains\\extracted\\w64devkit\\bin\\gcc.exe",
+    "version": "gcc.exe (GCC) 16.2.0\r\nCopyright (C) 2026 Free Software Foundation, Inc.\r\nThis is free software; see the source for copying conditions.  There is NO\r\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  "source_sha256": "ce303291d05bdc6362b496527aab52fad7da881e16371c9689abac792160729c",
+  "executable_sha256": "e8fb220a8752d0203429b0c651fe1ed6e4292cff9f63c186783723e37d598322",
+  "output": ""
+}

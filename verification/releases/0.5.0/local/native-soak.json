@@ -1,0 +1,522 @@
+{
+  "status": "passed",
+  "platform": "nt",
+  "started": "2026-09-21T02:01:48.573331+00:00",
+  "duration_requested": 1800,
+  "rate_cap": 500,
+  "executable_sha256": "a75eefe784bdb9a2b87f31bb9486a67c0a988f859f661747b28d50db48342b06",
+  "samples": [
+    {
+      "rss": 2551808,
+      "private_bytes": 454656,
+      "handles": 32,
+      "seconds": 0.0,
+      "received": 0
+    },
+    {
+      "rss": 142544896,
+      "private_bytes": 146792448,
+      "handles": 58,
+      "seconds": 30.07800000000043,
+      "received": 15050
+    },
+    {
+      "rss": 142491648,
+      "private_bytes": 146661376,
+      "handles": 58,
+      "seconds": 60.15599999999995,
+      "received": 30100
+    },
+    {
+      "rss": 142503936,
+      "private_bytes": 146673664,
+      "handles": 58,
+      "seconds": 90.03099999999995,
+      "received": 45050
+    },
+    {
+      "rss": 142544896,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 120.09299999999985,
+      "received": 60050
+    },
+    {
+      "rss": 142524416,
+      "private_bytes": 146694144,
+      "handles": 58,
+      "seconds": 150.15599999999995,
+      "received": 75100
+    },
+    {
+      "rss": 142503936,
+      "private_bytes": 146702336,
+      "handles": 58,
+      "seconds": 180.01500000000033,
+      "received": 90000
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146690048,
+      "handles": 58,
+      "seconds": 210.07800000000043,
+      "received": 105050
+    },
+    {
+      "rss": 26832896,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 240.14000000000033,
+      "received": 120100
+    },
+    {
+      "rss": 26796032,
+      "private_bytes": 146673664,
+      "handles": 58,
+      "seconds": 270.0150000000003,
+      "received": 135000
+    },
+    {
+      "rss": 26816512,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 300.07800000000043,
+      "received": 150050
+    },
+    {
+      "rss": 26796032,
+      "private_bytes": 146673664,
+      "handles": 58,
+      "seconds": 330.15599999999995,
+      "received": 165100
+    },
+    {
+      "rss": 26836992,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 360.0150000000003,
+      "received": 180050
+    },
+    {
+      "rss": 26800128,
+      "private_bytes": 146677760,
+      "handles": 58,
+      "seconds": 390.09299999999985,
+      "received": 195050
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146690048,
+      "handles": 58,
+      "seconds": 420.1400000000003,
+      "received": 210100
+    },
+    {
+      "rss": 26783744,
+      "private_bytes": 146661376,
+      "handles": 58,
+      "seconds": 450.0150000000003,
+      "received": 225050
+    },
+    {
+      "rss": 26816512,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 480.07800000000043,
+      "received": 240050
+    },
+    {
+      "rss": 26779648,
+      "private_bytes": 146657280,
+      "handles": 58,
+      "seconds": 510.1400000000003,
+      "received": 255100
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 540.0150000000003,
+      "received": 270000
+    },
+    {
+      "rss": 26808320,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 570.0780000000004,
+      "received": 285050
+    },
+    {
+      "rss": 26832896,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 600.1400000000003,
+      "received": 300100
+    },
+    {
+      "rss": 26816512,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 630.0,
+      "received": 315000
+    },
+    {
+      "rss": 26796032,
+      "private_bytes": 146681856,
+      "handles": 58,
+      "seconds": 660.0619999999999,
+      "received": 330050
+    },
+    {
+      "rss": 26820608,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 690.1400000000003,
+      "received": 345100
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 720.0150000000003,
+      "received": 360050
+    },
+    {
+      "rss": 26808320,
+      "private_bytes": 146685952,
+      "handles": 58,
+      "seconds": 750.0929999999998,
+      "received": 375050
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 780.1710000000003,
+      "received": 390100
+    },
+    {
+      "rss": 26791936,
+      "private_bytes": 146669568,
+      "handles": 58,
+      "seconds": 810.031,
+      "received": 405050
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 840.0929999999998,
+      "received": 420057
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 870.1710000000003,
+      "received": 435100
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146690048,
+      "handles": 58,
+      "seconds": 900.0460000000003,
+      "received": 450050
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146690048,
+      "handles": 58,
+      "seconds": 930.1090000000004,
+      "received": 465050
+    },
+    {
+      "rss": 26820608,
+      "private_bytes": 146698240,
+      "handles": 58,
+      "seconds": 960.1710000000003,
+      "received": 480100
+    },
+    {
+      "rss": 26783744,
+      "private_bytes": 146661376,
+      "handles": 58,
+      "seconds": 990.031,
+      "received": 495050
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146690048,
+      "handles": 58,
+      "seconds": 1020.0929999999998,
+      "received": 510050
+    },
+    {
+      "rss": 26828800,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1050.156,
+      "received": 525100
+    },
+    {
+      "rss": 26808320,
+      "private_bytes": 146665472,
+      "handles": 58,
+      "seconds": 1080.031,
+      "received": 540050
+    },
+    {
+      "rss": 26820608,
+      "private_bytes": 146677760,
+      "handles": 58,
+      "seconds": 1110.0929999999998,
+      "received": 555050
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146661376,
+      "handles": 58,
+      "seconds": 1140.156,
+      "received": 570100
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146669568,
+      "handles": 58,
+      "seconds": 1170.0150000000003,
+      "received": 585000
+    },
+    {
+      "rss": 26816512,
+      "private_bytes": 146673664,
+      "handles": 58,
+      "seconds": 1200.0929999999998,
+      "received": 600050
+    },
+    {
+      "rss": 26828800,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1230.1710000000003,
+      "received": 615100
+    },
+    {
+      "rss": 26800128,
+      "private_bytes": 146657280,
+      "handles": 58,
+      "seconds": 1260.031,
+      "received": 630050
+    },
+    {
+      "rss": 26828800,
+      "private_bytes": 146685952,
+      "handles": 58,
+      "seconds": 1290.1090000000004,
+      "received": 645050
+    },
+    {
+      "rss": 26828800,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1320.1710000000003,
+      "received": 660100
+    },
+    {
+      "rss": 26816512,
+      "private_bytes": 146685952,
+      "handles": 58,
+      "seconds": 1350.0460000000003,
+      "received": 675050
+    },
+    {
+      "rss": 26841088,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1380.125,
+      "received": 690100
+    },
+    {
+      "rss": 26828800,
+      "private_bytes": 146685952,
+      "handles": 58,
+      "seconds": 1410.0,
+      "received": 705000
+    },
+    {
+      "rss": 26804224,
+      "private_bytes": 146673664,
+      "handles": 58,
+      "seconds": 1440.0780000000004,
+      "received": 720050
+    },
+    {
+      "rss": 26824704,
+      "private_bytes": 146694144,
+      "handles": 58,
+      "seconds": 1470.156,
+      "received": 735100
+    },
+    {
+      "rss": 26828800,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1500.031,
+      "received": 750050
+    },
+    {
+      "rss": 26824704,
+      "private_bytes": 146681856,
+      "handles": 58,
+      "seconds": 1530.1090000000004,
+      "received": 765050
+    },
+    {
+      "rss": 26845184,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1560.062,
+      "received": 780050
+    },
+    {
+      "rss": 26832896,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1590.1710000000003,
+      "received": 795100
+    },
+    {
+      "rss": 26816512,
+      "private_bytes": 146673664,
+      "handles": 58,
+      "seconds": 1620.031,
+      "received": 810050
+    },
+    {
+      "rss": 26812416,
+      "private_bytes": 146669568,
+      "handles": 58,
+      "seconds": 1650.0929999999998,
+      "received": 825050
+    },
+    {
+      "rss": 26796032,
+      "private_bytes": 146653184,
+      "handles": 58,
+      "seconds": 1680.1710000000003,
+      "received": 840100
+    },
+    {
+      "rss": 26836992,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1710.0460000000003,
+      "received": 855050
+    },
+    {
+      "rss": 26832896,
+      "private_bytes": 146690048,
+      "handles": 58,
+      "seconds": 1740.1090000000004,
+      "received": 870100
+    },
+    {
+      "rss": 26845184,
+      "private_bytes": 146722816,
+      "handles": 58,
+      "seconds": 1770.187,
+      "received": 885100
+    }
+  ],
+  "scope": "Actual Native CLI, paced JSONL input and continuously drained output; not maximum query throughput.",
+  "sources": {
+    "geo": {
+      "name": "geo",
+      "bytes": 127339927,
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "database_type": "DBIP-City-Lite",
+      "build_epoch": "1788226681",
+      "fields": [
+        "/country/iso_code",
+        "/city/names/en"
+      ],
+      "found": 5,
+      "not_found": 4,
+      "errors": 0,
+      "missing_fields": 8
+    },
+    "asn": {
+      "name": "asn",
+      "bytes": 9511026,
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+      "build_epoch": "1788226697",
+      "fields": [
+        "/autonomous_system_number",
+        "/autonomous_system_organization"
+      ],
+      "found": 5,
+      "not_found": 4,
+      "errors": 0,
+      "missing_fields": 8
+    }
+  },
+  "elapsed_seconds": 1800.0460000000003,
+  "rows": 900000,
+  "rows_per_second": 499.987222548757,
+  "summary": {
+    "status": "summary",
+    "processed": 900000,
+    "valid_ips": 900000,
+    "invalid_inputs": 0,
+    "sources": {
+      "geo": {
+        "name": "geo",
+        "bytes": 127339927,
+        "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+        "database_type": "DBIP-City-Lite",
+        "build_epoch": "1788226681",
+        "fields": [
+          "/country/iso_code",
+          "/city/names/en"
+        ],
+        "found": 500000,
+        "not_found": 400000,
+        "errors": 0,
+        "missing_fields": 800000
+      },
+      "asn": {
+        "name": "asn",
+        "bytes": 9511026,
+        "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+        "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+        "build_epoch": "1788226697",
+        "fields": [
+          "/autonomous_system_number",
+          "/autonomous_system_organization"
+        ],
+        "found": 500000,
+        "not_found": 400000,
+        "errors": 0,
+        "missing_fields": 800000
+      }
+    }
+  },
+  "rss_gate": {
+    "early_median": 26806272.0,
+    "late_median": 26830848.0,
+    "growth": 24576.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "private_bytes_gate": {
+    "early_median": 146706432.0,
+    "late_median": 146706432.0,
+    "growth": 0.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "finished": "2026-09-21T02:31:51.331765+00:00",
+  "peak_sampled_rss": 142544896,
+  "peak_sampled_private_bytes": 146792448,
+  "measurement_note": "Initial local sampler: peaks are sample maxima, not OS high-water marks. See CI reports for OS high-water data."
+}

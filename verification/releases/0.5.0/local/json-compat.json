@@ -1,0 +1,61 @@
+{
+  "scope": "Explicit fixed-parser Unicode input boundary; not a universal JSON equivalence claim",
+  "cases": [
+    {
+      "input": "{\"ip\":\"192.0.2.1\",\"x\":1e999}",
+      "native": {
+        "exit": 0,
+        "status": "found"
+      },
+      "node": {
+        "exit": 0,
+        "status": "found"
+      }
+    },
+    {
+      "input": "{\"ip\":\"192.0.2.1\",\"x\":1e-999}",
+      "native": {
+        "exit": 0,
+        "status": "found"
+      },
+      "node": {
+        "exit": 0,
+        "status": "found"
+      }
+    },
+    {
+      "input": "{\"ip\":\"192.0.2.1\",\"x\":\"\\ud800\"}",
+      "native": {
+        "exit": 2,
+        "status": "invalid-jsonl"
+      },
+      "node": {
+        "exit": 0,
+        "status": "found"
+      }
+    },
+    {
+      "input": "{\"ip\":\"192.0.2.1\",\"x\":\"\\udfff\"}",
+      "native": {
+        "exit": 2,
+        "status": "invalid-jsonl"
+      },
+      "node": {
+        "exit": 0,
+        "status": "found"
+      }
+    },
+    {
+      "input": "{\"ip\":\"192.0.2.1\",\"x\":\"\\ud800\\udc00\"}",
+      "native": {
+        "exit": 0,
+        "status": "found"
+      },
+      "node": {
+        "exit": 0,
+        "status": "found"
+      }
+    }
+  ],
+  "status": "documented-boundary"
+}

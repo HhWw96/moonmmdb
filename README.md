@@ -10,7 +10,17 @@ MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格�
 
 读取调用方提供的数据库，返回 IP 对应的记录、匹配前缀和明确错误。无需在线查询服务；国家、ASN 或组织自定义字段由数据库决定。随项目提供的是官方人工测试数据，**不代表这些 IP 当前的真实归属**。
 
-## 立即试用
+## Native 命令行工具
+
+v0.5.0 开发版本新增无需 Node.js 的 Windows/Linux x64 可执行程序，支持 `metadata`、`lookup`、`project` 和 `enrich-many`。当前正在进行完整验收，稳定发布仍为上方标明的 v0.4.0。
+
+```text
+node scripts/native-build.mjs
+```
+
+Windows 需先准备固定编译器；构建、用法与边界见 [Native 说明](docs/NATIVE_CLI.md) 和 [0.5.0 验证状态](docs/VERIFICATION_0_5.md)。下载包通过全部门槛后才加入正式 Release。
+
+## 从源码运行 Node.js 工具
 
 需要 Node.js 22+ 和 MoonBit 工具链。本轮使用 Node.js 24.13.0、`moonc v0.10.11+6ff76a5f9`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；个人工具链配置 `.local-toolchain.json` 不随仓库提交。
 
