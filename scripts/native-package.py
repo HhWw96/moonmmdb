@@ -67,4 +67,3 @@ else:
 report['archive_verification']=verify(archive);report['status']='passed'
 (out/'SHA256SUMS').write_text(f'{digest(archive)}  {archive.name}\n',encoding='utf-8')
 (ROOT/'verification/local/native-package.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8');print(json.dumps(report))
-

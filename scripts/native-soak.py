@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parent.parent
 p=argparse.ArgumentParser();p.add_argument('--seconds',type=int,default=1800);p.add_argument('--rate',type=int,default=500);p.add_argument('--exe',default=str(ROOT/'dist'/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')));args=p.parse_args()
 assert args.seconds>=60 and 1<=args.rate<=500 and args.seconds*args.rate<=1000000
 exe=Path(args.exe).resolve();config=ROOT/'examples/production-many.json';output=ROOT/'verification/local/native-soak.json'
-report={'status':'running','platform':os.name,'started':datetime.datetime.now(datetime.timezone.utc).isoformat(),'duration_requested':args.seconds,'rate_cap':args.rate,'executable_sha256':hashlib.sha256(exe.read_bytes()).hexdigest(),'samples':[],'scope':'Actual Native CLI, paced JSONL input and continuously drained output; not maximum query throughput.'}
+report={'status':'running','platform':os.name,'started':datetime.datetime.now(datetime.timezone.utc).isoformat(),'duration_requested':args.seconds,'rate_cap':args.rate,'sampling':'Every 30 seconds; RSS high-water supplied by the OS, private bytes sampled; final sub-sample interval not observed','executable_sha256':hashlib.sha256(exe.read_bytes()).hexdigest(),'samples':[],'scope':'Actual Native CLI, paced JSONL input and continuously drained output; not maximum query throughput.'}
 ips=['1.1.1.1','8.8.8.8','81.2.69.160','2001:4860:4860::8888','2606:4700:4700::1111','::1','10.0.0.1','255.255.255.255','192.0.2.1']
 lines=[json.dumps({'ip':ip},separators=(',',':'))+'\n' for ip in ips]
 base=subprocess.run([str(exe),'enrich-many',str(config),'-'],input=''.join(lines),capture_output=True,text=True,encoding='utf-8',timeout=90)
@@ -50,13 +50,13 @@ def sample():
  if os.name=='nt':
   c=Counters();c.cb=ctypes.sizeof(c);assert psapi.GetProcessMemoryInfo(handle,ctypes.byref(c),c.cb)
   h=wintypes.DWORD();assert kernel.GetProcessHandleCount(handle,ctypes.byref(h))
-  return {'rss':c.WorkingSetSize,'private_bytes':c.PrivateUsage,'handles':h.value}
+  return {'rss':c.WorkingSetSize,'rss_high_water':c.PeakWorkingSetSize,'private_bytes':c.PrivateUsage,'handles':h.value}
  values={}
  for line in Path(f'/proc/{child.pid}/status').read_text().splitlines():
   if ':' in line:
    key,value=line.split(':',1)
-   if key in ('VmRSS','RssAnon'):values[key]=int(value.split()[0])*1024
- return {'rss':values['VmRSS'],'private_bytes':values.get('RssAnon',0),'handles':len(list(Path(f'/proc/{child.pid}/fd').iterdir()))}
+   if key in ('VmRSS','VmHWM','RssAnon'):values[key]=int(value.split()[0])*1024
+ return {'rss':values['VmRSS'],'rss_high_water':values['VmHWM'],'private_bytes':values.get('RssAnon',0),'handles':len(list(Path(f'/proc/{child.pid}/fd').iterdir()))}
 threads=[threading.Thread(target=f,daemon=True) for f in (reader,stderr_reader,writer)]
 for t in threads:t.start()
 try:
@@ -75,7 +75,7 @@ try:
  assert child.returncode in (0,1),(child.returncode,state['stderr'])
  assert state['received']==state['sent'] and state['received']>0
  summary=json.loads(state['stderr']);assert summary['status']=='summary' and summary['processed']==state['received']
- report.update(elapsed_seconds=duration,rows=state['received'],rows_per_second=state['received']/duration,peak_rss=max(s['rss'] for s in report['samples']),peak_private_bytes=max(s['private_bytes'] for s in report['samples']),summary=summary)
+ report.update(elapsed_seconds=duration,rows=state['received'],rows_per_second=state['received']/duration,peak_rss=max(s['rss_high_water'] for s in report['samples']),peak_sampled_rss=max(s['rss'] for s in report['samples']),peak_sampled_private_bytes=max(s['private_bytes'] for s in report['samples']),summary=summary)
  if args.seconds>=1800:
   warm=[s for s in report['samples'] if s['seconds']>=300];assert len(warm)>=20
   for key in ('rss','private_bytes'):

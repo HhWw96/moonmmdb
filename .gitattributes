@@ -6,3 +6,7 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.mmdb binary
+
+# Preserve upstream notices and source bytes, including upstream whitespace.
+native_cli/licenses/** -whitespace
+native_cli/vendor/** -whitespace

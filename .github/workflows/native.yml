@@ -2,6 +2,7 @@ name: Native product validation
 on:
   push:
     branches: [main]
+    paths-ignore: ["docs/**", "README.md", "CHANGELOG.md", "verification/releases/**"]
   pull_request:
   workflow_dispatch:
 permissions:

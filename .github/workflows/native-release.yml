@@ -1,0 +1,46 @@
+name: Publish verified Native release
+on:
+  workflow_dispatch:
+    inputs:
+      native_run:
+        description: Successful Native product validation run ID
+        required: true
+      regression_run:
+        description: Successful Verify MoonMMDB run ID
+        required: true
+permissions:
+  contents: read
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: write
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      NATIVE_RUN: ${{ inputs.native_run }}
+      REGRESSION_RUN: ${{ inputs.regression_run }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24'
+      - name: Check successful runs and matching code
+        run: node scripts/native-release-gate.mjs
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: native-package-ubuntu-22.04
+          run-id: ${{ inputs.native_run }}
+          github-token: ${{ github.token }}
+          path: dist/publish/linux
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: native-package-windows-2022
+          run-id: ${{ inputs.native_run }}
+          github-token: ${{ github.token }}
+          path: dist/publish/windows
+      - name: Check artifacts, registry receipt, and publish
+        run: node scripts/native-release-gate.mjs --publish

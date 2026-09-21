@@ -71,6 +71,7 @@ for(const [name,sources] of [['empty sources',[]],['five sources',['a','b','c','
 await new Promise((resolvePromise,reject)=>{const child=spawn(exe,['enrich-many',bad,'-'],{cwd:root,windowsHide:true});const timer=setTimeout(()=>{child.kill();reject(new Error('configuration consumed stdin'));},5000);child.stdout.resume();child.stderr.resume();child.on('error',reject);child.on('close',code=>{clearTimeout(timer);try{assert.equal(code,2);resolvePromise();}catch(e){reject(e);}});});report.checks.push('configuration preflight before stdin');
 // Test genuine backpressure and an early-closed stdout pipe with bounded writers.
 async function stream(closeEarly=false){
+  const started=performance.now();
   const child=spawn(exe,['enrich-many',config,'-','--max-records','1000000','--max-input-bytes','1073741824'],{cwd:root,windowsHide:true});
   let stderr='',lines=0,buffer='',sent=0;child.stderr.on('data',c=>stderr+=c);child.stdin.on('error',()=>{});
   const timer=setTimeout(()=>child.kill(),120000);
@@ -83,7 +84,7 @@ async function stream(closeEarly=false){
   const code=await new Promise((res,rej)=>{child.on('error',rej);child.on('close',res);});clearTimeout(timer);
   if(closeEarly){assert.equal(code,2);assert(!jsonLines(stderr).some(v=>v.status==='summary'));}
   else {assert.equal(code,0);assert.equal(lines,100000);assert.equal(jsonLines(stderr)[0].processed,100000);}
-  return {lines,code};
+  const seconds=(performance.now()-started)/1000;return {lines,code,seconds,lines_per_second:lines/seconds,scope:closeEarly?'early close':'100000-row pipeline with a slow consumer'};
 }
 report.stream=await stream();report.checks.push('100000 lines with slow consumer');report.broken_pipe=await stream(true);report.checks.push('early closed stdout');
 check('runtime without development tools',()=>{const env={...process.env,PATH:process.platform==='win32'?(process.env.SystemRoot+'\\System32'):'/usr/bin:/bin',MOON_HOME:''};assert.equal(execute(['lookup',asn,'1.128.0.1'],undefined,true,{env}).code,0);});
