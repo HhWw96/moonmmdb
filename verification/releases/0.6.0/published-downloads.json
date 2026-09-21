@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "scope": "Published GitHub assets downloaded again; SHA256SUMS and original CI package hashes matched. Windows archive rerun locally without developer runtime PATH. Linux same-byte artifact had isolated Ubuntu 22.04 and 24.04 acceptance in CI.",
+  "files": [
+    {
+      "name": "moonmmdb-0.6.0-windows-x64.zip",
+      "sha256": "7036ddf0f1614f94101644b8754478e6fea985926b8d0bb492b7a50341cc9752",
+      "bytes": 263198
+    },
+    {
+      "name": "moonmmdb-0.6.0-linux-x64.tar.gz",
+      "sha256": "6f446d1212118c0557f814d96eb5d67976c6a5a2e44ef951f8d16020a0de2dfc",
+      "bytes": 294317
+    },
+    {
+      "name": "HhWw96-moonmmdb-0.6.0.zip",
+      "sha256": "58cdddb255c733742002b78b92ef083c7be649023b05b3de3d1b07b91fa034ef",
+      "bytes": 839472
+    }
+  ],
+  "windows_isolated_acceptance": {
+    "status": "passed",
+    "commands": 9,
+    "without_developer_tools": true
+  }
+}

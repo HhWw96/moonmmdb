@@ -37,7 +37,11 @@
     "linux-native-production.json": "480eb3b82e5ec8051df70b99438df2d987468e84b6bdb9806088ecc6ee8da008",
     "linux-native-soak.json": "5e30c3b4211bb584fb5841ad992cd88a97b1f87e74d912ef0142fc8eb4b4ca7f",
     "linux-typed-production.json": "a8f6e3eb8242254e5158e5909b472ee171270aefd87f50521e5bde7d087e800e",
-    "linux-native-cli.json": "59671120a015ad1c6f26e8d8c31b0fb75ab15e9f9fda500e50449259c476a317"
+    "linux-native-cli.json": "59671120a015ad1c6f26e8d8c31b0fb75ab15e9f9fda500e50449259c476a317",
+    "publication.json": "796ead88d845af8d24ad395a248b873bc9d6c44bea07ba39a22048c76b7c54da",
+    "published-downloads.json": "3ef06ffda5d0be861731617a8b34e3a06f20ff816f083a192136af717e0f7d97",
+    "registry-0.6.0.json": "71c2288aaddc0bda0897504e864c4f704ecaafee09e7f2455440c0deaa401b28",
+    "registry-consumer-verify.mjs": "e7728aec4c0d8ad48c999f76d46d9d617e0fb95f5655091974630fecfdfe6128"
   },
   "source_byte_identity": {
     "windows": "387e61dd4d773253aee446a71f7b45323a819b622d7a49c87dd01e1332364dbb",
@@ -45,5 +49,7 @@
     "note": "Git text conversion gives platform-specific bytes for text=auto files. Windows-exported package candidate matches the verified Windows source fingerprint; common Linux source differences are line endings only."
   },
   "ubuntu_24_04_artifact_verification": "passed in linux-newer job of native_run",
-  "file_hash_scope": "SHA-256 of committed Git blob bytes (LF-normalized text); Windows checkout or raw CI artifact line endings may differ."
+  "file_hash_scope": "SHA-256 of committed Git blob bytes (LF-normalized text); Windows checkout or raw CI artifact line endings may differ.",
+  "publication_status": "published-and-verified",
+  "release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.6.0"
 }

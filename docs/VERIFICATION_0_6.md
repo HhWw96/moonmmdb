@@ -1,6 +1,6 @@
 # 0.6.0 验证与发布
 
-2026-09-21：本版本实现、完整回归、Windows/Linux Native 持续运行及 Ubuntu 24.04 产物验收通过。Mooncakes 0.6.0 已上传并通过全新目录注册表安装；正式 Release 回执在完成后追加到公开证据目录。注册表构建包中的本页是上传前快照，最新回执以本仓库为准。
+2026-09-21：本版本实现、完整回归、Windows/Linux Native 持续运行及 Ubuntu 24.04 产物验收通过。Mooncakes 0.6.0 已上传并通过全新目录注册表安装；GitHub 正式 Release 和下载复验完成。注册表构建包中的本页是上传前快照，最新回执以本仓库为准。
 
 ## 绑定与复现
 
@@ -72,3 +72,9 @@ JS / WasmGC 各通过 48 项核心与 geo 测试；Windows/Linux Native 核心�
 [安装回执](../verification/releases/0.6.0/registry-0.6.0.json)、[上传与冻结接口散列](../verification/releases/0.6.0/publication.json)。复现运行 `node verification/releases/0.6.0/registry-consumer-verify.mjs`。此版本专用脚本修正了通用 registry-verify 脚本仅在测试中使用 geo 导入导致的 deny-warn 警告；消费者正式代码也调用 geo，已验证的库源码没有变化。Windows 本次安装使用进程级 Git OpenSSL 后端绕过宿主 Schannel 凭据错误，未修改全局 Git 设置。
 
 发布归档排除了包含本机用户路径的旧编译失败原始日志 `verification/regressions/native-mingw-missing-rand-s.json`；历史失败结论仍保留在仓库文档中。排除项不影响源码、样例、许可证或验证绑定。
+
+## 正式发布与下载复验
+
+[GitHub v0.6.0](https://github.com/HhWw96/moonmmdb/releases/tag/v0.6.0) 于 2026-09-21 10:15:15 UTC 发布，非草稿、非预发布；[发布门槛工作流 35587733106](https://github.com/HhWw96/moonmmdb/actions/runs/35587733106) 成功，目标提交 `90f122eacbc722433a576361084b030df63f24ff`。
+
+再次从公开 Release 下载 Windows ZIP、Linux tar.gz、Mooncakes 源码包及 SHA256SUMS，三个归档与验证产物逐字节散列一致。Windows 下载包在本机隔离目录完成 9 个命令检查，运行 PATH 不包含 Node.js、Python 或 MoonBit。Linux 下载包与已通过 Ubuntu 22.04 / 24.04 验收的同一归档一致，没有在 Windows 上冒称重新运行 Linux 二进制。见 [下载回执](../verification/releases/0.6.0/published-downloads.json)。

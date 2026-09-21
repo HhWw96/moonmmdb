@@ -1,5 +1,5 @@
 {
-  "status": "registry-published-and-installed",
+  "status": "published-and-verified",
   "published_date": "2026-09-21",
   "implementation_commit": "8b91a9f5c935e8c40b9469917bca279e5dc544b6",
   "package_source_commit": "251cf9d86a3f12f6f3729d24a9e4ab7213b883db",
@@ -31,5 +31,9 @@
   "registry_test": "registry-0.6.0.json",
   "native_run": 35582806130,
   "regression_run": 35582806143,
-  "github_release_status": "pending"
+  "github_release_status": "published",
+  "github_release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.6.0",
+  "github_release_run": 35587733106,
+  "github_release_target_commit": "90f122eacbc722433a576361084b030df63f24ff",
+  "github_published_at": "2026-09-21T10:15:15Z"
 }
