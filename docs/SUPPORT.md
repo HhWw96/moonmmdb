@@ -1,6 +1,6 @@
 # 支持范围
 
-v0.6.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_5.md)。
+v0.6.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_6.md)。
 
 0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
@@ -21,7 +21,7 @@ Enricher 支持 1—4 个命名数据源；非法 IP 为整条输入错误，各
 | 映射/6to4 地址 | 遵循数据库别名；不自行重写 Teredo 或其他过渡地址 |
 | 元数据指针 | 以元数据段为基址，区别于记录数据段 |
 | 未命中 | Lookup.value=None，保留终止前缀长度 |
-| 整库合法性认证 | 不提供；open 只验证元数据、布局及分隔符，lookup 验证实际访问路径 |
+| 物理树与引用记录检查 | validate 检查全部物理树节点，可选解码全部被引用的不同数据偏移；不认证地理准确性或未引用数据字节。open / lookup 原有检查范围不变 |
 
 ## 类型与 JSON
 

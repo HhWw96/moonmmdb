@@ -1,0 +1,91 @@
+{
+  "status": "passed",
+  "started": "2026-09-21T09:22:59.299301+00:00",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "production": false,
+  "target": "MoonBit JS typed consumer",
+  "checks": 7860,
+  "sources": [
+    {
+      "file": "GeoIP2-City-Shield-Test.mmdb",
+      "sha256": "ad2c5f0f80cba877e00566d3641c4ff4b391000fa11bd5a4c9b5ab1ba63db8bc",
+      "addresses": 502,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoIP2-City-Test.mmdb",
+      "sha256": "ed972738e4e03a3e56e12041a6af4d91592249d110f7e4a647e5f2fa0e639c09",
+      "addresses": 502,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoIP2-Enterprise-Shield-Test.mmdb",
+      "sha256": "cc8634c3dacb5b5678f741e30fefbd9457c57b5d95f03a629dd1e139c1c3fbbe",
+      "addresses": 57,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoIP2-Enterprise-Test.mmdb",
+      "sha256": "49e2a844f12195ad1d3463bf11e99c25ec5e71c965fb7d3ae7e2e76247cd5933",
+      "addresses": 57,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoIP2-Precision-Enterprise-Shield-Test.mmdb",
+      "sha256": "a4ac974ea9370117d92b1579a9bc17656a8cdf7987751743c68d45fdffae49e2",
+      "addresses": 95,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoIP2-Precision-Enterprise-Test.mmdb",
+      "sha256": "b24046ee5af8bbe0607914205e006be1f06fb9f4bd847031277177fb9616e2ff",
+      "addresses": 95,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoLite2-ASN-Test.mmdb",
+      "sha256": "75901b98ed6e58d3bd41af9985044b747a7ec0be1369f930c24f5e044427181a",
+      "addresses": 826,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    },
+    {
+      "file": "GeoLite2-City-Test.mmdb",
+      "sha256": "f936702b51dcb6c94b286d77a6f182c31a1601baf4b27e8e896934deb41f49f2",
+      "addresses": 486,
+      "locales": [
+        "en",
+        "zh-CN",
+        "missing-locale"
+      ]
+    }
+  ],
+  "finished": "2026-09-21T09:23:03.142820+00:00"
+}

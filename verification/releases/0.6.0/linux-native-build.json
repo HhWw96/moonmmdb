@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "platform": "linux",
+  "arch": "x64",
+  "toolchain": "moon 0.1.20260827 (d0aaa07 2026-08-27) ~/.moon/bin/moon\nmoonc v0.10.11+6ff76a5f9 (2026-08-28) ~/.moon/bin/moonc\nmoonrun 0.1.20260827 (d0aaa07 2026-08-27) ~/.moon/bin/moonrun\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg\n",
+  "compiler": {
+    "compiler": "gcc",
+    "version": "gcc (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0\nCopyright (C) 2021 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE."
+  },
+  "source_sha256": "d7ffb492a18c60d4cd9d4f5306582be6b98eafeb0441cc42077516228ba0ab0f",
+  "executable_sha256": "347f5b2e27eb220074c0215f8877a54af99f096143939b58b17d229225a259e5",
+  "output": ""
+}

@@ -1,0 +1,583 @@
+{
+  "status": "passed",
+  "platform": "nt",
+  "started": "2026-09-21T09:26:06.764250+00:00",
+  "duration_requested": 1800,
+  "rate_cap": 500,
+  "sampling": "Every 30 seconds; RSS high-water supplied by the OS, private bytes sampled; final sub-sample interval not observed",
+  "executable_sha256": "6e01f5d587d8ec70c94e5522f7cdf2797e05bd3d85af88255030799b0a3f284e",
+  "samples": [
+    {
+      "rss": 2465792,
+      "rss_high_water": 2465792,
+      "private_bytes": 593920,
+      "handles": 39,
+      "seconds": 0.0,
+      "received": 0
+    },
+    {
+      "rss": 141365248,
+      "rss_high_water": 259051520,
+      "private_bytes": 146661376,
+      "handles": 50,
+      "seconds": 30.045999999999992,
+      "received": 15050
+    },
+    {
+      "rss": 141373440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146661376,
+      "handles": 50,
+      "seconds": 60.125,
+      "received": 30100
+    },
+    {
+      "rss": 141332480,
+      "rss_high_water": 259051520,
+      "private_bytes": 146612224,
+      "handles": 50,
+      "seconds": 90.18700000000001,
+      "received": 45100
+    },
+    {
+      "rss": 138633216,
+      "rss_high_water": 259051520,
+      "private_bytes": 146661376,
+      "handles": 50,
+      "seconds": 120.04599999999999,
+      "received": 60050
+    },
+    {
+      "rss": 103690240,
+      "rss_high_water": 259051520,
+      "private_bytes": 146661376,
+      "handles": 50,
+      "seconds": 150.09299999999996,
+      "received": 75050
+    },
+    {
+      "rss": 77467648,
+      "rss_high_water": 259051520,
+      "private_bytes": 146661376,
+      "handles": 50,
+      "seconds": 180.15599999999995,
+      "received": 90100
+    },
+    {
+      "rss": 58421248,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 210.0,
+      "received": 105000
+    },
+    {
+      "rss": 43626496,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 240.062,
+      "received": 120050
+    },
+    {
+      "rss": 33435648,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 270.10900000000004,
+      "received": 135100
+    },
+    {
+      "rss": 25030656,
+      "rss_high_water": 259051520,
+      "private_bytes": 146718720,
+      "handles": 50,
+      "seconds": 300.17100000000005,
+      "received": 150100
+    },
+    {
+      "rss": 18812928,
+      "rss_high_water": 259051520,
+      "private_bytes": 146718720,
+      "handles": 50,
+      "seconds": 330.015,
+      "received": 165050
+    },
+    {
+      "rss": 16982016,
+      "rss_high_water": 259051520,
+      "private_bytes": 146718720,
+      "handles": 50,
+      "seconds": 360.062,
+      "received": 180050
+    },
+    {
+      "rss": 17002496,
+      "rss_high_water": 259051520,
+      "private_bytes": 146718720,
+      "handles": 50,
+      "seconds": 390.125,
+      "received": 195100
+    },
+    {
+      "rss": 16986112,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 420.17100000000005,
+      "received": 210100
+    },
+    {
+      "rss": 16990208,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 450.03099999999995,
+      "received": 225050
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 480.078,
+      "received": 240050
+    },
+    {
+      "rss": 16990208,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 510.14,
+      "received": 255100
+    },
+    {
+      "rss": 16982016,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 540.187,
+      "received": 270100
+    },
+    {
+      "rss": 17006592,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 570.046,
+      "received": 285050
+    },
+    {
+      "rss": 16990208,
+      "rss_high_water": 259051520,
+      "private_bytes": 146710528,
+      "handles": 50,
+      "seconds": 600.093,
+      "received": 300050
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146649088,
+      "handles": 50,
+      "seconds": 630.14,
+      "received": 315100
+    },
+    {
+      "rss": 16887808,
+      "rss_high_water": 259051520,
+      "private_bytes": 146644992,
+      "handles": 50,
+      "seconds": 660.0,
+      "received": 330004
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 690.046,
+      "received": 345050
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 720.1089999999999,
+      "received": 360050
+    },
+    {
+      "rss": 16883712,
+      "rss_high_water": 259051520,
+      "private_bytes": 146612224,
+      "handles": 50,
+      "seconds": 750.156,
+      "received": 375100
+    },
+    {
+      "rss": 16932864,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 780.0150000000001,
+      "received": 390000
+    },
+    {
+      "rss": 16928768,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 810.0619999999999,
+      "received": 405050
+    },
+    {
+      "rss": 16891904,
+      "rss_high_water": 259051520,
+      "private_bytes": 146653184,
+      "handles": 50,
+      "seconds": 840.1089999999999,
+      "received": 420100
+    },
+    {
+      "rss": 16924672,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 870.171,
+      "received": 435100
+    },
+    {
+      "rss": 16891904,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 900.0150000000001,
+      "received": 450000
+    },
+    {
+      "rss": 16936960,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 930.078,
+      "received": 465050
+    },
+    {
+      "rss": 16953344,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 960.125,
+      "received": 480100
+    },
+    {
+      "rss": 16928768,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 990.171,
+      "received": 495100
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1020.031,
+      "received": 510050
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1050.078,
+      "received": 525050
+    },
+    {
+      "rss": 16945152,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1080.14,
+      "received": 540100
+    },
+    {
+      "rss": 16949248,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1110.0,
+      "received": 555000
+    },
+    {
+      "rss": 16928768,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1140.062,
+      "received": 570050
+    },
+    {
+      "rss": 16953344,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1170.125,
+      "received": 585100
+    },
+    {
+      "rss": 16879616,
+      "rss_high_water": 259051520,
+      "private_bytes": 146636800,
+      "handles": 50,
+      "seconds": 1200.171,
+      "received": 600100
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1230.031,
+      "received": 615050
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1260.078,
+      "received": 630050
+    },
+    {
+      "rss": 16941056,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1290.14,
+      "received": 645100
+    },
+    {
+      "rss": 16941056,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1320.187,
+      "received": 660100
+    },
+    {
+      "rss": 16855040,
+      "rss_high_water": 259051520,
+      "private_bytes": 146579456,
+      "handles": 50,
+      "seconds": 1350.046,
+      "received": 675050
+    },
+    {
+      "rss": 16945152,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1380.109,
+      "received": 690050
+    },
+    {
+      "rss": 16949248,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1410.156,
+      "received": 705100
+    },
+    {
+      "rss": 16941056,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1440.015,
+      "received": 720000
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1470.062,
+      "received": 735050
+    },
+    {
+      "rss": 16936960,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1500.109,
+      "received": 750100
+    },
+    {
+      "rss": 16932864,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1530.171,
+      "received": 765100
+    },
+    {
+      "rss": 16932864,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1560.015,
+      "received": 780000
+    },
+    {
+      "rss": 16941056,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1590.078,
+      "received": 795050
+    },
+    {
+      "rss": 16941056,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1620.125,
+      "received": 810100
+    },
+    {
+      "rss": 16957440,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1650.171,
+      "received": 825100
+    },
+    {
+      "rss": 16949248,
+      "rss_high_water": 259051520,
+      "private_bytes": 146681856,
+      "handles": 50,
+      "seconds": 1680.031,
+      "received": 840050
+    },
+    {
+      "rss": 16863232,
+      "rss_high_water": 259051520,
+      "private_bytes": 146587648,
+      "handles": 50,
+      "seconds": 1710.0929999999998,
+      "received": 855050
+    },
+    {
+      "rss": 16887808,
+      "rss_high_water": 259051520,
+      "private_bytes": 146612224,
+      "handles": 50,
+      "seconds": 1740.156,
+      "received": 870100
+    },
+    {
+      "rss": 16932864,
+      "rss_high_water": 259051520,
+      "private_bytes": 146702336,
+      "handles": 50,
+      "seconds": 1770.0,
+      "received": 885000
+    }
+  ],
+  "scope": "Actual Native CLI, paced JSONL input and continuously drained output; not maximum query throughput.",
+  "sources": {
+    "geo": {
+      "name": "geo",
+      "bytes": 127339927,
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "database_type": "DBIP-City-Lite",
+      "build_epoch": "1788226681",
+      "fields": [
+        "/country/iso_code",
+        "/city/names/en"
+      ],
+      "found": 5,
+      "not_found": 4,
+      "errors": 0,
+      "missing_fields": 8
+    },
+    "asn": {
+      "name": "asn",
+      "bytes": 9511026,
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+      "build_epoch": "1788226697",
+      "fields": [
+        "/autonomous_system_number",
+        "/autonomous_system_organization"
+      ],
+      "found": 5,
+      "not_found": 4,
+      "errors": 0,
+      "missing_fields": 8
+    }
+  },
+  "elapsed_seconds": 1800.062,
+  "rows": 900000,
+  "rows_per_second": 499.98277837096725,
+  "peak_rss": 259051520,
+  "peak_sampled_rss": 141373440,
+  "peak_sampled_private_bytes": 146718720,
+  "summary": {
+    "status": "summary",
+    "processed": 900000,
+    "valid_ips": 900000,
+    "invalid_inputs": 0,
+    "sources": {
+      "geo": {
+        "name": "geo",
+        "bytes": 127339927,
+        "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+        "database_type": "DBIP-City-Lite",
+        "build_epoch": "1788226681",
+        "fields": [
+          "/country/iso_code",
+          "/city/names/en"
+        ],
+        "found": 500000,
+        "not_found": 400000,
+        "errors": 0,
+        "missing_fields": 800000
+      },
+      "asn": {
+        "name": "asn",
+        "bytes": 9511026,
+        "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+        "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+        "build_epoch": "1788226697",
+        "fields": [
+          "/autonomous_system_number",
+          "/autonomous_system_organization"
+        ],
+        "found": 500000,
+        "not_found": 400000,
+        "errors": 0,
+        "missing_fields": 800000
+      }
+    }
+  },
+  "rss_gate": {
+    "early_median": 16990208.0,
+    "late_median": 16934912.0,
+    "growth": -55296.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "private_bytes_gate": {
+    "early_median": 146681856.0,
+    "late_median": 146681856.0,
+    "growth": 0.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "finished": "2026-09-21T09:56:08.633945+00:00"
+}
