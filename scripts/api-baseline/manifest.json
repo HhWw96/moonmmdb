@@ -11,6 +11,25 @@
       "current": "src/bridge/pkg.generated.mbti",
       "baseline": "bridge-0.5.0.mbti",
       "sha256": "98f4a69b2e2a2481a1b0fd65221c39331638edf45f9308d35f8164312293ddd7"
+    },
+    {
+      "current": "src/pkg.generated.mbti",
+      "baseline": "core-0.6.0.mbti",
+      "sha256": "6ff640ba97fc56cf45d8dcdfd6013fe0c97424ea26a98ecd3e86cdfbeba31d38"
+    },
+    {
+      "current": "src/bridge/pkg.generated.mbti",
+      "baseline": "bridge-0.6.0.mbti",
+      "sha256": "baca18c7ae20763467abdfe6a7c4df857598c3d8060e1c5670f3d70f798bd1f8"
+    },
+    {
+      "current": "src/geo/pkg.generated.mbti",
+      "baseline": "geo-0.6.0.mbti",
+      "sha256": "79bd46dabe00fa37af0cce3d76d13f9256f42b70a2e6383203eec48026a2e661"
     }
-  ]
+  ],
+  "additional_baseline": {
+    "version": "0.6.0",
+    "origin": "Frozen release candidate source interfaces; publication receipt verifies matching registry bytes. Historical 0.5.0 registry baseline is retained."
+  }
 }

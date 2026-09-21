@@ -4,8 +4,9 @@ import { openSync, fstatSync, readSync, closeSync } from 'node:fs';
 import { open_database, metadata, lookup, project, validate_paths, prepare_fields, selection_status, project_prepared, compare_prepared } from '../dist/core.mjs';
 import { InputError, streamOptions, inputSelector, openInput, boundedLines } from './jsonl.mjs';
 import { enrichMany } from './many.mjs';
+import { inspect } from './inspect.mjs';
 
-const help = `MoonMMDB 0.5.0 — offline MaxMind DB reader
+const help = `MoonMMDB 0.6.0 — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
@@ -13,9 +14,11 @@ Usage:
   node bin/moonmmdb.mjs enrich DATABASE.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs diff BEFORE.mmdb AFTER.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs enrich-many CONFIG.json INPUT.jsonl|- [OPTIONS]
+  node bin/moonmmdb.mjs networks DATABASE CIDR [--max-records N] [--max-work N]
+  node bin/moonmmdb.mjs validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]
   node bin/moonmmdb.mjs --help | --version
 
-Stream options:
+Inspection: networks defaults to 100000 records (cap 1000000). Both commands use\n100000000 work units (cap 1000000000); validate state defaults to 64 MiB (cap 256 MiB).\nStream options:
   --field POINTER        Select a database field; repeat for up to 64 paths.
   --ip-path POINTER      Input IP field (default /ip), e.g. /client/ip.
   --max-records N        Default 10000; maximum 1000000.
@@ -64,12 +67,16 @@ function statusCode(value) { return value.status === 'error' ? 2 : value.status 
 
 async function main() {
   const [command, database, ...args] = process.argv.slice(2);
+  if (command === 'networks' || command === 'validate') {
+    process.exitCode = await inspect(command, process.argv.slice(3), write);
+    return;
+  }
   if (command === 'enrich-many') {
     process.exitCode = await enrichMany(process.argv.slice(3), write);
     return;
   }
   if (command === '--help' && !database) { await write(help); return; }
-  if (command === '--version' && !database) { await write('0.5.0\n'); return; }
+  if (command === '--version' && !database) { await write('0.6.0\n'); return; }
   if (!['metadata', 'lookup', 'project', 'enrich', 'diff'].includes(command) || !database ||
     (command === 'metadata' && args.length !== 0) ||
     (command === 'lookup' && (args.length === 0 || args.length > 10000)) ||

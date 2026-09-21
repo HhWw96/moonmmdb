@@ -49,3 +49,13 @@ stdout 为逐条 JSON 结果，原始日志保存在 input 下，联合结果在
 
 项目与源码：https://github.com/HhWw96/moonmmdb
 许可证及第三方来源见 LICENSE、THIRD_PARTY.md、licenses/。
+
+## 网段与检查
+
+`moonmmdb networks examples/asn.mmdb 192.0.2.0/24` 按地址顺序输出 CIDR 与类型化记录。
+`moonmmdb validate examples/asn.mmdb --decode-data` 检查全部树节点与引用记录。
+`moonmmdb lookup examples/hidden-corruption.mmdb 1.1.1.1` 命中人工数据，但 `moonmmdb validate examples/hidden-corruption.mmdb` 发现不可达节点的损坏指针，预期退出 2。
+
+networks 默认最多 100000 条，`--max-records` 上限 1000000；两命令 `--max-work` 默认 100000000，上限 1000000000。validate 的 `--max-state-bytes` 默认 64 MiB，上限 256 MiB，只限制辅助状态缓冲区，不是进程内存上限。
+networks 完整执行有命中退出 0，无命中退出 1；错误或超限退出 2，且无完成汇总。validate 报告 valid/invalid/incomplete/error，只有 valid 退出 0。资源不足不是数据库损坏的证明。
+City Lite 大库完整解码建议显式 `--max-work 1000000000`。更多说明见源码 docs/INSPECTION.md。

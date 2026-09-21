@@ -40,6 +40,10 @@ jobs:
         run: python -m pip install --target .reference-deps -r requirements-reference.txt
       - name: Verify sources, references, scale, package and performance together
         run: node scripts/release-verify.mjs
+      - name: Network export transport checks
+        run: |
+          python scripts/inspection-fixtures.py
+          node scripts/inspection-cli-verify.mjs
       - name: Linux Native core and independent analytics consumer
         if: runner.os == 'Linux'
         shell: bash

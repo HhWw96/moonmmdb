@@ -3,13 +3,23 @@
 pub struct Handle {
   priv reader : @mmdb.Reader?
   priv error : String?
+  priv validation_error : String?
 }
 
 ///|
 #export_name("open_database")
 pub fn open_database(bytes : Bytes) -> Handle {
-  { reader: Some(@mmdb.open_bytes(bytes)), error: None, } catch {
-    e => { reader: None, error: Some(e.to_json().stringify()), }
+  {
+    reader: Some(@mmdb.open_bytes(bytes)),
+    error: None,
+    validation_error: None,
+  } catch {
+    e =>
+      {
+        reader: None,
+        error: Some(e.to_json().stringify()),
+        validation_error: Some(e.to_validation_json().stringify()),
+      }
   }
 }
 

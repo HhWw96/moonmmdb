@@ -8,10 +8,17 @@ priv struct Decode {
   mut remaining : Int
   mut payload : Int
   active : Array[Int]
+  work : OperationWork?
 }
 
 ///|
-fn decoder(data : Bytes, base : Int, end : Int, limits : Limits) -> Decode {
+fn decoder(
+  data : Bytes,
+  base : Int,
+  end : Int,
+  limits : Limits,
+  work? : OperationWork? = None,
+) -> Decode {
   {
     data,
     base,
@@ -20,6 +27,7 @@ fn decoder(data : Bytes, base : Int, end : Int, limits : Limits) -> Decode {
     remaining: limits.max_values,
     payload: limits.max_payload_bytes,
     active: [],
+    work,
   }
 }
 
@@ -83,6 +91,9 @@ fn decode(
     raise MmdbError("pointer-cycle", offset, "Cyclic data reference")
   }
   ctx.remaining = ctx.remaining - 1
+  if ctx.work is Some(work) {
+    work.charge(1, offset)
+  }
   ctx.active.push(offset)
   let result = decode_value(ctx, offset, depth)
   ignore(ctx.active.pop())
@@ -206,6 +217,9 @@ fn decode_value(
         )
       }
       ctx.payload = ctx.payload - size
+      if ctx.work is Some(work) {
+        work.charge((size + 63) / 64, offset)
+      }
       if kind == 2 {
         let text = @utf8.decode(ctx.data[pos:end], ignore_bom=false) catch {
           _ => raise MmdbError("invalid-utf8", pos, "String is not valid UTF-8")

@@ -21,7 +21,7 @@
 
 ## 新增 Native 长时复验
 
-[Native 产品 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35564700839) 已启动，包含新增语料、真实数据和原有 30 分钟持续运行。本文记录时仍在执行，不能记作通过。本机此次构建的 Native CLI 与此前完成 30 分钟运行的本机 0.5.0 二进制逐字节相同（SHA-256 `a75eefe784bdb9a2b87f31bb9486a67c0a988f859f661747b28d50db48342b06`）；这项身份比较不替代本次 CI 完成结果，也不宣称可选 geo 包已经过长时服务负载测试。
+[Native 产品 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35564700839) 已启动，包含新增语料、真实数据和原有 30 分钟持续运行。该运行现已全部通过，包含 Windows/Linux 30 分钟持续运行及 Ubuntu 24.04 产物复验；结论绑定原实现提交。本机此次构建的 Native CLI 与此前完成 30 分钟运行的本机 0.5.0 二进制逐字节相同（SHA-256 `a75eefe784bdb9a2b87f31bb9486a67c0a988f859f661747b28d50db48342b06`）；这项身份比较不替代本次 CI 完成结果，也不宣称可选 geo 包已经过长时服务负载测试。
 
 ## 范围与限制
 

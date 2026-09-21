@@ -4,7 +4,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 
 ## 使用与构建
 
-四个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
+六个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
 
 开发环境沿用 MoonBit 0.10.11+6ff76a5f9；Windows 使用固定 w64devkit 2.10.0 / GCC 16.2.0，Linux 在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
 
@@ -56,3 +56,5 @@ v0.4.0 的默认 Node RSS 门槛失败记录保留在 [历史验证](VERIFICATIO
 
 
 内存曲线可用 `docs/plot_native_soak.py` 从已保存的 JSON 报告重绘，绘图依赖为 Matplotlib 3.11.2，仅供生成验证材料，Native 程序运行不需要该依赖。
+
+0.6.0 增加 `networks` 与 `validate`，参数、状态和资源边界见 [检查与导出](INSPECTION.md)。

@@ -54,9 +54,14 @@ jobs:
           python scripts/native-production-verify.py
           python scripts/corpus-verify.py --native
           python scripts/typed-verify.py --production
+          python scripts/inspection-verify.py --native
+          python scripts/inspection-verify.py --native --production
+          python scripts/inspection-fixtures.py
+          node scripts/inspection-cli-verify.mjs --native
+          node scripts/inspection-soak-build.mjs
           node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs'; import {runMoon} from './scripts/moon.mjs'; nativeToolchain();runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb/geo','--deny-warn']);runMoon(['test','--target','native','--release','-p','local/moonmmdb_typed_example','--deny-warn'],'examples/typed_consumer');"
       - name: Thirty minute Native product soak
-        run: python scripts/native-soak.py
+        run: python scripts/native-soaks.py
       - name: Package and isolated runtime smoke
         run: python scripts/native-package.py
       - uses: actions/upload-artifact@v7.0.1
@@ -71,6 +76,8 @@ jobs:
             verification/local/native-package.json
             verification/local/corpus-native.json
             verification/local/typed-production.json
+            verification/local/inspection-*.json
+            verification/local/*soak.log
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: native-package-${{ matrix.os }}
@@ -88,4 +95,4 @@ jobs:
           name: native-package-ubuntu-22.04
           path: dist/native/
       - name: Verify Ubuntu 22.04 artifact on Ubuntu 24.04
-        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.5.0-linux-x64.tar.gz
+        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.6.0-linux-x64.tar.gz

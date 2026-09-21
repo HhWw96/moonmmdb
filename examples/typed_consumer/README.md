@@ -1,6 +1,6 @@
 # 独立强类型消费示例
 
-这是尚未发布的下一版本源码示例，通过本地 workspace 使用 `HhWw96/moonmmdb/geo`。Node.js 只负责文件与输入输出；MoonBit 复用 Reader 并处理 ASN、国家、城市及本地化名称。
+这是 0.6.0 的独立源码示例，通过本地 workspace 使用 `HhWw96/moonmmdb/geo`。Node.js 只负责文件与输入输出；MoonBit 复用 Reader 并处理 ASN、国家、城市及本地化名称。
 
 从仓库根目录运行：
 

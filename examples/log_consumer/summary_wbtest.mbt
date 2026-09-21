@@ -12,4 +12,9 @@ test "public API consumer preserves missing and failed queries in aggregation" {
     "asn_counts": { "15169": 2, "1221": 1 },
   }
   assert_eq(result, expected)
+  let cursor = reader.networks("1.0.0.1/32")
+  assert_eq(cursor.next().unwrap().network, "1.0.0.1/32")
+  assert_eq(cursor.next(), None)
+  cursor.close()
+  assert_eq(reader.validate(decode_data=true).unreachable_nodes, 0)
 }

@@ -1,8 +1,8 @@
 # 支持范围
 
-v0.5.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_5.md)。
+v0.6.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_5.md)。
 
-下一版本源码另有 [完整官方语料验证](CORPUS.md) 和 [City／ASN 可选包](GEO.md)，尚未纳入 0.5.0 发布包。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
+0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
 ## 多库查询与分析
 
