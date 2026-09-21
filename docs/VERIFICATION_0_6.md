@@ -1,6 +1,6 @@
 # 0.6.0 验证与发布
 
-2026-09-21：本版本实现、完整回归、Windows/Linux Native 持续运行及 Ubuntu 24.04 产物验收通过。Mooncakes 上传和正式 Release 的回执在完成后追加到本页链接的公开证据目录；构建包中的本页是上传前快照。
+2026-09-21：本版本实现、完整回归、Windows/Linux Native 持续运行及 Ubuntu 24.04 产物验收通过。Mooncakes 0.6.0 已上传并通过全新目录注册表安装；正式 Release 回执在完成后追加到公开证据目录。注册表构建包中的本页是上传前快照，最新回执以本仓库为准。
 
 ## 绑定与复现
 
@@ -64,3 +64,11 @@ JS / WasmGC 各通过 48 项核心与 geo 测试；Windows/Linux Native 核心�
 ## 保留边界
 
 未扫描未引用的数据字节；结构通过不代表定位信息准确；没有真实商业 Enterprise 大库验证；没有在线 demo。既有 Node 默认 RSS 门槛失败记录继续保留，Native 通过不代表该问题已修复。官方固定 Enterprise/Anonymous 样例通过不能扩大为所有商业数据库都已验证。
+
+## 注册表安装回执
+
+[Mooncakes 0.6.0](https://mooncakes.io/docs/HhWw96/moonmmdb@0.6.0/) 下载归档 SHA-256 为 `58cdddb255c733742002b78b92ef083c7be649023b05b3de3d1b07b91fa034ef`，与发布前检查的 839,472 字节归档一致。新目录通过 `moon add HhWw96/moonmmdb@0.6.0` 解析注册表依赖，没有 moon.work 或本地 workspace 替代；JS / WasmGC 各执行并通过一项包含版本、查询、投影、联合查询、游标、检查及 geo 的消费者测试。
+
+[安装回执](../verification/releases/0.6.0/registry-0.6.0.json)、[上传与冻结接口散列](../verification/releases/0.6.0/publication.json)。复现运行 `node verification/releases/0.6.0/registry-consumer-verify.mjs`。此版本专用脚本修正了通用 registry-verify 脚本仅在测试中使用 geo 导入导致的 deny-warn 警告；消费者正式代码也调用 geo，已验证的库源码没有变化。Windows 本次安装使用进程级 Git OpenSSL 后端绕过宿主 Schannel 凭据错误，未修改全局 Git 设置。
+
+发布归档排除了包含本机用户路径的旧编译失败原始日志 `verification/regressions/native-mingw-missing-rand-s.json`；历史失败结论仍保留在仓库文档中。排除项不影响源码、样例、许可证或验证绑定。

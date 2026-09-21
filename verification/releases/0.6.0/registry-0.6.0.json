@@ -1,0 +1,26 @@
+{
+  "started": "2026-09-21T10:12:21.827Z",
+  "status": "passed",
+  "module": "HhWw96/moonmmdb",
+  "version": "0.6.0",
+  "directory": "[fresh operating-system temporary directory; private path omitted]",
+  "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+  "steps": [
+    {
+      "name": "add",
+      "output": ""
+    },
+    {
+      "target": "js",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "downloaded_manifest_sha256": "ce92e75cce6b32226d066bf2181e8b1f0b797b7e6a8523c449410ee9a556e705",
+  "finished": "2026-09-21T10:12:29.578Z",
+  "reproducer": "verification/releases/0.6.0/registry-consumer-verify.mjs",
+  "harness_note": "The generic helper imported geo only in tests, causing an unused-package warning with --deny-warn. This standalone reproducer uses geo in production consumer code; no published library code was changed."
+}
