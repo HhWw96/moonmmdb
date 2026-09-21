@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "verified_at": "2026-09-21T03:18:44.185538+00:00",
+  "release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.5.0",
+  "sha256": {
+    "moonmmdb-0.5.0-windows-x64.zip": "43998e32df43d62114227fd7df8feea813649f1780347c025540241ea8419583",
+    "moonmmdb-0.5.0-linux-x64.tar.gz": "61da6cfed11e95f39d191ade49e5fc20dcdbcfe8ed95a241d7f111f90f3a8bbc",
+    "HhWw96-moonmmdb-0.5.0.zip": "226836bd2fd767b1ebbdc25b3f3d220e6dd7a3c4b7425823ed0d4927ad5e4479"
+  },
+  "windows_isolated": {
+    "status": "passed",
+    "archive": "moonmmdb-0.5.0-windows-x64.zip",
+    "sha256": "43998e32df43d62114227fd7df8feea813649f1780347c025540241ea8419583",
+    "executable_sha256": "e8fb220a8752d0203429b0c651fe1ed6e4292cff9f63c186783723e37d598322",
+    "without_developer_tools": true,
+    "commands": 5
+  },
+  "linux_scope": "Downloaded archive is byte-identical to the Ubuntu 22.04 build tested on Ubuntu 22.04 and 24.04 in Native CI."
+}

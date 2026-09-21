@@ -60,7 +60,7 @@ v0.4.0 默认 Node 配置曾超过 RSS 增长门槛；此限制继续保留。�
 
 ## 发布
 
-验证门槛已通过，Mooncakes 0.5.0 已上传并完成全新目录安装，JS/WasmGC 均通过精确 ASN 查询及 Enricher 消费测试；没有本地 workspace 替代。注册表下载包与上传包逐字节散列一致。GitHub Release 正在发布，最终状态见 [发布回执](../verification/releases/0.5.0/publication.json)。本次原始 CI 压缩包的 SHA-256：
+验证门槛已通过，Mooncakes 0.5.0 已上传并完成全新目录安装，JS/WasmGC 均通过精确 ASN 查询及 Enricher 消费测试；没有本地 workspace 替代。注册表下载包与上传包逐字节散列一致。[GitHub v0.5.0](https://github.com/HhWw96/moonmmdb/releases/tag/v0.5.0) 已于 2026-09-21 正式发布；重新下载三个压缩包并核对 SHA256SUMS 全部一致，Windows 下载包另在隔离目录移除开发工具 PATH 后通过五项命令验收，Linux 下载字节与 Ubuntu 22.04/24.04 验收包相同。见 [发布回执](../verification/releases/0.5.0/publication.json) 与 [下载复验](../verification/releases/0.5.0/download-verification.json)。本次原始 CI 压缩包的 SHA-256：
 
 | 文件 | SHA-256 |
 |---|---|

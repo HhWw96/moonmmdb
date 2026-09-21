@@ -6,5 +6,11 @@
   "registry_archive_bytes": 519212,
   "registry_url": "https://d15l9c1mnzh3r.cloudfront.net/user/HhWw96/moonmmdb/0.5.0.zip",
   "uploaded_archive_match": true,
-  "verified_at": "2026-09-21T03:11:16.928Z"
+  "verified_at": "2026-09-21T03:11:16.928Z",
+  "github_release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.5.0",
+  "github_release_commit": "009394ec79632d1cdc05f460bca8b6ed25c222fc",
+  "github_published_at": "2026-09-21T03:17:29Z",
+  "publish_run": "https://github.com/HhWw96/moonmmdb/actions/runs/35557016400",
+  "download_verification": "download-verification.json",
+  "status": "published_and_verified"
 }
