@@ -68,3 +68,5 @@ v0.4.0 默认 Node 配置曾超过 RSS 增长门槛；此限制继续保留。�
 | moonmmdb-0.5.0-linux-x64.tar.gz | `61da6cfed11e95f39d191ade49e5fc20dcdbcfe8ed95a241d7f111f90f3a8bbc` |
 
 发布直接使用通过 CI 的原始压缩包，不重新编译或打包。逐文件清单位于各包 MANIFEST.json，附快速入门、人工离线样例、许可证及第三方声明。
+
+Mooncakes 的 0.5.0 源码归档固定于提交 `c6127ff49cc67525b362cd8f6f150205caf351b9`。其 README 是上传前快照，仍有“0.4.0 已发布 / Native 正在验收”的过时文案；包版本、实现和实际安装结果均为 0.5.0。注册表拒绝同版本覆盖（409），因此保留归档身份，更新后的安装及下载说明以 [GitHub README](https://github.com/HhWw96/moonmmdb#readme) 和本报告为准。未为文案变化撤回或替换已发布源码。

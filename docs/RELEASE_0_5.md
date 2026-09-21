@@ -11,3 +11,5 @@
 Native JSON 最大嵌套 128 层，固定 MoonBit 解析器拒绝未配对的 Unicode 代理项转义；这类输入与 Node JSON.parse 存在明确差异。Native 尚不提供 enrich、diff 或 analytics 命令，原有 Node 工具继续提供对应功能。v0.4.0 的默认 Node RSS 门槛失败记录继续保留。
 
 [验证报告](https://github.com/HhWw96/moonmmdb/blob/main/docs/VERIFICATION_0_5.md) · [离线演示](https://github.com/HhWw96/moonmmdb/blob/main/docs/DEMO_0_5.md) · [Mooncakes](https://mooncakes.io/docs/HhWw96/moonmmdb@0.5.0/)
+
+Mooncakes 源码归档的 README 保留上传前的发布状态快照，部分文案过时；实际安装版本为 0.5.0，已通过全新目录消费验证。最新下载与安装说明以 GitHub README 为准，归档身份与差异记录在验证报告中。
