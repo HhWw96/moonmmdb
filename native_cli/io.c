@@ -15,6 +15,7 @@
 #define FILENO _fileno
 #else
 #include <unistd.h>
+#include <fcntl.h>
 #include <signal.h>
 #define STAT stat
 #define FSTAT fstat
@@ -48,7 +49,12 @@ static FILE *open_file(const char *path) {
 #ifdef _WIN32
   wchar_t *p=wide_path(path);FILE *f=p?_wfopen(p,L"rb"):NULL;free(p);return f;
 #else
-  return fopen(path,"rb");
+  // Opening a FIFO for reading must not block before the regular-file check.
+  int fd=open(path,O_RDONLY|O_NONBLOCK|O_CLOEXEC);
+  if(fd<0)return NULL;
+  FILE *file=fdopen(fd,"rb");
+  if(!file)close(fd);
+  return file;
 #endif
 }
 static int64_t regular_size(FILE *f) {

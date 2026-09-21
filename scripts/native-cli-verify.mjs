@@ -58,6 +58,11 @@ check('nesting limit is row error',()=>{const r=execute(['enrich-many',config,'-
 const bad=join(dir,'bad-config.json');writeFileSync(bad,JSON.stringify({version:1,sources:[{name:'same',database:'missing',fields:['']},{name:'same',database:'missing',fields:['']}]}));
 check('invalid config rejected',()=>{const r=execute(['enrich-many',bad,'-'],good);assert.equal(r.code,2);assert.equal(jsonLines(r.stderr)[0].code,'invalid-config');assert.equal(r.stdout,'');});
 const broken=join(dir,'broken.mmdb');writeFileSync(broken,'not a database');parity('corrupt database',['metadata',broken]);
+if(process.platform==='linux')check('FIFO rejected without waiting for writer',()=>{
+ const fifo=join(dir,'input.fifo');const created=spawnSync('mkfifo',[fifo],{encoding:'utf8'});assert.equal(created.status,0);
+ const r=execute(['metadata',fifo],undefined,true,{timeout:3000});assert.equal(r.code,2);assert.equal(jsonLines(r.stderr)[0].code,'file-limit');
+ const log=execute(['enrich-many',config,fifo],undefined,true,{timeout:3000});assert.equal(log.code,2);assert(!jsonLines(log.stderr).some(v=>v.status==='summary'));
+});
 const damaged=join(dir,'damaged-tree.mmdb');const altered=Buffer.from(readFileSync(join(root,'tests/scenarios/geo.mmdb')));altered.fill(255,0,6);writeFileSync(damaged,altered);
 const four=join(dir,'four.json');const validSource={name:'good',database:join(root,'tests/scenarios/geo.mmdb'),fields:['/country/iso_code','/absent']};
 writeFileSync(four,JSON.stringify({version:1,sources:[{...validSource,name:'broken',database:damaged},...['second','third','fourth'].map(name=>({...validSource,name}))]}));
