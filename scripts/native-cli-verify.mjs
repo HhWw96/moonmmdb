@@ -59,7 +59,7 @@ const bad=join(dir,'bad-config.json');writeFileSync(bad,JSON.stringify({version:
 check('invalid config rejected',()=>{const r=execute(['enrich-many',bad,'-'],good);assert.equal(r.code,2);assert.equal(jsonLines(r.stderr)[0].code,'invalid-config');assert.equal(r.stdout,'');});
 const broken=join(dir,'broken.mmdb');writeFileSync(broken,'not a database');parity('corrupt database',['metadata',broken]);
 if(process.platform==='linux')check('FIFO rejected without waiting for writer',()=>{
- const fifo=join(dir,'input.fifo');const created=spawnSync('mkfifo',[fifo],{encoding:'utf8'});assert.equal(created.status,0);
+ const fifo=join(dir,'input-'+process.pid+'-'+Date.now()+'.fifo');const created=spawnSync('mkfifo',[fifo],{encoding:'utf8'});assert.equal(created.status,0);
  const r=execute(['metadata',fifo],undefined,true,{timeout:3000});assert.equal(r.code,2);assert.equal(jsonLines(r.stderr)[0].code,'file-limit');
  const log=execute(['enrich-many',config,fifo],undefined,true,{timeout:3000});assert.equal(log.code,2);assert(!jsonLines(log.stderr).some(v=>v.status==='summary'));
 });
