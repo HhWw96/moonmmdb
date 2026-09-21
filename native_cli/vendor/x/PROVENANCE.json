@@ -1,0 +1,93 @@
+{
+  "version": "0.5.5",
+  "source": "https://download.mooncakes.io/user/moonbitlang/x/0.5.5.zip",
+  "scope": "crypto implementation files only; upstream test and benchmark files omitted",
+  "patch": "Four AES Array(capacity=data_length) calls changed to Array::new(capacity=data_length) for pinned MoonBit 0.10.11; hashing implementation unchanged",
+  "files": [
+    {
+      "path": "crypto/aes.mbt",
+      "upstream_sha256": "db76521242b4b22614cb7fdce280bac34899fc9b38ea6f45da13ce5de8e25e08",
+      "local_sha256": "a02e1fee0b1adb7f69fea858f970d7851e1b65287f4eaf9266ed6418efefc65e"
+    },
+    {
+      "path": "crypto/byte_source.mbt",
+      "upstream_sha256": "15940fc1541a73c11273e6a89d56c4e45f88fd8993d19cef4b3ec259176f6dac",
+      "local_sha256": "15940fc1541a73c11273e6a89d56c4e45f88fd8993d19cef4b3ec259176f6dac"
+    },
+    {
+      "path": "crypto/chacha.mbt",
+      "upstream_sha256": "51d05466b99e6660f78ee3f107d05f5c2bc3c1ec473fc124cf7b19561ca6f025",
+      "local_sha256": "51d05466b99e6660f78ee3f107d05f5c2bc3c1ec473fc124cf7b19561ca6f025"
+    },
+    {
+      "path": "crypto/chacha_simd.mbt",
+      "upstream_sha256": "81a49ffa2e21aae3bef118247ec48b33f03920ae8541cb2f5d5b6139a96fee77",
+      "local_sha256": "81a49ffa2e21aae3bef118247ec48b33f03920ae8541cb2f5d5b6139a96fee77"
+    },
+    {
+      "path": "crypto/hmac.mbt",
+      "upstream_sha256": "51b783f1c9f91459278e381bac226a84d51bf3100b962841e71c27a55c5bc1e7",
+      "local_sha256": "51b783f1c9f91459278e381bac226a84d51bf3100b962841e71c27a55c5bc1e7"
+    },
+    {
+      "path": "crypto/md4.mbt",
+      "upstream_sha256": "077ecf96dd30530c93a0d63b7045db736254d285e7f6628fcdec169dea467e9f",
+      "local_sha256": "077ecf96dd30530c93a0d63b7045db736254d285e7f6628fcdec169dea467e9f"
+    },
+    {
+      "path": "crypto/md5.mbt",
+      "upstream_sha256": "09d06abf576e951d2573fcc4a98ceb5a65a577c46cdbd28956b883bb9773cd35",
+      "local_sha256": "09d06abf576e951d2573fcc4a98ceb5a65a577c46cdbd28956b883bb9773cd35"
+    },
+    {
+      "path": "crypto/ripemd160.mbt",
+      "upstream_sha256": "4a64e7891ac7dce2dee459093909b929e31b875be18e1ebacbc833211aec3967",
+      "local_sha256": "4a64e7891ac7dce2dee459093909b929e31b875be18e1ebacbc833211aec3967"
+    },
+    {
+      "path": "crypto/sha1.mbt",
+      "upstream_sha256": "67e288efb7bae2293f0226abb00c79b1de1de1c49dd2438af97eb93fe0a2fa3f",
+      "local_sha256": "67e288efb7bae2293f0226abb00c79b1de1de1c49dd2438af97eb93fe0a2fa3f"
+    },
+    {
+      "path": "crypto/sha224.mbt",
+      "upstream_sha256": "e85ffd72add211686b533abf3f4f5b7b4b7172597438ddd31e74ad7ada54a5d4",
+      "local_sha256": "e85ffd72add211686b533abf3f4f5b7b4b7172597438ddd31e74ad7ada54a5d4"
+    },
+    {
+      "path": "crypto/sha256.mbt",
+      "upstream_sha256": "2fd3517d6ecbf971a72563fbe1a161a23ab710374fe1b526f8fc07f77342f527",
+      "local_sha256": "2fd3517d6ecbf971a72563fbe1a161a23ab710374fe1b526f8fc07f77342f527"
+    },
+    {
+      "path": "crypto/sha384.mbt",
+      "upstream_sha256": "8d25283c7c2c5de448e830bb9b34ccfa37c04bed7fbb0be95860cb010fa89ff7",
+      "local_sha256": "8d25283c7c2c5de448e830bb9b34ccfa37c04bed7fbb0be95860cb010fa89ff7"
+    },
+    {
+      "path": "crypto/sha512.mbt",
+      "upstream_sha256": "c319bc5378a1421b490f86008b919b25bf21a2f76a803b20c3bb73bdf3e6946f",
+      "local_sha256": "c319bc5378a1421b490f86008b919b25bf21a2f76a803b20c3bb73bdf3e6946f"
+    },
+    {
+      "path": "crypto/simd.mbt",
+      "upstream_sha256": "4b799e01cc8ea4bd5a8c32fad9573f49d0ca753f876e3aac2b2d5fbd650453c7",
+      "local_sha256": "4b799e01cc8ea4bd5a8c32fad9573f49d0ca753f876e3aac2b2d5fbd650453c7"
+    },
+    {
+      "path": "crypto/sm3.mbt",
+      "upstream_sha256": "bc15a68d9fd94dfe05dd7a848f45e950f31ec72df566e12f12b0a9cf02a318a0",
+      "local_sha256": "bc15a68d9fd94dfe05dd7a848f45e950f31ec72df566e12f12b0a9cf02a318a0"
+    },
+    {
+      "path": "crypto/traits.mbt",
+      "upstream_sha256": "f644696f16c674d73a61db16d5da2d179e4d3e21b3fd94df1744a598d94857be",
+      "local_sha256": "f644696f16c674d73a61db16d5da2d179e4d3e21b3fd94df1744a598d94857be"
+    },
+    {
+      "path": "crypto/utils.mbt",
+      "upstream_sha256": "6bf70292a2376a277b19a2436558b0d0a8aa8b0826711ab2f93dcadf4fdda2b8",
+      "local_sha256": "6bf70292a2376a277b19a2436558b0d0a8aa8b0826711ab2f93dcadf4fdda2b8"
+    }
+  ]
+}

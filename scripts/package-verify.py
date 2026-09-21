@@ -47,7 +47,7 @@ try:
         for name in bundle.namelist():
             if any(token in name for token in forbidden):raise RuntimeError('Private/generated file in package: '+name)
         report['file_count']=len(bundle.namelist())
-        report['contains_scenario_licenses']=all(name in bundle.namelist() for name in ('LICENSE','THIRD_PARTY.md','tests/scenarios/manifest.json'))
+        report['contains_scenario_licenses']=all(name in bundle.namelist() for name in ('LICENSE','THIRD_PARTY.md','tests/scenarios/manifest.json','native_cli/main.mbt','native_cli/io.c','native_cli/vendor/x/PROVENANCE.json','native_cli/licenses/MinGW-w64-runtime.txt'))
         if not report['contains_scenario_licenses']:raise RuntimeError('Package missing licenses or scenario provenance')
         for member in bundle.infolist():
             if not (library/member.filename).resolve().is_relative_to(library.resolve()): raise RuntimeError('Archive path escapes extraction root')

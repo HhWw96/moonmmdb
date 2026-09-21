@@ -1,0 +1,6 @@
+warnings = "-alert_experimental"
+
+import {
+  "moonbitlang/core/cmp",
+  "moonbitlang/core/v128",
+}

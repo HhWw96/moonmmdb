@@ -18,7 +18,7 @@ export function sourceFingerprint(directory=root) {
       else if(!item.name.endsWith('.tmp')) files.push(name);
     }
   }
-  for(const dir of ['src','bin','scripts','tests','examples','.github']) walk(dir);
+  for(const dir of ['src','bin','scripts','tests','examples','native_cli','.github']) walk(dir);
   for(const file of ['moon.mod','package.json','requirements-reference.txt','verification/production-sources.json']) if(existsSync(resolve(directory,file))) files.push(file);
   return sha256(files.sort().map(file=>file+'\0'+sha256(readFileSync(resolve(directory,file)))+'\n').join(''));
 }

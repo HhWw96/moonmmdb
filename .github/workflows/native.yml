@@ -1,0 +1,85 @@
+name: Native product validation
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  native:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 60
+    env:
+      MOONBIT_INSTALL_VERSION: 0.10.11+6ff76a5f9
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install fixed MoonBit on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Invoke-RestMethod https://cli.moonbitlang.com/install/powershell.ps1 | Invoke-Expression
+          "$env:USERPROFILE\.moon\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          python scripts/setup-native-windows.py
+      - name: Install fixed MoonBit on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Build both hosts and Native unit tests
+        run: |
+          node scripts/build.mjs
+          node scripts/native-build.mjs
+          node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs'; import {runMoon} from './scripts/moon.mjs'; nativeToolchain();runMoon(['fmt','--check'],'native_cli');runMoon(['test','--target','native','--release','-p','local/moonmmdb_native_cli','--deny-warn'],'native_cli');runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn']);"
+      - name: Native parity, transport and 100000 lines
+        run: node scripts/native-cli-verify.mjs
+      - name: Independent real database verification
+        run: |
+          python -m pip install --target .reference-deps -r requirements-reference.txt
+          python scripts/download-production.py
+          python scripts/native-production-verify.py
+      - name: Thirty minute Native product soak
+        run: python scripts/native-soak.py
+      - name: Package and isolated runtime smoke
+        run: python scripts/native-package.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: native-evidence-${{ matrix.os }}
+          path: |
+            verification/local/native-build.json
+            verification/local/native-cli/report.json
+            verification/local/native-production.json
+            verification/local/native-soak.json
+            verification/local/native-package.json
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: native-package-${{ matrix.os }}
+          path: dist/native/
+  linux-newer:
+    needs: native
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - uses: actions/download-artifact@v8.0.1
+        with:
+          name: native-package-ubuntu-22.04
+          path: dist/native/
+      - name: Verify Ubuntu 22.04 artifact on Ubuntu 24.04
+        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.5.0-linux-x64.tar.gz

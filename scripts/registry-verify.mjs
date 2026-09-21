@@ -4,8 +4,8 @@ import {resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {root,runMoon} from './moon.mjs';
 import {sha256} from './evidence.mjs';
-const version=process.argv[2] || '0.4.0';
-if(!/^0\.[34]\.0$/.test(version))throw new Error('Expected stable version 0.3.0 or 0.4.0');
+const version=process.argv[2] || '0.5.0';
+if(!/^0\.[345]\.0$/.test(version))throw new Error('Expected stable version 0.3.0, 0.4.0 or 0.5.0');
 const directory=mkdtempSync(resolve(tmpdir(),'moonmmdb-registry-'));
 const report={started:new Date().toISOString(),status:'running',module:'HhWw96/moonmmdb',version,directory,scope:'New standalone consumer; no workspace dependency; registry download and version assertion.',steps:[]};
 const output=resolve(root,'verification/local/registry-'+version+'.json');
@@ -16,7 +16,7 @@ try {
   copyFileSync(resolve(root,'examples/log_consumer/fixture.mbt'),resolve(directory,'fixture_wbtest.mbt'));
   writeFileSync(resolve(directory,'consumer.mbt'),'///|\npub fn installed_version() -> String { @mmdb.version() }\n');
   writeFileSync(resolve(directory,'consumer_wbtest.mbt'),`///|\ntest "registry version and exact ASN query" {\n  assert_eq(@mmdb.version(), "${version}")\n  let reader = @mmdb.open_bytes(asn_fixture())\n  let selected = reader.project("1.0.0.1", ["/autonomous_system_number"])\n  assert_true(selected.record_found)\n  assert_eq(selected.fields[0].1, Some(@mmdb.Unsigned32(15169)))\n}\n`);
-  if(version==='0.4.0') {
+  if(version!=='0.3.0') {
     const path=resolve(directory,'consumer_wbtest.mbt');
     const query=`  let fields = @mmdb.prepare_fields(["/autonomous_system_number"])\n  let joined = @mmdb.Enricher::new([{ name: "asn", reader, fields }])\n  let result = joined.lookup("1.0.0.1")\n  assert_eq(result.status_code(), 0)\n  assert_eq(result.sources[0].0, "asn")\n`;
     writeFileSync(path,readFileSync(path,'utf8').replace(/}\n$/,query+'}\n'));
