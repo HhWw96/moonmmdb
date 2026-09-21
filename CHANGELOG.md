@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- 纳入固定 MaxMind 官方提交的全部 73 个 MMDB 文件及共享指针原始样本，增加独立参考与有界拒绝验证。
+- 增加公开接口声明基线、兼容政策及破坏性变更自动检查。
+- 增加可选 geo 包，提供 City／ASN 强类型结果、字段级 schema-mismatch 错误、精确 ASN 与独立本地化名称。
+- 增加强类型独立消费者、官方样本及真实 City＋ASN 的参考对照。
+
 ## 0.5.0 — 2026-09-21
 
 - 增加 Windows/Linux x64 Native metadata、lookup、project 和 enrich-many 命令。

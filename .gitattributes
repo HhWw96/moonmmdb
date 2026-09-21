@@ -6,6 +6,8 @@
 *.md text eol=lf
 *.yml text eol=lf
 *.mmdb binary
+*.raw binary
+tests/fixtures/upstream/source-data/*.json -text
 
 # Preserve upstream notices and source bytes, including upstream whitespace.
 native_cli/licenses/** -whitespace

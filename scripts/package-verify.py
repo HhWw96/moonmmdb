@@ -55,10 +55,13 @@ try:
     consumer=workspace/'consumer'
     # The example and its pinned fixture must be present in the archive itself.
     shutil.copytree(library/'examples/log_consumer',consumer,ignore=shutil.ignore_patterns('moon.work','_build','target'))
-    (workspace/'moon.work').write_text('members = ["library", "consumer"]\n',encoding='utf-8')
+    shutil.copytree(library/'examples/typed_consumer',workspace/'typed',ignore=shutil.ignore_patterns('moon.work','_build','target'))
+    (workspace/'moon.work').write_text('members = ["library", "consumer", "typed"]\n',encoding='utf-8')
     for target in ('js','wasm-gc'):
         output=run([moon,'test','-p','local/moonmmdb_log_example','--target',target,'--deny-warn'],cwd=workspace,env=env)
         if 'Total tests: 1, passed: 1, failed: 0.' not in output: raise RuntimeError('Consumer test did not execute exactly one expected test')
+        output=run([moon,'test','-p','local/moonmmdb_typed_example','--target',target,'--deny-warn'],cwd=workspace,env=env)
+        if 'Total tests: 1, passed: 1, failed: 0.' not in output: raise RuntimeError('Typed package consumer did not execute')
     report['status']='passed'
 except Exception as error:
     report['status']='failed'

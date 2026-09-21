@@ -1,0 +1,16 @@
+{
+  "version": "0.5.0",
+  "registry_archive_sha256": "226836bd2fd767b1ebbdc25b3f3d220e6dd7a3c4b7425823ed0d4927ad5e4479",
+  "files": [
+    {
+      "current": "src/pkg.generated.mbti",
+      "baseline": "core-0.5.0.mbti",
+      "sha256": "0fcb3369dcf3d7ca4d84311e94dae78b275fe05f65d3d53e92fa25940d50dabf"
+    },
+    {
+      "current": "src/bridge/pkg.generated.mbti",
+      "baseline": "bridge-0.5.0.mbti",
+      "sha256": "98f4a69b2e2a2481a1b0fd65221c39331638edf45f9308d35f8164312293ddd7"
+    }
+  ]
+}

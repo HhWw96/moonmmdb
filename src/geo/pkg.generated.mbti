@@ -1,0 +1,79 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "HhWw96/moonmmdb/geo"
+
+import {
+  "HhWw96/moonmmdb",
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn lookup_asn(@moonmmdb.Reader, String) -> AsnLookup raise GeoError
+
+pub fn lookup_city(@moonmmdb.Reader, String) -> CityLookup raise GeoError
+
+// Errors
+pub suberror GeoError {
+  SchemaMismatch(String, String)
+  DatabaseError(@moonmmdb.MmdbError)
+} derive(@debug.Debug)
+pub fn GeoError::code(Self) -> String
+pub fn GeoError::message(Self) -> String
+pub fn GeoError::path(Self) -> String?
+
+// Types and methods
+pub(all) struct AsnLookup {
+  record : AsnRecord?
+  prefix_length : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct AsnRecord {
+  autonomous_system_number : UInt?
+  autonomous_system_organization : String?
+} derive(Eq, @debug.Debug)
+pub fn AsnRecord::from_value(@moonmmdb.Value) -> Self raise GeoError
+
+pub(all) struct CityLookup {
+  record : CityRecord?
+  prefix_length : Int
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CityRecord {
+  continent_code : String?
+  country : Country?
+  registered_country : Country?
+  city : Place?
+  subdivisions : Array[Subdivision]
+  postal_code : String?
+  location : Location?
+} derive(Eq, @debug.Debug)
+pub fn CityRecord::from_value(@moonmmdb.Value) -> Self raise GeoError
+
+pub(all) struct Country {
+  iso_code : String?
+  geoname_id : UInt?
+  names : Map[String, String]
+  is_in_european_union : Bool?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Location {
+  latitude : Double?
+  longitude : Double?
+  accuracy_radius : UInt?
+  time_zone : String?
+  metro_code : UInt?
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Place {
+  geoname_id : UInt?
+  names : Map[String, String]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Subdivision {
+  iso_code : String?
+  geoname_id : UInt?
+  names : Map[String, String]
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits

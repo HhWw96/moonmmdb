@@ -52,6 +52,9 @@ jobs:
           python -m pip install --target .reference-deps -r requirements-reference.txt
           python scripts/download-production.py
           python scripts/native-production-verify.py
+          python scripts/corpus-verify.py --native
+          python scripts/typed-verify.py --production
+          node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs'; import {runMoon} from './scripts/moon.mjs'; nativeToolchain();runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb/geo','--deny-warn']);runMoon(['test','--target','native','--release','-p','local/moonmmdb_typed_example','--deny-warn'],'examples/typed_consumer');"
       - name: Thirty minute Native product soak
         run: python scripts/native-soak.py
       - name: Package and isolated runtime smoke
@@ -66,6 +69,8 @@ jobs:
             verification/local/native-production.json
             verification/local/native-soak.json
             verification/local/native-package.json
+            verification/local/corpus-native.json
+            verification/local/typed-production.json
       - uses: actions/upload-artifact@v7.0.1
         with:
           name: native-package-${{ matrix.os }}

@@ -1,0 +1,11 @@
+import {readFileSync} from 'node:fs';
+import {resolve,dirname} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {runMoon} from '../../scripts/moon.mjs';
+const directory=dirname(fileURLToPath(import.meta.url));
+const built=resolve(directory,'_build/js/release/build/local/moonmmdb_typed_example/moonmmdb_typed_example.js');
+const [kind,file,ip,locale='en']=process.argv.slice(2);
+if(!['city','asn'].includes(kind)||!file||!ip)throw new Error('Usage: node examples/typed_consumer/run.mjs city|asn DATABASE IP [LOCALE]');
+runMoon(['build','--target','js','--release','--deny-warn'],directory);
+const {summarize}=await import(pathToFileURL(built));
+console.log(summarize(readFileSync(file),[ip],kind,locale));

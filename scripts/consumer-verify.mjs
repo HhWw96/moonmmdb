@@ -5,6 +5,10 @@ const results=[];
 let status='passed';
 try {
   for (const target of ['js','wasm-gc']) {
+    runMoon(['fmt','--check'],resolve(root,'examples/typed_consumer'),true);
+    const typed=runMoon(['test','-p','local/moonmmdb_typed_example','--target',target,'--deny-warn'],resolve(root,'examples/typed_consumer'),true);
+    if(!typed.includes('Total tests: 1, passed: 1, failed: 0.'))throw new Error('Typed consumer did not run');
+    results.push({target,consumer:'typed',status:'passed',output:typed});
     const output=runMoon(['test','-p','local/moonmmdb_log_example','--target',target,'--deny-warn'],resolve(root,'examples/log_consumer'),true);
     if (!output.includes('Total tests: 1, passed: 1, failed: 0.')) throw new Error('Expected consumer test did not execute: '+output);
     results.push({target,status:'passed',output});

@@ -1,0 +1,137 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "HhWw96/moonmmdb"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+pub fn open_bytes(Bytes, limits? : Limits) -> Reader raise MmdbError
+
+pub fn prepare_fields(Array[String]) -> FieldSelector raise MmdbError
+
+pub fn validate_paths(Array[String]) -> Unit raise MmdbError
+
+pub fn version() -> String
+
+// Errors
+pub suberror MmdbError {
+  MmdbError(String, Int, String)
+} derive(@debug.Debug)
+pub fn MmdbError::code(Self) -> String
+pub fn MmdbError::message(Self) -> String
+pub fn MmdbError::offset(Self) -> Int
+pub fn MmdbError::to_json(Self) -> Json
+
+// Types and methods
+pub struct Enricher {
+  // private fields
+}
+pub fn Enricher::lookup(Self, String) -> Enrichment raise MmdbError
+pub fn Enricher::new(Array[EnrichmentSource]) -> Self raise MmdbError
+
+pub(all) struct Enrichment {
+  sources : Array[(String, SourceResult)]
+} derive(@debug.Debug)
+pub fn Enrichment::status_code(Self) -> Int
+pub fn Enrichment::to_json(Self) -> Json
+
+pub(all) struct EnrichmentSource {
+  name : String
+  reader : Reader
+  fields : FieldSelector
+}
+
+pub struct FieldSelector {
+  // private fields
+}
+
+pub(all) struct Float32Value {
+  bits : UInt
+} derive(Eq, @debug.Debug)
+pub fn Float32Value::number(Self) -> Float
+
+pub(all) struct Float64Value {
+  bits : UInt64
+} derive(Eq, @debug.Debug)
+pub fn Float64Value::number(Self) -> Double
+
+pub(all) struct Limits {
+  max_depth : Int
+  max_values : Int
+  max_payload_bytes : Int
+  max_file_bytes : Int
+} derive(Eq, @debug.Debug)
+pub fn Limits::default() -> Self
+
+pub(all) struct Lookup {
+  value : Value?
+  prefix_length : Int
+} derive(Eq, @debug.Debug)
+pub fn Lookup::to_json(Self) -> Json
+
+pub(all) struct Metadata {
+  node_count : UInt
+  record_size : Int
+  ip_version : Int
+  database_type : String
+  format_major : Int
+  format_minor : Int
+  build_epoch : UInt64
+  raw : Value
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Projection {
+  record_found : Bool
+  prefix_length : Int
+  fields : Array[(String, Value?)]
+} derive(Eq, @debug.Debug)
+pub fn Projection::to_json(Self) -> Json
+
+pub struct Reader {
+  // private fields
+}
+pub fn Reader::compare(Self, Self, String, Array[String]) -> RecordDiff raise MmdbError
+pub fn Reader::compare_prepared(Self, Self, String, FieldSelector) -> RecordDiff raise MmdbError
+pub fn Reader::lookup(Self, String) -> Lookup raise MmdbError
+pub fn Reader::metadata(Self) -> Metadata
+pub fn Reader::project(Self, String, Array[String]) -> Projection raise MmdbError
+pub fn Reader::project_prepared(Self, String, FieldSelector) -> Projection raise MmdbError
+
+pub(all) struct RecordDiff {
+  before : Projection
+  after : Projection
+  record_changed : Bool
+  prefix_changed : Bool
+  changed_fields : Array[String]
+} derive(Eq, @debug.Debug)
+pub fn RecordDiff::changed(Self) -> Bool
+pub fn RecordDiff::to_json(Self) -> Json
+
+pub(all) enum SourceResult {
+  Selected(Projection)
+  Failed(MmdbError)
+} derive(@debug.Debug)
+
+pub(all) enum Value {
+  Text(String)
+  Blob(Bytes)
+  Boolean(Bool)
+  Unsigned16(UInt)
+  Unsigned32(UInt)
+  Signed32(Int)
+  Unsigned64(UInt64)
+  Unsigned128(String)
+  Real32(Float32Value)
+  Real64(Float64Value)
+  List(Array[Value])
+  Object(Array[(String, Value)])
+} derive(Eq, @debug.Debug)
+pub fn Value::at_pointer(Self, String) -> Self? raise MmdbError
+pub fn Value::get(Self, String) -> Self?
+pub fn Value::text(Self) -> String?
+pub fn Value::to_tagged_json(Self) -> Json
+
+// Type aliases
+
+// Traits

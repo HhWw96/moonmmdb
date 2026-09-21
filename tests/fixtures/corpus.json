@@ -1,0 +1,612 @@
+{
+  "source": "https://codeload.github.com/maxmind/MaxMind-DB/zip/7fcd868842970b2d0657af799807cbe722fb738d",
+  "commit": "7fcd868842970b2d0657af799807cbe722fb738d",
+  "archive_sha256": "2aad1dc1c439b91e5cb455a9bf61d2984d1590a2db17a09886c1de0d9e6af15e",
+  "license": "Apache-2.0 OR MIT",
+  "scope": "All 73 MMDB files and one raw decoder fixture at the pinned commit. File coverage is not branch coverage or a port of every upstream reader assertion.",
+  "files": [
+    {
+      "path": "upstream/bad-data/libmaxminddb/libmaxminddb-corrupt-search-tree.mmdb",
+      "mode": "reference",
+      "iterate": false,
+      "reason": "Probe reachable paths only; this Reader does not certify every tree node",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-corrupt-search-tree.mmdb",
+      "bytes": 813,
+      "sha256": "41eb5cb3cda166808e66e9b95f63f99c086baa8c354c3f521ee3c1800b6c96f3"
+    },
+    {
+      "path": "boundary/libmaxminddb-deep-array-nesting.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "depth-limit",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-deep-array-nesting.mmdb",
+      "bytes": 2198,
+      "sha256": "6d5822f9292a16505806e537e2d93b0d49257cf465bab7b26b0f91b279bc264d"
+    },
+    {
+      "path": "boundary/libmaxminddb-deep-nesting.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "depth-limit",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-deep-nesting.mmdb",
+      "bytes": 2798,
+      "sha256": "7f32fe2a5a456d45cf1cca5873e64c1f699801ad4ab1b3fe52ef681fb3632e37"
+    },
+    {
+      "path": "upstream/bad-data/libmaxminddb/libmaxminddb-empty-array-last-in-metadata.mmdb",
+      "mode": "reference",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-empty-array-last-in-metadata.mmdb",
+      "bytes": 219,
+      "sha256": "5d04e810346e2b3a522911c200be4efdab92fcfd5551567af01c7fe62e25574a"
+    },
+    {
+      "path": "upstream/bad-data/libmaxminddb/libmaxminddb-empty-map-last-in-metadata.mmdb",
+      "mode": "reference",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-empty-map-last-in-metadata.mmdb",
+      "bytes": 219,
+      "sha256": "7f7670483205eb6c1dffed69b09424210ece0eea5121fee4c26ea83599ae1ff5"
+    },
+    {
+      "path": "boundary/libmaxminddb-metadata-marker-only.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-metadata-marker-only.mmdb",
+      "bytes": 14,
+      "sha256": "744df941aa9b8f456a01a359f9a011f93d79d4cc127db6601dc72c09ae04dfdb"
+    },
+    {
+      "path": "boundary/libmaxminddb-offset-integer-overflow.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-offset-integer-overflow.mmdb",
+      "bytes": 412,
+      "sha256": "18bccbe3b4120212973926f8544b37659a28efff28599cefe079641558d974e7"
+    },
+    {
+      "path": "boundary/libmaxminddb-oversized-array.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-oversized-array.mmdb",
+      "bytes": 219,
+      "sha256": "4753ef60f5bd0f501783e72b5ef72c384d91f8ef5228b1af20643e46438729ba"
+    },
+    {
+      "path": "boundary/libmaxminddb-oversized-map.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-oversized-map.mmdb",
+      "bytes": 218,
+      "sha256": "a394cb54d668b872dc6ddb8ac0e78ac31191b84e168605ad75491c9063077a9c"
+    },
+    {
+      "path": "boundary/libmaxminddb-separator-record-max-left.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-tree-pointer",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-separator-record-max-left.mmdb",
+      "bytes": 219,
+      "sha256": "936e456212618891d12f551c9a6fef07fbc17210fa02488ce1f9004523207658"
+    },
+    {
+      "path": "boundary/libmaxminddb-separator-record-min-left.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-tree-pointer",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-left.mmdb",
+      "bytes": 219,
+      "sha256": "ed1bfd6a8ef442af25ecf5896f7fd9ca7b805c971e430d3122827dd627658bd4"
+    },
+    {
+      "path": "boundary/libmaxminddb-separator-record-min-right.mmdb",
+      "mode": "policy",
+      "ip": "128.0.0.1",
+      "expected_code": "invalid-tree-pointer",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-right.mmdb",
+      "bytes": 219,
+      "sha256": "879e4dae7c9f5bbf2e88b9b01dbe181ddb9837d489c0393fe72a8905541bd1f5"
+    },
+    {
+      "path": "boundary/libmaxminddb-uint64-max-epoch.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": null,
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-uint64-max-epoch.mmdb",
+      "bytes": 219,
+      "sha256": "ff1fcdbbbc6322a9b652e82cc94e3d942e6c2cfd7eeacaa71b520584836d7b43"
+    },
+    {
+      "path": "boundary/cyclic-data-structure.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/maxminddb-golang/cyclic-data-structure.mmdb",
+      "bytes": 2731,
+      "sha256": "0e68e22cccf36654d78cf3a155e89728b0ea34ca6fea0767e17842df2bc6cc0c"
+    },
+    {
+      "path": "boundary/invalid-bytes-length.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/maxminddb-golang/invalid-bytes-length.mmdb",
+      "bytes": 32,
+      "sha256": "9273e22ba24f9a04ba6bb37cfb8af9dfaa62a34572bf2516c101aa0bd8d168e2"
+    },
+    {
+      "path": "boundary/invalid-data-record-offset.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-utf8",
+      "source_path": "bad-data/maxminddb-golang/invalid-data-record-offset.mmdb",
+      "bytes": 327,
+      "sha256": "589a73821e54fb1b23171bc6bb8fad0bf17de78a3df56308c40e8f0f846890cc"
+    },
+    {
+      "path": "boundary/invalid-map-key-length.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/maxminddb-golang/invalid-map-key-length.mmdb",
+      "bytes": 2731,
+      "sha256": "2014c7924ace0d2767321b3c9934a5d9a61c70672a0af18948040a881735b118"
+    },
+    {
+      "path": "boundary/invalid-string-length.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/maxminddb-golang/invalid-string-length.mmdb",
+      "bytes": 187,
+      "sha256": "257c20a3041697f052ff6bfacae1a61702ff2325f4ac78628f29a35efab02872"
+    },
+    {
+      "path": "boundary/metadata-is-an-uint128.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/maxminddb-golang/metadata-is-an-uint128.mmdb",
+      "bytes": 16,
+      "sha256": "b9b380edbf509f1b702f8830adb1d6b68bd4326307e3bac43884837f5f79da17"
+    },
+    {
+      "path": "boundary/unexpected-bytes.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "source_path": "bad-data/maxminddb-golang/unexpected-bytes.mmdb",
+      "bytes": 2333,
+      "sha256": "e32117c47725f213a02e1310a79b9c3a0bc279b26b41c70ab46d88b79ee0bc57"
+    },
+    {
+      "path": "boundary/bad-unicode-in-map-key.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-separator",
+      "source_path": "bad-data/maxminddb-python/bad-unicode-in-map-key.mmdb",
+      "bytes": 3535,
+      "sha256": "d4a9872cbce3cf9d6173652733b0248841901f745dea14b2a2dc0b6fb0b4b3e4"
+    },
+    {
+      "path": "upstream/test-data/GeoIP-Anonymous-Plus-Test.mmdb",
+      "mode": "reference",
+      "iterate": false,
+      "address_source": "upstream/source-data/GeoIP-Anonymous-Plus-Test.json",
+      "address_source_sha256": "7780a9d4851f0e75492c84179732f404ad15071cb2e06e229eafec51989456dc",
+      "reason": "Python 3.2.0 network iterator raises host-bits-set on IPv6 aliases; derive boundary addresses from pinned upstream source JSON, then use independent get_with_prefix_len",
+      "source_path": "test-data/GeoIP-Anonymous-Plus-Test.mmdb",
+      "bytes": 5330,
+      "sha256": "947611e3f9d32544c02c34132a07417bb5975d6003edf13b28afc7f0f942da84"
+    },
+    {
+      "path": "upstream/test-data/GeoIP-Residential-Proxy-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP-Residential-Proxy-Test.mmdb",
+      "bytes": 8898,
+      "sha256": "cd0d5f0d29f1e9ecdb98cc8e30ee7a7c4d9692f3933cde12974eb5b12f38a788"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Anonymous-IP-Test.mmdb",
+      "mode": "reference",
+      "iterate": false,
+      "address_source": "upstream/source-data/GeoIP2-Anonymous-IP-Test.json",
+      "address_source_sha256": "b3ee13914028b256dcce5e6f306407d7b37cc0220057dcb023991008ad48991d",
+      "reason": "Python 3.2.0 network iterator raises host-bits-set on IPv6 aliases; derive boundary addresses from pinned upstream source JSON, then use independent get_with_prefix_len",
+      "source_path": "test-data/GeoIP2-Anonymous-IP-Test.mmdb",
+      "bytes": 4873,
+      "sha256": "d080856c8dfb306780a2c20cf1b32fd873bd6ac262fbe5cb5ea37e497348244d"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-City-Shield-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-City-Shield-Test.mmdb",
+      "bytes": 22562,
+      "sha256": "ad2c5f0f80cba877e00566d3641c4ff4b391000fa11bd5a4c9b5ab1ba63db8bc"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-City-Test-Broken-Double-Format.mmdb",
+      "mode": "policy",
+      "ip": "89.160.20.112",
+      "expected_code": "invalid-size",
+      "reason": "Invalid encoded double length",
+      "source_path": "test-data/GeoIP2-City-Test-Broken-Double-Format.mmdb",
+      "bytes": 22478,
+      "sha256": "a340a6871b8bee8351befb8ad26f5229453705dddee0e948a35a65916c931e9c"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-City-Test-Invalid-Node-Count.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-layout",
+      "reason": "Declared search tree overlaps metadata",
+      "source_path": "test-data/GeoIP2-City-Test-Invalid-Node-Count.mmdb",
+      "bytes": 22876,
+      "sha256": "89396af24c3d0a67c0e91e0dca930f6de256fba9e9be466cb794617442fee295"
+    },
+    {
+      "path": "GeoIP2-City-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-City-Test.mmdb",
+      "bytes": 22569,
+      "sha256": "ed972738e4e03a3e56e12041a6af4d91592249d110f7e4a647e5f2fa0e639c09"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Connection-Type-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Connection-Type-Test.mmdb",
+      "bytes": 4537,
+      "sha256": "8c406e033cffaa9906b39804e4dcc52f5550dd5a0d3c0108aeee7b52587e8668"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Country-Shield-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Country-Shield-Test.mmdb",
+      "bytes": 19506,
+      "sha256": "90d658041c8909304649a046d511f5c1d220c4c8ab4a242c24b8990ec2f76151"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Country-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Country-Test.mmdb",
+      "bytes": 19492,
+      "sha256": "b37601903448683d241af52893c8cbf0fed461e0cdebe0bfaca01891fdeb6db9"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-DensityIncome-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-DensityIncome-Test.mmdb",
+      "bytes": 3057,
+      "sha256": "e46e9f3ce39bc99e5f19291e0a776829d0b92357703902bc9a3537acc37304d7"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Domain-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Domain-Test.mmdb",
+      "bytes": 6449,
+      "sha256": "433129738b0f92792c7c83bcc26ac2282d8825325f288ced8867ef384074bb12"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Enterprise-Shield-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Enterprise-Shield-Test.mmdb",
+      "bytes": 14292,
+      "sha256": "cc8634c3dacb5b5678f741e30fefbd9457c57b5d95f03a629dd1e139c1c3fbbe"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Enterprise-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Enterprise-Test.mmdb",
+      "bytes": 14278,
+      "sha256": "49e2a844f12195ad1d3463bf11e99c25ec5e71c965fb7d3ae7e2e76247cd5933"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-IP-Risk-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-IP-Risk-Test.mmdb",
+      "bytes": 4386,
+      "sha256": "06dc79b0c63fdfb5edd069a5f194f354bb31a8988cb24a77f634515bbe6e2268"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-ISP-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-ISP-Test.mmdb",
+      "bytes": 75076,
+      "sha256": "45eb7af92e3c7f458a255af0479110c87a66841918cd2dffed834e59634c4abe"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Precision-Enterprise-Shield-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Precision-Enterprise-Shield-Test.mmdb",
+      "bytes": 21909,
+      "sha256": "a4ac974ea9370117d92b1579a9bc17656a8cdf7987751743c68d45fdffae49e2"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Precision-Enterprise-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Precision-Enterprise-Test.mmdb",
+      "bytes": 21894,
+      "sha256": "b24046ee5af8bbe0607914205e006be1f06fb9f4bd847031277177fb9616e2ff"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-Static-IP-Score-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-Static-IP-Score-Test.mmdb",
+      "bytes": 9938,
+      "sha256": "6f07de1a10d1da6b01495d2c28d1d80e33340bd395fbbcdd5c56398223575bba"
+    },
+    {
+      "path": "upstream/test-data/GeoIP2-User-Count-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoIP2-User-Count-Test.mmdb",
+      "bytes": 5006,
+      "sha256": "edc852e917f5d20ceddb6465963b75a0f3d63cb19a04eb929cbec22c59ce6c29"
+    },
+    {
+      "path": "GeoLite2-ASN-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoLite2-ASN-Test.mmdb",
+      "bytes": 12653,
+      "sha256": "75901b98ed6e58d3bd41af9985044b747a7ec0be1369f930c24f5e044427181a"
+    },
+    {
+      "path": "upstream/test-data/GeoLite2-City-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoLite2-City-Test.mmdb",
+      "bytes": 21088,
+      "sha256": "f936702b51dcb6c94b286d77a6f182c31a1601baf4b27e8e896934deb41f49f2"
+    },
+    {
+      "path": "upstream/test-data/GeoLite2-Country-Test.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/GeoLite2-Country-Test.mmdb",
+      "bytes": 18012,
+      "sha256": "6996ce679243c7f719b901ebe3b490048af2fb5965163f083857533841154fd8"
+    },
+    {
+      "path": "MaxMind-DB-no-ipv4-search-tree.mmdb",
+      "mode": "reference",
+      "iterate": false,
+      "reason": "Probe reachable paths only; this Reader does not certify every tree node",
+      "source_path": "test-data/MaxMind-DB-no-ipv4-search-tree.mmdb",
+      "bytes": 616,
+      "sha256": "92130dcf5bed199177da541c53ec410de3a2f778091bdaf882ba71280ad01c07"
+    },
+    {
+      "path": "MaxMind-DB-string-value-entries.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-string-value-entries.mmdb",
+      "bytes": 1334,
+      "sha256": "205b089624faf6226d6d2056ede619993a50695f74de9157c7e064af6a9c3703"
+    },
+    {
+      "path": "upstream/test-data/MaxMind-DB-test-broken-pointers-24.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.16",
+      "expected_code": "out-of-bounds",
+      "reason": "Data pointer targets outside data section",
+      "source_path": "test-data/MaxMind-DB-test-broken-pointers-24.mmdb",
+      "bytes": 1289,
+      "sha256": "48cc210f3e02f1cfed9a73e31fba3304ca5b3744f61f3cbc943ae8b9561c6290"
+    },
+    {
+      "path": "upstream/test-data/MaxMind-DB-test-broken-search-tree-24.mmdb",
+      "mode": "policy",
+      "ip": "255.255.255.255",
+      "expected_code": "invalid-tree",
+      "reason": "No terminal after all address bits",
+      "source_path": "test-data/MaxMind-DB-test-broken-search-tree-24.mmdb",
+      "bytes": 1298,
+      "sha256": "bd5e1fa9f33e7088aa8a68388c6c6ce1c1ff85dc653b842566f7679092560087"
+    },
+    {
+      "path": "upstream/test-data/MaxMind-DB-test-decode-path-shared-budget.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "duplicate-key",
+      "reason": "Reader rejects duplicate map keys before any projection; upstream decode-path budget behavior is not implemented",
+      "source_path": "test-data/MaxMind-DB-test-decode-path-shared-budget.mmdb",
+      "bytes": 10457,
+      "sha256": "ea292d27988f09088c31f51271efe70ec35603361fa55ac7f48ef4c8fc731328"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "payload-limit",
+      "source_path": "test-data/MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "bytes": 65852,
+      "sha256": "d4f52817d94f8cf8a1f342d536b52564ad909565ad004d6674f19c9c2379c30b"
+    },
+    {
+      "path": "boundary/MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": null,
+      "source_path": "test-data/MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "bytes": 65851,
+      "sha256": "ae9b3a6107b84c1483706e4ae4627fff962f22373029885202e35d8d851e3ae7"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "test-data/MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "bytes": 131287,
+      "sha256": "56d4faf1e8031deb40391e8a20e89437f2e19f519cfac036f629e39032fcb36b"
+    },
+    {
+      "path": "boundary/MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "test-data/MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "bytes": 301,
+      "sha256": "37ee11f329a8728ea52dbdb3437d69a0bc8103e01e2842626dc69785deb9316b"
+    },
+    {
+      "path": "boundary/MaxMind-DB-test-decoder-value-limit.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "test-data/MaxMind-DB-test-decoder-value-limit.mmdb",
+      "bytes": 131285,
+      "sha256": "57d3167b00cf77d50b60277c1a09b6f85f377523d555cd5912de2b3f4f263d96"
+    },
+    {
+      "path": "MaxMind-DB-test-decoder.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-decoder.mmdb",
+      "bytes": 3188,
+      "sha256": "1b34970ee2f8b05c03a478e90b8e5266a01ea2f9385f361bfd3d31edd8d4ce3a"
+    },
+    {
+      "path": "MaxMind-DB-test-ipv4-24.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-ipv4-24.mmdb",
+      "bytes": 1285,
+      "sha256": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02"
+    },
+    {
+      "path": "MaxMind-DB-test-ipv4-28.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-ipv4-28.mmdb",
+      "bytes": 1448,
+      "sha256": "fd0102ee5e1b72b17d00ee01599547e641186f6561f037b91f5df6102416dbb4"
+    },
+    {
+      "path": "MaxMind-DB-test-ipv4-32.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-ipv4-32.mmdb",
+      "bytes": 1611,
+      "sha256": "5924cfd66a7c84ebdb5b45fe94f1efc4e468ff7bf2b39693b37e4c391d89d73a"
+    },
+    {
+      "path": "MaxMind-DB-test-ipv6-24.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-ipv6-24.mmdb",
+      "bytes": 2794,
+      "sha256": "599f1555ce3a568c2d4ad965332dcba87d0d109297636f1b595241247263d98b"
+    },
+    {
+      "path": "MaxMind-DB-test-ipv6-28.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-ipv6-28.mmdb",
+      "bytes": 3209,
+      "sha256": "45681de9db4e09948780a4142782616bd0c3096d4d03b372ed62f007cc5f63b2"
+    },
+    {
+      "path": "MaxMind-DB-test-ipv6-32.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-ipv6-32.mmdb",
+      "bytes": 3624,
+      "sha256": "fe96ba60cbdbecf88151735012407ae9b0638d54ff5a9658238f45aa595564ec"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "payload-limit",
+      "source_path": "test-data/MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "bytes": 65811,
+      "sha256": "b2a897c8e7fb8181d9cb088cbd26f80789253b3db040b53a468e82953032a5bd"
+    },
+    {
+      "path": "MaxMind-DB-test-metadata-pointers.mmdb",
+      "mode": "reference",
+      "metadata_only": true,
+      "source_path": "test-data/MaxMind-DB-test-metadata-pointers.mmdb",
+      "bytes": 2249,
+      "sha256": "bab16f958603ff3d926b9e7b9e2fbf94324eac34f5f2d4e7b7750ffd504211c7"
+    },
+    {
+      "path": "MaxMind-DB-test-mixed-24.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-mixed-24.mmdb",
+      "bytes": 3048,
+      "sha256": "f934da8fe7ec4a98dc6bf3bb7b8dbc982316571d221877c79c477eacd0585160"
+    },
+    {
+      "path": "MaxMind-DB-test-mixed-28.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-mixed-28.mmdb",
+      "bytes": 3492,
+      "sha256": "52b07052973df356468086ae04c30f8e62e40c551f718b64cfa11e7baa5c88b5"
+    },
+    {
+      "path": "MaxMind-DB-test-mixed-32.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-mixed-32.mmdb",
+      "bytes": 3936,
+      "sha256": "d5f282353e3c7a96be5fbdc5c2b76d9dbff458cde2bc758af6fa19dec57e438a"
+    },
+    {
+      "path": "upstream/test-data/MaxMind-DB-test-nested.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-nested.mmdb",
+      "bytes": 2589,
+      "sha256": "c950bc17ed8d5cf26ba3b75801fb57384a358d2584ae1a6e376deb6a6ddc6248"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "payload-limit",
+      "source_path": "test-data/MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "bytes": 82136,
+      "sha256": "27e131379a39cb40e0e4019453d4eb024bcb073a13538801295283edc5f6cdf2"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "payload-limit",
+      "source_path": "test-data/MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "bytes": 196822,
+      "sha256": "a94146d6ad237382535e6ad45c6a682051466946141345cfe53cea07e420a0b6"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "payload-limit",
+      "source_path": "test-data/MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "bytes": 82136,
+      "sha256": "a31e69174aaf714dbbf9535f1f70ba026119666d77ddd3e2e4b55813998d42db"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "test-data/MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "bytes": 1027,
+      "sha256": "c10db83947de1f74d590abac4c66c6ac09b9c20d21636166afd9e27c006a42f4"
+    },
+    {
+      "path": "adversarial/MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "mode": "policy",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "source_path": "test-data/MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "bytes": 451,
+      "sha256": "d3235628d77d684961d305b8667a82b4f8894b255dfb455ad3a5274f9cf564b6"
+    },
+    {
+      "path": "upstream/test-data/MaxMind-DB-test-pointer-decoder.mmdb",
+      "mode": "reference",
+      "source_path": "test-data/MaxMind-DB-test-pointer-decoder.mmdb",
+      "bytes": 1737,
+      "sha256": "69a10ac5ce60d3a2420415789f8e57aa79eb237447e259105f703172c2535182"
+    }
+  ],
+  "raw": {
+    "path": "maps-with-pointers.raw",
+    "source_path": "test-data/maps-with-pointers.raw",
+    "sha256": "fef65a8e4747a54d6ae2a96aba34f1a5c88ef696b3e34fffe84c1925618ce3f9",
+    "records": 6
+  }
+}

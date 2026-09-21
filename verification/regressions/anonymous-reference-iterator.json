@@ -1,0 +1,9 @@
+{
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "upstream_commit": "7fcd868842970b2d0657af799807cbe722fb738d",
+  "fixtures": ["GeoIP-Anonymous-Plus-Test.mmdb", "GeoIP2-Anonymous-IP-Test.mmdb"],
+  "observed_error": "ValueError: ::1:0:0/0 has host bits set",
+  "operation": "Full network iteration using reader.__iter__",
+  "resolution": "Derive address boundaries from pinned upstream source-data JSON with verified SHA-256, then call independent get_with_prefix_len. No MoonMMDB result is used as the oracle.",
+  "scope": "Reference iterator limitation; not evidence that every database alias or reader implementation is incorrect."
+}
