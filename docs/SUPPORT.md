@@ -1,6 +1,6 @@
 # 支持范围
 
-v0.7.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_7.md)。
+v0.8.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_7.md)。
 
 0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
@@ -78,4 +78,4 @@ Native 产品提供 metadata、lookup、project、enrich-many、networks、valid
 
 Native 0.7.0 增加 `diff`，按输入 IP 比较两个快照；字段选择、变化状态、文件合计限制及完成汇总见 [更新对比](NATIVE_DIFF.md)。
 
-浏览器工作台为 v0.8.0 候选功能，实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [0.8.0 验证](VERIFICATION_0_8.md)。完成发布门槛前，稳定版本仍为 v0.7.0。
+浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 基础验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [0.8.0 验证](VERIFICATION_0_8.md)。不扩大到 Safari 或手机大数据库性能。

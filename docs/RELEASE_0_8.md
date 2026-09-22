@@ -6,4 +6,6 @@
 
 数据库单库及合计上限 256 MiB；结果 8 MiB，页面预览 64 KiB。文件上限不是进程内存上限。检查通过不代表信息准确；指定 IP 对比不等于整库相同。历史 Node 默认 RSS 门槛失败保留。
 
-浏览器支持范围、验证结果、独立参考、持续运行和发布后验收见 `docs/VERIFICATION_0_8.md`。只有全部门槛通过后才能作为正式发布说明使用。
+浏览器支持范围、验证结果、独立参考、持续运行和发布后验收见 `docs/VERIFICATION_0_8.md`。Windows/Linux Chromium、Firefox 的网页与 file:// 离线测试全部通过，每组 73 个官方文件及两份真实数据库、31,259 次查询；两平台 Chromium 各通过 30 分钟持续运行。
+
+[打开工作台](https://hhww96.github.io/moonmmdb/) · 下载附件 `moonmmdb-0.8.0-offline.html` 可断网直接打开。Pages 发布状态和最终下载回执见仓库验证报告。

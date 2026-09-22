@@ -1,0 +1,27 @@
+{
+  "started": "2026-09-22T08:21:18.564040+00:00",
+  "status": "passed",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "sources": [
+    {
+      "name": "geo",
+      "addresses": 1030,
+      "sha256": "02d0c798291448a4ee2797afb115d418e25c61f4d9a995ce0431d94cb1ce0187"
+    },
+    {
+      "name": "asn",
+      "addresses": 1030,
+      "sha256": "dab06da41e8858d2f40b4cd05a89ad924cd5ff8bae5cf533165bbe52dab0da70"
+    },
+    {
+      "name": "tags",
+      "addresses": 1030,
+      "sha256": "3cbea721e93a4237971fe2c9aac8f91cbd75bea49c5158d22e873373a20f8d71"
+    }
+  ],
+  "checks": 3090,
+  "failure_count": 0,
+  "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+  "analysis_checked": true,
+  "finished": "2026-09-22T08:21:18.953645+00:00"
+}

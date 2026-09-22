@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "platform": "windows-x64",
+  "executable_sha256": "22aa41e9735643253531434009568d2dd80273cb62d945228454055c0cbc5749",
+  "system_dlls": [
+    "KERNEL32.dll",
+    "msvcrt.dll"
+  ],
+  "dynamic_system_dll": "shell32.dll (Unicode argv via Windows API)",
+  "archive_verification": {
+    "status": "passed",
+    "archive": "moonmmdb-0.8.0-windows-x64.zip",
+    "sha256": "16f3f3a87e472719d750abc418d3fb0427ccb6e8228e45f773104086358083bc",
+    "executable_sha256": "22aa41e9735643253531434009568d2dd80273cb62d945228454055c0cbc5749",
+    "without_developer_tools": true,
+    "commands": 10
+  }
+}

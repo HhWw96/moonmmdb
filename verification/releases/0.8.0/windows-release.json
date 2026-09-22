@@ -1,0 +1,76 @@
+{
+  "started": "2026-09-22T08:20:12.916Z",
+  "status": "passed",
+  "source_sha256": "6da8af85c12e967fbb076b8a946d58f60428f14a99ce24c8d0fafb86ab5a9160",
+  "steps": [
+    {
+      "name": "verification",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "corpus",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "typed",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "inspection-js",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "comparison",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "enrichment",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "scale",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "package",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "benchmark",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+  "evidence": {
+    "verification": "21d15e459686f813807711163e56dee2bdd8fb338891c4fb42f35f58e4048f96",
+    "api-compat": "7da6a2f5931a57e65dbd7207748cee448fd8a0c4840cffb3ed7abe4675cd45ff",
+    "reference": "318446365d72d2da2ac20b4ca4b8cdd394e0ff6c4b658e357e0962b909ad7074",
+    "corpus": "0dedfd4ec07e36e1dcd3e6458b83ad76eeba63ca3d6aa8a50b6f78a963ef0ecc",
+    "typed": "3bb2dd60763b671648536cf321df583493d7c7b09dcadee228a034a75e9caed4",
+    "inspection-js": "580b279c185282d9acf2484c5bab70c607b2b2ebe6dcdce0d53e2212762f8362",
+    "comparison": "4a34b9975d5251aadd021219f4b2c69ee04dcb65152209d68f650fa15ff3c3e2",
+    "enrichment": "0f948f5907a4b1854934360762b4722abdb70d54786cd7f9acfb02f768c49204",
+    "adversarial": "83c5f3a009498627db3570eca2db14e432f185813efdf3c7e6a099093fcef511",
+    "boundary": "546f6184d6a4d1454128b83ce67bce3bc6b075601cbfa8651561122a518a0dca",
+    "mutation": "4eaa38cd39c9abb5cb23b3b9aeddaabc22280df22b5ad55ed4ca821e8613071a",
+    "consumer": "e83f3c85c2b191323962e6e7a18c1324116c9b341c31ef1d07056a86e3ef8353",
+    "scale": "7b2c939a0d9254fa6561b1f86162311f48d763610c8d6bed077aeb3f4e6bc819",
+    "package": "584aeb4118c9010e8bfa7869140165dfef2cc6fcaa6f7a5e14ddade9e9b847c4",
+    "benchmark": "5f3fbcd8318235ac8d9e081e4afe800a242e4f5670503da4ee4da61de976d069"
+  },
+  "finished": "2026-09-22T08:21:24.768Z"
+}

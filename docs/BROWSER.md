@@ -1,6 +1,6 @@
 # 浏览器本地数据库工作台
 
-0.8.0 增加独立的浏览器产品。正式地址与下载状态以版本验证报告为准；未完成发布门槛前，稳定版本仍为 0.7.0。
+0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.8.0/moonmmdb-0.8.0-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_8.md)。
 
 ## 使用
 
@@ -47,11 +47,14 @@ npm run build --prefix web
 python -m pip install --target .reference-deps -r requirements-reference.txt
 python scripts/download-production.py
 python web/oracle.py --production
+cd web
+npx playwright install chromium firefox
+cd ..
 node web/verify.mjs
 ```
 
-前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.11+6ff76a5f9。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机预览服务器只返回生成的 HTML，不提供工作区文件访问。
+前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.11+6ff76a5f9。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机可用 `node web/serve.mjs` 在 http://127.0.0.1:4173/ 预览；服务器只返回生成的 HTML，不提供工作区文件访问。Linux 缺少浏览器系统库时，在隔离测试环境使用 `npx playwright install --with-deps chromium firefox`。
 
 `python web/oracle.py --production` 使用固定 Python maxminddb 3.2.0、原始物理树检查和已审阅异常策略生成答案。Anonymous 等已知参考器枚举缺陷沿用官方源地址；参考失败不会算作通过。真实数据仅用于验证，不内置在 HTML 中。
 
-`node web/soak.mjs` 默认 30 分钟，使用隔离 Chromium 进程树，记录 RSS 合计及 Windows 私有内存。进程 RSS 求和可能重复计算共享页，报告明确度量口径。无强制 GC；历史 Node 默认 RSS 失败仍未因此解决。
+先安装 `python -m pip install psutil==7.2.2`，再执行 `node web/soak.mjs`，默认 30 分钟，使用隔离 Chromium 进程树，记录 RSS 合计及 Windows 私有内存。进程 RSS 求和可能重复计算共享页，报告明确度量口径。无强制 GC；历史 Node 默认 RSS 失败仍未因此解决。

@@ -1,0 +1,76 @@
+{
+  "started": "2026-09-22T08:19:53.443Z",
+  "status": "passed",
+  "source_sha256": "88b30d76dd69e3f61a7f6ab710e34eb17e1ad70bfc6ee90057a15d1dfe97171f",
+  "steps": [
+    {
+      "name": "verification",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "corpus",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "typed",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "inspection-js",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "comparison",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "enrichment",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "scale",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "package",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "benchmark",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+  "evidence": {
+    "verification": "ed077d84b5105d3e02bb6b6506a11cc4bdcabdd3a23cd96ca404ea4aa718ba47",
+    "api-compat": "7da6a2f5931a57e65dbd7207748cee448fd8a0c4840cffb3ed7abe4675cd45ff",
+    "reference": "2a331ddeba8df1da7a28ba85e44a01b8c9d2e9c9bfc24a61c1684db608dfa114",
+    "corpus": "5f08e8b53a33cbdb15296aca571736b6599585cb8717a9eb10718810c71bb21f",
+    "typed": "7a7a80a23d2af7d03def3ec0319e9a2ac4af29c5aae46c98bc8f7d0155b3d4f6",
+    "inspection-js": "e52f5f5b530347a0237fb6bc0ad4c6535ed922bf83e1894c334562285024b92b",
+    "comparison": "2a6d60c343966fd923c8876a3bb9a4aa4db3008d0c93bf9d80a3a794959ee438",
+    "enrichment": "133d07a3e3bd74c130257c4f75c1724bac03e7bf7eb67ece88dc78d5097ea4bc",
+    "adversarial": "8b9da396681918ae9eef396314c7007e4b62f3fedc136b0706eaa74381781c30",
+    "boundary": "473f741c1841aa1a21fdcac1b39c96bd74dfb8aa00d0d4666b85ddf65e583b86",
+    "mutation": "105c8d5e8a4642489372a038c3b0ad048e15a7c0f3908ad561ef30df41db9b48",
+    "consumer": "5f97dba3e7b4af665ae73ef501df1a263ca2314294dccb8e2ca856f68af606f7",
+    "scale": "595474affbf49b5212e9bc70e5a5bff0dc08ac74d63fec8a4a30b85bee35e0b8",
+    "package": "dd68d2dd5a721e80f661d8e55ad35d94ae16a52cb58aa554a5ffac738194587b",
+    "benchmark": "473e234ba85ddcbfe22f3e21c0f3b82a9d00d77f0b9c55eef82207d6629e76a5"
+  },
+  "finished": "2026-09-22T08:20:46.528Z"
+}

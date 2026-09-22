@@ -1,0 +1,41 @@
+{
+  "timestamp": "2026-09-22T08:20:34.981Z",
+  "status": "passed",
+  "scope": "Separate MoonBit module via local workspace dependency; not registry installation.",
+  "results": [
+    {
+      "target": "js",
+      "consumer": "typed",
+      "status": "passed",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "js",
+      "status": "passed",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "js",
+      "consumer": "analytics",
+      "status": "passed",
+      "output": "Total tests: 4, passed: 4, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "consumer": "typed",
+      "status": "passed",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "status": "passed",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "consumer": "analytics",
+      "status": "passed",
+      "output": "Total tests: 4, passed: 4, failed: 0.\n"
+    }
+  ]
+}

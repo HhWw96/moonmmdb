@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "html_sha256": "f982070388acf25d5799e978a95e6d901aa5bf34a2017b7836d04108543c6af6",
+  "bytes": 324872,
+  "inline_scripts": 1,
+  "inline_styles": 1,
+  "automatic_external_assets": [],
+  "csp_hashes_match": true,
+  "online_offline_identical": true,
+  "scope": "Static audit of local built artifact; browser behavior verified separately."
+}

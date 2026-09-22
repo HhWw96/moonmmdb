@@ -1,0 +1,558 @@
+{
+  "status": "passed",
+  "platform": "posix",
+  "started": "2026-09-22T08:22:44.016727+00:00",
+  "duration_requested": 1800,
+  "rate_cap": 500,
+  "sampling": "Every 30 seconds; RSS high-water supplied by the OS, private bytes sampled; final sub-sample interval not observed",
+  "executable_sha256": "970ceeacf896f78b5fffc5793885647331abeb75b7bd209493b811cef4193029",
+  "samples": [
+    {
+      "rss": 2117632,
+      "rss_high_water": 2117632,
+      "private_bytes": 307200,
+      "handles": 4,
+      "seconds": 0.0006267819999834501,
+      "received": 0
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 30.014729414999977,
+      "received": 15050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 60.03112170899999,
+      "received": 30050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 90.049571878,
+      "received": 45050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 120.06852845499998,
+      "received": 60050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 150.086009543,
+      "received": 75050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 180.104206621,
+      "received": 90100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 210.12120536499998,
+      "received": 105100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 240.140070481,
+      "received": 120100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 270.15983261499997,
+      "received": 135100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 300.17782068599996,
+      "received": 150100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 330.198423244,
+      "received": 165100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 360.01623649999993,
+      "received": 180050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 390.03514480300004,
+      "received": 195050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 420.055734301,
+      "received": 210050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 450.074551032,
+      "received": 225050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 480.09527416500003,
+      "received": 240050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 510.113750187,
+      "received": 255100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 540.132372907,
+      "received": 270100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 570.154748956,
+      "received": 285100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 600.1749146909999,
+      "received": 300100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 630.196225438,
+      "received": 315100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 660.015354936,
+      "received": 330050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 690.034834289,
+      "received": 345050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 720.052421329,
+      "received": 360050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 750.070280508,
+      "received": 375050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 780.089531777,
+      "received": 390050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 810.1082829919999,
+      "received": 405100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 840.12604975,
+      "received": 420100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 870.1461892570001,
+      "received": 435100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 900.1648736680002,
+      "received": 450100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 930.1825287020001,
+      "received": 465100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 960.0033864040001,
+      "received": 480050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 990.0199054459999,
+      "received": 495050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1020.040379084,
+      "received": 510050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1050.0618642880002,
+      "received": 525050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1080.081795052,
+      "received": 540050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1110.103032891,
+      "received": 555100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1140.119189534,
+      "received": 570100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1170.139165086,
+      "received": 585100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1200.159431835,
+      "received": 600100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1230.176310707,
+      "received": 615100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1260.1968165780002,
+      "received": 630100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1290.015118604,
+      "received": 645050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1320.035738274,
+      "received": 660050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1350.057616712,
+      "received": 675050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1380.076812007,
+      "received": 690050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1410.0979717320001,
+      "received": 705050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1440.114343088,
+      "received": 720100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1470.1341071260001,
+      "received": 735100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1500.1538982680001,
+      "received": 750100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1530.173993258,
+      "received": 765100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1560.1938381060002,
+      "received": 780100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1590.01155212,
+      "received": 795050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1620.029758058,
+      "received": 810050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1650.052241978,
+      "received": 825050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1680.0726855770001,
+      "received": 840050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1710.092088431,
+      "received": 855050
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1740.110824761,
+      "received": 870100
+    },
+    {
+      "rss": 138821632,
+      "rss_high_water": 256376832,
+      "private_bytes": 137011200,
+      "handles": 3,
+      "seconds": 1770.12836189,
+      "received": 885100
+    }
+  ],
+  "scope": "Actual Native CLI, paced JSONL input and continuously drained output; not maximum query throughput. Diff compares fixed City and ASN schemas for sustained decoding/comparison, not actual monthly database updates.",
+  "mode": "diff",
+  "sources": {
+    "before": {
+      "bytes": 127339927,
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "database_type": "DBIP-City-Lite",
+      "build_epoch": "1788226681"
+    },
+    "after": {
+      "bytes": 9511026,
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+      "build_epoch": "1788226697"
+    }
+  },
+  "elapsed_seconds": 1800.147680757,
+  "rows": 900000,
+  "rows_per_second": 499.95898093290384,
+  "peak_rss": 256376832,
+  "peak_sampled_rss": 138821632,
+  "peak_sampled_private_bytes": 137011200,
+  "summary": {
+    "status": "summary",
+    "processed": 900000,
+    "changed": 500000,
+    "unchanged": 400000,
+    "errors": 0,
+    "fields": [
+      "/country/iso_code",
+      "/autonomous_system_number"
+    ],
+    "databases": {
+      "before": {
+        "bytes": 127339927,
+        "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+        "database_type": "DBIP-City-Lite",
+        "build_epoch": "1788226681"
+      },
+      "after": {
+        "bytes": 9511026,
+        "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+        "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+        "build_epoch": "1788226697"
+      }
+    }
+  },
+  "rss_gate": {
+    "early_median": 138821632.0,
+    "late_median": 138821632.0,
+    "growth": 0.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "private_bytes_gate": {
+    "early_median": 137011200.0,
+    "late_median": 137011200.0,
+    "growth": 0.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "handles_gate": {
+    "early_median": 3.0,
+    "late_median": 3.0,
+    "passed": true
+  },
+  "finished": "2026-09-22T08:52:46.089017+00:00"
+}

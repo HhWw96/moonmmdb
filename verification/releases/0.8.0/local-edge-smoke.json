@@ -1,0 +1,41 @@
+{
+  "status": "smoke-only",
+  "engine": "chromium",
+  "transport": "http",
+  "started": "2026-09-22T08:24:52.052Z",
+  "files": [],
+  "queries": 0,
+  "checks": [
+    "initial screen, title and disabled controls",
+    "offline ASN fixture and exact integer",
+    "missing field distinct from missing IP",
+    "invalid IP and invalid pointer",
+    "artificial update comparison",
+    "download provenance and unchanged result",
+    "clipboard denial has useful fallback",
+    "hidden corruption and incomplete budget",
+    "help modal, keyboard and mobile layout",
+    "corrupt file with Unicode name",
+    "preview boundary, malicious text and result cap",
+    "worker file metadata preflight without reading payloads",
+    "application makes no data requests"
+  ],
+  "html_sha256": "f982070388acf25d5799e978a95e6d901aa5bf34a2017b7836d04108543c6af6",
+  "browser": "153.0.4234.32",
+  "finished": "2026-09-22T08:24:58.396Z",
+  "requests": [
+    "http://127.0.0.1:12017/",
+    "blob:http://127.0.0.1:12017/ccc83f03-3bc2-48b4-84e3-1efe133c96e1",
+    "blob:http://127.0.0.1:12017/1dad94b0-56c6-4eb5-802c-0cb9702773e2",
+    "blob:http://127.0.0.1:12017/6e993cf1-cc52-420e-9e35-d73c8c596416",
+    "blob:http://127.0.0.1:12017/9d414fa1-f4b8-4fdb-a178-6e978164e869",
+    "blob:http://127.0.0.1:12017/0d8103a8-62bb-48ce-9d0d-76b255bd7c12",
+    "blob:http://127.0.0.1:12017/1ce7a08f-f6f6-4e06-90ba-d993d4e08bb9",
+    "blob:http://127.0.0.1:12017/cfeced49-f7c6-4785-88c4-dd49bfa51b95",
+    "blob:http://127.0.0.1:12017/52d19a06-fa51-4d9d-98ef-f89fcfd6658c",
+    "blob:http://127.0.0.1:12017/59e38955-c263-4044-8e0c-c3b97c8fb905",
+    "blob:http://127.0.0.1:12017/2dd51934-8bcc-4e8c-a532-293c36fec16b"
+  ],
+  "console_errors": [],
+  "scope": "Local Edge HTTP smoke test only; full independent reference and file:// checks run in isolated CI."
+}

@@ -1,0 +1,72 @@
+{
+  "started": "2026-09-22T08:21:20.600798+00:00",
+  "status": "passed",
+  "scope": "Fresh local workspace importing a newly extracted moon package, not Mooncakes registry installation.",
+  "steps": [
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "package"
+      ],
+      "exit_code": 0,
+      "output": "Running moon check ...\nFinished. moon: ran 8 tasks, now up to date\nCheck passed\nPackage to D:\\a\\moonmmdb\\moonmmdb\\_build\\publish\\HhWw96-moonmmdb-0.8.0.zip\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_log_example",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_typed_example",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_log_example",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_typed_example",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "archive": "HhWw96-moonmmdb-0.8.0.zip",
+  "sha256": "2f494776b4138d847e4b2ec74ce3adce811d3bcf5f7eae2e316e379890ec0fc6",
+  "file_count": 452,
+  "contains_scenario_licenses": true,
+  "finished": "2026-09-22T08:21:23.785323+00:00"
+}

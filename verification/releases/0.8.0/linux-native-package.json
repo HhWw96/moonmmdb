@@ -1,0 +1,15 @@
+{
+  "status": "passed",
+  "platform": "linux-x64",
+  "executable_sha256": "970ceeacf896f78b5fffc5793885647331abeb75b7bd209493b811cef4193029",
+  "max_glibc_required": "2.34",
+  "system_libraries": "\tlinux-vdso.so.1 (0x00007ffd1152b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007f97e8c00000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007f97e8f41000)\n",
+  "archive_verification": {
+    "status": "passed",
+    "archive": "moonmmdb-0.8.0-linux-x64.tar.gz",
+    "sha256": "53f735913ea6570385c65495f627ff5ea1122933f2a49b9682f7a26e5b334dd1",
+    "executable_sha256": "970ceeacf896f78b5fffc5793885647331abeb75b7bd209493b811cef4193029",
+    "without_developer_tools": true,
+    "commands": 10
+  }
+}
