@@ -1,6 +1,6 @@
 # City 与 ASN 强类型接口
 
-自 0.6.0 提供；0.5.0 包不包含 `geo`。安装 `HhWw96/moonmmdb@0.6.0` 后可导入此可选包。在本仓库运行完整独立消费示例：
+自 0.6.0 提供；0.5.0 包不包含 `geo`。安装 `HhWw96/moonmmdb@0.7.0` 后可导入此可选包。在本仓库运行完整独立消费示例：
 
 ```text
 node examples/typed_consumer/run.mjs city tests/fixtures/GeoIP2-City-Test.mmdb 2001:218:: en

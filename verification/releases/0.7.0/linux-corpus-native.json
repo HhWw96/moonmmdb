@@ -1,0 +1,486 @@
+{
+  "started": "2026-09-22T03:59:15.882914+00:00",
+  "status": "passed",
+  "target": "native",
+  "commit": "7fcd868842970b2d0657af799807cbe722fb738d",
+  "scope": "All 73 MMDB files and one raw decoder fixture at the pinned commit. File coverage is not branch coverage or a port of every upstream reader assertion.",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "files": [
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-corrupt-search-tree.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 4
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-deep-array-nesting.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "depth-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-deep-nesting.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "depth-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-empty-array-last-in-metadata.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 6
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-empty-map-last-in-metadata.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 6
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-metadata-marker-only.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-offset-integer-overflow.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-oversized-array.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-oversized-map.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-separator-record-max-left.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-tree-pointer"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-left.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-tree-pointer"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-right.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-tree-pointer"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-uint64-max-epoch.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": null
+    },
+    {
+      "file": "bad-data/maxminddb-golang/cyclic-data-structure.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-bytes-length.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-data-record-offset.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-utf8"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-map-key-length.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-string-length.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/metadata-is-an-uint128.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/unexpected-bytes.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-python/bad-unicode-in-map-key.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-separator"
+    },
+    {
+      "file": "test-data/GeoIP-Anonymous-Plus-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 107
+    },
+    {
+      "file": "test-data/GeoIP-Residential-Proxy-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 107
+    },
+    {
+      "file": "test-data/GeoIP2-Anonymous-IP-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 76
+    },
+    {
+      "file": "test-data/GeoIP2-City-Shield-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 992
+    },
+    {
+      "file": "test-data/GeoIP2-City-Test-Broken-Double-Format.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-size"
+    },
+    {
+      "file": "test-data/GeoIP2-City-Test-Invalid-Node-Count.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-layout"
+    },
+    {
+      "file": "test-data/GeoIP2-City-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 992
+    },
+    {
+      "file": "test-data/GeoIP2-Connection-Type-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 92
+    },
+    {
+      "file": "test-data/GeoIP2-Country-Shield-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 1183
+    },
+    {
+      "file": "test-data/GeoIP2-Country-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 1183
+    },
+    {
+      "file": "test-data/GeoIP2-DensityIncome-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 16
+    },
+    {
+      "file": "test-data/GeoIP2-Domain-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 236
+    },
+    {
+      "file": "test-data/GeoIP2-Enterprise-Shield-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 117
+    },
+    {
+      "file": "test-data/GeoIP2-Enterprise-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 117
+    },
+    {
+      "file": "test-data/GeoIP2-IP-Risk-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 37
+    },
+    {
+      "file": "test-data/GeoIP2-ISP-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 5626
+    },
+    {
+      "file": "test-data/GeoIP2-Precision-Enterprise-Shield-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 186
+    },
+    {
+      "file": "test-data/GeoIP2-Precision-Enterprise-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 186
+    },
+    {
+      "file": "test-data/GeoIP2-Static-IP-Score-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 1210
+    },
+    {
+      "file": "test-data/GeoIP2-User-Count-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 1210
+    },
+    {
+      "file": "test-data/GeoLite2-ASN-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 1088
+    },
+    {
+      "file": "test-data/GeoLite2-City-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 966
+    },
+    {
+      "file": "test-data/GeoLite2-Country-Test.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 974
+    },
+    {
+      "file": "test-data/MaxMind-DB-no-ipv4-search-tree.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 8
+    },
+    {
+      "file": "test-data/MaxMind-DB-string-value-entries.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 15
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-broken-pointers-24.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "out-of-bounds"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-broken-search-tree-24.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "invalid-tree"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decode-path-shared-budget.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "duplicate-key"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-value-limit.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 33
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv4-24.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 15
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv4-28.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 15
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv4-32.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 15
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv6-24.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 19
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv6-28.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 19
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv6-32.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 19
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-metadata-pointers.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 0
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-mixed-24.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 30
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-mixed-28.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 30
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-mixed-32.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 30
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-nested.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 31
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "mode": "policy",
+      "status": "passed",
+      "queries": 1,
+      "expected_code": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-pointer-decoder.mmdb",
+      "mode": "reference",
+      "status": "passed",
+      "queries": 13
+    }
+  ],
+  "query_checks": 17043,
+  "artifact_sha256": "60cb29ba344f1e634114aa13cf1a76b0471e79c4c041278e832683a9d1c570c5",
+  "raw_reference_checks": 6,
+  "finished": "2026-09-22T03:59:22.220891+00:00"
+}

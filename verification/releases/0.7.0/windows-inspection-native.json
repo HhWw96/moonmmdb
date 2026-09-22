@@ -1,0 +1,449 @@
+{
+  "status": "passed",
+  "started": "2026-09-22T04:00:55.831358+00:00",
+  "target": "native",
+  "artifact_sha256": "ededf73e789d08ded387259e81d6840603799ddc7c86face84dff337a6ecf02b",
+  "files": [
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-corrupt-search-tree.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-deep-array-nesting.mmdb",
+      "validation_status": "incomplete",
+      "code": "depth-limit",
+      "expected_policy": "depth-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-deep-nesting.mmdb",
+      "validation_status": "incomplete",
+      "code": "depth-limit",
+      "expected_policy": "depth-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-empty-array-last-in-metadata.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-empty-map-last-in-metadata.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-metadata-marker-only.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-offset-integer-overflow.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-oversized-array.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-oversized-map.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-separator-record-max-left.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-tree-pointer",
+      "expected_policy": "invalid-tree-pointer"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-left.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-tree-pointer",
+      "expected_policy": "invalid-tree-pointer"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-right.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-tree-pointer",
+      "expected_policy": "invalid-tree-pointer"
+    },
+    {
+      "file": "bad-data/libmaxminddb/libmaxminddb-uint64-max-epoch.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "bad-data/maxminddb-golang/cyclic-data-structure.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-bytes-length.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-data-record-offset.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-utf8",
+      "expected_policy": "invalid-utf8"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-map-key-length.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/invalid-string-length.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/metadata-is-an-uint128.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-golang/unexpected-bytes.mmdb",
+      "validation_status": "invalid",
+      "code": "out-of-bounds",
+      "expected_policy": "out-of-bounds"
+    },
+    {
+      "file": "bad-data/maxminddb-python/bad-unicode-in-map-key.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-separator",
+      "expected_policy": "invalid-separator"
+    },
+    {
+      "file": "test-data/GeoIP-Anonymous-Plus-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP-Residential-Proxy-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Anonymous-IP-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-City-Shield-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-City-Test-Broken-Double-Format.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-size",
+      "expected_policy": "invalid-size"
+    },
+    {
+      "file": "test-data/GeoIP2-City-Test-Invalid-Node-Count.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-layout",
+      "expected_policy": "invalid-layout"
+    },
+    {
+      "file": "test-data/GeoIP2-City-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Connection-Type-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Country-Shield-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Country-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-DensityIncome-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Domain-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Enterprise-Shield-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Enterprise-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-IP-Risk-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-ISP-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Precision-Enterprise-Shield-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Precision-Enterprise-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-Static-IP-Score-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoIP2-User-Count-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoLite2-ASN-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoLite2-City-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/GeoLite2-Country-Test.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-no-ipv4-search-tree.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-string-value-entries.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-broken-pointers-24.mmdb",
+      "validation_status": "invalid",
+      "code": "invalid-tree-pointer",
+      "expected_policy": "invalid-tree-pointer"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-broken-search-tree-24.mmdb",
+      "validation_status": "invalid",
+      "code": "tree-cycle",
+      "expected_policy": "tree-cycle"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decode-path-shared-budget.mmdb",
+      "validation_status": "invalid",
+      "code": "duplicate-key",
+      "expected_policy": "duplicate-key"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "validation_status": "incomplete",
+      "code": "payload-limit",
+      "expected_policy": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder-value-limit.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-decoder.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv4-24.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv4-28.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv4-32.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv6-24.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv6-28.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-ipv6-32.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "validation_status": "incomplete",
+      "code": "payload-limit",
+      "expected_policy": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-metadata-pointers.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-mixed-24.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-mixed-28.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-mixed-32.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-nested.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "validation_status": "incomplete",
+      "code": "payload-limit",
+      "expected_policy": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "validation_status": "incomplete",
+      "code": "payload-limit",
+      "expected_policy": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "validation_status": "incomplete",
+      "code": "payload-limit",
+      "expected_policy": "payload-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "validation_status": "incomplete",
+      "code": "value-limit",
+      "expected_policy": "value-limit"
+    },
+    {
+      "file": "test-data/MaxMind-DB-test-pointer-decoder.mmdb",
+      "validation_status": "valid",
+      "code": null,
+      "expected_policy": null
+    }
+  ],
+  "network_checks": 53343,
+  "synthetic_networks": 65536,
+  "finished": "2026-09-22T04:01:07.140551+00:00"
+}

@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "started": "2026-09-22T03:59:02.107136+00:00",
+  "executable_sha256": "60cb29ba344f1e634114aa13cf1a76b0471e79c4c041278e832683a9d1c570c5",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "production": true,
+  "pairs": [
+    {
+      "before": "dbip-city-lite-2026-09.mmdb",
+      "after": "dbip-city-lite-2026-09.mmdb",
+      "addresses": 7114,
+      "changed": 0,
+      "databases": {
+        "before": {
+          "bytes": 127339927,
+          "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+          "database_type": "DBIP-City-Lite",
+          "build_epoch": "1788226681"
+        },
+        "after": {
+          "bytes": 127339927,
+          "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+          "database_type": "DBIP-City-Lite",
+          "build_epoch": "1788226681"
+        }
+      }
+    },
+    {
+      "before": "dbip-asn-lite-2026-09.mmdb",
+      "after": "dbip-asn-lite-2026-09.mmdb",
+      "addresses": 7114,
+      "changed": 0,
+      "databases": {
+        "before": {
+          "bytes": 9511026,
+          "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+          "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+          "build_epoch": "1788226697"
+        },
+        "after": {
+          "bytes": 9511026,
+          "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+          "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+          "build_epoch": "1788226697"
+        }
+      }
+    },
+    {
+      "before": "dbip-city-lite-2026-09.mmdb",
+      "after": "dbip-asn-lite-2026-09.mmdb",
+      "addresses": 7114,
+      "changed": 6912,
+      "databases": {
+        "before": {
+          "bytes": 127339927,
+          "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+          "database_type": "DBIP-City-Lite",
+          "build_epoch": "1788226681"
+        },
+        "after": {
+          "bytes": 9511026,
+          "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+          "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+          "build_epoch": "1788226697"
+        }
+      }
+    }
+  ],
+  "checks": 21342,
+  "scope": "Independent lookup and prefix comparison for selected IPs; same-release production snapshots and explicitly artificial changes, not a real monthly update or exhaustive database diff.",
+  "finished": "2026-09-22T03:59:15.481957+00:00"
+}

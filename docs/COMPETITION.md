@@ -1,10 +1,12 @@
 # 参赛准备事实（不是人工申报书）
 
-项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库，0.6.0。
+项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库，0.7.0。
 
 根据参赛者收到的通知，已通过报名初审。此状态来自参赛者提供的组委会邮件；最终验收和奖项结果尚未确认。
 
 v0.6.0 增加受限 CIDR 网段导出、全部物理树节点检查、引用记录解码检查，并交付 City/ASN 强类型可选包及 API 兼容政策。Node、Windows/Linux Native 均可使用；跨平台、真实数据库和 30 分钟持续运行通过。交付状态与可复验证据见 [0.6.0 验证](VERIFICATION_0_6.md)。
+
+v0.7.0 增加 Native 数据库更新对比，直接使用日志检查旧、新快照的字段、记录存在性及前缀变化；Windows/Linux 独立参考、十万行和 30 分钟持续运行通过。见 [0.7.0 验证](VERIFICATION_0_7.md)。
 
 ## 已完成的技术贡献
 
@@ -38,7 +40,7 @@ v0.6.0 增加受限 CIDR 网段导出、全部物理树节点检查、引用记�
 
 已完成 GitHub 公开发布：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，源码与提交历史均可见。[首次远端 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 两个环境通过。外部交付与验收状态如下：
 
-- 已发布 [Mooncakes 0.6.0](https://mooncakes.io/docs/HhWw96/moonmmdb@0.6.0/)，完成全新注册表安装及 JS / WasmGC 消费验证；回执见 [版本验证](VERIFICATION_0_6.md)。
+- Mooncakes 与 GitHub 各版本的真实发布、全新注册表安装和下载验收状态，以 [当前版本验证](VERIFICATION_0_7.md) 的公开回执为准。
 - 保持已通过初审的申报方向，提交与最终版本一致的成果。
 - 由赛方给出最终验收及奖项结果。
 

@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "started": "2026-09-22T03:59:33.860525+00:00",
+  "target": "native",
+  "artifact_sha256": "60cb29ba344f1e634114aa13cf1a76b0471e79c4c041278e832683a9d1c570c5",
+  "files": [
+    {
+      "file": "dbip-city-lite-2026-09.mmdb",
+      "seconds": 26.579654491000014,
+      "status": "valid",
+      "scope": "all-tree-nodes-and-referenced-records",
+      "checked_nodes": 14346080,
+      "reachable_nodes": 14346080,
+      "unreachable_nodes": 0,
+      "decoded_records": 562485,
+      "work_used": 193656993,
+      "peak_state_bytes": 32057306,
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "bytes": 127339927,
+      "database_type": "DBIP-City-Lite",
+      "build_epoch": "1788226681"
+    },
+    {
+      "file": "dbip-asn-lite-2026-09.mmdb",
+      "seconds": 1.5537724890000106,
+      "status": "valid",
+      "scope": "all-tree-nodes-and-referenced-records",
+      "checked_nodes": 1146501,
+      "reachable_nodes": 1146501,
+      "unreachable_nodes": 0,
+      "decoded_records": 81763,
+      "work_used": 8852914,
+      "peak_state_bytes": 2622478,
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "bytes": 9511026,
+      "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+      "build_epoch": "1788226697"
+    }
+  ],
+  "network_checks": 68,
+  "finished": "2026-09-22T04:00:01.995269+00:00"
+}

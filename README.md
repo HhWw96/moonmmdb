@@ -2,21 +2,21 @@
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**本版本：0.6.0。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.6.0/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_6.md) · [支持范围](docs/SUPPORT.md)
+**本版本：0.7.0。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.7.0/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_7.md) · [支持范围](docs/SUPPORT.md)
 
-解压 Native 程序后运行六个命令：[Native 离线演示](docs/DEMO_0_5.md)。三个完整源码场景见 [多库与分析演示](docs/DEMO_0_4.md)。正式发布与 Mooncakes 安装状态以版本验证页为准。
+解压 Native 程序后运行七个命令：[Native 离线演示](docs/DEMO_0_5.md)。三个完整源码场景见 [多库与分析演示](docs/DEMO_0_4.md)。正式发布与 Mooncakes 安装状态以版本验证页为准。
 
 源码仓库：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)。
 
-**本版本包含：**[完整官方语料检查](docs/CORPUS.md)、[API 兼容政策与自动检查](docs/COMPATIBILITY.md)、[City／ASN 强类型可选包](docs/GEO.md)，以及[网段导出与数据库检查](docs/INSPECTION.md)。发布产物、验证结论和安装凭据见 [0.6.0 验证报告](docs/VERIFICATION_0_6.md)。
+**本版本包含：**[完整官方语料检查](docs/CORPUS.md)、[API 兼容政策与自动检查](docs/COMPATIBILITY.md)、[City／ASN 强类型可选包](docs/GEO.md)、[网段导出与数据库检查](docs/INSPECTION.md)，以及 [Native 数据库更新对比](docs/NATIVE_DIFF.md)。发布产物、验证结论和安装凭据见 [0.7.0 验证报告](docs/VERIFICATION_0_7.md)。
 
 读取调用方提供的数据库，返回 IP 对应的记录、匹配前缀和明确错误。无需在线查询服务；国家、ASN 或组织自定义字段由数据库决定。随项目提供的是官方人工测试数据，**不代表这些 IP 当前的真实归属**。
 
 ## Native 命令行工具
 
-Windows/Linux x64 可执行程序支持 `metadata`、`lookup`、`project`、`enrich-many`、`networks` 和 `validate`，解压即可运行，无需安装 Node.js、Python 或 MoonBit。
+Windows/Linux x64 可执行程序支持 `metadata`、`lookup`、`project`、`enrich-many`、`networks`、`validate` 和 `diff`，解压即可运行，无需安装 Node.js、Python 或 MoonBit。
 
-[Windows x64 ZIP](https://github.com/HhWw96/moonmmdb/releases/download/v0.6.0/moonmmdb-0.6.0-windows-x64.zip) · [Linux x64 tar.gz](https://github.com/HhWw96/moonmmdb/releases/download/v0.6.0/moonmmdb-0.6.0-linux-x64.tar.gz) · [发布页与 SHA256SUMS](https://github.com/HhWw96/moonmmdb/releases/tag/v0.6.0)
+[Windows x64 ZIP](https://github.com/HhWw96/moonmmdb/releases/download/v0.7.0/moonmmdb-0.7.0-windows-x64.zip) · [Linux x64 tar.gz](https://github.com/HhWw96/moonmmdb/releases/download/v0.7.0/moonmmdb-0.7.0-linux-x64.tar.gz) · [发布页与 SHA256SUMS](https://github.com/HhWw96/moonmmdb/releases/tag/v0.7.0)
 
 在解压目录执行（Linux 将 `moonmmdb` 写为 `./moonmmdb`；PowerShell 写为 `.\moonmmdb.exe`）：
 
@@ -28,9 +28,12 @@ moonmmdb project examples/asn.mmdb 192.0.2.1 /autonomous_system_number
 moonmmdb enrich-many examples/many.json examples/access.jsonl
 moonmmdb networks examples/asn.mmdb 192.0.2.0/24
 moonmmdb validate examples/asn.mmdb --decode-data
+moonmmdb diff examples/tags.mmdb examples/tags-updated.mmdb examples/access.jsonl --field /site
 ```
 
-样例为人工数据；enrich-many 示例含未命中，预期退出码 1。换成自己的配置、数据库和日志即可使用。Linux 最低 glibc 2.35，已在 Ubuntu 22.04/24.04 验证。Native JSON 嵌套最多 128 层，未配对 Unicode 代理项按错误行处理；完整限制、构建与验证方法见 [Native 说明](docs/NATIVE_CLI.md) 和 [版本报告](docs/VERIFICATION_0_6.md)。
+样例为人工数据；enrich-many 示例含未命中，diff 标签样例含变化，预期退出码均为 1。换成自己的配置、数据库和日志即可使用。Linux 最低 glibc 2.35，已在 Ubuntu 22.04/24.04 验证。Native JSON 嵌套最多 128 层，未配对 Unicode 代理项按错误行处理；完整限制、构建与验证方法见 [Native 说明](docs/NATIVE_CLI.md) 和 [版本报告](docs/VERIFICATION_0_7.md)。
+
+Native `diff` 按输入 IP 比较旧、新数据库，默认比较完整记录，也可重复指定 `--field`。完成汇总包含变化计数和两库 SHA-256；它不是整库差异枚举。用法与错误处理见 [数据库更新对比](docs/NATIVE_DIFF.md)。
 
 ## 从源码运行 Node.js 工具
 
@@ -80,10 +83,10 @@ node examples/log_analytics/run.mjs tests/scenarios/geo.mmdb tests/scenarios/asn
 核心包名为 `HhWw96/moonmmdb`。在自己的 MoonBit 项目中从 Mooncakes 安装：
 
 ```text
-moon add HhWw96/moonmmdb@0.6.0
+moon add HhWw96/moonmmdb@0.7.0
 ```
 
-完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_6.md)。
+完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_7.md)。
 
 ```moonbit
 // moon.pkg: import { "HhWw96/moonmmdb" @mmdb }
@@ -144,7 +147,7 @@ node scripts/release-verify.mjs
 
 测试数据固定到 MaxMind-DB 提交 `7fcd868842970b2d0657af799807cbe722fb738d`，原始字节和 SHA-256 已随库保存。重新获取可运行 `python scripts/prepare-fixtures.py`，它核对整个归档散列值；生成测试源码后用 `moon fmt` 整理格式。
 
-本版本证据与限制见 [0.6.0 验证报告](docs/VERIFICATION_0_6.md)。以下历史验证仍绑定其各自版本：[多库功能 GitHub Actions 验证](https://github.com/HhWw96/moonmmdb/actions/runs/35484457274)在 Ubuntu 与 Windows 上均通过，覆盖 JS/Wasm GC、独立参考、规模对照和隔离包消费，Ubuntu 另外执行 Linux Native 核心与分析模块测试；[后续运行状态](https://github.com/HhWw96/moonmmdb/actions)。Windows/Linux Native 产品另通过 [跨平台验收](https://github.com/HhWw96/moonmmdb/actions/runs/35554063542)，含实际 CLI 的 30 分钟持续运行和真实 City＋ASN 对照。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
+本版本证据与限制见 [0.7.0 验证报告](docs/VERIFICATION_0_7.md)。以下历史验证仍绑定其各自版本：[多库功能 GitHub Actions 验证](https://github.com/HhWw96/moonmmdb/actions/runs/35484457274)在 Ubuntu 与 Windows 上均通过，覆盖 JS/Wasm GC、独立参考、规模对照和隔离包消费，Ubuntu 另外执行 Linux Native 核心与分析模块测试；[后续运行状态](https://github.com/HhWw96/moonmmdb/actions)。Windows/Linux Native 产品另通过 [跨平台验收](https://github.com/HhWw96/moonmmdb/actions/runs/35554063542)，含实际 CLI 的 30 分钟持续运行和真实 City＋ASN 对照。参考 C 扩展在本机一个 UInt32 边界上与纯 Python 路径不一致，记录已保留，未把该差异伪报为两者全部一致。
 
 Windows Native 与真实数据库补充验证（需 Python 3.12 参考环境，首次下载工具链和数据）：
 
