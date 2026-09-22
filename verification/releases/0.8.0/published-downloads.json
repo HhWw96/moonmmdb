@@ -1,0 +1,36 @@
+{
+  "status": "passed",
+  "release": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.8.0",
+  "files": [
+    {
+      "name": "moonmmdb-0.8.0-windows-x64.zip",
+      "bytes": 273422,
+      "sha256": "16f3f3a87e472719d750abc418d3fb0427ccb6e8228e45f773104086358083bc"
+    },
+    {
+      "name": "moonmmdb-0.8.0-linux-x64.tar.gz",
+      "bytes": 303504,
+      "sha256": "53f735913ea6570385c65495f627ff5ea1122933f2a49b9682f7a26e5b334dd1"
+    },
+    {
+      "name": "moonmmdb-0.8.0-offline.html",
+      "bytes": 324872,
+      "sha256": "f982070388acf25d5799e978a95e6d901aa5bf34a2017b7836d04108543c6af6"
+    },
+    {
+      "name": "HhWw96-moonmmdb-0.8.0.zip",
+      "bytes": 1408408,
+      "sha256": "89a730d52134bbb6f0cbeb6d96fb3b57b431dff692500768eff0003c5d598cb4"
+    }
+  ],
+  "windows_runtime": {
+    "status": "passed",
+    "archive": "moonmmdb-0.8.0-windows-x64.zip",
+    "sha256": "16f3f3a87e472719d750abc418d3fb0427ccb6e8228e45f773104086358083bc",
+    "executable_sha256": "22aa41e9735643253531434009568d2dd80273cb62d945228454055c0cbc5749",
+    "without_developer_tools": true,
+    "commands": 10
+  },
+  "linux_scope": "Downloaded archive matches the identical bytes executed on Ubuntu 22.04 and 24.04 in CI; not executed on local Windows.",
+  "html_matches_tested_artifact": true
+}

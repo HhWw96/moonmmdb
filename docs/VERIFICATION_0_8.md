@@ -2,7 +2,7 @@
 
 浏览器工作台复用既有 MoonBit JS bridge，实现本地文件打开、IP 查询、字段选择、结构与引用数据检查、指定 IP 的新旧记录对比。没有新增或修改 MoonBit 公开 API。
 
-2026-09-22：完整回归、跨平台浏览器功能、两平台浏览器 30 分钟持续运行、旧 Native 持续运行及 Ubuntu 24.04 产物验收全部通过。正式发布和公开下载复验正在执行，最终状态以本页回执为准。
+2026-09-22：完整回归、跨平台浏览器功能、两平台浏览器 30 分钟持续运行、旧 Native 持续运行及 Ubuntu 24.04 产物验收全部通过。GitHub Release、Mooncakes 与 Pages 已正式发布，公开下载和安装复验已通过。
 
 ## 验证绑定
 
@@ -47,9 +47,9 @@ Windows RSS/私有内存允许增长均为 67,108,864 B；Linux RSS 允许增长
 
 ## 发布验收
 
-全部门槛通过后，GitHub Release 复用通过测试的 HTML 和 Native 压缩包；Pages 从 Release 获取同一 HTML，不另外重新构建。源码包排除生产数据库、工具链、凭据、本地缓存及私人材料。Mooncakes 必须使用全新目录注册表依赖运行 JS / WasmGC 消费测试，不以 workspace 替代。
+GitHub Release 复用通过测试的 HTML 和 Native 压缩包；Pages 从 Release 获取同一 HTML，没有另外重新构建。源码包排除生产数据库、工具链、凭据、本地缓存及私人材料。Mooncakes 使用全新目录注册表依赖通过 JS / WasmGC 消费测试，没有 workspace 替代。
 
-发布后重新下载 HTML、Windows ZIP、Linux tar.gz，逐项核对 SHA256SUMS；在线页面须与离线 HTML 逐字节一致。正式地址与回执待发布后补入。
+发布后重新下载 HTML、Windows ZIP、Linux tar.gz 及源码归档，逐项核对 SHA256SUMS；在线页面与离线 HTML 逐字节一致。
 
 ## 已验证浏览器产物
 
@@ -62,3 +62,13 @@ Chromium `145.0.7632.6`、Firefox `146.0.1`，两个操作系统与两种打开�
 [HhWw96/moonmmdb@0.8.0](https://mooncakes.io/docs/HhWw96/moonmmdb@0.8.0/) 已上传，全新临时目录从注册表安装，JS / WasmGC 消费者各通过一项组合测试，包含版本、查询、字段选择、联合查询、网段、检查与 geo；没有 workspace 替代。
 
 上传包 1,408,408 字节、524 个文件，SHA-256 `89a730d52134bbb6f0cbeb6d96fb3b57b431dff692500768eff0003c5d598cb4`；重新下载完全一致。源码来自 `11031231aa441e7da2ec0b218eeb1c26a63289bc`，实现散列与 Windows CI 一致。包内文档为上传前快照，最新公开状态以仓库回执为准。[独立安装回执](../verification/releases/0.8.0/registry-0.8.0.json) · [上传回执](../verification/releases/0.8.0/publication.json)。
+
+## GitHub 与 Pages 发布后复验
+
+[GitHub v0.8.0](https://github.com/HhWw96/moonmmdb/releases/tag/v0.8.0) 于 2026-09-22 09:20:35 UTC 正式发布，非草稿、非预发布。[发布门禁 35709762681](https://github.com/HhWw96/moonmmdb/actions/runs/35709762681) 与 [Pages 部署 35709959759](https://github.com/HhWw96/moonmmdb/actions/runs/35709959759) 成功。
+
+[在线工作台](https://hhww96.github.io/moonmmdb/) 返回 HTTP 200，版本为 0.8.0，324,872 字节与 Release 离线 HTML 完全一致。公开页面的 ASN、标签更新、损坏分支三个样例均经实际界面操作复验，控制台没有错误。线上交互不替代 CI 的断网 file:// 验收，两种证据分别保留。
+
+Windows ZIP SHA-256：`16f3f3a87e472719d750abc418d3fb0427ccb6e8228e45f773104086358083bc`；Linux tar.gz：`53f735913ea6570385c65495f627ff5ea1122933f2a49b9682f7a26e5b334dd1`。Windows 下载包在移除开发工具 PATH 的隔离目录重新通过 10 项命令检查；Linux 下载文件与 Ubuntu 22.04 / 24.04 已运行产物一致，没有声称在本机 Windows 执行 Linux 程序。
+
+[下载验收](../verification/releases/0.8.0/published-downloads.json) · [网页与交互回执](../verification/releases/0.8.0/pages.json) · [发布与安装回执](../verification/releases/0.8.0/publication.json)。

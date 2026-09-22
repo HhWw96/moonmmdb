@@ -1,6 +1,6 @@
 # MoonMMDB
 
-**浏览器本地数据库工作台：** [网页入口](https://hhww96.github.io/moonmmdb/) · [独立离线 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.8.0/moonmmdb-0.8.0-offline.html) · [使用说明](docs/BROWSER.md)。本地查询、结构检查和指定 IP 更新对比，无需安装工具。发布前快照；公开入口和最终回执见 [0.8.0 验证报告](docs/VERIFICATION_0_8.md)。
+**浏览器本地数据库工作台：** [网页入口](https://hhww96.github.io/moonmmdb/) · [独立离线 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.8.0/moonmmdb-0.8.0-offline.html) · [使用说明](docs/BROWSER.md)。本地查询、结构检查和指定 IP 更新对比，无需安装工具。网页、离线 HTML、Native 下载包与 Mooncakes 0.8.0 均已发布；完整回执见 [0.8.0 验证报告](docs/VERIFICATION_0_8.md)。
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 

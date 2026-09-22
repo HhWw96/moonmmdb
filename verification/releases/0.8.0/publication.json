@@ -1,5 +1,5 @@
 {
-  "status": "registry-published-and-verified",
+  "status": "published-and-verified",
   "implementation_commit": "e059e5f244e186f46cfb3e21bd2661aa88c720fd",
   "package_source_commit": "11031231aa441e7da2ec0b218eeb1c26a63289bc",
   "registry_archive_url": "https://download.mooncakes.io/user/HhWw96/moonmmdb/0.8.0.zip",
@@ -17,5 +17,13 @@
   "native_run": 35704184476,
   "regression_run": 35704184461,
   "browser_run": 35704184537,
-  "github_release_status": "pending"
+  "github_release_status": "published",
+  "github_release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.8.0",
+  "github_release_run": 35709762681,
+  "github_release_target_commit": "c7f30395e4f882fcf3dbda54517940c5aa60c9fb",
+  "github_published_at": "2026-09-22T09:20:35Z",
+  "pages_url": "https://hhww96.github.io/moonmmdb/",
+  "pages_run": 35709959759,
+  "pages_status": "published-and-verified",
+  "post_release_registry_test": "registry-post-release.json"
 }

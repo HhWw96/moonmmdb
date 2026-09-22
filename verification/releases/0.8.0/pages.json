@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "url": "https://hhww96.github.io/moonmmdb/",
+  "checked_at": "2026-09-22T09:24:37.183Z",
+  "http_status": 200,
+  "version": "0.8.0",
+  "bytes": 324872,
+  "html_sha256": "f982070388acf25d5799e978a95e6d901aa5bf34a2017b7836d04108543c6af6",
+  "online_offline_identical": true,
+  "scope": "Public HTTP bytes; interactive checks recorded separately.",
+  "interactive_checks": [
+    {
+      "sample": "ASN",
+      "status": "found",
+      "exact_uint32": "64512",
+      "prefix_length": 24
+    },
+    {
+      "sample": "internal-tags",
+      "status": "changed",
+      "field": "/site",
+      "before": "lab-a",
+      "after": "lab-a-new"
+    },
+    {
+      "sample": "hidden-corruption",
+      "status": "invalid",
+      "code": "invalid-tree-pointer",
+      "offset": 6
+    }
+  ],
+  "interactive_surface": "Codex in-app browser, public Pages URL",
+  "console_errors": [],
+  "deployment_run": 35709959759
+}
