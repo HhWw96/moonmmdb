@@ -56,3 +56,9 @@ Windows RSS/私有内存允许增长均为 67,108,864 B；Linux RSS 允许增长
 Chromium `145.0.7632.6`、Firefox `146.0.1`，两个操作系统与两种打开方式均通过。每组 75 个文件、31,259 次查询。Windows、Linux 及本机生成的 HTML 内容一致：324,872 字节，SHA-256 `f982070388acf25d5799e978a95e6d901aa5bf34a2017b7836d04108543c6af6`；MoonBit JS 核心 SHA-256 `e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af`。
 
 首轮 CI 曾发现 Linux Firefox 自动请求 favicon 触发 CSP，以及旧版本号测试尚未更新；已内置 data 图标并修正版本断言，再运行上述完整门槛通过。失败记录保留在原工作流，不改写为首次通过。
+
+## Mooncakes 发布与独立安装
+
+[HhWw96/moonmmdb@0.8.0](https://mooncakes.io/docs/HhWw96/moonmmdb@0.8.0/) 已上传，全新临时目录从注册表安装，JS / WasmGC 消费者各通过一项组合测试，包含版本、查询、字段选择、联合查询、网段、检查与 geo；没有 workspace 替代。
+
+上传包 1,408,408 字节、524 个文件，SHA-256 `89a730d52134bbb6f0cbeb6d96fb3b57b431dff692500768eff0003c5d598cb4`；重新下载完全一致。源码来自 `11031231aa441e7da2ec0b218eeb1c26a63289bc`，实现散列与 Windows CI 一致。包内文档为上传前快照，最新公开状态以仓库回执为准。[独立安装回执](../verification/releases/0.8.0/registry-0.8.0.json) · [上传回执](../verification/releases/0.8.0/publication.json)。
