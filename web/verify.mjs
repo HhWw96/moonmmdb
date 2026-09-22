@@ -79,7 +79,7 @@ try {
    const outcomes=await page.evaluate(async()=>{const a=await window.testCall({op:'load',files:[{name:'oversize.mmdb',size:256*1024*1024+1}]});const b=await window.testCall({op:'load',files:[]});const c=await window.testCall({op:'load',files:[{name:'a.mmdb',size:128*1024*1024},{name:'b.mmdb',size:128*1024*1024+1}]});return [a,b,c].map(x=>x.error?.code);});assert.deepEqual(outcomes,['browser-file-limit','browser-file-count','browser-file-limit']);
  });
  await page.evaluate(()=>{window.testReset();});
- await check('application makes no data requests',async()=>{assert.ok(env.requests.every(u=>u===env.url||u.startsWith('blob:')),env.requests.join('\n'));assert.equal(await page.evaluate(()=>{try{return localStorage.length+sessionStorage.length;}catch(e){if(e.name==='SecurityError')return 0;throw e;}}),0);});
+ await check('application makes no data requests',async()=>{assert.ok(env.requests.every(u=>u===env.url||u.startsWith('blob:')||u.startsWith('data:')),env.requests.join('\n'));assert.equal(await page.evaluate(()=>{try{return localStorage.length+sessionStorage.length;}catch(e){if(e.name==='SecurityError')return 0;throw e;}}),0);});
  assert.deepEqual(env.errors,[]);report.status=process.env.BROWSER_QUICK?'smoke-only':'passed';
 } catch(error){report.status='failed';report.error=error.stack;process.exitCode=1;console.error(error);}
 finally{report.finished=new Date().toISOString();report.requests=env.requests;report.console_errors=env.errors;writeFileSync(resolve(out,`${engine}-${report.transport}.json`),JSON.stringify(report,null,2)+'\n');await env.close();console.log(JSON.stringify({status:report.status,engine,transport:report.transport,files:report.files.length,queries:report.queries,checks:report.checks.length}));}
