@@ -31,7 +31,7 @@ function parity(name,args,input){check(name,()=>{
 const config=join(root,'examples/many.json'),asn=join(root,'tests/fixtures/GeoLite2-ASN-Test.mmdb');
 const good='{"ip":"192.0.2.1","n":9007199254740993123456789,"negative":-0,"exp":1e100}\n';
 try {
-check('version and help',()=>{assert.equal(execute(['--version']).stdout.trim(),'0.6.0');assert.equal(execute(['--help']).code,0);assert.equal(execute(['diff']).code,2);});
+check('version and help',()=>{assert.equal(execute(['--version']).stdout.trim(),'0.7.0');assert.equal(execute(['--help']).code,0);assert.equal(execute(['diff']).code,2);});
 parity('metadata',['metadata',asn]);parity('lookup mixed',['lookup',asn,'1.128.0.1','1.1.1.1','2001:4860:4860::8888','invalid']);
 parity('projection',['project',asn,'1.128.0.1','/autonomous_system_number','/missing']);
 parity('invalid pointer',['project',asn,'1.128.0.1','/~2']);

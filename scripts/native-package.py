@@ -16,20 +16,20 @@ def verify(archive):
  for name,expected in manifest['files'].items():assert digest(folder/name)==expected,name
  exe=folder/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')
  env={**os.environ,'PATH':str(Path(os.environ['SystemRoot'])/'System32') if os.name=='nt' else '/nonexistent','MOON_HOME':''}
- for command in [['--version'],['metadata','examples/geo.mmdb'],['lookup','examples/asn.mmdb','192.0.2.1'],['project','examples/asn.mmdb','192.0.2.1','/autonomous_system_number'],['enrich-many','examples/many.json','examples/access.jsonl'],['networks','examples/asn.mmdb','192.0.2.0/24'],['validate','examples/asn.mmdb','--decode-data']]:
+ for command in [['--version'],['metadata','examples/geo.mmdb'],['lookup','examples/asn.mmdb','192.0.2.1'],['project','examples/asn.mmdb','192.0.2.1','/autonomous_system_number'],['enrich-many','examples/many.json','examples/access.jsonl'],['diff','examples/tags.mmdb','examples/tags-updated.mmdb','examples/access.jsonl','--field','/site'],['networks','examples/asn.mmdb','192.0.2.0/24'],['validate','examples/asn.mmdb','--decode-data']]:
   result=subprocess.run([str(exe),*command],cwd=folder,env=env,capture_output=True,text=True,encoding='utf-8',timeout=20)
   assert result.returncode in (0,1),(command,result.stdout,result.stderr)
-  if command==['--version']:assert result.stdout.strip()=='0.6.0'
+  if command==['--version']:assert result.stdout.strip()=='0.7.0'
   else:assert all(isinstance(json.loads(line),dict) for line in result.stdout.splitlines())
-  if command[0]=='enrich-many':assert json.loads(result.stderr)['status']=='summary'
+  if command[0] in ('enrich-many','diff'):assert json.loads(result.stderr)['status']=='summary'
  for command,code in [(['lookup','examples/hidden-corruption.mmdb','1.1.1.1'],0),(['validate','examples/hidden-corruption.mmdb'],2)]:
   result=subprocess.run([str(exe),*command],cwd=folder,env=env,capture_output=True,text=True,encoding='utf-8',timeout=20)
   assert result.returncode==code,(command,result.stdout,result.stderr)
   if code==2:assert json.loads(result.stdout)['code']=='invalid-tree-pointer'
- return {'status':'passed','archive':archive.name,'sha256':digest(archive),'executable_sha256':digest(exe),'without_developer_tools':True,'commands':9}
+ return {'status':'passed','archive':archive.name,'sha256':digest(archive),'executable_sha256':digest(exe),'without_developer_tools':True,'commands':10}
 if args.verify:
  print(json.dumps(verify(args.verify.resolve())));raise SystemExit()
-platform='windows-x64' if os.name=='nt' else 'linux-x64';name='moonmmdb-0.6.0-'+platform
+platform='windows-x64' if os.name=='nt' else 'linux-x64';name='moonmmdb-0.7.0-'+platform
 exe=ROOT/'dist'/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')
 report={'status':'running','platform':platform,'executable_sha256':digest(exe)}
 if os.name=='nt':
@@ -53,14 +53,14 @@ for source,target in [('LICENSE','LICENSE'),('THIRD_PARTY.md','THIRD_PARTY.md'),
 shutil.copytree(ROOT/'native_cli/licenses',folder/'licenses')
 shutil.copyfile(ROOT/'native_cli/vendor/x/PROVENANCE.json',folder/'licenses/moonbitlang-x-provenance.json')
 examples=folder/'examples';examples.mkdir()
-for f in ('geo.mmdb','asn.mmdb','tags.mmdb','manifest.json'):shutil.copyfile(ROOT/'tests/scenarios'/f,examples/f)
+for f in ('geo.mmdb','asn.mmdb','tags.mmdb','tags-updated.mmdb','manifest.json'):shutil.copyfile(ROOT/'tests/scenarios'/f,examples/f)
 shutil.copyfile(ROOT/'examples/analysis-access.jsonl',examples/'access.jsonl')
 shutil.copyfile(ROOT/'verification/local/inspection-hidden-corruption.mmdb',examples/'hidden-corruption.mmdb')
 config=json.loads((ROOT/'examples/many.json').read_text())
 for source in config['sources']:source['database']=Path(source['database']).name
 (examples/'many.json').write_text(json.dumps(config,indent=2)+'\n',encoding='utf-8')
 files={str(p.relative_to(folder)).replace('\\','/'):digest(p) for p in sorted(folder.rglob('*')) if p.is_file()}
-(folder/'MANIFEST.json').write_text(json.dumps({'version':'0.6.0','platform':platform,'files':files,'build':report},indent=2)+'\n',encoding='utf-8')
+(folder/'MANIFEST.json').write_text(json.dumps({'version':'0.7.0','platform':platform,'files':files,'build':report},indent=2)+'\n',encoding='utf-8')
 out=ROOT/'dist/native';out.mkdir(parents=True,exist_ok=True)
 archive=out/(name+('.zip' if os.name=='nt' else '.tar.gz'))
 if os.name=='nt':

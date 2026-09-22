@@ -46,12 +46,16 @@ jobs:
           node scripts/native-build.mjs
           node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs'; import {runMoon} from './scripts/moon.mjs'; nativeToolchain();runMoon(['fmt','--check'],'native_cli');runMoon(['test','--target','native','--release','-p','local/moonmmdb_native_cli','--deny-warn'],'native_cli');runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn']);"
       - name: Native parity, transport and 100000 lines
-        run: node scripts/native-cli-verify.mjs
+        run: |
+          node scripts/native-cli-verify.mjs
+          node scripts/native-diff-verify.mjs
       - name: Independent real database verification
         run: |
           python -m pip install --target .reference-deps -r requirements-reference.txt
           python scripts/download-production.py
           python scripts/native-production-verify.py
+          python scripts/native-diff-reference.py
+          python scripts/native-diff-reference.py --production
           python scripts/corpus-verify.py --native
           python scripts/typed-verify.py --production
           python scripts/inspection-verify.py --native
@@ -73,6 +77,7 @@ jobs:
             verification/local/native-cli/report.json
             verification/local/native-production.json
             verification/local/native-soak.json
+            verification/local/native-diff*.json
             verification/local/native-package.json
             verification/local/corpus-native.json
             verification/local/typed-production.json
@@ -95,4 +100,4 @@ jobs:
           name: native-package-ubuntu-22.04
           path: dist/native/
       - name: Verify Ubuntu 22.04 artifact on Ubuntu 24.04
-        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.6.0-linux-x64.tar.gz
+        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.7.0-linux-x64.tar.gz

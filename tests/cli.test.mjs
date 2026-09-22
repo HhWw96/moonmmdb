@@ -18,7 +18,7 @@ function cli(args) {
 
 test('help and version require no database or network', () => {
   assert.match(cli(['--help']).text, /offline MaxMind DB/);
-  assert.equal(cli(['--version']).text.trim(), '0.6.0');
+  assert.equal(cli(['--version']).text.trim(), '0.7.0');
   assert.equal(cli([]).code, 2);
 });
 

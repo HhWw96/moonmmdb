@@ -2,22 +2,27 @@
 import argparse,ctypes,datetime,hashlib,json,os,statistics,subprocess,threading,time
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
-p=argparse.ArgumentParser();p.add_argument('--seconds',type=int,default=1800);p.add_argument('--rate',type=int,default=500);p.add_argument('--exe',default=str(ROOT/'dist'/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')));args=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--mode',choices=['enrich-many','diff'],default='enrich-many');p.add_argument('--seconds',type=int,default=1800);p.add_argument('--rate',type=int,default=500);p.add_argument('--exe',default=str(ROOT/'dist'/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')));args=p.parse_args()
 assert args.seconds>=60 and 1<=args.rate<=500 and args.seconds*args.rate<=1000000
-exe=Path(args.exe).resolve();config=ROOT/'examples/production-many.json';output=ROOT/'verification/local/native-soak.json'
+exe=Path(args.exe).resolve();config=ROOT/'examples/production-many.json';output=ROOT/'verification/local'/('native-diff-soak.json' if args.mode=='diff' else 'native-soak.json')
 report={'status':'running','platform':os.name,'started':datetime.datetime.now(datetime.timezone.utc).isoformat(),'duration_requested':args.seconds,'rate_cap':args.rate,'sampling':'Every 30 seconds; RSS high-water supplied by the OS, private bytes sampled; final sub-sample interval not observed','executable_sha256':hashlib.sha256(exe.read_bytes()).hexdigest(),'samples':[],'scope':'Actual Native CLI, paced JSONL input and continuously drained output; not maximum query throughput.'}
 ips=['1.1.1.1','8.8.8.8','81.2.69.160','2001:4860:4860::8888','2606:4700:4700::1111','::1','10.0.0.1','255.255.255.255','192.0.2.1']
 lines=[json.dumps({'ip':ip},separators=(',',':'))+'\n' for ip in ips]
-base=subprocess.run([str(exe),'enrich-many',str(config),'-'],input=''.join(lines),capture_output=True,text=True,encoding='utf-8',timeout=90)
+if args.mode=='diff':
+ sources=json.loads(config.read_text(encoding='utf-8'))['sources'];command=['diff',*[str((config.parent/s['database']).resolve()) for s in sources],'-','--field','/country/iso_code','--field','/autonomous_system_number'];result_key='diff'
+else:command=['enrich-many',str(config),'-'];result_key='enrichment'
+report['mode']=args.mode
+if args.mode=='diff':report['scope']+=' Diff compares fixed City and ASN schemas for sustained decoding/comparison, not actual monthly database updates.'
+base=subprocess.run([str(exe),*command],input=''.join(lines),capture_output=True,text=True,encoding='utf-8',timeout=90)
 assert base.returncode in (0,1),base.stderr
-expected=[json.loads(line)['enrichment'] for line in base.stdout.splitlines()];assert len(expected)==len(ips)
-report['sources']=json.loads(base.stderr)['sources']
-child=subprocess.Popen([str(exe),'enrich-many',str(config),'-','--max-records','1000000','--max-input-bytes','1073741824'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+expected=[json.loads(line)[result_key] for line in base.stdout.splitlines()];assert len(expected)==len(ips)
+report['sources']=json.loads(base.stderr)['databases' if args.mode=='diff' else 'sources']
+child=subprocess.Popen([str(exe),*command,'--max-records','1000000','--max-input-bytes','1073741824'],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 errors=[];state={'received':0,'sent':0,'stderr':b''};stop=threading.Event();started=time.monotonic()
 def reader():
  try:
   for line in child.stdout:
-   value=json.loads(line);i=state['received'];assert value['line']==i+1 and value['input']['ip']==ips[i%len(ips)] and value['enrichment']==expected[i%len(ips)],('result drift',i)
+   value=json.loads(line);i=state['received'];assert value['line']==i+1 and value['input']['ip']==ips[i%len(ips)] and value[result_key]==expected[i%len(ips)],('result drift',i)
    state['received']+=1
  except Exception as e:errors.append(str(e));stop.set()
 def stderr_reader():
@@ -83,6 +88,7 @@ try:
    report[key+'_gate']={'early_median':early,'late_median':late,'growth':late-early,'allowed':allowed,'passed':late-early<=allowed}
    assert late-early<=allowed,(key,'memory threshold exceeded')
   first=statistics.median(s['handles'] for s in warm[:10]);last=statistics.median(s['handles'] for s in warm[-10:]);assert last<=first+2,('handles grow',first,last)
+  report['handles_gate']={'early_median':first,'late_median':last,'passed':True}
   report['status']='passed'
  else:report['status']='smoke-only'
  assert hashlib.sha256(exe.read_bytes()).hexdigest()==report['executable_sha256'],'Executable changed during soak'

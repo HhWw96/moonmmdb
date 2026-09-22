@@ -4,7 +4,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 
 ## 使用与构建
 
-六个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
+七个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
 
 开发环境沿用 MoonBit 0.10.11+6ff76a5f9；Windows 使用固定 w64devkit 2.10.0 / GCC 16.2.0，Linux 在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
 
@@ -12,6 +12,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 python scripts/setup-native-windows.py
 node scripts/native-build.mjs
 node scripts/native-cli-verify.mjs
+node scripts/native-diff-verify.mjs
 python scripts/inspection-fixtures.py
 python scripts/native-package.py
 ```
@@ -27,7 +28,7 @@ SHA-256 来自固定 `moonbitlang/x@0.5.5`。该版本 crypto 包的旧数组构
 - Native JSON 嵌套上限为 128；这是显式资源限制。固定 MoonBit 解析器还要求 Unicode 代理项转义成对：如 `"\ud800"`、`"\udfff"` 会成为 invalid-jsonl 错误行，而 Node JSON.parse 接受它们。正确配对的 `"\ud800\udc00"` 与普通 Unicode 均可使用。这是明确的输入兼容边界，不宣称任意 JSON 完全等价。坏配置直接终止，坏日志按行报错；非法 UTF-8、传输失败或资源超限终止整次处理。
 - 数据库合计上限 256 MiB；打开过程中存在宿主字节、Reader 快照、解码及输出分配，不能把文件上限写成内存上限。
 - 输出发生阻塞时等待消费者；管道提前关闭时退出 2，不写完成汇总。EOF 为正常输入终止；不能从 EOF 判断上游进程的业务状态。
-- 本轮不提供 Native enrich、diff、analytics、mmap、自动下载和更新功能。
+- 本轮不提供 Native enrich、analytics、mmap、自动下载和更新功能。
 
 ## 验证入口
 
@@ -37,7 +38,9 @@ node scripts/native-verify.mjs
 python -m pip install --target .reference-deps -r requirements-reference.txt
 python scripts/download-production.py
 python scripts/native-production-verify.py
-python scripts/native-soak.py
+python scripts/native-diff-reference.py
+python scripts/native-diff-reference.py --production
+python scripts/native-soaks.py
 python scripts/inspection-fixtures.py
 python scripts/native-package.py
 ```
@@ -60,3 +63,7 @@ v0.4.0 的默认 Node RSS 门槛失败记录保留在 [历史验证](VERIFICATIO
 内存曲线可用 `docs/plot_native_soak.py` 从已保存的 JSON 报告重绘，绘图依赖为 Matplotlib 3.11.2，仅供生成验证材料，Native 程序运行不需要该依赖。
 
 0.6.0 增加 `networks` 与 `validate`，参数、状态和资源边界见 [检查与导出](INSPECTION.md)。
+
+0.7.0 增加 Native `diff BEFORE AFTER INPUT|-`，比较输入 IP 的字段、存在性与前缀变化；不是整库差异枚举。协议与 Node diff 一致，Native 顶层错误写 stderr，完成汇总额外提供 fields 和 databases 来源散列。Native 两库合计 256 MiB，比 Node 历史的每库 256 MiB 更严格。下载包包含人工旧、新标签库。
+
+`native-soaks.py` 同时运行旧联合补充、新 diff 产品命令及网段/检查 API 三个独立进程；各自报告 30 分钟采样及趋势门槛，报告注明并发宿主负载。diff 的真实负载使用固定 City 与 ASN 的不同字段结构，不冒称不同月份数据库的实际更新。

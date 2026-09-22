@@ -44,7 +44,7 @@ stdout 为逐条 JSON 结果，原始日志保存在 input 下，联合结果在
 只有正常读完且结果已成功写出，stderr 才包含 status: summary 的最终汇总。
 汇总包括行数、各库计数、数据库类型、构建时间及 SHA-256。请同时检查退出码和汇总。
 
-首版 Native 不提供 enrich、diff 或 analytics 命令；对应功能仍可使用项目的 Node.js 工具。
+Native 不提供 enrich 或 analytics 命令；对应功能仍可使用项目的 Node.js 工具。
 目前只交付 Windows/Linux x64，不声明 macOS、ARM64、Alpine 或 MSVC 支持。
 
 项目与源码：https://github.com/HhWw96/moonmmdb
@@ -59,3 +59,16 @@ stdout 为逐条 JSON 结果，原始日志保存在 input 下，联合结果在
 networks 默认最多 100000 条，`--max-records` 上限 1000000；两命令 `--max-work` 默认 100000000，上限 1000000000。validate 的 `--max-state-bytes` 默认 64 MiB，上限 256 MiB，只限制辅助状态缓冲区，不是进程内存上限。
 networks 完整执行有命中退出 0，无命中退出 1；错误或超限退出 2，且无完成汇总。validate 报告 valid/invalid/incomplete/error，只有 valid 退出 0。资源不足不是数据库损坏的证明。
 City Lite 大库完整解码建议显式 `--max-work 1000000000`。更多说明见源码 docs/INSPECTION.md。
+
+## 数据库更新对比
+
+```text
+./moonmmdb diff examples/tags.mmdb examples/tags-updated.mmdb examples/access.jsonl --field /site
+./moonmmdb diff old.mmdb new.mmdb access.jsonl --ip-path /client/ip --field /country/iso_code --field /city/names/en
+```
+
+对输入日志中的 IP 比较旧、新快照，默认比较完整记录；重复 `--field` 最多选择 64 个不同字段。逐行输出 `input` 和 `diff`，包含旧值、新值、变化字段、记录存在性与命中前缀变化。两边都没有记录可以是 unchanged；这不是整库差异枚举。标签样例为人工数据，预期有变化时退出 1。
+
+退出码：0 全部未变化；1 存在变化；2 存在错误，优先级最高。错误行继续，UTF-8、资源、读写或管道错误立即终止。只在完整完成时输出 stderr 汇总，包含 processed、changed、unchanged、errors、fields 及 databases.before/after 的版本与 SHA-256。即使已有输出，也必须检查最终退出码。
+
+继承上述 JSONL 限制和 128 层嵌套限制。两个数据库每个最多 256 MiB，合计最多 256 MiB；全部参数、字段及数据库验证后才消费日志，两个快照各打开一次。Node diff 的既有单库上限保持不变；Native 合计上限更严格。Map 键顺序不影响比较，数组顺序、数值类型和浮点原始位参与比较。
