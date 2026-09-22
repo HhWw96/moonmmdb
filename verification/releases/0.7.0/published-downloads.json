@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "scope": "Published GitHub assets downloaded again and matched SHA256SUMS plus original CI package hashes. Windows downloaded archive passed 10 isolated runtime commands; Linux identical artifact passed Ubuntu 22.04 and 24.04 in CI.",
+  "files": [
+    {
+      "name": "moonmmdb-0.7.0-windows-x64.zip",
+      "sha256": "4039de5252fa13f6dc75b0763cda2fbbb01846a35c68e47dcb06bf7134c981f9",
+      "bytes": 273208
+    },
+    {
+      "name": "moonmmdb-0.7.0-linux-x64.tar.gz",
+      "sha256": "075f9671bf95826b967be7fa0a63b92a6b3b5775fee6a85c5af0a28c6dcc4fea",
+      "bytes": 303340
+    },
+    {
+      "name": "HhWw96-moonmmdb-0.7.0.zip",
+      "sha256": "fb62b907b8d086e780f952ea6a5196416c96be68180d6208ce05035bb223fb2d",
+      "bytes": 912362
+    }
+  ],
+  "windows_isolated_acceptance": {
+    "status": "passed",
+    "commands": 10,
+    "without_developer_tools": true
+  }
+}

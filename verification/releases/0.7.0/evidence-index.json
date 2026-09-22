@@ -49,8 +49,11 @@
     "windows-native-soak.json": "b75e499c87a4e6325462a68bbabeb57a58f24bf9e34832fac40ce9536587df7d",
     "windows-typed-production.json": "f8af7f74080970f6ebe501f066b5b812edf0ed22d1edd4ee87fe6e1460b692da",
     "windows-native-cli.json": "1292df61fd80480fe61c8b28c5c32882abb72e89567a5b0d37affa192a421850",
-    "publication.json": "eaa205b05cc727815b45c963929e5819abe66b3d62be28e90f2f7b5dabc63599",
-    "registry-0.7.0.json": "300ba53909d6a0b22cf511bfce245f1d905c70099a0e5074e8b4f7c9b3247372"
+    "publication.json": "3101e57f0f0adbbe89c6cead94abdc32d28cbdbba91f5ac0ad710698e2d33ab8",
+    "registry-0.7.0.json": "300ba53909d6a0b22cf511bfce245f1d905c70099a0e5074e8b4f7c9b3247372",
+    "published-downloads.json": "2aa40101df4a6a5869249b6d9fc98ddb8ce14bf00219ffb0033891636d9e3a0d"
   },
-  "ubuntu_24_04_artifact_verification": "passed in linux-newer job of native_run"
+  "ubuntu_24_04_artifact_verification": "passed in linux-newer job of native_run",
+  "publication_status": "published-and-verified",
+  "release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.7.0"
 }

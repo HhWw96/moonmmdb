@@ -1,6 +1,6 @@
 # 0.7.0 验证与发布
 
-本版本增加 Native `diff`，使用现有 MoonBit 公开比较接口；Node 原有命令和核心 API 保持兼容。2026-09-22：实现、完整回归、Windows/Linux 三项 30 分钟持续运行及 Ubuntu 24.04 产物验收全部通过。Mooncakes 安装与正式发布后下载回执在完成后追加到本页；注册表包内文档是上传前快照，最新状态以仓库公开回执为准。
+本版本增加 Native `diff`，使用现有 MoonBit 公开比较接口；Node 原有命令和核心 API 保持兼容。2026-09-22：实现、完整回归、Windows/Linux 三项 30 分钟持续运行及 Ubuntu 24.04 产物验收全部通过。Mooncakes 全新安装、GitHub 正式发布与重新下载验收已完成；注册表包内文档是上传前快照，最新状态以仓库公开回执为准。
 
 ## 验证绑定
 
@@ -62,7 +62,7 @@ Native 工作流对旧 enrich-many、新 diff 产品命令、网段/检查 API �
 | Windows x64 | `4039de5252fa13f6dc75b0763cda2fbbb01846a35c68e47dcb06bf7134c981f9` | `ededf73e789d08ded387259e81d6840603799ddc7c86face84dff337a6ecf02b` |
 | Linux x64 | `075f9671bf95826b967be7fa0a63b92a6b3b5775fee6a85c5af0a28c6dcc4fea` | `60cb29ba344f1e634114aa13cf1a76b0471e79c4c041278e832683a9d1c570c5` |
 
-原始 CI 压缩包各通过 10 个隔离命令检查，运行 PATH 不依赖 Node.js、Python 或 MoonBit，包含许可证、第三方声明和旧/新标签样例。Linux 的相同包又在 Ubuntu 24.04 验收，实际最高 GLIBC 符号 2.34，但仍只声明最低 glibc 2.35。正式 Release 将直接复用原始 CI 包。
+原始 CI 压缩包各通过 10 个隔离命令检查，运行 PATH 不依赖 Node.js、Python 或 MoonBit，包含许可证、第三方声明和旧/新标签样例。Linux 的相同包又在 Ubuntu 24.04 验收，实际最高 GLIBC 符号 2.34，但仍只声明最低 glibc 2.35。正式 Release 直接复用原始 CI 包。
 
 新 diff 的十万行慢消费者测试，Linux 用时 1.92 秒，Windows 5.40 秒；这些数字包含本测试的输入、输出和人工样例，不能外推为真实业务吞吐。
 
@@ -73,3 +73,9 @@ Native 工作流对旧 enrich-many、新 diff 产品命令、网段/检查 API �
 独立临时目录使用 `moon add HhWw96/moonmmdb@0.7.0` 解析注册表依赖，没有 moon.work 或本地 workspace；JS / WasmGC 各通过一项消费者测试，包含版本、查询、投影、联合查询、游标、结构检查及 geo。修复后的通用 `scripts/registry-verify.mjs` 可直接复现，无需版本专用替代脚本。回执见 [注册表安装](../verification/releases/0.7.0/registry-0.7.0.json) 和 [上传散列](../verification/releases/0.7.0/publication.json)。
 
 源码包源自文档提交 `17bba68718eefb30261dd6eed0db807c9e6746a3`，实现源码散列与已通过的 Windows CI 一致，0.6.0 冻结接口逐文件散列保持一致。平台间文本换行会造成不同源码字节散列，报告分别保留。包内包含源码、样例和许可证，排除生产数据库、工具链和凭据；包含私人路径的历史原始编译失败日志没有打包，其失败说明仍保留于历史文档。
+
+## GitHub 正式发布与下载复验
+
+[GitHub v0.7.0](https://github.com/HhWw96/moonmmdb/releases/tag/v0.7.0) 于 2026-09-22 04:39:53 UTC 正式发布，非草稿、非预发布。发布提交 `d2c5a4a56e72c75cd68229f5dfd47fef8f11baee`，[发布门槛工作流 35687720751](https://github.com/HhWw96/moonmmdb/actions/runs/35687720751) 成功；实现验证后只有文档和公开回执变化。
+
+重新下载 Windows ZIP、Linux tar.gz、Mooncakes 源码归档及 SHA256SUMS，三个归档与准备产物散列一致。Windows 下载包在移除开发工具 PATH 的隔离环境重新通过 10 个命令；Linux 下载归档与 Ubuntu 22.04 / 24.04 已验收的同一文件一致，没有声称在 Windows 上运行 Linux 程序。见 [下载验收回执](../verification/releases/0.7.0/published-downloads.json)。
