@@ -1,0 +1,25 @@
+{
+  "started": "2026-09-22T04:38:09.725Z",
+  "status": "passed",
+  "module": "HhWw96/moonmmdb",
+  "version": "0.7.0",
+  "directory": "[fresh operating-system temporary directory; private path omitted]",
+  "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+  "steps": [
+    {
+      "name": "add",
+      "output": ""
+    },
+    {
+      "target": "js",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "downloaded_manifest_sha256": "c532ef52ecbc53f011832a9341d9a269578f5edeca79bc58461a92c44d572edd",
+  "finished": "2026-09-22T04:38:20.603Z",
+  "reproducer": "node scripts/registry-verify.mjs 0.7.0"
+}

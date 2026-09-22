@@ -1,0 +1,21 @@
+{
+  "status": "registry-published-and-installed",
+  "implementation_commit": "efe606a2b77c919d8a42cc9b1cd795cf3f91860a",
+  "package_source_commit": "17bba68718eefb30261dd6eed0db807c9e6746a3",
+  "registry_archive_url": "https://download.mooncakes.io/user/HhWw96/moonmmdb/0.7.0.zip",
+  "registry_archive_sha256": "fb62b907b8d086e780f952ea6a5196416c96be68180d6208ce05035bb223fb2d",
+  "registry_archive_bytes": 912362,
+  "package_files": 429,
+  "uploaded_downloaded_bytes_equal": true,
+  "excluded_files": [
+    {
+      "path": "verification/regressions/native-mingw-missing-rand-s.json",
+      "reason": "Historical raw compiler failure log contains a private user path; not required source, example or license."
+    }
+  ],
+  "frozen_0_6_api_baselines_match": true,
+  "registry_test": "registry-0.7.0.json",
+  "native_run": 35685029670,
+  "regression_run": 35685029726,
+  "github_release_status": "pending"
+}

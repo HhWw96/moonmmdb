@@ -48,7 +48,9 @@
     "windows-native-production.json": "49a1c55a3680ec0f798a6430960b9c7fbcc6c3fc8292c29784116318431116d0",
     "windows-native-soak.json": "b75e499c87a4e6325462a68bbabeb57a58f24bf9e34832fac40ce9536587df7d",
     "windows-typed-production.json": "f8af7f74080970f6ebe501f066b5b812edf0ed22d1edd4ee87fe6e1460b692da",
-    "windows-native-cli.json": "1292df61fd80480fe61c8b28c5c32882abb72e89567a5b0d37affa192a421850"
+    "windows-native-cli.json": "1292df61fd80480fe61c8b28c5c32882abb72e89567a5b0d37affa192a421850",
+    "publication.json": "eaa205b05cc727815b45c963929e5819abe66b3d62be28e90f2f7b5dabc63599",
+    "registry-0.7.0.json": "300ba53909d6a0b22cf511bfce245f1d905c70099a0e5074e8b4f7c9b3247372"
   },
   "ubuntu_24_04_artifact_verification": "passed in linux-newer job of native_run"
 }
