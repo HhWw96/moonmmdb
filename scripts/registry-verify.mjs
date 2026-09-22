@@ -4,8 +4,8 @@ import {resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {root,runMoon} from './moon.mjs';
 import {sha256} from './evidence.mjs';
-const version=process.argv[2] || '0.7.0';
-if(!/^0\.[34567]\.0$/.test(version))throw new Error('Expected stable version 0.3.0, 0.4.0, 0.5.0, 0.6.0 or 0.7.0');
+const version=process.argv[2] || '0.8.0';
+if(!/^0\.[345678]\.0$/.test(version))throw new Error('Expected stable version 0.3.0, 0.4.0, 0.5.0, 0.6.0 0.7.0 or 0.8.0');
 const directory=mkdtempSync(resolve(tmpdir(),'moonmmdb-registry-'));
 const report={started:new Date().toISOString(),status:'running',module:'HhWw96/moonmmdb',version,directory,scope:'New standalone consumer; no workspace dependency; registry download and version assertion.',steps:[]};
 const output=resolve(root,'verification/local/registry-'+version+'.json');
@@ -21,7 +21,7 @@ try {
     const query=`  let fields = @mmdb.prepare_fields(["/autonomous_system_number"])\n  let joined = @mmdb.Enricher::new([{ name: "asn", reader, fields }])\n  let result = joined.lookup("1.0.0.1")\n  assert_eq(result.status_code(), 0)\n  assert_eq(result.sources[0].0, "asn")\n`;
     writeFileSync(path,readFileSync(path,'utf8').replace(/}\n$/,query+'}\n'));
   }
-  if(['0.6.0','0.7.0'].includes(version)) {
+  if(['0.6.0','0.7.0','0.8.0'].includes(version)) {
     writeFileSync(resolve(directory,'moon.pkg'),'import { "HhWw96/moonmmdb" @mmdb, "HhWw96/moonmmdb/geo" @geo }\n');
     writeFileSync(resolve(directory,'consumer.mbt'),'///|\npub fn installed_version() -> String { @mmdb.version() }\n///|\npub fn lookup_asn(reader : @mmdb.Reader, ip : String) -> @geo.AsnLookup raise @geo.GeoError { @geo.lookup_asn(reader, ip) }\n');
     const file=resolve(directory,'consumer_wbtest.mbt');

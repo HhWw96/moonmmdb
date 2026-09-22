@@ -5,5 +5,5 @@ version = "0.0.0"
 license = "Apache-2.0"
 
 import {
-  "HhWw96/moonmmdb@0.7.0",
+  "HhWw96/moonmmdb@0.8.0",
 }

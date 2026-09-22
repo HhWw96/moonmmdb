@@ -100,4 +100,4 @@ jobs:
           name: native-package-ubuntu-22.04
           path: dist/native/
       - name: Verify Ubuntu 22.04 artifact on Ubuntu 24.04
-        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.7.0-linux-x64.tar.gz
+        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.8.0-linux-x64.tar.gz

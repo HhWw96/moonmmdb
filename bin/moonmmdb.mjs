@@ -6,7 +6,7 @@ import { InputError, streamOptions, inputSelector, openInput, boundedLines } fro
 import { enrichMany } from './many.mjs';
 import { inspect } from './inspect.mjs';
 
-const help = `MoonMMDB 0.7.0 — offline MaxMind DB reader
+const help = `MoonMMDB 0.8.0 — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
@@ -76,7 +76,7 @@ async function main() {
     return;
   }
   if (command === '--help' && !database) { await write(help); return; }
-  if (command === '--version' && !database) { await write('0.7.0\n'); return; }
+  if (command === '--version' && !database) { await write('0.8.0\n'); return; }
   if (!['metadata', 'lookup', 'project', 'enrich', 'diff'].includes(command) || !database ||
     (command === 'metadata' && args.length !== 0) ||
     (command === 'lookup' && (args.length === 0 || args.length > 10000)) ||

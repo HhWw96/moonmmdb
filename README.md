@@ -1,5 +1,7 @@
 # MoonMMDB
 
+**0.8.0 浏览器工作台正在验证。** 新增本地查询、结构检查和指定 IP 更新对比，提供网页与独立离线 HTML；[使用说明](docs/BROWSER.md) · [候选版本验证状态](docs/VERIFICATION_0_8.md)。以下安装与正式下载仍指向已发布的稳定版 0.7.0，待全部门槛通过后切换。
+
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
 **本版本：0.7.0。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.7.0/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_7.md) · [支持范围](docs/SUPPORT.md)

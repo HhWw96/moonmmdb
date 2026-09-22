@@ -8,6 +8,9 @@ on:
       regression_run:
         description: Successful Verify MoonMMDB run ID
         required: true
+      browser_run:
+        description: Successful Browser product validation run ID
+        required: true
 permissions:
   contents: read
   actions: read
@@ -21,6 +24,7 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       NATIVE_RUN: ${{ inputs.native_run }}
       REGRESSION_RUN: ${{ inputs.regression_run }}
+      BROWSER_RUN: ${{ inputs.browser_run }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:
@@ -43,4 +47,12 @@ jobs:
           github-token: ${{ github.token }}
           path: dist/publish/windows
       - name: Check artifacts, registry receipt, and publish
+        # Browser bundle is produced and tested by the same validated source.
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: browser-package-ubuntu-22.04
+          run-id: ${{ inputs.browser_run }}
+          github-token: ${{ github.token }}
+          path: dist/publish/browser
+      - name: Publish all verified artifacts
         run: node scripts/native-release-gate.mjs --publish

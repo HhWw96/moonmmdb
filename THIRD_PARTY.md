@@ -24,3 +24,6 @@ tests/scenarios 中的四份数据库由本项目 scripts/prepare-scenarios.py �
 Native 工具使用 `moonbitlang/x@0.5.5` crypto 源码（International Digital Economy Academy，Apache-2.0）。固定 MoonBit 0.10.11 无法编译其中四处旧 AES 数组构造语法，因此在 `native_cli/vendor/x` 保留实现源码并将这四处改为 `Array::new`；SHA-256 算法未改动。包内的 PROVENANCE.json 记录上游 URL、原始及本地文件散列。没有修改用户的全局包缓存，也没有增加核心读取库的依赖。源码子集不包含上游测试与基准，项目另验 SHA-256 标准向量。
 
 Native 分发包附带 MoonBit core 的 Apache-2.0 许可证、MinGW-w64 运行库声明，以及 GCC GPLv3 和 Runtime Library Exception 3.1 文本。GCC 工具链本身不随程序分发。文本分别取自固定工具链、官方 core 和 gcc-mirror/gcc 的 COPYING3 / COPYING.RUNTIME。二进制附带源码仓库地址，可核对构建版本与第三方修改。
+# 浏览器界面依赖
+
+浏览器模块的 React、React DOM 和 Scheduler 使用 MIT 许可证，版本和完整性固定在 `web/package-lock.json`。离线 HTML 内置对应许可证全文；不依赖 CDN。Vite、TypeScript、Playwright 仅用于构建或验证，不参与 MMDB 查询算法。内置数据库使用项目人工生成器，遵循本项目 Apache-2.0；不嵌入生产数据库。
