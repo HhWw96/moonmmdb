@@ -1,0 +1,132 @@
+{
+  "status": "passed",
+  "started": "2026-09-24T16:19:39.469818+00:00",
+  "executable_sha256": "18654ebe8da60394560048cdbba3d1883a07acbdcfac32096441f24f79765b28",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "production": false,
+  "pairs": [
+    {
+      "before": "MaxMind-DB-test-ipv4-24.mmdb",
+      "after": "MaxMind-DB-test-ipv4-28.mmdb",
+      "addresses": 322,
+      "changed": 0,
+      "databases": {
+        "before": {
+          "bytes": 1285,
+          "sha256": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        },
+        "after": {
+          "bytes": 1448,
+          "sha256": "fd0102ee5e1b72b17d00ee01599547e641186f6561f037b91f5df6102416dbb4",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        }
+      }
+    },
+    {
+      "before": "MaxMind-DB-test-ipv4-24.mmdb",
+      "after": "MaxMind-DB-test-ipv4-32.mmdb",
+      "addresses": 322,
+      "changed": 0,
+      "databases": {
+        "before": {
+          "bytes": 1285,
+          "sha256": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        },
+        "after": {
+          "bytes": 1611,
+          "sha256": "5924cfd66a7c84ebdb5b45fe94f1efc4e468ff7bf2b39693b37e4c391d89d73a",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        }
+      }
+    },
+    {
+      "before": "MaxMind-DB-test-ipv4-24.mmdb",
+      "after": "diff-artificial-update.mmdb",
+      "addresses": 322,
+      "changed": 2,
+      "databases": {
+        "before": {
+          "bytes": 1285,
+          "sha256": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        },
+        "after": {
+          "bytes": 1285,
+          "sha256": "387298ef8d50a3b880edc68e72190e8c5dc60431010abb411cc53f9c1b554e62",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        }
+      }
+    },
+    {
+      "before": "MaxMind-DB-test-ipv4-24.mmdb",
+      "after": "MaxMind-DB-test-ipv6-24.mmdb",
+      "addresses": 322,
+      "changed": 256,
+      "databases": {
+        "before": {
+          "bytes": 1285,
+          "sha256": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        },
+        "after": {
+          "bytes": 2794,
+          "sha256": "599f1555ce3a568c2d4ad965332dcba87d0d109297636f1b595241247263d98b",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        }
+      }
+    },
+    {
+      "before": "MaxMind-DB-test-ipv6-24.mmdb",
+      "after": "MaxMind-DB-test-ipv6-28.mmdb",
+      "addresses": 133,
+      "changed": 0,
+      "databases": {
+        "before": {
+          "bytes": 2794,
+          "sha256": "599f1555ce3a568c2d4ad965332dcba87d0d109297636f1b595241247263d98b",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        },
+        "after": {
+          "bytes": 3209,
+          "sha256": "45681de9db4e09948780a4142782616bd0c3096d4d03b372ed62f007cc5f63b2",
+          "database_type": "Test",
+          "build_epoch": "1770245369"
+        }
+      }
+    },
+    {
+      "before": "tags.mmdb",
+      "after": "tags-updated.mmdb",
+      "addresses": 4,
+      "changed": 1,
+      "databases": {
+        "before": {
+          "bytes": 577,
+          "sha256": "3cbea721e93a4237971fe2c9aac8f91cbd75bea49c5158d22e873373a20f8d71",
+          "database_type": "MoonMMDB-Synthetic-tags",
+          "build_epoch": "0"
+        },
+        "after": {
+          "bytes": 581,
+          "sha256": "a1e3b093b1b0543c6524addf7f7b50b00e57428c2e95b15fdeb644cb05881511",
+          "database_type": "MoonMMDB-Synthetic-tags",
+          "build_epoch": "0"
+        }
+      }
+    }
+  ],
+  "checks": 1425,
+  "scope": "Independent lookup and prefix comparison for selected IPs; same-release production snapshots and explicitly artificial changes, not a real monthly update or exhaustive database diff.",
+  "finished": "2026-09-24T16:19:39.580318+00:00"
+}

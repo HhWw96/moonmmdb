@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "node": "v24.20.0",
+  "environment": {
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "processor": "AMD64 Family 25 Model 17 Stepping 1, AuthenticAMD"
+  },
+  "workload": "asn",
+  "baseline_tag": "v0.8.0",
+  "historical_environment_note": "2026-09-20 Windows/Node24.13.0 failure is retained. This paired comparison fixes Node24.20.0 and runs both revisions sequentially on this same runner; it is not an exact recreation of the old OS/machine/runtime.",
+  "runs": [
+    {
+      "name": "baseline",
+      "passed": true,
+      "sha256": "4401e1f9ea0a1356f0ab699cada72eb33aeb1928c7d21f3693e5e9b36cc2e98c",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-1",
+      "passed": true,
+      "sha256": "ec691a0067eb990fdf143ca0a7e8b3062457cf85a484cac30157fde037e6bca1",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-2",
+      "passed": true,
+      "sha256": "528ad13dd2269a55b35e15e7c5f10d177e3dc3f7b57c669d674497d1ad51e15a",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-3",
+      "passed": true,
+      "sha256": "ca6f96cd07988073468b25777c1bcacda4a1357dcae5c10f56ef78150cbc962b",
+      "exit_code": 0
+    }
+  ],
+  "finished": "2026-09-24T18:18:48.669649+00:00"
+}

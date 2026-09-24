@@ -1,0 +1,14 @@
+{
+  "status": "reproduced-failure",
+  "source_archive_sha256": "0773cf22cfe8bf6f6307745f42f6dbe98c69916c3a8963e049ff6a23d85567e4",
+  "matching_fields": [
+    "core_sha256",
+    "databases",
+    "ips",
+    "expected_sha256",
+    "node",
+    "cpu"
+  ],
+  "report_sha256": "cb5eefcd32d1afbb1f3bf3772d8dff94a7a0c26ed00ade434e3fab76b72a8fdf",
+  "scope": "Supplemental original 0.4.0 replay on local Node24.13.0; not the formal paired v0.8.0/0.9.0 Node24.20.0 gate. OS patch level and background workload were not captured by the historical report."
+}

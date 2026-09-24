@@ -1,0 +1,82 @@
+{
+  "started": "2026-09-24T16:18:28.714Z",
+  "status": "passed",
+  "source_sha256": "31baecc42aab542c0e0d22b7ecf9496b504c508615c8f4e55492d3ea77c9d546",
+  "steps": [
+    {
+      "name": "verification",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "corpus",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "typed",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "inspection-js",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "comparison",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "enrichment",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "analytics-reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "scale",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "package",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "benchmark",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "core_sha256": "858874d08c0bf0a221daad4c661f5bbf148fc0cd6ffe20b988d9b6f88ba0b3ee",
+  "evidence": {
+    "verification": "8981a51b8463356a6cb6f7a4d1541108cb452bb5c814c4f8aa91e7258b2fe522",
+    "api-compat": "cc2d09c5d01b2efb28c141be6609df7b81a5a434ca42093080efae60fa8f1803",
+    "reference": "d4d19a495afd4ab82f2bfa5152e65c8575ca655c3e838be88fd43307043b30d9",
+    "corpus": "c2d048618e7b846955c30e609327351c637cfdbd13faed65ffd1230e8ef7b21f",
+    "typed": "97ef7ff506d7028598f67bec1340dd6e85c7409640164e5a42f436c9930fc9ab",
+    "inspection-js": "f2d39dccf9b0f03bfdd12941a65a9535026a9b87fb535ac62fa4a332ec4a4ade",
+    "comparison": "82b495ef1a999a4c81caf10d4cb6dd31673c1f0b76578c7806ec80c871ff54d9",
+    "enrichment": "da59185e6d4dd4d558902c4e2c256da42d6e308ffc8819c047bf15af76feb8b0",
+    "analytics-reference": "dc0c7388fe2d1cc804af1adee39f601921cef321e74c4a88f349b6724e14f737",
+    "adversarial": "db1002a3aa68f7b0c4174bb21e9f3790139bad846e755b5ca45c2e75da8447a5",
+    "boundary": "c724b09fd44159919b5d69058ae9e26d0e7c2f75a270e8c1128374236f379190",
+    "mutation": "333373fed4ba1bdcf272d8214b15947dd0d9770be9931ee5710ef55f039a5317",
+    "consumer": "b3326d8fc66925078c9b648e8a0145138c80879cc77eeefa764322b68290dc8f",
+    "scale": "7153a17ccc2689a3f9ca777f3ac6f1db6a0af90863978df912aefc18963be517",
+    "package": "127ee573ab1069bd22dd303bfc82d5a61032e223af5fef52f5c7717f0e7c840a",
+    "benchmark": "0166a7b981208ee93a4e79f133d9f03bdd3f7916f3bb5cee942e15528e727ce0"
+  },
+  "finished": "2026-09-24T16:19:44.157Z"
+}

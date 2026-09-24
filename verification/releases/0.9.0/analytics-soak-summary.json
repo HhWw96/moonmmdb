@@ -1,0 +1,171 @@
+{
+  "status": "passed",
+  "implementation_commit": "462389566a65d1a343e9ef731d95adfa6938ae30",
+  "validated_run": 36026377613,
+  "scope": "Four actual command runs produced identical JSON content, including all counters, input bytes/hash, parameters and database provenance. Each is independently checked by Python in the workflow.",
+  "same_result": {
+    "status": "complete",
+    "requests": "180000",
+    "valid_ips": "147274",
+    "invalid_inputs": "32726",
+    "exit_code": 2,
+    "country": {
+      "counted": "81820",
+      "not_found": "65454",
+      "missing_field": "0",
+      "type_error": "0",
+      "query_error": "0",
+      "group_count": "4",
+      "other_requests": "0",
+      "top": [
+        {
+          "key": "CA",
+          "count": "32728"
+        },
+        {
+          "key": "AU",
+          "count": "16364"
+        },
+        {
+          "key": "GB",
+          "count": "16364"
+        },
+        {
+          "key": "US",
+          "count": "16364"
+        }
+      ]
+    },
+    "asn": {
+      "counted": "81820",
+      "not_found": "65454",
+      "missing_field": "0",
+      "type_error": "0",
+      "query_error": "0",
+      "group_count": "3",
+      "other_requests": "0",
+      "top": [
+        {
+          "key": "13335",
+          "count": "32728"
+        },
+        {
+          "key": "15169",
+          "count": "32728"
+        },
+        {
+          "key": "20712",
+          "count": "16364"
+        }
+      ]
+    },
+    "tool_version": "0.9.0",
+    "parameters": {
+      "ip_path": "/ip",
+      "top": 10,
+      "max_groups": 10000,
+      "max_records": 1000000,
+      "max_input_bytes": 1073741824,
+      "max_line_bytes": 8388608,
+      "max_json_depth": 128
+    },
+    "databases": {
+      "city": {
+        "database_type": "DBIP-City-Lite",
+        "build_epoch": "1788226681",
+        "bytes": "127339927",
+        "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+      },
+      "asn": {
+        "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+        "build_epoch": "1788226697",
+        "bytes": "9511026",
+        "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+      }
+    },
+    "input": {
+      "bytes": "3632746",
+      "sha256": "9e55e861acdd4394be1b6ef69ef18db4b4493bd18c8f13a4884b4b6d63a453d5"
+    }
+  },
+  "runs": [
+    {
+      "platform": "analytics-evidence-ubuntu-22.04",
+      "host": "native",
+      "report_sha256": "7ccd25c03fbdb482c03f468c6a6737745c1ec12590330a4335f1e7c7c96bdd77",
+      "requests": 180000,
+      "elapsed_seconds": 1800.1420326750003,
+      "rss_trend": {
+        "first_median": 138833920.0,
+        "last_median": 138833920.0,
+        "growth_bytes": 0.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": true,
+        "peak": 138833920
+      },
+      "private_memory_trend": null
+    },
+    {
+      "platform": "analytics-evidence-ubuntu-22.04",
+      "host": "node",
+      "report_sha256": "cb378021627e422fee753e369f15061c9747108a0396893af5e1e633da1ea729",
+      "requests": 180000,
+      "elapsed_seconds": 1800.2305708,
+      "rss_trend": {
+        "first_median": 214765568.0,
+        "last_median": 218243072.0,
+        "growth_bytes": 3477504.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": true,
+        "peak": 218243072
+      },
+      "private_memory_trend": null
+    },
+    {
+      "platform": "analytics-evidence-windows-2022",
+      "host": "native",
+      "report_sha256": "a39e5aee2ce93c140e32952c53e4b5ccd68735b576c7386cb7ea0e803a5f48e1",
+      "requests": 180000,
+      "elapsed_seconds": 1800.156,
+      "rss_trend": {
+        "first_median": 17092608.0,
+        "last_median": 17092608.0,
+        "growth_bytes": 0.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": true,
+        "peak": 141238272
+      },
+      "private_memory_trend": {
+        "first_median": 146522112.0,
+        "last_median": 146522112.0,
+        "growth_bytes": 0.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": true,
+        "peak": 146554880
+      }
+    },
+    {
+      "platform": "analytics-evidence-windows-2022",
+      "host": "node",
+      "report_sha256": "938aba603841ea3504a097fb6dfaf2f272e8966b6d75550388dd0671e3617e15",
+      "requests": 180000,
+      "elapsed_seconds": 1800.172,
+      "rss_trend": {
+        "first_median": 19183616.0,
+        "last_median": 17154048.0,
+        "growth_bytes": -2029568.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": true,
+        "peak": 322424832
+      },
+      "private_memory_trend": {
+        "first_median": 173920256.0,
+        "last_median": 178679808.0,
+        "growth_bytes": 4759552.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": true,
+        "peak": 310419456
+      }
+    }
+  ]
+}

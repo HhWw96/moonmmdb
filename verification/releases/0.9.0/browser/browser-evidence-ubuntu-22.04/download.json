@@ -1,0 +1,104 @@
+{
+  "version": 1,
+  "tool": {
+    "name": "MoonMMDB",
+    "version": "0.9.0",
+    "core_sha256": "858874d08c0bf0a221daad4c661f5bbf148fc0cd6ffe20b988d9b6f88ba0b3ee"
+  },
+  "operation": {
+    "op": "compare",
+    "ip": "192.0.2.1",
+    "fields": [
+      "/site"
+    ]
+  },
+  "databases": [
+    {
+      "name": "tags.mmdb",
+      "bytes": 577,
+      "sha256": "3cbea721e93a4237971fe2c9aac8f91cbd75bea49c5158d22e873373a20f8d71",
+      "metadata": {
+        "node_count": "42",
+        "record_size": "24",
+        "ip_version": "4",
+        "database_type": "MoonMMDB-Synthetic-tags",
+        "binary_format_major_version": "2",
+        "binary_format_minor_version": "0",
+        "build_epoch": "0",
+        "languages": [
+          {
+            "type": "string",
+            "value": "en"
+          }
+        ],
+        "description": {
+          "en": {
+            "type": "string",
+            "value": "Synthetic scenario; not geolocation data"
+          }
+        }
+      }
+    },
+    {
+      "name": "updated.mmdb",
+      "bytes": 581,
+      "sha256": "a1e3b093b1b0543c6524addf7f7b50b00e57428c2e95b15fdeb644cb05881511",
+      "metadata": {
+        "node_count": "42",
+        "record_size": "24",
+        "ip_version": "4",
+        "database_type": "MoonMMDB-Synthetic-tags",
+        "binary_format_major_version": "2",
+        "binary_format_minor_version": "0",
+        "build_epoch": "0",
+        "languages": [
+          {
+            "type": "string",
+            "value": "en"
+          }
+        ],
+        "description": {
+          "en": {
+            "type": "string",
+            "value": "Synthetic scenario; not geolocation data"
+          }
+        }
+      }
+    }
+  ],
+  "finished": "2026-09-24T16:22:14.222Z",
+  "result": {
+    "status": "changed",
+    "record_changed": false,
+    "prefix_changed": false,
+    "changed_fields": [
+      "/site"
+    ],
+    "before": {
+      "status": "found",
+      "prefix_length": 24,
+      "fields": {
+        "/site": {
+          "status": "present",
+          "value": {
+            "type": "string",
+            "value": "lab-a"
+          }
+        }
+      }
+    },
+    "after": {
+      "status": "found",
+      "prefix_length": 24,
+      "fields": {
+        "/site": {
+          "status": "present",
+          "value": {
+            "type": "string",
+            "value": "lab-a-new"
+          }
+        }
+      }
+    }
+  }
+}

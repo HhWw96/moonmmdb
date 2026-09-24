@@ -1,0 +1,25 @@
+{
+  "status": "verified-candidates-unpublished",
+  "implementation_commit": "462389566a65d1a343e9ef731d95adfa6938ae30",
+  "artifacts": [
+    {
+      "file": "moonmmdb-0.9.0-windows-x64.zip",
+      "bytes": 292715,
+      "sha256": "f326e8c7a96d955711306ddcf70dcfea87777e5dfbefa2e4e50e8a702d6a0073",
+      "validated_run": 36026354266
+    },
+    {
+      "file": "moonmmdb-0.9.0-linux-x64.tar.gz",
+      "bytes": 321795,
+      "sha256": "e1bf528e3cd7ded3cde12569bf5e141ca08efcbfb0916cf6fa858b206d478edb",
+      "validated_run": 36026354266
+    },
+    {
+      "file": "moonmmdb-0.9.0-offline.html",
+      "bytes": 325304,
+      "sha256": "d308f6de9c29935fd29a2b970387e5ddd7319796cf2a1bad9091d7d1a4a9742e",
+      "validated_run": 36026354294
+    }
+  ],
+  "online_offline_bytes_equal": true
+}

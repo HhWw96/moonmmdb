@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "runs": [
+    {
+      "conclusion": "success",
+      "databaseId": 36026377613,
+      "headSha": "462389566a65d1a343e9ef731d95adfa6938ae30",
+      "name": "Analytics product validation",
+      "status": "completed",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36026377613"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36026364274,
+      "headSha": "462389566a65d1a343e9ef731d95adfa6938ae30",
+      "name": "Default Node stability",
+      "status": "completed",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36026364274"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36026354294,
+      "headSha": "462389566a65d1a343e9ef731d95adfa6938ae30",
+      "name": "Browser product validation",
+      "status": "completed",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36026354294"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36026354266,
+      "headSha": "462389566a65d1a343e9ef731d95adfa6938ae30",
+      "name": "Native product validation",
+      "status": "completed",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36026354266"
+    },
+    {
+      "conclusion": "success",
+      "databaseId": 36026354200,
+      "headSha": "462389566a65d1a343e9ef731d95adfa6938ae30",
+      "name": "Verify MoonMMDB",
+      "status": "completed",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36026354200"
+    }
+  ]
+}

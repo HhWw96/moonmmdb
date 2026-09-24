@@ -1,0 +1,595 @@
+{
+  "status": "passed",
+  "node": "v24.20.0",
+  "platform": "linux",
+  "source_sha256": "b1da0774bc1cabc8461bb14633fe8084b298cf0ff7bbadc3f7380bf2633c1e08",
+  "probe_sha256": "719346d8fa483085683a75acae09e0f9076f0582258c0646cb42b0a936328466",
+  "databases": [
+    "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+    "d284ae2e7427fe33d83465e1506b2b21aae47eb8a9b099f8f4dac6a98c99f041"
+  ],
+  "scope": "Inspector sampled allocation diagnostics, fixed 20000 operations per independent stage; synthetic drained output, not filesystem throughput or formal soak.",
+  "stages": [
+    {
+      "stage": "query",
+      "operations": 20000,
+      "elapsed_ms": 658.030479,
+      "before": {
+        "rss": 341626880,
+        "heapTotal": 12263424,
+        "heapUsed": 8064520,
+        "external": 277025748,
+        "arrayBuffers": 274623812
+      },
+      "after": {
+        "rss": 349769728,
+        "heapTotal": 16457728,
+        "heapUsed": 8925176,
+        "external": 274011337,
+        "arrayBuffers": 271570236
+      },
+      "sampled_bytes": 1091311104,
+      "largest_sites": [
+        {
+          "bytes": 149958288,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 137137336,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 82585200,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 63867752,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "subarray"
+          ]
+        },
+        {
+          "bytes": 40668848,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0MP26HhWw968moonmmdb6Reader6lookup",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 40499888,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "subarray"
+          ]
+        },
+        {
+          "bytes": 26030584,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb8uint__be"
+          ]
+        },
+        {
+          "bytes": 23942712,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 22063648,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode"
+          ]
+        },
+        {
+          "bytes": 22031200,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb8uint__be"
+          ]
+        },
+        {
+          "bytes": 21253648,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 19473224,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "decode"
+          ]
+        },
+        {
+          "bytes": 18981952,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode"
+          ]
+        },
+        {
+          "bytes": 14891400,
+          "stack": [
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value"
+          ]
+        },
+        {
+          "bytes": 13441624,
+          "stack": [
+            "_M0MP26HhWw968moonmmdb6Reader6lookup",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb6decode",
+            "_M0FP26HhWw968moonmmdb13decode__value",
+            "_M0FP26HhWw968moonmmdb8uint__be"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "typed_serialization",
+      "operations": 20000,
+      "elapsed_ms": 135.4057439999999,
+      "before": {
+        "rss": 230453248,
+        "heapTotal": 18268160,
+        "heapUsed": 10295960,
+        "external": 274011337,
+        "arrayBuffers": 135824014
+      },
+      "after": {
+        "rss": 240381952,
+        "heapTotal": 26685440,
+        "heapUsed": 12541064,
+        "external": 138265115,
+        "arrayBuffers": 135824014
+      },
+      "sampled_bytes": 325135784,
+      "largest_sites": [
+        {
+          "bytes": 139428712,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MPC14json4Json17stringify_2einner"
+          ]
+        },
+        {
+          "bytes": 30608080,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json"
+          ]
+        },
+        {
+          "bytes": 21680416,
+          "stack": [
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0MPB3Map3MapGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 16164480,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MPC14json4Json17stringify_2einner",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/examples/allocation_probe/_build/js/release/build/local/moonmmdb_allocation_probe/moonmmdb_allocation_probe.js"
+          ]
+        },
+        {
+          "bytes": 15188256,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0MPB3Map3MapGsRPB4JsonE",
+            "_M0MPB3Map15set__with__hashGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 10963584,
+          "stack": [
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0IPB3MapPB6ToJson8to__jsonGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 9278496,
+          "stack": [
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0MP26HhWw968moonmmdb5Value16to__tagged__json"
+          ]
+        },
+        {
+          "bytes": 7878496,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0MPC14json4Json17stringify_2einner"
+          ]
+        },
+        {
+          "bytes": 7216832,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0IPB3MapPB6ToJson8to__jsonGsRPB4JsonE",
+            "_M0MPB3Map3MapGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 6628120,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json"
+          ]
+        },
+        {
+          "bytes": 6166576,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MPB3Map3MapGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 5280544,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0MP26HhWw968moonmmdb5Value16to__tagged__json",
+            "_M0MPB3Map3MapGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 4891192,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0IPB3MapPB6ToJson8to__jsonGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 4264488,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0IPB3MapPB6ToJson8to__jsonGsRPB4JsonE",
+            "_M0MPB3Map15set__with__hashGsRPB4JsonE"
+          ]
+        },
+        {
+          "bytes": 3903696,
+          "stack": [
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_M0FP25local27moonmmdb__allocation__probe16probe__serialize",
+            "_M0MP26HhWw968moonmmdb10Enrichment8to__json",
+            "_M0MP26HhWw968moonmmdb10Projection8to__json",
+            "_M0MPB3Map15set__with__hashGsRPB4JsonE"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "host_parse",
+      "operations": 20000,
+      "elapsed_ms": 39.70680799999991,
+      "before": {
+        "rss": 240775168,
+        "heapTotal": 25812992,
+        "heapUsed": 7589080,
+        "external": 138265115,
+        "arrayBuffers": 135824014
+      },
+      "after": {
+        "rss": 240349184,
+        "heapTotal": 25370624,
+        "heapUsed": 9084784,
+        "external": 138265115,
+        "arrayBuffers": 135824014
+      },
+      "sampled_bytes": 9248424,
+      "largest_sites": [
+        {
+          "bytes": 9248424,
+          "stack": [
+            "(root)",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs"
+          ]
+        }
+      ]
+    },
+    {
+      "stage": "host_stringify_and_output",
+      "operations": 20000,
+      "elapsed_ms": 97.16788100000008,
+      "before": {
+        "rss": 240349184,
+        "heapTotal": 25108480,
+        "heapUsed": 6366696,
+        "external": 138265115,
+        "arrayBuffers": 135824014
+      },
+      "after": {
+        "rss": 240480256,
+        "heapTotal": 25108480,
+        "heapUsed": 9847352,
+        "external": 138854939,
+        "arrayBuffers": 136413838
+      },
+      "sampled_bytes": 45811888,
+      "largest_sites": [
+        {
+          "bytes": 18234072,
+          "stack": [
+            "(root)",
+            "processTicksAndRejections",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs"
+          ]
+        },
+        {
+          "bytes": 6010584,
+          "stack": [
+            "(root)",
+            "processTicksAndRejections",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs"
+          ]
+        },
+        {
+          "bytes": 4761240,
+          "stack": [
+            "(root)",
+            "processTicksAndRejections",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "Promise"
+          ]
+        },
+        {
+          "bytes": 4016952,
+          "stack": [
+            "processTicksAndRejections",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "fromStringFast"
+          ]
+        },
+        {
+          "bytes": 3770344,
+          "stack": [
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_write",
+            "writeOrBuffer",
+            "onwrite",
+            "nextTick"
+          ]
+        },
+        {
+          "bytes": 2471808,
+          "stack": [
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_write",
+            "from",
+            "fromStringFast",
+            "utf8Write"
+          ]
+        },
+        {
+          "bytes": 2200536,
+          "stack": [
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "writeOrBuffer",
+            "onwrite"
+          ]
+        },
+        {
+          "bytes": 1450112,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_write",
+            "from",
+            "fromString",
+            "fromStringFast",
+            "utf8Write"
+          ]
+        },
+        {
+          "bytes": 787368,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_write",
+            "writeOrBuffer",
+            "onwrite"
+          ]
+        },
+        {
+          "bytes": 754832,
+          "stack": [
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_write",
+            "from",
+            "fromStringFast",
+            "FastBuffer",
+            "Uint8Array"
+          ]
+        },
+        {
+          "bytes": 296560,
+          "stack": [
+            "Writable.write",
+            "_write",
+            "from",
+            "fromString",
+            "fromStringFast",
+            "utf8Write"
+          ]
+        },
+        {
+          "bytes": 295360,
+          "stack": [
+            "_write",
+            "from",
+            "fromString",
+            "fromStringFast",
+            "FastBuffer",
+            "Uint8Array"
+          ]
+        },
+        {
+          "bytes": 197504,
+          "stack": [
+            "processTicksAndRejections",
+            "(anonymous)",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "Promise",
+            "file:///home/runner/work/moonmmdb/moonmmdb/verification/local/baseline/scripts/allocation-profile.mjs",
+            "_write"
+          ]
+        },
+        {
+          "bytes": 131152,
+          "stack": [
+            "_write",
+            "writeOrBuffer",
+            "write",
+            "WritableState.onwrite",
+            "onwrite",
+            "nextTick"
+          ]
+        },
+        {
+          "bytes": 101504,
+          "stack": [
+            "(root)",
+            "processTicksAndRejections",
+            "pushAsyncContext"
+          ]
+        }
+      ]
+    }
+  ]
+}

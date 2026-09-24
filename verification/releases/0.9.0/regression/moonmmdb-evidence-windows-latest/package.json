@@ -1,0 +1,72 @@
+{
+  "started": "2026-09-24T16:19:39.892114+00:00",
+  "status": "passed",
+  "scope": "Fresh local workspace importing a newly extracted moon package, not Mooncakes registry installation.",
+  "steps": [
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "package"
+      ],
+      "exit_code": 0,
+      "output": "Running moon check ...\nFinished. moon: ran 13 tasks, now up to date\nCheck passed\nPackage to D:\\a\\moonmmdb\\moonmmdb\\_build\\publish\\HhWw96-moonmmdb-0.9.0.zip\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_log_example",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_typed_example",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_log_example",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "C:\\Users\\runneradmin\\.moon\\bin\\moon.EXE",
+        "test",
+        "-p",
+        "local/moonmmdb_typed_example",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "archive": "HhWw96-moonmmdb-0.9.0.zip",
+  "sha256": "4a5e62979225e6aed7355cda4db57a863314fa0e9605f4eb657baf6693769891",
+  "file_count": 556,
+  "contains_scenario_licenses": true,
+  "finished": "2026-09-24T16:19:43.287004+00:00"
+}

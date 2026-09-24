@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "node": "v24.20.0",
+  "environment": {
+    "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+    "processor": "x86_64"
+  },
+  "workload": "country",
+  "baseline_tag": "v0.8.0",
+  "historical_environment_note": "2026-09-20 Windows/Node24.13.0 failure is retained. This paired comparison fixes Node24.20.0 and runs both revisions sequentially on this same runner; it is not an exact recreation of the old OS/machine/runtime.",
+  "runs": [
+    {
+      "name": "baseline",
+      "passed": true,
+      "sha256": "8d29c4520662cdd64862da4523fb831cb389028287ab1a8edc4f35a66a935b2f",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-1",
+      "passed": true,
+      "sha256": "4175f19b8d951c6fca397a4403dfdc3c3f7d9aa6e123d6ed4b69faded75f0dc2",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-2",
+      "passed": true,
+      "sha256": "b8afdb870e29015e7ca91398873ef25a8a33a12716c3c6524ab8a39bec2d91f0",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-3",
+      "passed": true,
+      "sha256": "10bfb68539fc4b16806e533accd646256ea76ceae7236dca363db0b9c5a54517",
+      "exit_code": 0
+    }
+  ],
+  "finished": "2026-09-24T18:18:28.851107+00:00"
+}

@@ -4,7 +4,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 
 ## 使用与构建
 
-七个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
+八个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。0.9.0 新增 `analyze`，使用与报告口径见 [正式日志分析](ANALYTICS.md)；发布状态以 [版本验证](VERIFICATION_0_9.md) 为准。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
 
 开发环境沿用 MoonBit 0.10.11+6ff76a5f9；Windows 使用固定 w64devkit 2.10.0 / GCC 16.2.0，Linux 在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
 
@@ -28,7 +28,8 @@ SHA-256 来自固定 `moonbitlang/x@0.5.5`。该版本 crypto 包的旧数组构
 - Native JSON 嵌套上限为 128；这是显式资源限制。固定 MoonBit 解析器还要求 Unicode 代理项转义成对：如 `"\ud800"`、`"\udfff"` 会成为 invalid-jsonl 错误行，而 Node JSON.parse 接受它们。正确配对的 `"\ud800\udc00"` 与普通 Unicode 均可使用。这是明确的输入兼容边界，不宣称任意 JSON 完全等价。坏配置直接终止，坏日志按行报错；非法 UTF-8、传输失败或资源超限终止整次处理。
 - 数据库合计上限 256 MiB；打开过程中存在宿主字节、Reader 快照、解码及输出分配，不能把文件上限写成内存上限。
 - 输出发生阻塞时等待消费者；管道提前关闭时退出 2，不写完成汇总。EOF 为正常输入终止；不能从 EOF 判断上游进程的业务状态。
-- 本轮不提供 Native enrich、analytics、mmap、自动下载和更新功能。
+- `analyze` 在正常 EOF 后输出单个统计报告；坏日志行继续计错，资源耗尽、损坏 UTF-8、读写故障时终止且不输出完整报告。Node 和 Native 共用 MoonBit 分析包及 128 层输入深度限制。
+- 本轮不提供 Native enrich、mmap、自动下载和更新功能。
 
 ## 验证入口
 

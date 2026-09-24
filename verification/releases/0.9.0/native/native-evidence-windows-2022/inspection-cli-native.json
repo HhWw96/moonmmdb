@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "target": "native",
+  "platform": "win32",
+  "source_sha256": "31baecc42aab542c0e0d22b7ecf9496b504c508615c8f4e55492d3ea77c9d546",
+  "artifact_sha256": "2b540c19ad57c62a1b7fc600478faeccda16053e1bba73111ad0d6c9de37f222",
+  "checks": [
+    "Unicode networks",
+    "Unicode validation",
+    "clipping",
+    "all structure",
+    "decode",
+    "invalid CIDR",
+    "work exhaustion",
+    "state exhaustion",
+    "duplicate flag",
+    "unknown flag",
+    "metadata resource limit",
+    "hidden corruption",
+    "hidden corruption is outside successful lookup",
+    {
+      "name": "131072 records throughput",
+      "received": 131072,
+      "seconds": 0.6728997
+    },
+    {
+      "name": "131072 records slow consumer",
+      "received": 131072,
+      "seconds": 1.7635732999999998
+    },
+    {
+      "name": "record limit is incomplete",
+      "received": 100000,
+      "seconds": 0.4905510999999997
+    },
+    {
+      "name": "early output close",
+      "received": 100,
+      "seconds": 0.03802430000000004
+    }
+  ]
+}

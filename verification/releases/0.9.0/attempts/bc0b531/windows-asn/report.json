@@ -1,0 +1,27 @@
+{
+  "status": "failed",
+  "node": "v24.20.0",
+  "environment": {
+    "platform": "Windows-2022Server-10.0.20348-SP0",
+    "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+  },
+  "workload": "asn",
+  "baseline_tag": "v0.8.0",
+  "historical_environment_note": "2026-09-20 Windows/Node24.13.0 failure is retained. This paired comparison fixes Node24.20.0 and runs both revisions sequentially on this same runner; it is not an exact recreation of the old OS/machine/runtime.",
+  "runs": [
+    {
+      "name": "baseline",
+      "passed": true,
+      "sha256": "b13d25eff39b450448251a3f05fb4d031f66459d3ad7db4b7cb6ff5a7d0b4d98",
+      "exit_code": 0
+    },
+    {
+      "name": "candidate-1",
+      "passed": false,
+      "sha256": "323d2686326c0a6079a9f96206e8f4cb65e7c120787be8feebd9f5207927a3d5",
+      "exit_code": 0
+    }
+  ],
+  "error": "RuntimeError('Candidate default-memory gate failed; do not publish')",
+  "finished": "2026-09-24T15:07:04.220945+00:00"
+}

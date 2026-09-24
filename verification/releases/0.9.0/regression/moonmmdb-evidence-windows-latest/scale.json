@@ -1,0 +1,31 @@
+{
+  "started": "2026-09-24T16:19:38.346532+00:00",
+  "status": "passed",
+  "database_bytes": 31064069,
+  "database_sha256": "79147e27d62208f9705cce45e19f7a036b8dff5f130f9de3b2989b2819db28aa",
+  "networks": 65536,
+  "record_size": 28,
+  "checks": 5000,
+  "reference": "maxminddb 3.2.0 pure Python plus mathematical /16 identity",
+  "seed": "0x5343414c",
+  "conditions": {
+    "platform": "Windows-2025Server-10.0.26100-SP0",
+    "python": "3.12.10",
+    "node": "v24.20.0",
+    "warmup_queries": 200,
+    "measurement": "MoonBit lookup plus typed JSON serialization and host JSON parsing; result rows retained for comparison",
+    "limits": "Synthetic records, not real geolocation accuracy or production workload; RSS includes retained results and input snapshot."
+  },
+  "failure_count": 0,
+  "failures": [],
+  "measurement": {
+    "initialization_ms": 154.6575,
+    "query_count": 5000,
+    "elapsed_ms": 132.3006,
+    "mean_us": 26.46012,
+    "rss_bytes": 130408448,
+    "max_rss_kib": 127360,
+    "core_sha256": "858874d08c0bf0a221daad4c661f5bbf148fc0cd6ffe20b988d9b6f88ba0b3ee"
+  },
+  "finished": "2026-09-24T16:19:39.814678+00:00"
+}

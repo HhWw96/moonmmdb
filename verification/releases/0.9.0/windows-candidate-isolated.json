@@ -1,0 +1,11 @@
+{
+  "status": "passed",
+  "scope": "Downloaded final CI candidate, before public release",
+  "validated_run": 36026354266,
+  "implementation_commit": "462389566a65d1a343e9ef731d95adfa6938ae30",
+  "archive": "moonmmdb-0.9.0-windows-x64.zip",
+  "sha256": "f326e8c7a96d955711306ddcf70dcfea87777e5dfbefa2e4e50e8a702d6a0073",
+  "executable_sha256": "2b540c19ad57c62a1b7fc600478faeccda16053e1bba73111ad0d6c9de37f222",
+  "without_developer_tools": true,
+  "commands": 11
+}

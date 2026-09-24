@@ -1,0 +1,149 @@
+{
+  "started": "2026-09-24T16:18:28.815Z",
+  "platform": "win32",
+  "node": "v24.20.0",
+  "status": "passed",
+  "steps": [
+    {
+      "name": "toolchain",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/moon.mjs",
+        "version",
+        "--all"
+      ]
+    },
+    {
+      "name": "format",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/moon.mjs",
+        "fmt",
+        "--check"
+      ]
+    },
+    {
+      "name": "api-compat",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/api-compat.mjs"
+      ]
+    },
+    {
+      "name": "js-check",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/moon.mjs",
+        "check",
+        "--target",
+        "js",
+        "--deny-warn"
+      ]
+    },
+    {
+      "name": "js-tests",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/moon.mjs",
+        "test",
+        "--target",
+        "js",
+        "--deny-warn"
+      ]
+    },
+    {
+      "name": "wasm-check",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/moon.mjs",
+        "check",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ]
+    },
+    {
+      "name": "wasm-tests",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/moon.mjs",
+        "test",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ]
+    },
+    {
+      "name": "build",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/build.mjs"
+      ]
+    },
+    {
+      "name": "cli-tests",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "--test",
+        "tests/cli.test.mjs",
+        "tests/evidence.test.mjs",
+        "tests/api.test.mjs",
+        "tests/stream.test.mjs",
+        "tests/diff.test.mjs",
+        "tests/many.test.mjs",
+        "tests/api-compat.test.mjs",
+        "tests/analyze.test.mjs"
+      ]
+    },
+    {
+      "name": "adversarial",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/adversarial-verify.mjs"
+      ]
+    },
+    {
+      "name": "boundary",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/boundary-verify.mjs"
+      ]
+    },
+    {
+      "name": "mutation",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/mutation-verify.mjs"
+      ]
+    },
+    {
+      "name": "consumer",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/consumer-verify.mjs"
+      ]
+    },
+    {
+      "name": "scenarios",
+      "passed": true,
+      "exit_code": 0,
+      "args": [
+        "scripts/demo.mjs"
+      ]
+    }
+  ],
+  "finished": "2026-09-24T16:18:55.262Z"
+}

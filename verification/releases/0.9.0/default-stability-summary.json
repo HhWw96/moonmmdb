@@ -1,0 +1,361 @@
+{
+  "status": "passed",
+  "implementation_commit": "462389566a65d1a343e9ef731d95adfa6938ae30",
+  "validated_run": 36026364274,
+  "core_sha256": "858874d08c0bf0a221daad4c661f5bbf148fc0cd6ffe20b988d9b6f88ba0b3ee",
+  "scope": "Four same-runner baseline comparisons and twelve consecutive default-runtime candidate soaks; original report hashes checked before Git newline normalization.",
+  "groups": [
+    {
+      "group": "default-stability-ubuntu-22.04-asn",
+      "same_load_fields": [
+        "databases",
+        "ips",
+        "expected_sha256",
+        "node",
+        "cpu",
+        "exec_argv",
+        "gc_mode"
+      ],
+      "runs": [
+        {
+          "name": "baseline",
+          "combined_gate_passed": true,
+          "queries": 68936000,
+          "queries_per_second": 38297.535953540144,
+          "rss": {
+            "first_median": 366811136.0,
+            "last_median": 366850048.0,
+            "growth_bytes": 38912.0,
+            "allowed_growth_bytes": 91702784.0,
+            "passed": true,
+            "peak": 366850048
+          },
+          "private": null
+        },
+        {
+          "name": "candidate-1",
+          "combined_gate_passed": true,
+          "queries": 86439000,
+          "queries_per_second": 48021.173248337866,
+          "rss": {
+            "first_median": 361857024.0,
+            "last_median": 361869312.0,
+            "growth_bytes": 12288.0,
+            "allowed_growth_bytes": 90464256.0,
+            "passed": true,
+            "peak": 361869312
+          },
+          "private": null
+        },
+        {
+          "name": "candidate-2",
+          "combined_gate_passed": true,
+          "queries": 82912000,
+          "queries_per_second": 46061.9527496906,
+          "rss": {
+            "first_median": 361558016.0,
+            "last_median": 361566208.0,
+            "growth_bytes": 8192.0,
+            "allowed_growth_bytes": 90389504.0,
+            "passed": true,
+            "peak": 361566208
+          },
+          "private": null
+        },
+        {
+          "name": "candidate-3",
+          "combined_gate_passed": true,
+          "queries": 84115000,
+          "queries_per_second": 46730.30782965249,
+          "rss": {
+            "first_median": 364503040.0,
+            "last_median": 364511232.0,
+            "growth_bytes": 8192.0,
+            "allowed_growth_bytes": 91125760.0,
+            "passed": true,
+            "peak": 364511232
+          },
+          "private": null
+        }
+      ]
+    },
+    {
+      "group": "default-stability-ubuntu-22.04-country",
+      "same_load_fields": [
+        "databases",
+        "ips",
+        "expected_sha256",
+        "node",
+        "cpu",
+        "exec_argv",
+        "gc_mode"
+      ],
+      "runs": [
+        {
+          "name": "baseline",
+          "combined_gate_passed": true,
+          "queries": 70124000,
+          "queries_per_second": 38957.45706609638,
+          "rss": {
+            "first_median": 340996096.0,
+            "last_median": 341053440.0,
+            "growth_bytes": 57344.0,
+            "allowed_growth_bytes": 85249024.0,
+            "passed": true,
+            "peak": 341057536
+          },
+          "private": null
+        },
+        {
+          "name": "candidate-1",
+          "combined_gate_passed": true,
+          "queries": 89912000,
+          "queries_per_second": 49950.69252508476,
+          "rss": {
+            "first_median": 363663360.0,
+            "last_median": 363663360.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 90915840.0,
+            "passed": true,
+            "peak": 363663360
+          },
+          "private": null
+        },
+        {
+          "name": "candidate-2",
+          "combined_gate_passed": true,
+          "queries": 88213000,
+          "queries_per_second": 49006.84740761626,
+          "rss": {
+            "first_median": 364212224.0,
+            "last_median": 364462080.0,
+            "growth_bytes": 249856.0,
+            "allowed_growth_bytes": 91053056.0,
+            "passed": true,
+            "peak": 364462080
+          },
+          "private": null
+        },
+        {
+          "name": "candidate-3",
+          "combined_gate_passed": true,
+          "queries": 89391000,
+          "queries_per_second": 49661.16008139436,
+          "rss": {
+            "first_median": 368607232.0,
+            "last_median": 369827840.0,
+            "growth_bytes": 1220608.0,
+            "allowed_growth_bytes": 92151808.0,
+            "passed": true,
+            "peak": 369827840
+          },
+          "private": null
+        }
+      ]
+    },
+    {
+      "group": "default-stability-windows-2022-asn",
+      "same_load_fields": [
+        "databases",
+        "ips",
+        "expected_sha256",
+        "node",
+        "cpu",
+        "exec_argv",
+        "gc_mode"
+      ],
+      "runs": [
+        {
+          "name": "baseline",
+          "combined_gate_passed": true,
+          "queries": 85652000,
+          "queries_per_second": 47584.38943160311,
+          "rss": {
+            "first_median": 144922624.0,
+            "last_median": 143951872.0,
+            "growth_bytes": -970752.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 250462208
+          },
+          "private": {
+            "first_median": 301645824.0,
+            "last_median": 302759936.0,
+            "growth_bytes": 1114112.0,
+            "allowed_growth_bytes": 75411456.0,
+            "passed": true,
+            "peak": 302759936
+          }
+        },
+        {
+          "name": "candidate-1",
+          "combined_gate_passed": true,
+          "queries": 109441000,
+          "queries_per_second": 60800.0999972952,
+          "rss": {
+            "first_median": 144023552.0,
+            "last_median": 142833664.0,
+            "growth_bytes": -1189888.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 250261504
+          },
+          "private": {
+            "first_median": 302039040.0,
+            "last_median": 302313472.0,
+            "growth_bytes": 274432.0,
+            "allowed_growth_bytes": 75509760.0,
+            "passed": true,
+            "peak": 302313472
+          }
+        },
+        {
+          "name": "candidate-2",
+          "combined_gate_passed": true,
+          "queries": 103237000,
+          "queries_per_second": 57353.30701409888,
+          "rss": {
+            "first_median": 144121856.0,
+            "last_median": 142804992.0,
+            "growth_bytes": -1316864.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 249872384
+          },
+          "private": {
+            "first_median": 301068288.0,
+            "last_median": 301068288.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 75267072.0,
+            "passed": true,
+            "peak": 301105152
+          }
+        },
+        {
+          "name": "candidate-3",
+          "combined_gate_passed": true,
+          "queries": 108737000,
+          "queries_per_second": 60408.91205734643,
+          "rss": {
+            "first_median": 143951872.0,
+            "last_median": 142866432.0,
+            "growth_bytes": -1085440.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 249991168
+          },
+          "private": {
+            "first_median": 302419968.0,
+            "last_median": 302419968.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 75604992.0,
+            "passed": true,
+            "peak": 302452736
+          }
+        }
+      ]
+    },
+    {
+      "group": "default-stability-windows-2022-country",
+      "same_load_fields": [
+        "databases",
+        "ips",
+        "expected_sha256",
+        "node",
+        "cpu",
+        "exec_argv",
+        "gc_mode"
+      ],
+      "runs": [
+        {
+          "name": "baseline",
+          "combined_gate_passed": true,
+          "queries": 44336000,
+          "queries_per_second": 24630.597353796205,
+          "rss": {
+            "first_median": 141750272.0,
+            "last_median": 135899136.0,
+            "growth_bytes": -5851136.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 248811520
+          },
+          "private": {
+            "first_median": 301228032.0,
+            "last_median": 301228032.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 75307008.0,
+            "passed": true,
+            "peak": 301264896
+          }
+        },
+        {
+          "name": "candidate-1",
+          "combined_gate_passed": true,
+          "queries": 55944000,
+          "queries_per_second": 31079.549710850577,
+          "rss": {
+            "first_median": 144924672.0,
+            "last_median": 143022080.0,
+            "growth_bytes": -1902592.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 257241088
+          },
+          "private": {
+            "first_median": 299810816.0,
+            "last_median": 300138496.0,
+            "growth_bytes": 327680.0,
+            "allowed_growth_bytes": 74952704.0,
+            "passed": true,
+            "peak": 300138496
+          }
+        },
+        {
+          "name": "candidate-2",
+          "combined_gate_passed": true,
+          "queries": 57221000,
+          "queries_per_second": 31789.199794762822,
+          "rss": {
+            "first_median": 144062464.0,
+            "last_median": 142845952.0,
+            "growth_bytes": -1216512.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 257040384
+          },
+          "private": {
+            "first_median": 308604928.0,
+            "last_median": 308891648.0,
+            "growth_bytes": 286720.0,
+            "allowed_growth_bytes": 77151232.0,
+            "passed": true,
+            "peak": 308891648
+          }
+        },
+        {
+          "name": "candidate-3",
+          "combined_gate_passed": true,
+          "queries": 57195000,
+          "queries_per_second": 31774.6093788396,
+          "rss": {
+            "first_median": 144623616.0,
+            "last_median": 142796800.0,
+            "growth_bytes": -1826816.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 257146880
+          },
+          "private": {
+            "first_median": 308824064.0,
+            "last_median": 308879360.0,
+            "growth_bytes": 55296.0,
+            "allowed_growth_bytes": 77206016.0,
+            "passed": true,
+            "peak": 308879360
+          }
+        }
+      ]
+    }
+  ]
+}
