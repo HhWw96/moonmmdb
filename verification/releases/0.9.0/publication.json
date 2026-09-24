@@ -1,0 +1,22 @@
+{
+  "status": "registry-published-github-and-pages-pending",
+  "implementation_commit": "462389566a65d1a343e9ef731d95adfa6938ae30",
+  "package_source_commit": "8e3cc2977d9d00a172dcfa2cdad9305cd0ed6bd0",
+  "registry_archive_url": "https://download.mooncakes.io/user/HhWw96/moonmmdb/0.9.0.zip",
+  "registry_archive_sha256": "231f0b49c97ec30bc1f3996a7668b2c14e545d7d96965601e7ffe2fa55fb11b1",
+  "registry_archive_bytes": 2093212,
+  "package_files": 680,
+  "uploaded_downloaded_bytes_equal": true,
+  "excluded_files": [
+    {
+      "path": "verification/regressions/native-mingw-missing-rand-s.json",
+      "reason": "Historical compiler log contains a private user path; source and failure description remain available."
+    }
+  ],
+  "registry_test": "registry-0.9.0.json",
+  "native_run": 36026354266,
+  "regression_run": 36026354200,
+  "browser_run": 36026354294,
+  "analytics_run": 36026377613,
+  "stability_run": 36026364274
+}
