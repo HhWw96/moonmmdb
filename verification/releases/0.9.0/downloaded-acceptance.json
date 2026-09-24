@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "run": 36041324916,
+  "acceptance_commit": "84e263f79888f0cb623b9104fc1ac632b5713b46",
+  "scope": "Separate verification branch differs from released tag only in its acceptance workflow; product source unchanged. Downloaded public Release assets, verified hashes, removed developer tools from executable PATH.",
+  "receipts": [
+    {
+      "runner": "ubuntu-22.04",
+      "receipt": "downloaded/downloaded-acceptance-ubuntu-22.04/downloaded-acceptance.json",
+      "sha256": "499684b3b21d153ce912a51e6ebebebeaefa91e8a4df0645df3836df0a656173"
+    },
+    {
+      "runner": "ubuntu-24.04",
+      "receipt": "downloaded/downloaded-acceptance-ubuntu-24.04/downloaded-acceptance.json",
+      "sha256": "2e11c7e5c8db90b6fef6916b0d92c69ed26e8696a9f629d97ef54ea64d461574"
+    },
+    {
+      "runner": "windows-2022",
+      "receipt": "downloaded/downloaded-acceptance-windows-2022/downloaded-acceptance.json",
+      "sha256": "c3d601f2793005b34feddeea8b640fbdfa945e5193a3b05f4a8326917a2e1e6d"
+    }
+  ]
+}

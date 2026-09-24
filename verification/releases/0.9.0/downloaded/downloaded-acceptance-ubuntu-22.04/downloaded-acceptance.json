@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "archive": "moonmmdb-0.9.0-linux-x64.tar.gz",
+  "sha256": "e1bf528e3cd7ded3cde12569bf5e141ca08efcbfb0916cf6fa858b206d478edb",
+  "executable_sha256": "18654ebe8da60394560048cdbba3d1883a07acbdcfac32096441f24f79765b28",
+  "without_developer_tools": true,
+  "commands": 11,
+  "downloaded_assets": {
+    "moonmmdb-0.9.0-windows-x64.zip": "f326e8c7a96d955711306ddcf70dcfea87777e5dfbefa2e4e50e8a702d6a0073",
+    "moonmmdb-0.9.0-linux-x64.tar.gz": "e1bf528e3cd7ded3cde12569bf5e141ca08efcbfb0916cf6fa858b206d478edb",
+    "moonmmdb-0.9.0-offline.html": "d308f6de9c29935fd29a2b970387e5ddd7319796cf2a1bad9091d7d1a4a9742e",
+    "HhWw96-moonmmdb-0.9.0.zip": "231f0b49c97ec30bc1f3996a7668b2c14e545d7d96965601e7ffe2fa55fb11b1"
+  },
+  "release_commit": "e9ab1257eeac004f6655cbeebb5f47e347b7a070",
+  "acceptance_commit": "84e263f79888f0cb623b9104fc1ac632b5713b46",
+  "runner": "ubuntu-22.04"
+}

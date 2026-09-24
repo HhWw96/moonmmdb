@@ -1,6 +1,6 @@
 # 0.9.0 验证记录
 
-0.9.0 的全部实现与验证门槛已通过。正式发布、下载及注册表安装回执另行记录在本页末尾与 `verification/releases/0.9.0/publication.json`；打包前验证和发布后的复验分别记录。
+0.9.0 已完成全部验证并正式发布到 GitHub、Mooncakes 和 GitHub Pages。公开下载后的校验、三平台 Native 隔离运行和全新目录注册表安装均通过；打包前验证与发布后复验分别记录。
 
 本版本实现正式 `analytics` 包、Native/Node `analyze` 命令、精确互斥计数及原始输入来源信息。
 固定 MoonBit 0.10.11+6ff76a5f9；正式 Node 对照固定 24.20.0。功能定义见 [日志分析](ANALYTICS.md)。
@@ -99,8 +99,21 @@ RSS 与堆占用是不同指标，外部内存与 ArrayBuffer 也不能重复求
 完整来源、采样和结果见 `verification/releases/0.9.0/analytics` 与 `analytics-soak-summary.json`。输入 SHA-256 为 `9e55e861acdd4394be1b6ef69ef18db4b4493bd18c8f13a4884b4b6d63a453d5`。
 这是新分析命令的证据，不能替代 City＋Country 历史默认查询负载的三轮验证。
 
-## 发布后的必需回执
+## 发布与安装回执
 
-GitHub、Mooncakes、Pages、重新下载校验、Native 隔离运行和全新目录注册表消费者验证均须另附回执。
-注册表安装不得使用本地 workspace。没有这些证据时，候选源码、HTML 或压缩包不能称为正式交付。
-历史默认 RSS 失败仍见 [0.4.0 验证](VERIFICATION_0_4.md)，不得删除或改写为已经通过。
+2026-09-25（UTC+8）正式发布，实际 GitHub 发布时间为 2026-09-24T18:25:17Z。
+
+| 交付 | 验证结果 |
+|---|---|
+| [GitHub v0.9.0](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.0) | [发布工作流](https://github.com/HhWw96/moonmmdb/actions/runs/36041063913)核对五项门禁与源码差异后发布四个文件及 SHA256SUMS |
+| [Mooncakes 0.9.0](https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.0/) | 两次全新目录直接从注册表安装，JS/WasmGC 消费者均通过；未使用本地 workspace |
+| [网页](https://hhww96.github.io/moonmmdb/)与[离线 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.0/moonmmdb-0.9.0-offline.html) | [部署](https://github.com/HhWw96/moonmmdb/actions/runs/36041163097)通过，实际 HTTP 内容为 0.9.0，325304 字节，和公开离线下载逐字节一致 |
+| 公开 Native 下载包 | [发布后验收](https://github.com/HhWw96/moonmmdb/actions/runs/36041324916)在 Windows 2022、Ubuntu 22.04、24.04 各通过 11 项隔离运行检查；本机 Windows 另复验通过 |
+
+公开下载文件均与最终 CI 验证产物一致；注册表源码 ZIP 为 2093212 字节、680 个文件，SHA-256 `231f0b49c97ec30bc1f3996a7668b2c14e545d7d96965601e7ffe2fa55fb11b1`，与审核过的上传文件逐字节一致。
+源码包提交 `8e3cc2977d9d00a172dcfa2cdad9305cd0ed6bd0`；GitHub tag 提交 `e9ab1257eeac004f6655cbeebb5f47e347b7a070`，差别为发布回执。它们相对通过验证的实现提交仅修改文档和验证记录。
+
+发布后的验收分支只替换测试工作流，未改产品源码；原始回执包含发布提交、验收提交、下载散列与运行环境。它不替代发布前的五项门禁。
+全部发布信息见 `verification/releases/0.9.0/publication.json`，原始验证字节保存在 `validation-original-bytes.zip`，防止换行转换影响内部散列复核。`evidence-index.json` 按所标注提交的 Git blob 字节建立索引，不包含自身。
+源码归档无法包含自身上传后的散列与后续回执；最终发布信息以仓库主分支本页及上述回执为准。
+历史默认 RSS 失败仍见 [0.4.0 验证](VERIFICATION_0_4.md)，没有删除或改写为已经通过。
