@@ -7,6 +7,7 @@ priv struct Decode {
   limits : Limits
   mut remaining : Int
   mut payload : Int
+  mut next : Int
   active : Array[Int]
   work : OperationWork?
 }
@@ -26,6 +27,7 @@ fn decoder(
     limits,
     remaining: limits.max_values,
     payload: limits.max_payload_bytes,
+    next: base,
     active: [],
     work,
   }
@@ -47,6 +49,17 @@ fn uint_be(ctx : Decode, offset : Int, size : Int) -> UInt64 raise MmdbError {
   let mut value : UInt64 = 0
   for i in offset..<(offset + size) {
     value = (value << 8) | ctx.data[i].to_uint64()
+  }
+  value
+}
+
+///|
+// Encoded offsets and 16/32-bit scalars do not need a 64-bit accumulator.
+fn uint32_be(ctx : Decode, offset : Int, size : Int) -> UInt raise MmdbError {
+  bounded(ctx, offset, size)
+  let mut value : UInt = 0
+  for i in offset..<(offset + size) {
+    value = (value << 8) | ctx.data[i].to_uint()
   }
   value
 }
@@ -80,6 +93,19 @@ fn decode(
   offset : Int,
   depth : Int,
 ) -> (Value, Int) raise MmdbError {
+  let value = decode_into(ctx, offset, depth)
+  (value, ctx.next)
+}
+
+///|
+// Recursive calls share an operation-local next offset instead of allocating
+// a (Value, Int) pair for every decoded value. Pointer returns restore their
+// own encoded end; they never expose the referenced record's end to a parent.
+fn decode_into(
+  ctx : Decode,
+  offset : Int,
+  depth : Int,
+) -> Value raise MmdbError {
   bounded(ctx, offset, 1)
   if depth > ctx.limits.max_depth {
     raise MmdbError("depth-limit", offset, "Nesting budget exhausted")
@@ -105,15 +131,15 @@ fn decode_value(
   ctx : Decode,
   offset : Int,
   depth : Int,
-) -> (Value, Int) raise MmdbError {
+) -> Value raise MmdbError {
   let control = ctx.data[offset].to_int()
   let mut kind = control >> 5
   let mut pos = offset + 1
   if kind == 1 {
     let width = ((control >> 3) & 3) + 1
-    let mut pointer = uint_be(ctx, pos, width)
+    let mut pointer = uint32_be(ctx, pos, width)
     if width < 4 {
-      pointer = pointer | ((control & 7).to_uint64() << (width * 8))
+      pointer = pointer | ((control & 7).reinterpret_as_uint() << (width * 8))
     }
     if width == 2 {
       pointer = pointer + 2048
@@ -121,17 +147,18 @@ fn decode_value(
     if width == 3 {
       pointer = pointer + 526336
     }
-    if pointer >= (ctx.end - ctx.base).to_uint64() {
+    if pointer >= (ctx.end - ctx.base).reinterpret_as_uint() {
       raise MmdbError("out-of-bounds", offset, "Pointer outside data section")
     }
-    let target = ctx.base + pointer.to_int()
+    let target = ctx.base + pointer.reinterpret_as_int()
     if ctx.data[target].to_int() >> 5 == 1 {
       raise MmdbError(
         "pointer-to-pointer", offset, "Pointer targets another pointer",
       )
     }
-    let (value, _) = decode(ctx, target, depth + 1)
-    return (value, pos + width)
+    let value = decode_into(ctx, target, depth + 1)
+    ctx.next = pos + width
+    return value
   }
   if kind == 0 {
     bounded(ctx, pos, 1)
@@ -142,7 +169,7 @@ fn decode_value(
   if size >= 29 {
     let extra = size - 28
     let base = if size == 29 { 29 } else if size == 30 { 285 } else { 65821 }
-    size = base + uint_be(ctx, pos, extra).to_int()
+    size = base + uint32_be(ctx, pos, extra).reinterpret_as_int()
     pos = pos + extra
   }
   if kind == 7 || kind == 11 {
@@ -155,11 +182,12 @@ fn decode_value(
     if kind == 11 {
       let items : Array[Value] = []
       for _ in 0..<size {
-        let (value, next) = decode(ctx, pos, depth + 1)
+        let value = decode_into(ctx, pos, depth + 1)
         items.push(value)
-        pos = next
+        pos = ctx.next
       }
-      return (List(items), pos)
+      ctx.next = pos
+      return List(items)
     }
     let items : Array[(String, Value)] = []
     // Small MMDB maps already retain their keys in items. Reuse that storage
@@ -167,7 +195,8 @@ fn decode_value(
     // Large maps keep hash lookup to avoid quadratic hostile-input work.
     let seen : Map[String, Bool]? = if size > 16 { Some(Map([])) } else { None }
     for _ in 0..<size {
-      let (key, next) = decode(ctx, pos, depth + 1)
+      let key = decode_into(ctx, pos, depth + 1)
+      let next = ctx.next
       let name = match key {
         Text(s) => s
         _ =>
@@ -187,11 +216,12 @@ fn decode_value(
       if seen is Some(seen) {
         seen[name] = true
       }
-      let (value, after) = decode(ctx, next, depth + 1)
+      let value = decode_into(ctx, next, depth + 1)
       items.push((name, value))
-      pos = after
+      pos = ctx.next
     }
-    return (Object(items), pos)
+    ctx.next = pos
+    return Object(items)
   }
   if kind == 14 {
     if size > 1 {
@@ -199,7 +229,8 @@ fn decode_value(
         "invalid-size", offset, "Boolean size must be zero or one",
       )
     }
-    return (Boolean(size == 1), pos)
+    ctx.next = pos
+    return Boolean(size == 1)
   }
   let max_size = match kind {
     2 | 4 => size
@@ -239,13 +270,14 @@ fn decode_value(
       }
     }
     3 => Real64({ bits: uint_be(ctx, pos, size), })
-    5 => Unsigned16(uint_be(ctx, pos, size).to_uint())
-    6 => Unsigned32(uint_be(ctx, pos, size).to_uint())
-    8 => Signed32(uint_be(ctx, pos, size).to_int())
+    5 => Unsigned16(uint32_be(ctx, pos, size))
+    6 => Unsigned32(uint32_be(ctx, pos, size))
+    8 => Signed32(uint32_be(ctx, pos, size).reinterpret_as_int())
     9 => Unsigned64(uint_be(ctx, pos, size))
     10 => Unsigned128(decimal_bytes(ctx.data, pos, size))
-    15 => Real32({ bits: uint_be(ctx, pos, size).to_uint(), })
+    15 => Real32({ bits: uint32_be(ctx, pos, size), })
     _ => raise MmdbError("unsupported-type", offset, "Unsupported MMDB scalar")
   }
-  (value, end)
+  ctx.next = end
+  value
 }
