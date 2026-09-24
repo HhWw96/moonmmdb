@@ -14,6 +14,7 @@ cp=out/'config.json';cp.write_text(json.dumps(config))
 report={'status':'running','node':'v24.20.0','environment':{'platform':platform.platform(),'processor':platform.processor()},'workload':args.workload,'baseline_tag':'v0.8.0','historical_environment_note':'2026-09-20 Windows/Node24.13.0 failure is retained. This paired comparison fixes Node24.20.0 and runs both revisions sequentially on this same runner; it is not an exact recreation of the old OS/machine/runtime.','runs':[]}
 try:
  for name,directory in [('baseline',baseline),('candidate-1',ROOT),('candidate-2',ROOT),('candidate-3',ROOT)]:
+  (directory/'verification/local').mkdir(parents=True,exist_ok=True)
   log=out/(name+'.log');dest=out/(name+'.json');samples=[]
   with log.open('wb') as sink:
    child=subprocess.Popen([node,'scripts/soak.mjs',str(cp),'1800','stability-'+name],cwd=directory,stdout=sink,stderr=subprocess.STDOUT)
@@ -28,7 +29,9 @@ try:
    finally:
     monitor.close()
     if child.poll() is None:child.kill();child.wait()
-  result=json.loads((directory/f'verification/local/stability-{name}.json').read_text())
+  receipt=directory/f'verification/local/stability-{name}.json'
+  if not receipt.exists():raise RuntimeError('Soak produced no receipt: '+log.read_text(encoding='utf-8')[-4000:])
+  result=json.loads(receipt.read_text())
   assert result['node']=='v24.20.0' and result['exec_argv']==[] and result['gc_mode']=='runtime default'
   assert result['elapsed_seconds']>=1800 and len(result['samples'])>=59
   assert result['status']=='passed' or result.get('error')=='Persistent RSS growth exceeds gate',result
