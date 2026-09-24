@@ -40,6 +40,42 @@ fn failed_source() -> @mmdb.SourceResult {
 }
 
 ///|
+test "source resource exhaustion is fatal and does not partially count a row" {
+  for code in ["value-limit", "payload-limit", "depth-limit"] {
+    let a = state()
+    let limits = match code {
+      "value-limit" => { ..@mmdb.Limits::default(), max_values: 1, }
+      "payload-limit" => { ..@mmdb.Limits::default(), max_payload_bytes: 1, }
+      _ => { ..@mmdb.Limits::default(), max_depth: 1, }
+    }
+    let failed = try {
+      ignore(@mmdb.open_bytes(asn_fixture(), limits~))
+      abort("expected reader budget error")
+    } catch {
+      e => @mmdb.Failed(e)
+    }
+    let actual = try {
+      a.accept(pair(selected(Some(Text("GB"))), failed))
+      "none"
+    } catch {
+      e => e.code()
+    }
+    assert_eq(actual, code)
+    assert_eq(a.total, 0)
+    assert_eq(a.groups[0].length(), 0)
+    let again = try {
+      ignore(a.finish())
+      "none"
+    } catch {
+      e => e.code()
+    }
+    assert_eq(again, code)
+    a.close()
+    a.close()
+  }
+}
+
+///|
 test "mutually exclusive dimensions conserve valid requests including source failures" {
   let a = state()
   a.accept(row("GB", 7))

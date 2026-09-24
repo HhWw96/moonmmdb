@@ -21,7 +21,7 @@ Native 离线包演示：`moonmmdb analyze examples/geo.mmdb examples/asn.mmdb e
 - 每个国家/ASN 维度的 `counted + not_found + missing_field + type_error + query_error = valid_ips`。
 - `not_found`：IP 无记录；`missing_field`：有记录，但指定字段不存在；两者不会重复计数。
 - `type_error`：国家字段不是字符串，或 ASN 不是无符号 16/32/64 位整数。空字符串是字符串分组，0 是合法无符号 ASN 键；不额外验证地理学语义。
-- `query_error`：有效 IP 的该库查询失败，包括地址族不适用。另一维度仍独立统计。
+- `query_error`：有效 IP 的该库查询失败，包括地址族不适用、损坏记录等非资源错误。另一维度仍独立统计。数据库记录触发解码或投影预算上限时，整次分析立即终止，不输出完成报告。
 - `top` 按次数降序，同数按键的 UTF-16 字典序排序；例如 ASN `"10"` 在 `"9"` 前。
 - `group_count` 为完整有效分组数，`other_requests` 为 Top N 以外的成功计数。
 - 所有计数使用精确 UInt64，JSON 中输出十进制字符串。限制参数和退出码为普通整数。

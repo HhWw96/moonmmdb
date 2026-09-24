@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync, spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdirSync, writeFileSync, copyFileSync, openSync, ftruncateSync, closeSync, unlinkSync } from 'node:fs';
+import { mkdirSync, writeFileSync, readFileSync, copyFileSync, openSync, ftruncateSync, closeSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { root } from '../scripts/moon.mjs';
 const host = process.env.MOONMMDB_TEST_NATIVE ? [resolve(root, 'dist', process.platform === 'win32' ? 'moonmmdb.exe' : 'moonmmdb')] : [process.execPath, resolve(root, 'bin/moonmmdb.mjs')];
@@ -74,6 +74,22 @@ test('bad configuration does not wait for standard input', { timeout: 10000 }, a
   const timer = setTimeout(() => child.kill(), 5000);
   try { const code = await new Promise(resolve => child.once('close', resolve)); assert.equal(code, 2, err); assert.equal(out, ''); }
   finally { clearTimeout(timer); child.stdin.destroy(); }
+});
+
+test('record budgets are fatal while ordinary source corruption remains countable', () => {
+  const dir=resolve(root,'verification/local/analytics-record-limit');mkdirSync(dir,{recursive:true});
+  const data=readFileSync(asn), offset=data.indexOf(Buffer.from('autonomous_system_number'))-2;
+  assert.ok(offset>=0);assert.equal(data[offset],0xe1);assert.equal(data[offset+1],0x58);
+  const path=resolve(dir,'record-limit.mmdb');
+  // An array declaring 65821 elements exceeds the 65536-value decode budget.
+  const limited=Buffer.from(data);limited.set([0x1f,0x04,0,0,0],offset);writeFileSync(path,limited);
+  failed(row('192.0.2.1'),[],'value-limit',[path,asn]);
+  // A reserved scalar type is a per-source query error, not budget exhaustion.
+  const broken=Buffer.from(data);broken.set([0,5],offset);writeFileSync(path,broken);
+  const result=run(row('192.0.2.1'),[],[path,asn]);
+  assert.equal(result.status,2);assert.equal(result.report.status,'complete');
+  assert.equal(result.report.country.query_error,'1');assert.equal(result.report.asn.counted,'1');
+  unlinkSync(path);
 });
 
 test('individual and combined database limits fail before stdin', () => {

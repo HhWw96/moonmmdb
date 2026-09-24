@@ -211,6 +211,19 @@ fn Analyzer::accept(
   result : @mmdb.Enrichment,
 ) -> Unit raise AnalyticsError {
   self.ready()
+  for source in result.sources {
+    if source.1 is Failed(error) && error.code().has_suffix("-limit") {
+      self.stop(
+        error.code(),
+        source.0 +
+        ": " +
+        error.message() +
+        " (offset " +
+        error.offset().to_string() +
+        ")",
+      )
+    }
+  }
   let rows = [
     classify(result.sources[0].1, 0),
     classify(result.sources[1].1, 1),
