@@ -4,8 +4,8 @@ import {resolve} from 'node:path';
 import {tmpdir} from 'node:os';
 import {root,runMoon} from './moon.mjs';
 import {sha256} from './evidence.mjs';
-const version=process.argv[2] || '0.8.0';
-if(!/^0\.[345678]\.0$/.test(version))throw new Error('Expected stable version 0.3.0, 0.4.0, 0.5.0, 0.6.0 0.7.0 or 0.8.0');
+const version=process.argv[2] || '0.9.0';
+if(!/^0\.[3456789]\.0$/.test(version))throw new Error('Expected stable version 0.3.0, 0.4.0, 0.5.0, 0.6.0 0.7.0 or 0.9.0');
 const directory=mkdtempSync(resolve(tmpdir(),'moonmmdb-registry-'));
 const report={started:new Date().toISOString(),status:'running',module:'HhWw96/moonmmdb',version,directory,scope:'New standalone consumer; no workspace dependency; registry download and version assertion.',steps:[]};
 const output=resolve(root,'verification/local/registry-'+version+'.json');
@@ -21,11 +21,18 @@ try {
     const query=`  let fields = @mmdb.prepare_fields(["/autonomous_system_number"])\n  let joined = @mmdb.Enricher::new([{ name: "asn", reader, fields }])\n  let result = joined.lookup("1.0.0.1")\n  assert_eq(result.status_code(), 0)\n  assert_eq(result.sources[0].0, "asn")\n`;
     writeFileSync(path,readFileSync(path,'utf8').replace(/}\n$/,query+'}\n'));
   }
-  if(['0.6.0','0.7.0','0.8.0'].includes(version)) {
+  if(['0.6.0','0.7.0','0.8.0','0.9.0'].includes(version)) {
     writeFileSync(resolve(directory,'moon.pkg'),'import { "HhWw96/moonmmdb" @mmdb, "HhWw96/moonmmdb/geo" @geo }\n');
     writeFileSync(resolve(directory,'consumer.mbt'),'///|\npub fn installed_version() -> String { @mmdb.version() }\n///|\npub fn lookup_asn(reader : @mmdb.Reader, ip : String) -> @geo.AsnLookup raise @geo.GeoError { @geo.lookup_asn(reader, ip) }\n');
     const file=resolve(directory,'consumer_wbtest.mbt');
     const extra=`  let cursor = reader.networks("1.0.0.1/32")\n  assert_eq(cursor.next().unwrap().network, "1.0.0.1/32")\n  assert_eq(cursor.next(), None)\n  cursor.close()\n  assert_eq(reader.validate(decode_data=true).unreachable_nodes, 0)\n  assert_eq(@geo.lookup_asn(reader,"1.0.0.1").record.unwrap().autonomous_system_number, Some(15169U))\n`;
+    writeFileSync(file,readFileSync(file,'utf8').replace(/}\n$/,extra+'}\n'));
+  }
+  if(version==='0.9.0') {
+    const pkg=resolve(directory,'moon.pkg');
+    writeFileSync(pkg,readFileSync(pkg,'utf8').replace(' @geo }',' @geo, "HhWw96/moonmmdb/analytics" @analytics }'));
+    const file=resolve(directory,'consumer_wbtest.mbt');
+    const extra=`  let analysis = @analytics.Analyzer::new(reader, reader)\n  analysis.push("1.0.0.1")\n  analysis.invalid_input()\n  let report = analysis.finish()\n  assert_eq(report.requests, 2UL)\n  assert_eq(report.country.missing_field, 1UL)\n  assert_eq(report.asn.top[0].key, "15169")\n  assert_eq(report.exit_code, 2)\n  analysis.close()\n`;
     writeFileSync(file,readFileSync(file,'utf8').replace(/}\n$/,extra+'}\n'));
   }
   report.steps.push({name:'add',output:runMoon(['add','HhWw96/moonmmdb@'+version],directory,true)});

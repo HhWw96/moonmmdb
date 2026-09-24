@@ -128,24 +128,26 @@ void mm_cli_open(moonbit_bytes_t path,int32_t max_bytes,int32_t max_line) {
   input_owned=strcmp((char*)path,"-")!=0;input=input_owned?open_file((char*)path):stdin;
   if(!input){io_error=1;return;}
   if(input_owned){int64_t size=regular_size(input);if(size<0){io_error=1;mm_cli_close();return;}if(size>max_bytes){io_error=3;mm_cli_close();return;}}
-  line_buffer=malloc(max_line?max_line:1);line_capacity=max_line;
+  line_buffer=malloc((size_t)max_line+1);line_capacity=max_line;
   if(!line_buffer){io_error=1;mm_cli_close();}
 }
-moonbit_bytes_t mm_cli_line(int32_t max_bytes) {
+static moonbit_bytes_t read_line(int32_t max_bytes,int raw) {
   io_error=0;int used=0;
   if(!input){io_error=1;return moonbit_make_bytes(0,0);}
   for(;;){
     int ch=fgetc(input);
     if(ch==EOF){if(ferror(input))io_error=1;else if(!used)io_error=-1;break;}
     input_total++;if(input_total>max_bytes){io_error=3;break;}
-    if(ch=='\n')break;
+    if(ch=='\n'){if(raw)line_buffer[used++]=(unsigned char)ch;break;}
     if(used>=line_capacity){io_error=4;break;}
     line_buffer[used++]=(unsigned char)ch;
   }
   if(io_error){return moonbit_make_bytes(0,0);}
-  if(used && line_buffer[used-1]=='\r')used--;
+  if(!raw && used && line_buffer[used-1]=='\r')used--;
   moonbit_bytes_t out=moonbit_make_bytes(used,0);memcpy(out,line_buffer,used);return out;
 }
+moonbit_bytes_t mm_cli_line(int32_t max_bytes) { return read_line(max_bytes,0); }
+moonbit_bytes_t mm_cli_raw_line(int32_t max_bytes) { return read_line(max_bytes,1); }
 int32_t mm_cli_write(moonbit_bytes_t bytes,int32_t length,int32_t channel) {
   FILE *f=channel?stderr:stdout;
   if(fwrite(bytes,1,length,f)!=(size_t)length || fflush(f))return 1;

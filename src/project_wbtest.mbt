@@ -103,3 +103,19 @@ test "projection budgets charge overlapping selections and pointer request limit
   }
   assert_eq(code, "path-limit")
 }
+
+///|
+test "projection payload measurement preserves UTF8 limits without encoding copies" {
+  let value = Text("aé中🌍")
+  let budget : SelectionBudget = { values: 1, payload: 10, }
+  charge_selection(value, budget)
+  assert_eq(budget.payload, 0)
+  let small : SelectionBudget = { values: 1, payload: 9, }
+  let code = try {
+    charge_selection(value, small)
+    "none"
+  } catch {
+    e => e.code()
+  }
+  assert_eq(code, "payload-limit")
+}

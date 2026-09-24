@@ -7,6 +7,37 @@ fn decode_sample(
 }
 
 ///|
+test "duplicate detection is unchanged across small-map optimization threshold" {
+  for count in [16, 17] {
+    for duplicate in [false, true] {
+      let bytes = Bytes::makei(1 + count * 3, fn(i) {
+        if i == 0 {
+          return (224 + count).to_byte()
+        }
+        match (i - 1) % 3 {
+          0 => b'\x41'
+          1 =>
+            if duplicate && i == 2 + (count - 1) * 3 {
+              b'A'
+            } else {
+              (65 + (i - 1) / 3).to_byte()
+            }
+          _ => b'\x40'
+        }
+      })
+      if duplicate {
+        decode_error(bytes, "duplicate-key")
+      } else {
+        match decode_sample(bytes) {
+          Object(items) => assert_eq(items.length(), count)
+          _ => abort("map expected")
+        }
+      }
+    }
+  }
+}
+
+///|
 fn decode_error(
   bytes : Bytes,
   code : String,

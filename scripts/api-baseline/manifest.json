@@ -26,10 +26,19 @@
       "current": "src/geo/pkg.generated.mbti",
       "baseline": "geo-0.6.0.mbti",
       "sha256": "79bd46dabe00fa37af0cce3d76d13f9256f42b70a2e6383203eec48026a2e661"
+    },
+    {
+      "current": "src/analytics/pkg.generated.mbti",
+      "baseline": "analytics-0.9.0.mbti",
+      "sha256": "c51fef9f7c994de1acbd4fa9a50e314ade8b2d62cdf6c9c091654cc3a5c2d234"
     }
   ],
   "additional_baseline": {
     "version": "0.6.0",
     "origin": "Frozen release candidate source interfaces; publication receipt verifies matching registry bytes. Historical 0.5.0 registry baseline is retained."
+  },
+  "analytics_baseline": {
+    "version": "0.9.0",
+    "origin": "Candidate interface; release only after formal product and stability gates."
   }
 }

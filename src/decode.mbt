@@ -162,7 +162,10 @@ fn decode_value(
       return (List(items), pos)
     }
     let items : Array[(String, Value)] = []
-    let seen : Map[String, Bool] = Map([])
+    // Small MMDB maps already retain their keys in items. Reuse that storage
+    // for duplicate checks, bounding the linear scan to at most 16 entries.
+    // Large maps keep hash lookup to avoid quadratic hostile-input work.
+    let seen : Map[String, Bool]? = if size > 16 { Some(Map([])) } else { None }
     for _ in 0..<size {
       let (key, next) = decode(ctx, pos, depth + 1)
       let name = match key {
@@ -172,12 +175,18 @@ fn decode_value(
             "invalid-map-key", pos, "Map key must be a UTF-8 string",
           )
       }
-      if seen.contains(name) {
+      let duplicate = match seen {
+        Some(seen) => seen.contains(name)
+        None => items.any(fn(item) { item.0 == name })
+      }
+      if duplicate {
         raise MmdbError(
           "duplicate-key", pos, "Duplicate map key is outside reader profile",
         )
       }
-      seen[name] = true
+      if seen is Some(seen) {
+        seen[name] = true
+      }
       let (value, after) = decode(ctx, next, depth + 1)
       items.push((name, value))
       pos = after

@@ -1,4 +1,4 @@
-export const VERSION = '0.8.0';
+export const VERSION = '0.9.0';
 export const MAX_FILE_BYTES = 256 * 1024 * 1024;
 export const MAX_RESULT_BYTES = 8 * 1024 * 1024;
 export const PREVIEW_BYTES = 64 * 1024;

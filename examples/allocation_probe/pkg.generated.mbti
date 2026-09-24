@@ -1,0 +1,21 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "local/moonmmdb_allocation_probe"
+
+import {
+  "HhWw96/moonmmdb",
+}
+
+// Values
+pub fn probe_open(Bytes, Bytes) -> @moonmmdb.Enricher
+
+pub fn probe_query(@moonmmdb.Enricher, String) -> @moonmmdb.Enrichment
+
+pub fn probe_serialize(@moonmmdb.Enrichment) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits

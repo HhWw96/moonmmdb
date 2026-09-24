@@ -1,0 +1,26 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "HhWw96/moonmmdb/analytics_bridge"
+
+// Values
+pub fn analysis_close(AnalysisHandle) -> Unit
+
+pub fn analysis_create(Bytes, Bytes, Int, Int, String) -> AnalysisHandle
+
+pub fn analysis_error(AnalysisHandle) -> String
+
+pub fn analysis_finish(AnalysisHandle) -> String
+
+pub fn analysis_line(AnalysisHandle, String) -> String
+
+pub fn analysis_metadata(AnalysisHandle) -> String
+
+// Errors
+
+// Types and methods
+pub struct AnalysisHandle {
+  // private fields
+}
+
+// Type aliases
+
+// Traits

@@ -116,7 +116,24 @@ fn charge_selection(
   }
   budget.values = budget.values - 1
   let bytes = match value {
-    Text(text) => @utf8.encode(text[:]).length()
+    Text(text) => {
+      // Decoded strings are valid Unicode. Count the identical UTF-8 payload
+      // without allocating a second byte buffer just to measure its length.
+      let mut size = 0
+      for ch in text.iter() {
+        let n = ch.to_int()
+        size += if n < 0x80 {
+          1
+        } else if n < 0x800 {
+          2
+        } else if n < 0x10000 {
+          3
+        } else {
+          4
+        }
+      }
+      size
+    }
     Blob(bytes) => bytes.length()
     List(items) => {
       for item in items {

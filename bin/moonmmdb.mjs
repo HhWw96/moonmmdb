@@ -5,8 +5,9 @@ import { open_database, metadata, lookup, project, validate_paths, prepare_field
 import { InputError, streamOptions, inputSelector, openInput, boundedLines } from './jsonl.mjs';
 import { enrichMany } from './many.mjs';
 import { inspect } from './inspect.mjs';
+import { analyze } from './analyze.mjs';
 
-const help = `MoonMMDB 0.8.0 — offline MaxMind DB reader
+const help = `MoonMMDB 0.9.0 — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
@@ -14,6 +15,7 @@ Usage:
   node bin/moonmmdb.mjs enrich DATABASE.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs diff BEFORE.mmdb AFTER.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs enrich-many CONFIG.json INPUT.jsonl|- [OPTIONS]
+  node bin/moonmmdb.mjs analyze CITY.mmdb ASN.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs networks DATABASE CIDR [--max-records N] [--max-work N]
   node bin/moonmmdb.mjs validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]
   node bin/moonmmdb.mjs --help | --version
@@ -24,6 +26,8 @@ Inspection: networks defaults to 100000 records (cap 1000000). Both commands use
   --max-records N        Default 10000; maximum 1000000.
   --max-input-bytes N    Default 8388608; maximum 1073741824.
   --max-line-bytes N     Default 8388608; maximum 8388608 (LF excluded).
+  --top N               analyze: default 10; maximum 100.
+  --max-groups N        analyze: default/maximum 10000 per dimension.
 
 enrich expects a JSON object per line; output preserves the original under
 "input" and puts the lookup under "mmdb". Use - to read stdin incrementally.
@@ -67,6 +71,10 @@ function statusCode(value) { return value.status === 'error' ? 2 : value.status 
 
 async function main() {
   const [command, database, ...args] = process.argv.slice(2);
+  if (command === 'analyze') {
+    process.exitCode = await analyze(process.argv.slice(3), write);
+    return;
+  }
   if (command === 'networks' || command === 'validate') {
     process.exitCode = await inspect(command, process.argv.slice(3), write);
     return;
@@ -76,7 +84,7 @@ async function main() {
     return;
   }
   if (command === '--help' && !database) { await write(help); return; }
-  if (command === '--version' && !database) { await write('0.8.0\n'); return; }
+  if (command === '--version' && !database) { await write('0.9.0\n'); return; }
   if (!['metadata', 'lookup', 'project', 'enrich', 'diff'].includes(command) || !database ||
     (command === 'metadata' && args.length !== 0) ||
     (command === 'lookup' && (args.length === 0 || args.length > 10000)) ||
@@ -158,7 +166,7 @@ catch (error) {
   process.exitCode = 2;
   const diagnostic = { status: 'error', code: error instanceof OutputError ? 'host-output-error' : error instanceof InputError ? error.code : 'host-input-error', message: error.message };
   if (error instanceof InputError && error.line !== undefined) diagnostic.line = error.line;
-  if (error instanceof OutputError) process.stderr.write(JSON.stringify(diagnostic) + '\n');
+  if (error instanceof OutputError || process.argv[2] === 'analyze') process.stderr.write(JSON.stringify(diagnostic) + '\n');
   else {
     try { await emit(diagnostic); }
     catch (outputError) { process.stderr.write(JSON.stringify({ status: 'error', code: 'host-output-error', message: outputError.message }) + '\n'); }

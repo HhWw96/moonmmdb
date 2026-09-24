@@ -1,0 +1,66 @@
+name: Analytics product validation
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  analytics:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 90
+    env:
+      MOONBIT_INSTALL_VERSION: 0.10.11+6ff76a5f9
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24.20.0'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install fixed MoonBit and compiler (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Invoke-RestMethod https://cli.moonbitlang.com/install/powershell.ps1 | Invoke-Expression
+          "$env:USERPROFILE\.moon\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          python scripts/setup-native-windows.py
+      - name: Install fixed MoonBit (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Build and cross-backend core checks
+        run: |
+          node scripts/build.mjs
+          node scripts/native-build.mjs
+          node scripts/moon.mjs test --target js -p HhWw96/moonmmdb/analytics --deny-warn
+          node scripts/moon.mjs test --target wasm-gc -p HhWw96/moonmmdb/analytics --deny-warn
+          node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs';import {runMoon} from './scripts/moon.mjs';nativeToolchain();runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb/analytics','--deny-warn']);"
+      - name: Node transport and 100000 rows
+        run: node --test tests/analyze.test.mjs
+      - name: Native transport and 100000 rows
+        env:
+          MOONMMDB_TEST_NATIVE: '1'
+        run: node --test tests/analyze.test.mjs
+      - name: Independent aggregation on samples and 7114 production addresses per source
+        run: |
+          python -m pip install --target .reference-deps -r requirements-reference.txt
+          python scripts/download-production.py
+          python scripts/analytics-reference.py --native
+          python scripts/analytics-reference.py --native --production
+      - name: Default Node analyze 30 minute soak
+        run: python scripts/analytics-soak.py --host node
+      - name: Native analyze 30 minute soak
+        run: python scripts/analytics-soak.py --host native
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: analytics-evidence-${{ matrix.os }}
+          path: verification/local/analytics*.json

@@ -443,12 +443,12 @@ fn status_code(value : Json) -> Int {
 ///|
 fn run(args : Array[String]) -> Int raise {
   if args.length() == 2 && args[1] == "--version" {
-    write("0.8.0\n")
+    write("0.9.0\n")
     return 0
   }
   if args.length() == 2 && args[1] == "--help" {
     write(
-      "MoonMMDB 0.8.0 — Native offline MMDB reader\nUsage:\n  moonmmdb metadata DATABASE\n  moonmmdb lookup DATABASE IP [IP ...]\n  moonmmdb project DATABASE IP POINTER [POINTER ...]\n  moonmmdb enrich-many CONFIG INPUT.jsonl|- [OPTIONS]\n  moonmmdb diff BEFORE AFTER INPUT.jsonl|- [OPTIONS]\n  moonmmdb networks DATABASE CIDR [--max-records N] [--max-work N]\n  moonmmdb validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]\n  moonmmdb --help | --version\nOptions: --ip-path POINTER (default /ip), --max-records N (10000; cap 1000000),\n  --max-input-bytes N (8388608; cap 1073741824), --max-line-bytes N (8388608; cap 8388608).\nDatabase total <=256 MiB; config <=64 KiB; JSON nesting <=128. UTF-8 JSONL.\nExit codes: 0 all found; 1 any miss; 2 any error. enrich-many fields come from configuration.\ndiff: --field POINTER (repeatable; default whole record); 0 unchanged, 1 changes, 2 errors.\nstdout: results. stderr: diagnostics and completed summary only. No network access.\n",
+      "MoonMMDB 0.9.0 — Native offline MMDB reader\nUsage:\n  moonmmdb metadata DATABASE\n  moonmmdb lookup DATABASE IP [IP ...]\n  moonmmdb project DATABASE IP POINTER [POINTER ...]\n  moonmmdb enrich-many CONFIG INPUT.jsonl|- [OPTIONS]\n  moonmmdb analyze CITY ASN INPUT.jsonl|- [OPTIONS]\n  moonmmdb diff BEFORE AFTER INPUT.jsonl|- [OPTIONS]\n  moonmmdb networks DATABASE CIDR [--max-records N] [--max-work N]\n  moonmmdb validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]\n  moonmmdb --help | --version\nOptions: --ip-path POINTER (default /ip), --max-records N (10000; cap 1000000),\n  --max-input-bytes N (8388608; cap 1073741824), --max-line-bytes N (8388608; cap 8388608).\nanalyze: --top N (10; cap 100), --max-groups N (10000; cap 10000).\nDatabase total <=256 MiB; config <=64 KiB; JSON nesting <=128. UTF-8 JSONL.\nExit codes: 0 all found; 1 any miss; 2 any error. enrich-many fields come from configuration.\ndiff: --field POINTER (repeatable; default whole record); 0 unchanged, 1 changes, 2 errors.\nstdout: results. stderr: diagnostics and completed summary only. No network access.\n",
     )
     return 0
   }
@@ -456,6 +456,9 @@ fn run(args : Array[String]) -> Int raise {
     fail("host-input-error", "Invalid arguments; use --help")
   }
   let command = args[1]
+  if command == "analyze" {
+    return analyze(args)
+  }
   if command == "networks" || command == "validate" {
     return inspection(args)
   }
@@ -513,6 +516,12 @@ fn main {
     args.push(host_arg(i, fallback[i]))
   }
   let code = run(args) catch {
+    @analytics.AnalyticsError(_) as e => {
+      emit(e.to_json(), channel=1) catch {
+        _ => ()
+      }
+      2
+    }
     DiffDatabaseError(side, e) => {
       let out = object(e.to_json(), "host-input-error") catch { _ => Map([]) }
       out["database"] = side.to_json()

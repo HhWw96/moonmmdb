@@ -11,6 +11,12 @@ on:
       browser_run:
         description: Successful Browser product validation run ID
         required: true
+      analytics_run:
+        description: Successful Analytics product validation run ID
+        required: true
+      stability_run:
+        description: Successful Default Node stability run ID
+        required: true
 permissions:
   contents: read
   actions: read
@@ -25,6 +31,8 @@ jobs:
       NATIVE_RUN: ${{ inputs.native_run }}
       REGRESSION_RUN: ${{ inputs.regression_run }}
       BROWSER_RUN: ${{ inputs.browser_run }}
+      ANALYTICS_RUN: ${{ inputs.analytics_run }}
+      STABILITY_RUN: ${{ inputs.stability_run }}
     steps:
       - uses: actions/checkout@v7.0.1
         with:

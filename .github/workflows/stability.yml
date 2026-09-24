@@ -1,0 +1,60 @@
+name: Default Node stability
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  paired:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, windows-2022]
+        workload: [country, asn]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 145
+    env:
+      MOONBIT_INSTALL_VERSION: 0.10.11+6ff76a5f9
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: v0.8.0
+          path: verification/local/baseline
+          fetch-depth: 0
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24.20.0'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Install fixed MoonBit (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          Invoke-RestMethod https://cli.moonbitlang.com/install/powershell.ps1 | Invoke-Expression
+          "$env:USERPROFILE\.moon\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+      - name: Install fixed MoonBit (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
+          echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      - name: Build both revisions and verify fixed database bytes
+        run: |
+          node scripts/build.mjs
+          node verification/local/baseline/scripts/build.mjs
+          python scripts/download-production.py
+      - name: Same runner baseline then three consecutive default candidate soaks
+        run: python scripts/stability-matrix.py --workload ${{ matrix.workload }}
+      - name: Allocation decomposition on identical runtime
+        if: always() && matrix.workload == 'country'
+        run: python scripts/stability-profile.py
+      - uses: actions/upload-artifact@v7.0.1
+        if: always()
+        with:
+          name: default-stability-${{ matrix.os }}-${{ matrix.workload }}
+          path: |
+            verification/local/stability-${{ matrix.workload }}/
+            verification/local/allocation-comparison/

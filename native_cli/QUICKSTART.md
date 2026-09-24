@@ -44,11 +44,26 @@ stdout 为逐条 JSON 结果，原始日志保存在 input 下，联合结果在
 只有正常读完且结果已成功写出，stderr 才包含 status: summary 的最终汇总。
 汇总包括行数、各库计数、数据库类型、构建时间及 SHA-256。请同时检查退出码和汇总。
 
-Native 不提供 enrich 或 analytics 命令；对应功能仍可使用项目的 Node.js 工具。
+Native 不提供单库 enrich 命令；可使用 enrich-many 或现有 Node.js 工具。
 目前只交付 Windows/Linux x64，不声明 macOS、ARM64、Alpine 或 MSVC 支持。
 
 项目与源码：https://github.com/HhWw96/moonmmdb
 许可证及第三方来源见 LICENSE、THIRD_PARTY.md、licenses/。
+
+## 日志分析
+
+`moonmmdb analyze examples/geo.mmdb examples/asn.mmdb examples/access.jsonl --top 10`
+直接统计国家和 ASN 请求量；样例预期 4 次请求，其中 1 次未命中，退出 1。
+使用自己的库：`moonmmdb analyze CITY.mmdb ASN.mmdb access.jsonl --ip-path /client/ip`。
+
+完整读完后 stdout 输出一个 JSON 报告；不逐条输出日志，诊断写 stderr。
+五类统计 counted、not_found、missing_field、type_error、query_error 互斥，合计等于有效 IP 请求数。
+所有计数为十进制字符串；报告包含 Top N、总分组数、其余请求量、实际参数、数据库和原始输入的 SHA-256。
+原始输入散列包括 BOM/CR/LF，不受 JSON 数字转换影响。退出 0 表示无错误和未命中，1 表示未命中，2 表示非法行/查询/类型错误；字段缺失不改变退出码。
+坏日志行继续；UTF-8、资源或读写故障中止且无完整报告。正常 EOF 不保证上游未静默截断。
+
+`--top` 默认 10、最大 100；`--max-groups` 默认/最大 10000（每维度）；键最多 256 UTF-8 字节。
+输入限制沿用上文，JSON 深度最大 128。两个数据库合计最多 256 MiB；这不是进程内存上限。
 
 ## 网段与检查
 

@@ -22,7 +22,7 @@ function Help({close}: {close: ()=>void}) {
     <h3>从本地文件开始</h3><p>选择 .mmdb 文件，或使用人工样例。查询支持 IPv4、IPv6；字段每行一个 JSON Pointer，例如 /country/iso_code。空白字段框表示完整记录；路径中的空格有实际含义，不会自动删除。</p>
     <h3>检查与更新对比</h3><p>数据库检查包含所有物理树节点，包括不可达节点；勾选“解码引用记录”还会检查所有被树节点引用的数据。通过不代表地理信息准确，也不代表未引用字节全部有效。</p><p>更新对比只检查输入的这一个 IP 与所选字段，不能证明整库一致。未命中、字段缺失和错误各有独立状态。</p>
     <h3>资源与取消</h3><p>最多两份库，单库及合计不得超过 256 MiB。默认检查一亿工作单位、64 MiB 辅助状态；这不是浏览器内存上限。取消会终止后台任务，需要重新加载已选文件。大文件建议使用桌面浏览器，受设备可用内存限制。</p><p>结果最多 8 MiB；预览最多 64 KiB，复制与下载保留完整结果。整数以十进制字符串保留，浮点另含原始位表示。复制受权限限制时可下载 JSON。</p>
-    <h3>本地处理与离线使用</h3><p>数据库、文件名和查询 IP 不上传，不写入网址或查询历史。本页不使用持久存储或访问统计；在线打开页面仍会访问托管网站，网站可能记录此次访问。主动下载的报告包含所选文件名、输入和结果。</p><p>离线 HTML 内置所有代码、样例、说明与许可，无需服务器。首版验证桌面 Chromium、Edge 和 Firefox；不承诺 Safari 或手机大库性能。</p><a href="https://github.com/HhWw96/moonmmdb/releases/download/v0.8.0/moonmmdb-0.8.0-offline.html" target="_blank" rel="noreferrer">下载正式版离线 HTML</a>
+    <h3>本地处理与离线使用</h3><p>数据库、文件名和查询 IP 不上传，不写入网址或查询历史。本页不使用持久存储或访问统计；在线打开页面仍会访问托管网站，网站可能记录此次访问。主动下载的报告包含所选文件名、输入和结果。</p><p>离线 HTML 内置所有代码、样例、说明与许可，无需服务器。首版验证桌面 Chromium、Edge 和 Firefox；不承诺 Safari 或手机大库性能。</p><a href="https://github.com/HhWw96/moonmmdb/releases/download/v0.9.0/moonmmdb-0.9.0-offline.html" target="_blank" rel="noreferrer">下载正式版离线 HTML</a>
     <details><summary>版本、来源与许可证</summary><p>MoonMMDB {VERSION} · 核心 SHA-256：<code>{embedded.core_sha256}</code></p><p>内置数据库为项目生成的人工样例，不代表真实 IP 归属。损坏样例专门包含一个普通查询不经过的非法节点。</p><pre className="licenses">{embedded.licenses}</pre></details>
   </dialog>;
 }

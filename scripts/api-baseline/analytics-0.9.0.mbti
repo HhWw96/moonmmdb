@@ -1,0 +1,63 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "HhWw96/moonmmdb/analytics"
+
+import {
+  "HhWw96/moonmmdb",
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+pub suberror AnalyticsError {
+  AnalyticsError(String, String)
+} derive(@debug.Debug)
+pub fn AnalyticsError::code(Self) -> String
+pub fn AnalyticsError::to_json(Self) -> Json
+
+// Types and methods
+pub(all) struct AnalyticsLimits {
+  top : Int
+  max_groups : Int
+} derive(Eq, @debug.Debug)
+pub fn AnalyticsLimits::default() -> Self
+
+pub(all) struct AnalyticsReport {
+  requests : UInt64
+  valid_ips : UInt64
+  invalid_inputs : UInt64
+  exit_code : Int
+  country : DimensionReport
+  asn : DimensionReport
+} derive(Eq, @debug.Debug)
+pub fn AnalyticsReport::to_json(Self) -> Json
+
+pub struct Analyzer {
+  // private fields
+}
+pub fn Analyzer::close(Self) -> Unit
+pub fn Analyzer::finish(Self) -> AnalyticsReport raise AnalyticsError
+pub fn Analyzer::invalid_input(Self) -> Unit raise AnalyticsError
+pub fn Analyzer::new(@moonmmdb.Reader, @moonmmdb.Reader, limits? : AnalyticsLimits) -> Self raise AnalyticsError
+pub fn Analyzer::push(Self, String) -> Unit raise AnalyticsError
+
+pub(all) struct DimensionReport {
+  counted : UInt64
+  not_found : UInt64
+  missing_field : UInt64
+  type_error : UInt64
+  query_error : UInt64
+  group_count : Int
+  other_requests : UInt64
+  top : Array[GroupCount]
+} derive(Eq, @debug.Debug)
+pub fn DimensionReport::to_json(Self) -> Json
+
+pub(all) struct GroupCount {
+  key : String
+  count : UInt64
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
