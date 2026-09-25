@@ -4,17 +4,18 @@
 
 ## 使用
 
-网页和离线 HTML 使用同一份构建产物。离线版保存到本机后直接用桌面浏览器打开，无需服务器、Node.js、Python 或 MoonBit。页面内置三个项目人工样例、帮助及许可证；人工 IP 标签不是实际归属。
+网页和离线 HTML 使用同一份构建产物。离线版保存到本机后直接用桌面浏览器打开，无需服务器、Node.js、Python 或 MoonBit。页面内置项目人工样例、帮助及许可证；人工 IP 标签不是实际归属。0.9.1 增加 City＋ASN 日志分析样例，发布状态见 [0.9.1 验证](VERIFICATION_0_9_1.md)。
 
 1. 选择或拖入 `.mmdb` 文件，等待元数据与 SHA-256 计算完成。
 2. **IP 查询**：输入一个 IPv4/IPv6 地址；字段框每行一个 JSON Pointer，留空查询完整记录。
 3. **数据库检查**：检查所有物理树节点，包含不可达节点；可勾选解码树节点引用的记录。通过不证明信息准确或未引用字节均有效。
 4. **更新对比**：指定旧库、新库和一个 IP；默认比较完整记录，或按路径比较字段。不能据此推断整库相同。
-5. 复制结果 JSON，或下载附有工具版本、参数、文件名、散列、时间和实际检查结果的报告。
+5. **日志分析（0.9.1）**：加载两份数据库，明确指定 City、ASN 角色，再选择 JSONL 日志；逐行统计国家与 ASN 请求量。嵌套 IP、输入限制与异常口径见 [日志分析说明](BROWSER_ANALYTICS.md)。
+6. 复制结果 JSON，或下载附有工具版本、参数、文件名、散列、时间和实际检查结果的报告。日志分析报告只含统计与来源信息，不含原始日志。
 
 报告的 `version: 1` 是报告封装版本，`result` 保持现有核心类型化 JSON。整数为十进制字符串；浮点带原始位，字节为十六进制。不要在业务代码中无条件转换成 JavaScript Number。未命中、字段缺失、错误及检查未完成各自独立。
 
-取消会终止后台 Worker，清除可用 Reader 和当前结果；点击重新加载恢复。每次只执行一个任务；旧任务的结果不能覆盖新选择。查询和检查针对左侧第一份库；第二份是对比的新库。
+取消会终止后台 Worker，清除可用 Reader 和当前结果；点击重新加载恢复。每次只执行一个任务；旧任务的结果不能覆盖新选择。查询和检查针对左侧第一份库；更新对比和日志分析分别通过角色选择框指定两份库。
 
 ## 限制
 
@@ -25,6 +26,8 @@
 | 结果 | UTF-8 JSON 最大 8 MiB；页面预览最大 64 KiB |
 | 检查工作单位 | 默认 100,000,000；最大 1,000,000,000 |
 | 检查辅助状态 | 默认 64 MiB；界面可选 1—256 MiB |
+| JSONL 日志 | 默认 8 MiB／10,000 行；最大 64 MiB／1,000,000 行 |
+| 日志行与分组 | 每行最大 8 MiB，JSON 深度 128；国家、ASN 各最多 10,000 组 |
 
 文件与辅助状态上限不等于浏览器进程内存上限；Reader 保持原有快照隔离，浏览器还需运行时、界面及序列化内存。预算不足时显示检查未完成，不当作损坏，也不显示通过。页面显示已用时间，不编造总进度。
 
@@ -44,6 +47,7 @@ node scripts/build.mjs
 python scripts/inspection-fixtures.py
 npm run typecheck --prefix web
 npm run build --prefix web
+node web/hash-verify.mjs
 python -m pip install --target .reference-deps -r requirements-reference.txt
 python scripts/download-production.py
 python web/oracle.py --production
@@ -51,6 +55,8 @@ cd web
 npx playwright install chromium firefox
 cd ..
 node web/verify.mjs
+node web/analytics-verify.mjs --production
+node web/analytics-verify.mjs --file --production
 ```
 
 前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.11+6ff76a5f9。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机可用 `node web/serve.mjs` 在 http://127.0.0.1:4173/ 预览；服务器只返回生成的 HTML，不提供工作区文件访问。Linux 缺少浏览器系统库时，在隔离测试环境使用 `npx playwright install --with-deps chromium firefox`。

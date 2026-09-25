@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "tool": {
+    "name": "MoonMMDB",
+    "version": "0.9.1",
+    "core_sha256": "4b7f3a344709224dfa772c4517bb2242ae54b15dc5b82441971306d981de9335",
+    "hash_bridge_sha256": "52c036207fffff8b1da19014fb1ce78a805cd6719d0aa9bc4b09af9b549f95ea",
+    "worker_sha256": "305d83fdf611df0fdf7d14d9b53472765dfa3058b920062d4b6d47590762517b"
+  },
+  "operation": {
+    "op": "analyze",
+    "options": {
+      "file": {
+        "name": "analysis-access.jsonl",
+        "bytes": 201
+      },
+      "city": 0,
+      "asn": 1,
+      "ipPath": "/ip",
+      "top": 10,
+      "maxBytes": 8388608,
+      "maxRecords": 10000
+    }
+  },
+  "databases": [
+    {
+      "name": "geo.mmdb",
+      "bytes": 550,
+      "sha256": "02d0c798291448a4ee2797afb115d418e25c61f4d9a995ce0431d94cb1ce0187",
+      "metadata": {
+        "node_count": "42",
+        "record_size": "24",
+        "ip_version": "4",
+        "database_type": "MoonMMDB-Synthetic-geo",
+        "binary_format_major_version": "2",
+        "binary_format_minor_version": "0",
+        "build_epoch": "0",
+        "languages": [
+          {
+            "type": "string",
+            "value": "en"
+          }
+        ],
+        "description": {
+          "en": {
+            "type": "string",
+            "value": "Synthetic scenario; not geolocation data"
+          }
+        }
+      }
+    },
+    {
+      "name": "asn.mmdb",
+      "bytes": 564,
+      "sha256": "dab06da41e8858d2f40b4cd05a89ad924cd5ff8bae5cf533165bbe52dab0da70",
+      "metadata": {
+        "node_count": "42",
+        "record_size": "24",
+        "ip_version": "4",
+        "database_type": "MoonMMDB-Synthetic-asn",
+        "binary_format_major_version": "2",
+        "binary_format_minor_version": "0",
+        "build_epoch": "0",
+        "languages": [
+          {
+            "type": "string",
+            "value": "en"
+          }
+        ],
+        "description": {
+          "en": {
+            "type": "string",
+            "value": "Synthetic scenario; not geolocation data"
+          }
+        }
+      }
+    }
+  ],
+  "finished": "2026-09-25T13:16:43.357Z",
+  "result": {
+    "status": "complete",
+    "requests": "4",
+    "valid_ips": "4",
+    "invalid_inputs": "0",
+    "exit_code": 1,
+    "country": {
+      "counted": "3",
+      "not_found": "1",
+      "missing_field": "0",
+      "type_error": "0",
+      "query_error": "0",
+      "group_count": "2",
+      "other_requests": "0",
+      "top": [
+        {
+          "key": "ZZ",
+          "count": "2"
+        },
+        {
+          "key": "YY",
+          "count": "1"
+        }
+      ]
+    },
+    "asn": {
+      "counted": "3",
+      "not_found": "1",
+      "missing_field": "0",
+      "type_error": "0",
+      "query_error": "0",
+      "group_count": "2",
+      "other_requests": "0",
+      "top": [
+        {
+          "key": "64512",
+          "count": "2"
+        },
+        {
+          "key": "64513",
+          "count": "1"
+        }
+      ]
+    },
+    "tool_version": "0.9.1",
+    "parameters": {
+      "ip_path": "/ip",
+      "top": 10,
+      "max_groups": 10000,
+      "max_records": 10000,
+      "max_input_bytes": 8388608,
+      "max_line_bytes": 8388608,
+      "max_json_depth": 128
+    },
+    "databases": {
+      "city": {
+        "database_type": "MoonMMDB-Synthetic-geo",
+        "build_epoch": "0",
+        "bytes": "550",
+        "sha256": "02d0c798291448a4ee2797afb115d418e25c61f4d9a995ce0431d94cb1ce0187"
+      },
+      "asn": {
+        "database_type": "MoonMMDB-Synthetic-asn",
+        "build_epoch": "0",
+        "bytes": "564",
+        "sha256": "dab06da41e8858d2f40b4cd05a89ad924cd5ff8bae5cf533165bbe52dab0da70"
+      }
+    },
+    "input": {
+      "bytes": "201",
+      "sha256": "c3668daf405eec962da41d9ee40ce5e5e334c893bff9da92681332fbf3cd0b2f"
+    }
+  }
+}

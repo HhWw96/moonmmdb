@@ -1,0 +1,42 @@
+{
+  "status": "passed",
+  "target": "native",
+  "platform": "linux",
+  "source_sha256": "3423adc71178d3d6637214021233d27ca30eca827d01d46d0e320d8c4d70e304",
+  "artifact_sha256": "0eaef0ec6446d8f2f26f18f87b643dcb64975e1ce2a377634cb0d34aeb035a1f",
+  "checks": [
+    "Unicode networks",
+    "Unicode validation",
+    "clipping",
+    "all structure",
+    "decode",
+    "invalid CIDR",
+    "work exhaustion",
+    "state exhaustion",
+    "duplicate flag",
+    "unknown flag",
+    "metadata resource limit",
+    "hidden corruption",
+    "hidden corruption is outside successful lookup",
+    {
+      "name": "131072 records throughput",
+      "received": 131072,
+      "seconds": 0.47871138199999996
+    },
+    {
+      "name": "131072 records slow consumer",
+      "received": 131072,
+      "seconds": 0.850287382
+    },
+    {
+      "name": "record limit is incomplete",
+      "received": 100000,
+      "seconds": 0.36447890600000027
+    },
+    {
+      "name": "early output close",
+      "received": 100,
+      "seconds": 0.009404622000000017
+    }
+  ]
+}

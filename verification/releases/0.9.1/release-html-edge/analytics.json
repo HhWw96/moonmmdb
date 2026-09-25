@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "browser": "153.0.4234.48",
+  "engine": "chromium",
+  "transport": "http",
+  "version": "0.9.1",
+  "html_sha256": "3d856d3aece27b2978239868f43b4f393cc65072d32fe8feb71b12f78b1b4b7a",
+  "checks": [
+    "sample UI exact totals, role selectors, responsive layout and report download",
+    "empty, BOM CRLF, final line, nested pointer, errors and exact raw hashes",
+    "malformed UTF8, limits, duplicate roles and bad pointer are fatal",
+    "read failure and line/depth boundaries never produce a completed report",
+    "100000 lines and 64 MiB exact boundary stream without retaining records",
+    "7114 City + ASN addresses match independent Python and CLI",
+    "cancel running analysis, reload and retry without stale result"
+  ],
+  "production_addresses": 7114,
+  "databases": {
+    "city": {
+      "database_type": "DBIP-City-Lite",
+      "build_epoch": "1788226681",
+      "bytes": "127339927",
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+    },
+    "asn": {
+      "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+      "build_epoch": "1788226697",
+      "bytes": "9511026",
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+    }
+  },
+  "requests": [
+    "http://127.0.0.1:4132/",
+    "blob:http://127.0.0.1:4132/cf7a4b57-3dc6-4223-b5a6-9a41bd05f19f",
+    "blob:http://127.0.0.1:4132/e5f8aef6-0fd2-4efa-bdcc-d4293052c342",
+    "blob:http://127.0.0.1:4132/fc9489e2-0c17-460a-bde8-f6d669a00d75",
+    "blob:http://127.0.0.1:4132/faf1c250-5536-4e32-9fc5-924891d68bbd",
+    "blob:http://127.0.0.1:4132/c74caf83-528c-401b-ab13-9db9ad58bc22",
+    "blob:http://127.0.0.1:4132/9febab93-6d02-4996-b66f-0e6865074e7b",
+    "blob:http://127.0.0.1:4132/6cd35a89-4d19-4d2e-a909-372fbfb3db17"
+  ],
+  "console_errors": []
+}

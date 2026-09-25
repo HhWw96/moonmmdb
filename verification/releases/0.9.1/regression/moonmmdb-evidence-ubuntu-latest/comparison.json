@@ -1,0 +1,21 @@
+{
+  "started": "2026-09-25T13:14:11.975183+00:00",
+  "status": "passed",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "seed": "0x44494646",
+  "failures": [],
+  "comparisons": 1099,
+  "changed_cases": 258,
+  "unchanged_cases": 841,
+  "failure_count": 0,
+  "core_sha256": "4b7f3a344709224dfa772c4517bb2242ae54b15dc5b82441971306d981de9335",
+  "inputs": {
+    "MaxMind-DB-test-ipv4-24.mmdb": "07249989619a06bd267bf6aba890ed2f0ef490000c9bc82419bfbe0a924b2e02",
+    "MaxMind-DB-test-ipv4-32.mmdb": "5924cfd66a7c84ebdb5b45fe94f1efc4e468ff7bf2b39693b37e4c391d89d73a",
+    "comparison-modified.mmdb": "387298ef8d50a3b880edc68e72190e8c5dc60431010abb411cc53f9c1b554e62",
+    "MaxMind-DB-test-ipv6-24.mmdb": "599f1555ce3a568c2d4ad965332dcba87d0d109297636f1b595241247263d98b",
+    "MaxMind-DB-test-ipv6-28.mmdb": "45681de9db4e09948780a4142782616bd0c3096d4d03b372ed62f007cc5f63b2"
+  },
+  "scope": "Deterministic official layout fixtures, presence changes and an explicitly modified string record; not an exhaustive real database update comparison.",
+  "finished": "2026-09-25T13:14:12.133455+00:00"
+}

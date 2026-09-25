@@ -1,0 +1,358 @@
+{
+  "started": "2026-09-25T13:13:49.194Z",
+  "status": "passed",
+  "limits": {
+    "per_process_timeout_ms": 8000,
+    "rejected_v8_old_space_mib": 128,
+    "accepted_v8_old_space_mib": 256,
+    "note": "Accepted payload-boundary records are materialized and JSON-serialized. Decoder payload bytes do not bound V8 heap or total RSS. Rejected inputs retain the 128 MiB cap."
+  },
+  "results": [
+    {
+      "file": "libmaxminddb-deep-array-nesting.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-deep-array-nesting.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "depth-limit",
+      "bytes": 2198,
+      "sha256": "6d5822f9292a16505806e537e2d93b0d49257cf465bab7b26b0f91b279bc264d",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "depth-limit",
+        "projection_status": "error",
+        "projection_code": "depth-limit",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-deep-nesting.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-deep-nesting.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "depth-limit",
+      "bytes": 2798,
+      "sha256": "7f32fe2a5a456d45cf1cca5873e64c1f699801ad4ab1b3fe52ef681fb3632e37",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "depth-limit",
+        "projection_status": "error",
+        "projection_code": "depth-limit",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-metadata-marker-only.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-metadata-marker-only.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 14,
+      "sha256": "744df941aa9b8f456a01a359f9a011f93d79d4cc127db6601dc72c09ae04dfdb",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "libmaxminddb-offset-integer-overflow.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-offset-integer-overflow.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 412,
+      "sha256": "18bccbe3b4120212973926f8544b37659a28efff28599cefe079641558d974e7",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "libmaxminddb-oversized-array.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-oversized-array.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "bytes": 219,
+      "sha256": "4753ef60f5bd0f501783e72b5ef72c384d91f8ef5228b1af20643e46438729ba",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "projection_status": "error",
+        "projection_code": "value-limit",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-oversized-map.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-oversized-map.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "bytes": 218,
+      "sha256": "a394cb54d668b872dc6ddb8ac0e78ac31191b84e168605ad75491c9063077a9c",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "projection_status": "error",
+        "projection_code": "value-limit",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-separator-record-max-left.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-separator-record-max-left.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-tree-pointer",
+      "bytes": 219,
+      "sha256": "936e456212618891d12f551c9a6fef07fbc17210fa02488ce1f9004523207658",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "invalid-tree-pointer",
+        "projection_status": "error",
+        "projection_code": "invalid-tree-pointer",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-separator-record-min-left.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-left.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-tree-pointer",
+      "bytes": 219,
+      "sha256": "ed1bfd6a8ef442af25ecf5896f7fd9ca7b805c971e430d3122827dd627658bd4",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "invalid-tree-pointer",
+        "projection_status": "error",
+        "projection_code": "invalid-tree-pointer",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-separator-record-min-right.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-separator-record-min-right.mmdb",
+      "ip": "128.0.0.1",
+      "expected_code": "invalid-tree-pointer",
+      "bytes": 219,
+      "sha256": "879e4dae7c9f5bbf2e88b9b01dbe181ddb9837d489c0393fe72a8905541bd1f5",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "invalid-tree-pointer",
+        "projection_status": "error",
+        "projection_code": "invalid-tree-pointer",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "libmaxminddb-uint64-max-epoch.mmdb",
+      "source_path": "bad-data/libmaxminddb/libmaxminddb-uint64-max-epoch.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": null,
+      "bytes": 219,
+      "sha256": "ff1fcdbbbc6322a9b652e82cc94e3d942e6c2cfd7eeacaa71b520584836d7b43",
+      "v8_old_space_mib": 256,
+      "passed": true,
+      "actual": {
+        "status": "found",
+        "projection_status": "found",
+        "epoch": "18446744073709551615"
+      }
+    },
+    {
+      "file": "cyclic-data-structure.mmdb",
+      "source_path": "bad-data/maxminddb-golang/cyclic-data-structure.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 2731,
+      "sha256": "0e68e22cccf36654d78cf3a155e89728b0ea34ca6fea0767e17842df2bc6cc0c",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "invalid-bytes-length.mmdb",
+      "source_path": "bad-data/maxminddb-golang/invalid-bytes-length.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 32,
+      "sha256": "9273e22ba24f9a04ba6bb37cfb8af9dfaa62a34572bf2516c101aa0bd8d168e2",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "invalid-data-record-offset.mmdb",
+      "source_path": "bad-data/maxminddb-golang/invalid-data-record-offset.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-utf8",
+      "bytes": 327,
+      "sha256": "589a73821e54fb1b23171bc6bb8fad0bf17de78a3df56308c40e8f0f846890cc",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "invalid-utf8",
+        "projection_status": "error",
+        "projection_code": "invalid-utf8"
+      }
+    },
+    {
+      "file": "invalid-map-key-length.mmdb",
+      "source_path": "bad-data/maxminddb-golang/invalid-map-key-length.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 2731,
+      "sha256": "2014c7924ace0d2767321b3c9934a5d9a61c70672a0af18948040a881735b118",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "invalid-string-length.mmdb",
+      "source_path": "bad-data/maxminddb-golang/invalid-string-length.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 187,
+      "sha256": "257c20a3041697f052ff6bfacae1a61702ff2325f4ac78628f29a35efab02872",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "metadata-is-an-uint128.mmdb",
+      "source_path": "bad-data/maxminddb-golang/metadata-is-an-uint128.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 16,
+      "sha256": "b9b380edbf509f1b702f8830adb1d6b68bd4326307e3bac43884837f5f79da17",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "unexpected-bytes.mmdb",
+      "source_path": "bad-data/maxminddb-golang/unexpected-bytes.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "out-of-bounds",
+      "bytes": 2333,
+      "sha256": "e32117c47725f213a02e1310a79b9c3a0bc279b26b41c70ab46d88b79ee0bc57",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "out-of-bounds",
+        "projection_status": "error",
+        "projection_code": "out-of-bounds"
+      }
+    },
+    {
+      "file": "bad-unicode-in-map-key.mmdb",
+      "source_path": "bad-data/maxminddb-python/bad-unicode-in-map-key.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "invalid-separator",
+      "bytes": 3535,
+      "sha256": "d4a9872cbce3cf9d6173652733b0248841901f745dea14b2a2dc0b6fb0b4b3e4",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "invalid-separator",
+        "projection_status": "error",
+        "projection_code": "invalid-separator"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "source_path": "test-data/MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": null,
+      "bytes": 65851,
+      "sha256": "ae9b3a6107b84c1483706e4ae4627fff962f22373029885202e35d8d851e3ae7",
+      "v8_old_space_mib": 256,
+      "passed": true,
+      "actual": {
+        "status": "found",
+        "projection_status": "found",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-value-limit.mmdb",
+      "source_path": "test-data/MaxMind-DB-test-decoder-value-limit.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "bytes": 131285,
+      "sha256": "57d3167b00cf77d50b60277c1a09b6f85f377523d555cd5912de2b3f4f263d96",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "projection_status": "error",
+        "projection_code": "value-limit",
+        "epoch": "1000000000"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "source_path": "test-data/MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "ip": "1.1.1.1",
+      "expected_code": "value-limit",
+      "bytes": 301,
+      "sha256": "37ee11f329a8728ea52dbdb3437d69a0bc8103e01e2842626dc69785deb9316b",
+      "v8_old_space_mib": 128,
+      "passed": true,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "projection_status": "error",
+        "projection_code": "value-limit",
+        "epoch": "1000000000"
+      }
+    }
+  ],
+  "finished": "2026-09-25T13:13:51.177Z",
+  "cases": 21,
+  "passed": 21
+}

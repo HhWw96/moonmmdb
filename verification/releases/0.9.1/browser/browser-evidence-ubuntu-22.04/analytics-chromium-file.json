@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "browser": "145.0.7632.6",
+  "engine": "chromium",
+  "transport": "file",
+  "version": "0.9.1",
+  "html_sha256": "3d856d3aece27b2978239868f43b4f393cc65072d32fe8feb71b12f78b1b4b7a",
+  "checks": [
+    "sample UI exact totals, role selectors, responsive layout and report download",
+    "empty, BOM CRLF, final line, nested pointer, errors and exact raw hashes",
+    "malformed UTF8, limits, duplicate roles and bad pointer are fatal",
+    "read failure and line/depth boundaries never produce a completed report",
+    "100000 lines and 64 MiB exact boundary stream without retaining records",
+    "7114 City + ASN addresses match independent Python and CLI",
+    "cancel running analysis, reload and retry without stale result"
+  ],
+  "production_addresses": 7114,
+  "databases": {
+    "city": {
+      "database_type": "DBIP-City-Lite",
+      "build_epoch": "1788226681",
+      "bytes": "127339927",
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+    },
+    "asn": {
+      "database_type": "DBIP-ASN-Lite (compat=GeoLite2-ASN)",
+      "build_epoch": "1788226697",
+      "bytes": "9511026",
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+    }
+  },
+  "requests": [
+    "file:///home/runner/work/moonmmdb/moonmmdb/dist/web/index.html",
+    "blob:null/a02ffa89-c26f-461a-91c7-4500fed633e3",
+    "blob:null/e88c8d3b-204e-4c07-acee-5130d4fbbbc1",
+    "blob:null/b5303f36-8907-436b-96b0-23e5069c2390",
+    "blob:null/332d6cae-707d-4cb1-95f8-308f244a9d04",
+    "blob:null/6de871d2-2dab-4f59-8d7d-7fc46a035a32",
+    "blob:null/89fb8918-f89b-4cc8-8c78-149b0cec7680",
+    "blob:null/63bf6df0-027b-4140-89b6-477c500bd171"
+  ],
+  "console_errors": []
+}

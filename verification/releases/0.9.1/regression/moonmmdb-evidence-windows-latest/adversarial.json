@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-09-25T13:13:49.144Z",
+  "status": "passed",
+  "limits": {
+    "per_process_timeout_ms": 8000,
+    "v8_old_space_mib": 128,
+    "note": "V8 old-space cap, not a total process RSS cap; MoonBit also bounds decode work and payload."
+  },
+  "cases": 8,
+  "passed": 8,
+  "results": [
+    {
+      "file": "MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "expected_code": "value-limit",
+      "bytes": 451,
+      "sha256": "d3235628d77d684961d305b8667a82b4f8894b255dfb455ad3a5274f9cf564b6",
+      "passed": true,
+      "elapsed_ms": 85.1857,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "offset": 23,
+        "message": "Decode work budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "expected_code": "value-limit",
+      "bytes": 1027,
+      "sha256": "c10db83947de1f74d590abac4c66c6ac09b9c20d21636166afd9e27c006a42f4",
+      "passed": true,
+      "elapsed_ms": 84.91400000000002,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "offset": 599,
+        "message": "Decode work budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "expected_code": "payload-limit",
+      "bytes": 82136,
+      "sha256": "a31e69174aaf714dbbf9535f1f70ba026119666d77ddd3e2e4b55813998d42db",
+      "passed": true,
+      "elapsed_ms": 80.24000000000001,
+      "actual": {
+        "status": "error",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "expected_code": "payload-limit",
+      "bytes": 82136,
+      "sha256": "27e131379a39cb40e0e4019453d4eb024bcb073a13538801295283edc5f6cdf2",
+      "passed": true,
+      "elapsed_ms": 71.22830000000005,
+      "actual": {
+        "status": "error",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "expected_code": "payload-limit",
+      "bytes": 196822,
+      "sha256": "a94146d6ad237382535e6ad45c6a682051466946141345cfe53cea07e420a0b6",
+      "passed": true,
+      "elapsed_ms": 81.28960000000001,
+      "actual": {
+        "status": "error",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "expected_code": "payload-limit",
+      "bytes": 65811,
+      "sha256": "b2a897c8e7fb8181d9cb088cbd26f80789253b3db040b53a468e82953032a5bd",
+      "passed": true,
+      "elapsed_ms": 79.3725,
+      "actual": {
+        "status": "error",
+        "code": "payload-limit",
+        "offset": 136,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "expected_code": "payload-limit",
+      "bytes": 65852,
+      "sha256": "d4f52817d94f8cf8a1f342d536b52564ad909565ad004d6674f19c9c2379c30b",
+      "passed": true,
+      "elapsed_ms": 79.53930000000003,
+      "actual": {
+        "status": "error",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "expected_code": "value-limit",
+      "bytes": 131287,
+      "sha256": "56d4faf1e8031deb40391e8a20e89437f2e19f519cfac036f629e39032fcb36b",
+      "passed": true,
+      "elapsed_ms": 70.12779999999998,
+      "actual": {
+        "status": "error",
+        "code": "value-limit",
+        "offset": 23,
+        "message": "Declared container exceeds work budget"
+      }
+    }
+  ]
+}

@@ -1,0 +1,1045 @@
+{
+  "status": "passed",
+  "engine": "chromium",
+  "transport": "file-offline",
+  "started": "2026-09-25T13:15:13.149Z",
+  "files": [
+    {
+      "file": "tests/fixtures/upstream/bad-data/libmaxminddb/libmaxminddb-corrupt-search-tree.mmdb",
+      "status": "passed",
+      "queries": 4,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 100,
+        "reachable_nodes": 1,
+        "unreachable_nodes": 99,
+        "decoded_records": 1,
+        "work_used": 705,
+        "peak_state_bytes": 602
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-deep-array-nesting.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "depth-limit",
+        "offset": 1078,
+        "message": "Nesting budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-deep-nesting.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "depth-limit",
+        "offset": 1205,
+        "message": "Nesting budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/bad-data/libmaxminddb/libmaxminddb-empty-array-last-in-metadata.mmdb",
+      "status": "passed",
+      "queries": 6,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1,
+        "reachable_nodes": 1,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 12,
+        "peak_state_bytes": 8
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/bad-data/libmaxminddb/libmaxminddb-empty-map-last-in-metadata.mmdb",
+      "status": "passed",
+      "queries": 6,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1,
+        "reachable_nodes": 1,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 12,
+        "peak_state_bytes": 8
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-metadata-marker-only.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-offset-integer-overflow.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-oversized-array.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 22,
+        "message": "Declared container exceeds work budget"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-oversized-map.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 22,
+        "message": "Declared container exceeds work budget"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-separator-record-max-left.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "invalid-tree-pointer",
+        "offset": 0,
+        "message": "Search record points outside data"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-separator-record-min-left.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "invalid-tree-pointer",
+        "offset": 0,
+        "message": "Search record points outside data"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-separator-record-min-right.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "invalid-tree-pointer",
+        "offset": 0,
+        "message": "Search record points outside data"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/libmaxminddb-uint64-max-epoch.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1,
+        "reachable_nodes": 1,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 12,
+        "peak_state_bytes": 8
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/cyclic-data-structure.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/invalid-bytes-length.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/invalid-data-record-offset.mmdb",
+      "status": "opening-rejected",
+      "code": "invalid-utf8"
+    },
+    {
+      "file": "tests/fixtures/boundary/invalid-map-key-length.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/invalid-string-length.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/metadata-is-an-uint128.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/unexpected-bytes.mmdb",
+      "status": "opening-rejected",
+      "code": "out-of-bounds"
+    },
+    {
+      "file": "tests/fixtures/boundary/bad-unicode-in-map-key.mmdb",
+      "status": "opening-rejected",
+      "code": "invalid-separator"
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP-Anonymous-Plus-Test.mmdb",
+      "status": "passed",
+      "queries": 107,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 677,
+        "reachable_nodes": 677,
+        "unreachable_nodes": 0,
+        "decoded_records": 12,
+        "work_used": 4880,
+        "peak_state_bytes": 1903
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP-Residential-Proxy-Test.mmdb",
+      "status": "passed",
+      "queries": 107,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1120,
+        "reachable_nodes": 1120,
+        "unreachable_nodes": 0,
+        "decoded_records": 28,
+        "work_used": 8267,
+        "peak_state_bytes": 2847
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Anonymous-IP-Test.mmdb",
+      "status": "passed",
+      "queries": 76,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 629,
+        "reachable_nodes": 629,
+        "unreachable_nodes": 0,
+        "decoded_records": 8,
+        "work_used": 4481,
+        "peak_state_bytes": 1792
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-City-Shield-Test.mmdb",
+      "status": "passed",
+      "queries": 992,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1547,
+        "reachable_nodes": 1547,
+        "unreachable_nodes": 0,
+        "decoded_records": 63,
+        "work_used": 24090,
+        "peak_state_bytes": 5037
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-City-Test-Broken-Double-Format.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "invalid-size",
+        "offset": 11128,
+        "message": "Invalid encoded scalar size"
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-City-Test-Invalid-Node-Count.mmdb",
+      "status": "opening-rejected",
+      "code": "invalid-layout"
+    },
+    {
+      "file": "tests/fixtures/GeoIP2-City-Test.mmdb",
+      "status": "passed",
+      "queries": 992,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1547,
+        "reachable_nodes": 1547,
+        "unreachable_nodes": 0,
+        "decoded_records": 63,
+        "work_used": 24090,
+        "peak_state_bytes": 5037
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Connection-Type-Test.mmdb",
+      "status": "passed",
+      "queries": 92,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 596,
+        "reachable_nodes": 596,
+        "unreachable_nodes": 0,
+        "decoded_records": 4,
+        "work_used": 4195,
+        "peak_state_bytes": 1713
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Country-Shield-Test.mmdb",
+      "status": "passed",
+      "queries": 1183,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1704,
+        "reachable_nodes": 1704,
+        "unreachable_nodes": 0,
+        "decoded_records": 55,
+        "work_used": 21323,
+        "peak_state_bytes": 4830
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Country-Test.mmdb",
+      "status": "passed",
+      "queries": 1183,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1704,
+        "reachable_nodes": 1704,
+        "unreachable_nodes": 0,
+        "decoded_records": 55,
+        "work_used": 21323,
+        "peak_state_bytes": 4830
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-DensityIncome-Test.mmdb",
+      "status": "passed",
+      "queries": 16,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 387,
+        "reachable_nodes": 387,
+        "unreachable_nodes": 0,
+        "decoded_records": 2,
+        "work_used": 2725,
+        "peak_state_bytes": 1293
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Domain-Test.mmdb",
+      "status": "passed",
+      "queries": 236,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 834,
+        "reachable_nodes": 834,
+        "unreachable_nodes": 0,
+        "decoded_records": 21,
+        "work_used": 5963,
+        "peak_state_bytes": 2222
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Enterprise-Shield-Test.mmdb",
+      "status": "passed",
+      "queries": 117,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 961,
+        "reachable_nodes": 961,
+        "unreachable_nodes": 0,
+        "decoded_records": 30,
+        "work_used": 13659,
+        "peak_state_bytes": 3342
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Enterprise-Test.mmdb",
+      "status": "passed",
+      "queries": 117,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 961,
+        "reachable_nodes": 961,
+        "unreachable_nodes": 0,
+        "decoded_records": 30,
+        "work_used": 13659,
+        "peak_state_bytes": 3342
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-IP-Risk-Test.mmdb",
+      "status": "passed",
+      "queries": 37,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 524,
+        "reachable_nodes": 524,
+        "unreachable_nodes": 0,
+        "decoded_records": 12,
+        "work_used": 3828,
+        "peak_state_bytes": 1615
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-ISP-Test.mmdb",
+      "status": "passed",
+      "queries": 5626,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 6692,
+        "reachable_nodes": 6692,
+        "unreachable_nodes": 0,
+        "decoded_records": 907,
+        "work_used": 57481,
+        "peak_state_bytes": 17391
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Precision-Enterprise-Shield-Test.mmdb",
+      "status": "passed",
+      "queries": 186,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1259,
+        "reachable_nodes": 1259,
+        "unreachable_nodes": 0,
+        "decoded_records": 56,
+        "work_used": 23007,
+        "peak_state_bytes": 4627
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Precision-Enterprise-Test.mmdb",
+      "status": "passed",
+      "queries": 186,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1259,
+        "reachable_nodes": 1259,
+        "unreachable_nodes": 0,
+        "decoded_records": 56,
+        "work_used": 23007,
+        "peak_state_bytes": 4627
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-Static-IP-Score-Test.mmdb",
+      "status": "passed",
+      "queries": 1210,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 646,
+        "reachable_nodes": 646,
+        "unreachable_nodes": 0,
+        "decoded_records": 426,
+        "work_used": 6651,
+        "peak_state_bytes": 2444
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoIP2-User-Count-Test.mmdb",
+      "status": "passed",
+      "queries": 1210,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 646,
+        "reachable_nodes": 646,
+        "unreachable_nodes": 0,
+        "decoded_records": 15,
+        "work_used": 4692,
+        "peak_state_bytes": 1829
+      }
+    },
+    {
+      "file": "tests/fixtures/GeoLite2-ASN-Test.mmdb",
+      "status": "passed",
+      "queries": 1088,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1341,
+        "reachable_nodes": 1341,
+        "unreachable_nodes": 0,
+        "decoded_records": 101,
+        "work_used": 10352,
+        "peak_state_bytes": 3568
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoLite2-City-Test.mmdb",
+      "status": "passed",
+      "queries": 966,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1465,
+        "reachable_nodes": 1465,
+        "unreachable_nodes": 0,
+        "decoded_records": 55,
+        "work_used": 21895,
+        "peak_state_bytes": 4761
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/GeoLite2-Country-Test.mmdb",
+      "status": "passed",
+      "queries": 974,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1505,
+        "reachable_nodes": 1505,
+        "unreachable_nodes": 0,
+        "decoded_records": 52,
+        "work_used": 19542,
+        "peak_state_bytes": 4421
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-no-ipv4-search-tree.mmdb",
+      "status": "passed",
+      "queries": 8,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 64,
+        "reachable_nodes": 64,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 450,
+        "peak_state_bytes": 385
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-string-value-entries.mmdb",
+      "status": "passed",
+      "queries": 15,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 163,
+        "reachable_nodes": 163,
+        "unreachable_nodes": 0,
+        "decoded_records": 6,
+        "work_used": 1153,
+        "peak_state_bytes": 847
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/MaxMind-DB-test-broken-pointers-24.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "invalid-tree-pointer",
+        "offset": 216,
+        "message": "Search record points outside data"
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/MaxMind-DB-test-broken-search-tree-24.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "tree-cycle",
+        "offset": 0,
+        "message": "Cycle in physical search tree"
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/MaxMind-DB-test-decode-path-shared-budget.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "invalid",
+        "code": "duplicate-key",
+        "offset": 4128,
+        "message": "Duplicate map key is outside reader profile"
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-decoder-payload-limit-over.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/MaxMind-DB-test-decoder-payload-limit.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1,
+        "reachable_nodes": 1,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 32843,
+        "peak_state_bytes": 8212
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-decoder-value-limit-over.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 23,
+        "message": "Declared container exceeds work budget"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/MaxMind-DB-test-decoder-value-limit-pointer-heavy.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 101,
+        "message": "Decode work budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/boundary/MaxMind-DB-test-decoder-value-limit.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 22,
+        "message": "Decode work budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-decoder.mmdb",
+      "status": "passed",
+      "queries": 33,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 426,
+        "reachable_nodes": 426,
+        "unreachable_nodes": 0,
+        "decoded_records": 3,
+        "work_used": 3115,
+        "peak_state_bytes": 1407
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-ipv4-24.mmdb",
+      "status": "passed",
+      "queries": 15,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 163,
+        "reachable_nodes": 163,
+        "unreachable_nodes": 0,
+        "decoded_records": 6,
+        "work_used": 1176,
+        "peak_state_bytes": 847
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-ipv4-28.mmdb",
+      "status": "passed",
+      "queries": 15,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 163,
+        "reachable_nodes": 163,
+        "unreachable_nodes": 0,
+        "decoded_records": 6,
+        "work_used": 1176,
+        "peak_state_bytes": 847
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-ipv4-32.mmdb",
+      "status": "passed",
+      "queries": 15,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 163,
+        "reachable_nodes": 163,
+        "unreachable_nodes": 0,
+        "decoded_records": 6,
+        "work_used": 1176,
+        "peak_state_bytes": 847
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-ipv6-24.mmdb",
+      "status": "passed",
+      "queries": 19,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 415,
+        "reachable_nodes": 415,
+        "unreachable_nodes": 0,
+        "decoded_records": 5,
+        "work_used": 2934,
+        "peak_state_bytes": 1351
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-ipv6-28.mmdb",
+      "status": "passed",
+      "queries": 19,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 415,
+        "reachable_nodes": 415,
+        "unreachable_nodes": 0,
+        "decoded_records": 5,
+        "work_used": 2934,
+        "peak_state_bytes": 1351
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-ipv6-32.mmdb",
+      "status": "passed",
+      "queries": 19,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 415,
+        "reachable_nodes": 415,
+        "unreachable_nodes": 0,
+        "decoded_records": 5,
+        "work_used": 2934,
+        "peak_state_bytes": 1351
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-metadata-payload-limit.mmdb",
+      "status": "opening-rejected",
+      "code": "payload-limit"
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-metadata-pointers.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 335,
+        "reachable_nodes": 335,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 2346,
+        "peak_state_bytes": 1183
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-mixed-24.mmdb",
+      "status": "passed",
+      "queries": 30,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 444,
+        "reachable_nodes": 444,
+        "unreachable_nodes": 0,
+        "decoded_records": 11,
+        "work_used": 3173,
+        "peak_state_bytes": 1419
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-mixed-28.mmdb",
+      "status": "passed",
+      "queries": 30,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 444,
+        "reachable_nodes": 444,
+        "unreachable_nodes": 0,
+        "decoded_records": 11,
+        "work_used": 3173,
+        "peak_state_bytes": 1419
+      }
+    },
+    {
+      "file": "tests/fixtures/MaxMind-DB-test-mixed-32.mmdb",
+      "status": "passed",
+      "queries": 30,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 444,
+        "reachable_nodes": 444,
+        "unreachable_nodes": 0,
+        "decoded_records": 11,
+        "work_used": 3173,
+        "peak_state_bytes": 1419
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/MaxMind-DB-test-nested.mmdb",
+      "status": "passed",
+      "queries": 31,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 371,
+        "reachable_nodes": 371,
+        "unreachable_nodes": 0,
+        "decoded_records": 1,
+        "work_used": 2620,
+        "peak_state_bytes": 1259
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-payload-amplification-dos-string.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-payload-amplification-dos-worst-case.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-payload-amplification-dos.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "payload-limit",
+        "offset": 22,
+        "message": "Expanded bytes budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-pointer-decoder-dos-ipv6.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 599,
+        "message": "Decode work budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/adversarial/MaxMind-DB-test-pointer-decoder-dos.mmdb",
+      "status": "passed",
+      "queries": 0,
+      "validation": {
+        "status": "incomplete",
+        "code": "value-limit",
+        "offset": 23,
+        "message": "Decode work budget exhausted"
+      }
+    },
+    {
+      "file": "tests/fixtures/upstream/test-data/MaxMind-DB-test-pointer-decoder.mmdb",
+      "status": "passed",
+      "queries": 13,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 189,
+        "reachable_nodes": 189,
+        "unreachable_nodes": 0,
+        "decoded_records": 2,
+        "work_used": 1498,
+        "peak_state_bytes": 930
+      }
+    },
+    {
+      "file": "verification/local/production/dbip-city-lite-2026-09.mmdb",
+      "status": "passed",
+      "queries": 7114,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 14346080,
+        "reachable_nodes": 14346080,
+        "unreachable_nodes": 0,
+        "decoded_records": 562485,
+        "work_used": 193656993,
+        "peak_state_bytes": 32057306
+      }
+    },
+    {
+      "file": "verification/local/production/dbip-asn-lite-2026-09.mmdb",
+      "status": "passed",
+      "queries": 7114,
+      "validation": {
+        "status": "valid",
+        "scope": "all-tree-nodes-and-referenced-records",
+        "checked_nodes": 1146501,
+        "reachable_nodes": 1146501,
+        "unreachable_nodes": 0,
+        "decoded_records": 81763,
+        "work_used": 8852914,
+        "peak_state_bytes": 2622478
+      }
+    }
+  ],
+  "queries": 31259,
+  "checks": [
+    "initial screen, title and disabled controls",
+    "offline ASN fixture and exact integer",
+    "missing field distinct from missing IP",
+    "invalid IP and invalid pointer",
+    "artificial update comparison",
+    "download provenance and unchanged result",
+    "clipboard denial has useful fallback",
+    "hidden corruption and incomplete budget",
+    "help modal, keyboard and mobile layout",
+    "corrupt file with Unicode name",
+    "preview boundary, malicious text and result cap",
+    "cancel actual City validation and recover without stale results",
+    "worker file metadata preflight without reading payloads",
+    "application makes no data requests"
+  ],
+  "html_sha256": "3d856d3aece27b2978239868f43b4f393cc65072d32fe8feb71b12f78b1b4b7a",
+  "browser": "145.0.7632.6",
+  "finished": "2026-09-25T13:16:10.806Z",
+  "requests": [
+    "file:///home/runner/work/moonmmdb/moonmmdb/dist/web/index.html",
+    "blob:null/d503f32d-a2b7-41c9-ba1e-244124a6f83c",
+    "blob:null/09eadee2-c8b0-4515-a2c5-2588ea16d225",
+    "blob:null/130eb7df-6591-47d7-b8df-c6957ab0d9d9",
+    "blob:null/38c7a3ac-9fb1-46d8-bcb9-cfdb863b8b19",
+    "blob:null/91c3256d-bde2-486f-a4be-c4267c8038a2",
+    "blob:null/e481af53-175d-42c7-8061-c3641761668a",
+    "blob:null/43d47c26-41a1-487e-ae02-2e1922c12bd4",
+    "blob:null/82e40dc8-b05c-42ea-8d0f-1f5851865b78",
+    "blob:null/2d175329-5f27-491d-a7da-9a5b8621e329",
+    "blob:null/23574df5-d357-4e34-8f3b-d497209fbb2a",
+    "blob:null/b2dae9cd-55cd-40cf-b125-7e96d655fb7c",
+    "blob:null/b496aa66-2a63-46ac-b5e9-ce5db68eb007",
+    "blob:null/89aa667d-8e63-422f-b3b5-712c0ba58411",
+    "blob:null/7afd7328-6398-4ffd-bf03-83c7de2b28fb",
+    "blob:null/24ab93b8-2efb-46cc-991b-90b735bf0ad7",
+    "blob:null/13247617-fe6a-41f7-879c-04aa4485e58f",
+    "blob:null/f34d0ee7-de58-4750-ba54-a309e3f82b3a",
+    "blob:null/ffe1f7fc-efd0-4a3b-a788-feddda7ca154",
+    "blob:null/a9d0195e-8473-43d0-8abb-029e75cd0725",
+    "blob:null/51608633-59c0-4d3f-9990-09b21d0502b2",
+    "blob:null/1fe781df-730d-4eaa-b3b4-3c467b17321c",
+    "blob:null/d5e42e72-f2a1-49bb-924a-9752f7227184",
+    "blob:null/be8545a2-eaa6-46e6-8766-6843ade547bd",
+    "blob:null/871cc09e-d3b5-4068-ba2f-27c47c6e04ed",
+    "blob:null/32a9b01b-081a-41fa-9d53-0e0a9e4ce08b",
+    "blob:null/535671fd-b706-445c-9404-3ad82246e7ff",
+    "blob:null/aa2ce292-b5ea-42ee-9bd9-ca5dfa0e566f",
+    "blob:null/91d609e9-ed93-44b0-b638-e0cf0071c370",
+    "blob:null/6375b2eb-f314-43a3-b5fc-810dbfbed3a0",
+    "blob:null/dbf0e306-5e50-474c-80a7-d9d29a54557b",
+    "blob:null/d7948abc-b316-4893-a216-851a8fff1071",
+    "blob:null/4d876523-86c8-4b48-9613-117e74da62c9",
+    "blob:null/f9dec7eb-1a2e-4075-8c65-dffabc9a50a1",
+    "blob:null/c0298d63-f09e-465a-abb0-fa377ff46f3c",
+    "blob:null/6f402486-674f-4b75-b8c9-bc3cdcd29cb6",
+    "blob:null/7325d8ca-f782-44d6-bc00-ba8a1c3c90e2",
+    "blob:null/d1962475-a9e2-43c2-b3f2-3e462d3a77fd",
+    "blob:null/06328c1d-b934-4132-a380-ca3fe64b0532",
+    "blob:null/79ad6f95-67d5-4864-a7e6-f004b5b2ff8f",
+    "blob:null/ecc589eb-c823-4425-ad46-75e5b596f76d",
+    "blob:null/2790ac72-f74a-4472-a276-9a3fdd2d2aeb",
+    "blob:null/bd073206-6240-4926-b463-3a2f94396f74",
+    "blob:null/3c6badd7-29dc-43e7-a0ce-b1056499be25",
+    "blob:null/3485f6cc-2770-448b-807d-8ab8d54c135d",
+    "blob:null/2826c3b3-7c3c-40bb-8e09-3209ca57b30d",
+    "blob:null/f328a305-37c1-4a25-8d1d-e118d3e40afd",
+    "blob:null/338c9ed3-7f4e-4b7d-a2ba-e32ff0d95d5a",
+    "blob:null/3b08ee6b-8091-496b-94a1-fe387aa178e6",
+    "blob:null/87cc61d5-23b4-4984-b0ed-e0a3d7aad4ea",
+    "blob:null/f69fc32a-9bad-4890-83a4-b8b5089b86af",
+    "blob:null/1230565c-db6d-4ef4-9dcf-c6e706611c3e",
+    "blob:null/23479484-63a9-4e3f-88e6-3096ba4dbbbf",
+    "blob:null/b03d5b49-5c1f-446e-adf2-ecebc8f651fb",
+    "blob:null/4840408a-b247-4bd9-b63b-5fc9fb981a98",
+    "blob:null/5b31acad-4236-45de-b745-31d95a1520e3",
+    "blob:null/3e80e4ea-4d47-48d1-9286-7e3f15ef7a80",
+    "blob:null/2f85b1c5-07bc-45c3-b41d-3f4294587d3a",
+    "blob:null/8ec8d4cd-ef3c-4bf4-b4e9-aed29368f5b2",
+    "blob:null/284aba77-72de-4578-865e-ed9aa3251c61",
+    "blob:null/837f5b03-070f-420d-9689-05ca64c457b7",
+    "blob:null/2e99f8e2-4a62-4565-9f62-c9d49683f156",
+    "blob:null/a97feeba-850c-4eeb-94e2-1c09f533a8ed",
+    "blob:null/667a28ad-2543-4749-b965-ad75168cf86d",
+    "blob:null/687b2072-5f8b-4281-a395-73733dcb277a",
+    "blob:null/a44f61da-b781-40a8-a880-d57a99461bc3",
+    "blob:null/332ac1b6-297e-4b71-9662-a3268672b786",
+    "blob:null/9ca760d8-5879-49f0-be05-c160a634f79b",
+    "blob:null/e966a439-205c-4cb5-aa27-c3768a101521",
+    "blob:null/0df84c5e-a608-474b-8ec8-c8c0d40e13ec",
+    "blob:null/54ac1bf8-6f3a-4ad2-8ced-680582114ee7",
+    "blob:null/2499ca80-68cd-4036-b595-da400d9130a7",
+    "blob:null/849e9b70-122c-45b7-820b-75aa3e4e1bde",
+    "blob:null/dbdd753b-2f6f-4939-a1de-bcb36f186de6",
+    "blob:null/fd5d626b-77af-4946-bad4-ed166be5ecf3",
+    "blob:null/81e41c65-b714-44a1-99f8-0ed47842fbf9",
+    "blob:null/d346b6de-73a8-4a0d-b81a-6950e558848d",
+    "blob:null/036fdaa4-8830-4ed5-b4f8-fa3c1afb55d1",
+    "blob:null/c9f2ed9b-75c8-453d-9dda-aa839e4a2473",
+    "blob:null/5222c624-7999-433e-aa06-18ef1a4ac6a4",
+    "blob:null/124ef555-9665-43a2-b253-e0c96c2ee6c7",
+    "blob:null/6caa54de-9c1a-4473-adc7-c853ad465661",
+    "blob:null/4379b4ee-1b54-4069-9bfb-d8cf223b221a",
+    "blob:null/a7ce020e-5e73-4e43-9186-cb1f8716a63c",
+    "blob:null/93cec56b-7843-48b9-a4ee-f8dcadccadb9",
+    "blob:null/ce2e9f85-cf5b-4ac4-8a97-38e2f8d665fb",
+    "blob:null/b9a94a02-5a3a-45fb-8a92-c46aee75d7cb",
+    "blob:null/75e31121-7988-4a44-a7ba-74f9baca5288",
+    "blob:null/eaeb45bc-801e-4693-a108-33116d593b15"
+  ],
+  "console_errors": []
+}

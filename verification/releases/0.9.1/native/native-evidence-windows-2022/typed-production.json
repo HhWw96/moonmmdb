@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "started": "2026-09-25T13:16:49.891420+00:00",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY",
+  "production": true,
+  "target": "MoonBit JS typed consumer",
+  "checks": 14228,
+  "sources": [
+    {
+      "file": "dbip-city-lite-2026-09.mmdb",
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "addresses": 7114,
+      "locales": [
+        "en"
+      ]
+    },
+    {
+      "file": "dbip-asn-lite-2026-09.mmdb",
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "addresses": 7114,
+      "locales": [
+        "en"
+      ]
+    }
+  ],
+  "finished": "2026-09-25T13:16:52.159267+00:00"
+}

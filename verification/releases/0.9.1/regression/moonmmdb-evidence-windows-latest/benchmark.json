@@ -1,0 +1,50 @@
+{
+  "timestamp": "2026-09-25T13:14:33.165Z",
+  "node": "v24.20.0",
+  "platform": "win32",
+  "arch": "x64",
+  "cpu": "AMD EPYC 9V74 80-Core Processor                ",
+  "toolchain": "moon 0.1.20260827 (d0aaa07 2026-08-27) ~\\.moon\\bin\\moon.exe\nmoonc v0.10.11+6ff76a5f9 (2026-08-28) ~\\.moon\\bin\\moonc.exe\nmoonrun 0.1.20260827 (d0aaa07 2026-08-27) ~\\.moon\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
+  "core_sha256": "5cb8f9195ee97153f45f4efdda51fbbf7e474a3518e735dcd1c18997301ad1fb",
+  "scope": "Small official fixtures; hot in-memory lookup includes MoonBit typed JSON serialization. Open includes snapshot copy and metadata serialization. Not a full GeoLite/GeoIP production benchmark; no cross-language speed claim.",
+  "rss_end_bytes": 56778752,
+  "max_rss_kib": 56032,
+  "results": [
+    {
+      "file": "GeoLite2-ASN-Test.mmdb",
+      "bytes": 12653,
+      "sha256": "75901b98ed6e58d3bd41af9985044b747a7ec0be1369f930c24f5e044427181a",
+      "ips": [
+        "1.0.0.1",
+        "1.128.0.1",
+        "255.255.255.255"
+      ],
+      "open_iterations": 100,
+      "mean_open_and_metadata_ms": 0.218866,
+      "warmup": 200,
+      "query_iterations": 10000,
+      "query_elapsed_ms": 64.4308,
+      "mean_query_us": 6.44308,
+      "queries_per_second": 155205.27449604846,
+      "output_characters": 1556716
+    },
+    {
+      "file": "GeoIP2-City-Test.mmdb",
+      "bytes": 22569,
+      "sha256": "ed972738e4e03a3e56e12041a6af4d91592249d110f7e4a647e5f2fa0e639c09",
+      "ips": [
+        "2001:218::",
+        "81.2.69.160",
+        "255.255.255.255"
+      ],
+      "open_iterations": 100,
+      "mean_open_and_metadata_ms": 0.12529099999999999,
+      "warmup": 200,
+      "query_iterations": 10000,
+      "query_elapsed_ms": 362.7222,
+      "mean_query_us": 36.272220000000004,
+      "queries_per_second": 27569.307861498415,
+      "output_characters": 14926954
+    }
+  ]
+}

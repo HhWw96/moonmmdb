@@ -1,0 +1,532 @@
+{
+  "status": "passed",
+  "platform": "nt",
+  "started": "2026-09-25T13:18:03.836948+00:00",
+  "duration_requested": 1800,
+  "executable_sha256": "7a99d5bb520021dd9e702c02e153d3620b44e3f2a84779e79f2576c37db47192",
+  "scope": "Independent Native consumer, one process, reusable real City/ASN readers, eight cursors including early close plus full ASN referenced-record validation per cycle. Product CLI is tested separately.",
+  "sources": [
+    {
+      "file": "dbip-city-lite-2026-09.mmdb",
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+    },
+    {
+      "file": "dbip-asn-lite-2026-09.mmdb",
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+    }
+  ],
+  "samples": [
+    {
+      "rss": 2342912,
+      "rss_high_water": 2342912,
+      "private_bytes": 475136,
+      "handles": 39,
+      "seconds": 0.0,
+      "cycles": 0
+    },
+    {
+      "rss": 141340672,
+      "rss_high_water": 268525568,
+      "private_bytes": 138182656,
+      "handles": 56,
+      "seconds": 30.156999999999982,
+      "cycles": 41
+    },
+    {
+      "rss": 141291520,
+      "rss_high_water": 268525568,
+      "private_bytes": 138084352,
+      "handles": 56,
+      "seconds": 60.01600000000002,
+      "cycles": 83
+    },
+    {
+      "rss": 141643776,
+      "rss_high_water": 268525568,
+      "private_bytes": 138715136,
+      "handles": 56,
+      "seconds": 90.07900000000001,
+      "cycles": 125
+    },
+    {
+      "rss": 129826816,
+      "rss_high_water": 268525568,
+      "private_bytes": 138088448,
+      "handles": 56,
+      "seconds": 120.14100000000002,
+      "cycles": 168
+    },
+    {
+      "rss": 96964608,
+      "rss_high_water": 268525568,
+      "private_bytes": 138088448,
+      "handles": 56,
+      "seconds": 150.00000000000006,
+      "cycles": 210
+    },
+    {
+      "rss": 72839168,
+      "rss_high_water": 268525568,
+      "private_bytes": 141017088,
+      "handles": 56,
+      "seconds": 180.06300000000005,
+      "cycles": 251
+    },
+    {
+      "rss": 52654080,
+      "rss_high_water": 268525568,
+      "private_bytes": 138715136,
+      "handles": 56,
+      "seconds": 210.10999999999996,
+      "cycles": 293
+    },
+    {
+      "rss": 39305216,
+      "rss_high_water": 268525568,
+      "private_bytes": 138715136,
+      "handles": 56,
+      "seconds": 240.17199999999997,
+      "cycles": 336
+    },
+    {
+      "rss": 29290496,
+      "rss_high_water": 268525568,
+      "private_bytes": 138715136,
+      "handles": 56,
+      "seconds": 270.032,
+      "cycles": 378
+    },
+    {
+      "rss": 22097920,
+      "rss_high_water": 268525568,
+      "private_bytes": 138747904,
+      "handles": 56,
+      "seconds": 300.079,
+      "cycles": 420
+    },
+    {
+      "rss": 17137664,
+      "rss_high_water": 268525568,
+      "private_bytes": 138747904,
+      "handles": 56,
+      "seconds": 330.141,
+      "cycles": 462
+    },
+    {
+      "rss": 16941056,
+      "rss_high_water": 268525568,
+      "private_bytes": 138747904,
+      "handles": 56,
+      "seconds": 360.00000000000006,
+      "cycles": 504
+    },
+    {
+      "rss": 16384000,
+      "rss_high_water": 268525568,
+      "private_bytes": 138723328,
+      "handles": 56,
+      "seconds": 390.04699999999997,
+      "cycles": 546
+    },
+    {
+      "rss": 16379904,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 420.094,
+      "cycles": 588
+    },
+    {
+      "rss": 15818752,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 450.141,
+      "cycles": 630
+    },
+    {
+      "rss": 15634432,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 480.18800000000005,
+      "cycles": 673
+    },
+    {
+      "rss": 15634432,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 510.032,
+      "cycles": 715
+    },
+    {
+      "rss": 15450112,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 540.079,
+      "cycles": 757
+    },
+    {
+      "rss": 15081472,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 570.125,
+      "cycles": 799
+    },
+    {
+      "rss": 14741504,
+      "rss_high_water": 268525568,
+      "private_bytes": 138723328,
+      "handles": 56,
+      "seconds": 600.1879999999999,
+      "cycles": 841
+    },
+    {
+      "rss": 14741504,
+      "rss_high_water": 268525568,
+      "private_bytes": 138723328,
+      "handles": 56,
+      "seconds": 630.047,
+      "cycles": 883
+    },
+    {
+      "rss": 14741504,
+      "rss_high_water": 268525568,
+      "private_bytes": 138723328,
+      "handles": 56,
+      "seconds": 660.1099999999999,
+      "cycles": 925
+    },
+    {
+      "rss": 14729216,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 690.1569999999999,
+      "cycles": 967
+    },
+    {
+      "rss": 17022976,
+      "rss_high_water": 268525568,
+      "private_bytes": 140992512,
+      "handles": 56,
+      "seconds": 720.0159999999998,
+      "cycles": 1009
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 750.0629999999999,
+      "cycles": 1051
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 780.125,
+      "cycles": 1094
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 810.172,
+      "cycles": 1136
+    },
+    {
+      "rss": 14712832,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 840.0319999999999,
+      "cycles": 1178
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 870.079,
+      "cycles": 1220
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 900.125,
+      "cycles": 1262
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 930.172,
+      "cycles": 1304
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 960.0159999999998,
+      "cycles": 1346
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 990.079,
+      "cycles": 1388
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1020.125,
+      "cycles": 1431
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 1050.1879999999999,
+      "cycles": 1473
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1080.032,
+      "cycles": 1515
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1110.079,
+      "cycles": 1557
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1140.11,
+      "cycles": 1599
+    },
+    {
+      "rss": 14712832,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1170.172,
+      "cycles": 1641
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 1200.032,
+      "cycles": 1683
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 1230.094,
+      "cycles": 1725
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1260.1409999999998,
+      "cycles": 1768
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1290.0,
+      "cycles": 1809
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 1320.032,
+      "cycles": 1852
+    },
+    {
+      "rss": 14716928,
+      "rss_high_water": 268525568,
+      "private_bytes": 138674176,
+      "handles": 56,
+      "seconds": 1350.094,
+      "cycles": 1894
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1380.1409999999998,
+      "cycles": 1936
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1410.1879999999999,
+      "cycles": 1978
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1440.032,
+      "cycles": 2020
+    },
+    {
+      "rss": 14721024,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1470.079,
+      "cycles": 2063
+    },
+    {
+      "rss": 14725120,
+      "rss_high_water": 268525568,
+      "private_bytes": 138715136,
+      "handles": 56,
+      "seconds": 1500.125,
+      "cycles": 2105
+    },
+    {
+      "rss": 14725120,
+      "rss_high_water": 268525568,
+      "private_bytes": 138678272,
+      "handles": 56,
+      "seconds": 1530.0,
+      "cycles": 2147
+    },
+    {
+      "rss": 14737408,
+      "rss_high_water": 268525568,
+      "private_bytes": 138706944,
+      "handles": 56,
+      "seconds": 1560.047,
+      "cycles": 2189
+    },
+    {
+      "rss": 14737408,
+      "rss_high_water": 268525568,
+      "private_bytes": 138690560,
+      "handles": 56,
+      "seconds": 1590.11,
+      "cycles": 2231
+    },
+    {
+      "rss": 14733312,
+      "rss_high_water": 268525568,
+      "private_bytes": 138702848,
+      "handles": 56,
+      "seconds": 1620.1719999999998,
+      "cycles": 2273
+    },
+    {
+      "rss": 14725120,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1650.032,
+      "cycles": 2315
+    },
+    {
+      "rss": 14712832,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1680.079,
+      "cycles": 2357
+    },
+    {
+      "rss": 14729216,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1710.1409999999998,
+      "cycles": 2399
+    },
+    {
+      "rss": 14733312,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1740.204,
+      "cycles": 2442
+    },
+    {
+      "rss": 14725120,
+      "rss_high_water": 268525568,
+      "private_bytes": 138715136,
+      "handles": 56,
+      "seconds": 1770.0629999999999,
+      "cycles": 2483
+    },
+    {
+      "rss": 14737408,
+      "rss_high_water": 268525568,
+      "private_bytes": 138719232,
+      "handles": 56,
+      "seconds": 1800.1249999999998,
+      "cycles": 2525
+    }
+  ],
+  "cycles": 2526,
+  "cursors": 20208,
+  "elapsed_seconds": 1800.7189999999998,
+  "peak_rss": 268525568,
+  "rss_gate": {
+    "early_median": 16099328.0,
+    "late_median": 14731264.0,
+    "growth": -1368064.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "private_bytes_gate": {
+    "early_median": 138690560.0,
+    "late_median": 138717184.0,
+    "growth": 26624.0,
+    "allowed": 67108864,
+    "passed": true
+  },
+  "handles_gate": {
+    "early_median": 56.0,
+    "late_median": 56.0,
+    "passed": true
+  },
+  "finished": "2026-09-25T13:48:04.580945+00:00"
+}

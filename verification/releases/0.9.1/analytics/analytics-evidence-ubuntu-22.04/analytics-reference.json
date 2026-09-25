@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY, independent Python Counter aggregation",
+  "addresses_per_database": 4,
+  "input_sha256": "d5922a354f558b7072bdf66f4e8d77d1e621dc1fb9b2180c2591a908cdf4f93f",
+  "databases": [
+    {
+      "file": "geo.mmdb",
+      "sha256": "02d0c798291448a4ee2797afb115d418e25c61f4d9a995ce0431d94cb1ce0187"
+    },
+    {
+      "file": "asn.mmdb",
+      "sha256": "dab06da41e8858d2f40b4cd05a89ad924cd5ff8bae5cf533165bbe52dab0da70"
+    }
+  ],
+  "hosts": [
+    {
+      "command": [
+        "node",
+        "bin/moonmmdb.mjs"
+      ],
+      "exit_code": 1,
+      "report_sha256": "6d4e2545eb78da656665fb3675cd9caecceb2a4afb87e3742f589811327b685d"
+    },
+    {
+      "command": [
+        "/home/runner/work/moonmmdb/moonmmdb/dist/moonmmdb"
+      ],
+      "exit_code": 1,
+      "report_sha256": "9a7eb4f79f4a7a7dbfe826ef032b9c125ea58e60d4309136b264cd406ceced95"
+    }
+  ],
+  "finished": "2026-09-25T13:14:15.811946+00:00"
+}

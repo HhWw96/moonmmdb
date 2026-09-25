@@ -1,0 +1,10 @@
+{
+  "cases": 2048,
+  "seed": "0x4d4d4442",
+  "opened": 1212,
+  "rejected": 836,
+  "failures": [],
+  "status": "passed",
+  "timestamp": "2026-09-25T13:13:34.801Z",
+  "scope": "Deterministic truncation/bit-mutation smoke test; not a proof all corrupt inputs are detected."
+}

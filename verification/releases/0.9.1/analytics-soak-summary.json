@@ -1,0 +1,82 @@
+[
+  {
+    "os": "ubuntu-22.04",
+    "host": "node",
+    "report": "analytics/analytics-evidence-ubuntu-22.04/analytics-soak-node.json",
+    "status": "passed",
+    "elapsed_seconds": 1800.170622495,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 210964480,
+      "last_median": 215941120,
+      "growth_bytes": 4976640,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 345972736
+    }
+  },
+  {
+    "os": "ubuntu-22.04",
+    "host": "native",
+    "report": "analytics/analytics-evidence-ubuntu-22.04/analytics-soak-native.json",
+    "status": "passed",
+    "elapsed_seconds": 1800.171749231,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 138842112,
+      "last_median": 138842112,
+      "growth_bytes": 0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 138842112
+    }
+  },
+  {
+    "os": "windows-2022",
+    "host": "node",
+    "report": "analytics/analytics-evidence-windows-2022/analytics-soak-node.json",
+    "status": "passed",
+    "elapsed_seconds": 1800.2350000000001,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 17385472,
+      "last_median": 17166336,
+      "growth_bytes": -219136,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 186048512
+    },
+    "private_trend": {
+      "first_median": 174428160,
+      "last_median": 178769920,
+      "growth_bytes": 4341760,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 179314688
+    }
+  },
+  {
+    "os": "windows-2022",
+    "host": "native",
+    "report": "analytics/analytics-evidence-windows-2022/analytics-soak-native.json",
+    "status": "passed",
+    "elapsed_seconds": 1800.047,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 17055744,
+      "last_median": 17047552,
+      "growth_bytes": -8192,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 141242368
+    },
+    "private_trend": {
+      "first_median": 146513920,
+      "last_median": 146513920,
+      "growth_bytes": 0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 146546688
+    }
+  }
+]

@@ -1,0 +1,34 @@
+{
+  "status": "passed",
+  "reference": "maxminddb 3.2.0 MODE_MEMORY, independent Python Counter aggregation",
+  "addresses_per_database": 7114,
+  "input_sha256": "6d2bb87bc3956e605fef4bd30ee5961f6d9c93d036544b0cb9667faefe46dbd3",
+  "databases": [
+    {
+      "file": "dbip-city-lite-2026-09.mmdb",
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+    },
+    {
+      "file": "dbip-asn-lite-2026-09.mmdb",
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+    }
+  ],
+  "hosts": [
+    {
+      "command": [
+        "node",
+        "bin/moonmmdb.mjs"
+      ],
+      "exit_code": 1,
+      "report_sha256": "a5593ed0deb208201d300855ddd1be60d8c7b9d9e21a0e6864c7153c24410fe5"
+    },
+    {
+      "command": [
+        "D:\\a\\moonmmdb\\moonmmdb\\dist\\moonmmdb.exe"
+      ],
+      "exit_code": 1,
+      "report_sha256": "6537229cae591ec1ee80c03ba98c4c7c923c2dc2c2643c1b47c934781f117f55"
+    }
+  ],
+  "finished": "2026-09-25T13:14:59.498530+00:00"
+}

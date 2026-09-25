@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "tool": {
+    "name": "MoonMMDB",
+    "version": "0.9.1",
+    "core_sha256": "5cb8f9195ee97153f45f4efdda51fbbf7e474a3518e735dcd1c18997301ad1fb",
+    "hash_bridge_sha256": "52c036207fffff8b1da19014fb1ce78a805cd6719d0aa9bc4b09af9b549f95ea",
+    "worker_sha256": "305d83fdf611df0fdf7d14d9b53472765dfa3058b920062d4b6d47590762517b"
+  },
+  "operation": {
+    "op": "compare",
+    "ip": "192.0.2.1",
+    "fields": [
+      "/site"
+    ]
+  },
+  "databases": [
+    {
+      "name": "tags.mmdb",
+      "bytes": 577,
+      "sha256": "3cbea721e93a4237971fe2c9aac8f91cbd75bea49c5158d22e873373a20f8d71",
+      "metadata": {
+        "node_count": "42",
+        "record_size": "24",
+        "ip_version": "4",
+        "database_type": "MoonMMDB-Synthetic-tags",
+        "binary_format_major_version": "2",
+        "binary_format_minor_version": "0",
+        "build_epoch": "0",
+        "languages": [
+          {
+            "type": "string",
+            "value": "en"
+          }
+        ],
+        "description": {
+          "en": {
+            "type": "string",
+            "value": "Synthetic scenario; not geolocation data"
+          }
+        }
+      }
+    },
+    {
+      "name": "updated.mmdb",
+      "bytes": 581,
+      "sha256": "a1e3b093b1b0543c6524addf7f7b50b00e57428c2e95b15fdeb644cb05881511",
+      "metadata": {
+        "node_count": "42",
+        "record_size": "24",
+        "ip_version": "4",
+        "database_type": "MoonMMDB-Synthetic-tags",
+        "binary_format_major_version": "2",
+        "binary_format_minor_version": "0",
+        "build_epoch": "0",
+        "languages": [
+          {
+            "type": "string",
+            "value": "en"
+          }
+        ],
+        "description": {
+          "en": {
+            "type": "string",
+            "value": "Synthetic scenario; not geolocation data"
+          }
+        }
+      }
+    }
+  ],
+  "finished": "2026-09-25T13:20:57.926Z",
+  "result": {
+    "status": "changed",
+    "record_changed": false,
+    "prefix_changed": false,
+    "changed_fields": [
+      "/site"
+    ],
+    "before": {
+      "status": "found",
+      "prefix_length": 24,
+      "fields": {
+        "/site": {
+          "status": "present",
+          "value": {
+            "type": "string",
+            "value": "lab-a"
+          }
+        }
+      }
+    },
+    "after": {
+      "status": "found",
+      "prefix_length": 24,
+      "fields": {
+        "/site": {
+          "status": "present",
+          "value": {
+            "type": "string",
+            "value": "lab-a-new"
+          }
+        }
+      }
+    }
+  }
+}
