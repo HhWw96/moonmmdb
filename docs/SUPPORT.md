@@ -1,6 +1,6 @@
 # 支持范围
 
-v0.9.0 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9.md)。
+v0.9.1 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_1.md)。
 
 0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
@@ -78,8 +78,10 @@ Native 产品提供 metadata、lookup、project、enrich-many、networks、valid
 
 Native 0.7.0 增加 `diff`，按输入 IP 比较两个快照；字段选择、变化状态、文件合计限制及完成汇总见 [更新对比](NATIVE_DIFF.md)。
 
-浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 基础验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [0.9.0 验证](VERIFICATION_0_9.md)。不扩大到 Safari 或手机大数据库性能。
+浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [0.9.1 验证](VERIFICATION_0_9_1.md)。不扩大到 Safari 或手机大数据库性能。
 
 正式 `analytics` 包与 Native/Node `analyze` 的互斥计数、精确整数、来源散列及资源边界见 [日志分析](ANALYTICS.md)。旧分析示例输出保持不变。
 
 0.9.0 默认 Node 稳定性在固定 Node 24.20.0 的 Windows/Linux City＋Country 和 City＋ASN 负载下各连续通过三次 30 分钟验证；本轮 v0.8.0 基线也通过。该结论不覆盖所有 Node 版本，也不撤销历史 Node 24.13.0 失败记录，详见 [0.9.0 验证](VERIFICATION_0_9.md)。
+
+0.9.1 浏览器新增本地 JSONL 分析，默认 8 MiB／10,000 行，最大 64 MiB／1,000,000 行；分块读取、精确计数、取消恢复与原始日志散列见 [浏览器分析说明](BROWSER_ANALYTICS.md)。原有默认 Node 四组负载各连续三次通过 30 分钟复验，历史失败与运行时范围说明继续保留。

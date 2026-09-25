@@ -1,6 +1,6 @@
 # 日志分析
 
-0.9.0 新增功能；下载与安装回执见 [版本验证](VERIFICATION_0_9.md)。无需预先生成联合补充日志：
+0.9.0 新增功能；下载与安装回执见 [版本验证](VERIFICATION_0_9_1.md)。无需预先生成联合补充日志：
 
 ```text
 moonmmdb analyze CITY.mmdb ASN.mmdb access.jsonl --ip-path /client/ip --top 10

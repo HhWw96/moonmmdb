@@ -4,7 +4,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 
 ## 使用与构建
 
-八个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。0.9.0 新增 `analyze`，使用与报告口径见 [正式日志分析](ANALYTICS.md)；发布状态以 [版本验证](VERIFICATION_0_9.md) 为准。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
+八个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。0.9.0 新增 `analyze`，使用与报告口径见 [正式日志分析](ANALYTICS.md)；发布状态以 [版本验证](VERIFICATION_0_9_1.md) 为准。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
 
 开发环境沿用 MoonBit 0.10.11+6ff76a5f9；Windows 使用固定 w64devkit 2.10.0 / GCC 16.2.0，Linux 在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
 

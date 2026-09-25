@@ -1,6 +1,6 @@
 # 参赛准备事实（不是人工申报书）
 
-项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库。当前公开稳定版本 0.9.0；0.9.1 浏览器日志分析处于发布验收阶段，实际状态见 [验证回执](VERIFICATION_0_9_1.md)。
+项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库。当前版本 0.9.1；浏览器日志分析已通过发布门禁，公开交付状态见 [验证回执](VERIFICATION_0_9_1.md)。
 
 根据参赛者收到的通知，已通过报名初审。此状态来自参赛者提供的组委会邮件；最终验收和奖项结果尚未确认。
 
@@ -44,7 +44,7 @@ v0.9.0 将日志分析提升为正式 Native/Node 命令和独立 analytics 包�
 
 已完成 GitHub 公开发布：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，源码与提交历史均可见。[首次远端 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 两个环境通过。外部交付与验收状态如下：
 
-- Mooncakes 与 GitHub 各版本的真实发布、全新注册表安装和下载验收状态，以 [0.9.0 稳定版本](VERIFICATION_0_9.md) 与 [0.9.1 验收状态](VERIFICATION_0_9_1.md) 的公开回执为准。
+- Mooncakes 与 GitHub 各版本的真实发布、全新注册表安装和下载验收状态，以 [0.9.1 当前版本](VERIFICATION_0_9_1.md) 与 [0.9.0 历史版本](VERIFICATION_0_9.md) 的公开回执为准。
 - 保持已通过初审的申报方向，提交与最终版本一致的成果。
 - 由赛方给出最终验收及奖项结果。
 

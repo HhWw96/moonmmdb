@@ -1,6 +1,6 @@
 # 0.9.1 验证与发布状态
 
-当前为候选版本；跨平台发布门槛尚未完成，0.9.0 继续作为公开稳定版。此文件随实际验证回执更新，构建成功不代表正式发布。
+五组跨平台发布门禁均已通过，正在执行正式发布与公开产物复验。最终公开交付以本页发布回执为准，门禁通过本身不等于已经发布。
 
 验证入口：
 
@@ -23,7 +23,7 @@
 | Native 完整验收 | Windows/Linux 通过，Ubuntu 24.04 解压复验通过 | [36139544371](https://github.com/HhWw96/moonmmdb/actions/runs/36139544371) |
 | 浏览器产品与持续运行 | Windows/Linux 通过 | [36139545098](https://github.com/HhWw96/moonmmdb/actions/runs/36139545098) |
 | 正式分析产品 | Windows/Linux Node、Native 均通过 | [36139579064](https://github.com/HhWw96/moonmmdb/actions/runs/36139579064) |
-| 默认 Node 连续稳定性 | 进行中 | [36139583916](https://github.com/HhWw96/moonmmdb/actions/runs/36139583916) |
+| 默认 Node 连续稳定性 | 两平台、两种负载各连续三次通过 | [36139583916](https://github.com/HhWw96/moonmmdb/actions/runs/36139583916) |
 
 本机 Edge 153.0.4234.48 已完成 73 份固定语料和两份真实库的 31,259 次浏览器查询检查，以及新分析流程的十万行、64 MiB、原始字节散列、读取错误、取消恢复、报告下载和每库 7,114 个地址独立对照。跨平台正式报告统一使用固定 Node 24.20.0。
 
@@ -49,7 +49,13 @@ Native 原有联合补充、diff、游标／检查持续运行均在两平台完
 
 版本选择逻辑新增 `0.9.1`、`0.9.10` 等数字比较用例；实际旧版本兼容入口还在全新临时目录安装 0.5.0，JS/WasmGC 消费均通过，见 [`registry-old-0.5.0.json`](../verification/releases/0.9.1/registry-old-0.5.0.json)。私有临时目录路径已省略；历史接口基线未改写。
 
-## 待发布产物身份
+## 默认 Node 稳定性
+
+固定 Node 24.20.0，在 Windows 2022 和 Ubuntu 22.04 分别运行 City＋Country、City＋ASN；每组先运行 v0.8.0 基线，再连续执行三次本版本候选。四次基线和十二次候选均完成至少 1800 秒，原始报告内部散列与下载文件逐一匹配。候选的最大 RSS 中位数增量为 409,600 字节，Windows 最大私有内存中位数增量为 335,872 字节，均通过原有门槛。
+
+无强制 GC、无堆缩小参数，保留 RSS、堆、外部内存、ArrayBuffer 和 Windows 私有内存的实际采样。完整数据见 [`stability-summary.json`](../verification/releases/0.9.1/stability-summary.json) 和其链接的原始回执。本轮 v0.8.0 基线也通过，不能据此宣称重现或修复了旧 Windows／Node 24.13.0 机器的失败；历史失败记录继续保留。
+
+## 发布产物身份
 
 下列文件已经过对应 CI 验证，尚不代表已公开发布。正式发布使用 Linux 构建的同一份 HTML 作为网页及离线下载；Windows 构建另有独立散列和验证记录。
 
@@ -62,3 +68,5 @@ Native 原有联合补充、diff、游标／检查持续运行均在两平台完
 | Linux x64 tar.gz | `19b14b41b9fe3a16708b4b278fd593063ed9d3afab4fe3110af437ca475571a6` |
 
 原始回执位于 [`verification/releases/0.9.1`](../verification/releases/0.9.1)。源码身份以实现提交和各平台报告中的散列共同绑定；不同平台的换行和生成代码字节可能不同，不据此宣称二进制可复现。
+
+[`validation-original-bytes.zip`](../verification/releases/0.9.1/validation-original-bytes.zip) 保留 CI 和本机浏览器回执的原始字节，用于复核报告内部散列；Git 中单独列出的 JSON 可能经过文本换行转换。最终证据索引另按提交中的 Git blob 字节计算，不混淆这两种散列口径。

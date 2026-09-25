@@ -1,6 +1,6 @@
 # 浏览器本地数据库工作台
 
-0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.0/moonmmdb-0.9.0-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_9.md)。
+0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.1/moonmmdb-0.9.1-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_9_1.md)。
 
 ## 使用
 
