@@ -1,0 +1,24 @@
+{
+  "started": "2026-09-25T15:22:27.328Z",
+  "status": "passed",
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.1",
+  "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+  "steps": [
+    {
+      "name": "add",
+      "output": ""
+    },
+    {
+      "target": "js",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "downloaded_manifest_sha256": "c9826d7ac1d2a87a667200db5c40ebc53c1366c4fa3d1d5f06b8d2c3192b1457",
+  "finished": "2026-09-25T15:22:49.888Z",
+  "directory_note": "Fresh OS temporary directory outside repository; private path omitted."
+}
