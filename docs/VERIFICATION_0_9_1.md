@@ -1,6 +1,6 @@
 # 0.9.1 验证与发布状态
 
-五组跨平台发布门禁均已通过；Mooncakes 0.9.1 已发布并完成独立注册表安装，GitHub 与网页发布及公开产物复验正在执行。最终公开交付以本页发布回执为准，门禁通过本身不等于已经发布。
+0.9.1 已正式发布到 GitHub、Mooncakes 和 GitHub Pages。五组发布门禁全部通过，公开下载后的散列检查、Windows/Ubuntu 22.04/24.04 Native 隔离运行、在线／离线 HTML 身份核对及全新注册表安装复验均通过。
 
 验证入口：
 
@@ -57,9 +57,9 @@ Native 原有联合补充、diff、游标／检查持续运行均在两平台完
 
 ## 发布产物身份
 
-下列文件已经过对应 CI 验证，尚不代表已公开发布。正式发布使用 Linux 构建的同一份 HTML 作为网页及离线下载；Windows 构建另有独立散列和验证记录。
+下列文件已经过对应 CI 验证并正式发布，公开下载后再次核对散列。网页及离线下载使用 Linux 构建的同一份 HTML；Windows 构建另有独立散列和验证记录。
 
-该 Linux CI HTML 还在本机 Edge 153.0.4234.48 经仅提供该文件的本地 HTTP 入口复验，通过完整 31,259 次查询、14 项工作台检查及七组日志分析验收（含真实库、100,000 行和 64 MiB）。这两份回执的 HTML 散列与待发布文件一致，见 [`release-html-edge`](../verification/releases/0.9.1/release-html-edge)。本机最初的 30 分钟记录绑定本地构建；正式 Chromium 持续运行分别绑定各 CI 平台构建，不混用散列。
+该 Linux CI HTML 还在本机 Edge 153.0.4234.48 经仅提供该文件的本地 HTTP 入口复验，通过完整 31,259 次查询、14 项工作台检查及七组日志分析验收（含真实库、100,000 行和 64 MiB）。这两份回执的 HTML 散列与发布文件一致，见 [`release-html-edge`](../verification/releases/0.9.1/release-html-edge)。本机最初的 30 分钟记录绑定本地构建；正式 Chromium 持续运行分别绑定各 CI 平台构建，不混用散列。
 
 | 产物 | SHA-256 |
 |---|---|
@@ -76,3 +76,15 @@ Native 原有联合补充、diff、游标／检查持续运行均在两平台完
 `HhWw96/moonmmdb@0.9.1` 已由服务端返回 200 OK。重新下载的公开归档与上传文件逐字节相同，SHA-256 为 `3dffd46868f2569f93839e35677f3968b9ff1e1651689423f81cff7f1cf32126`，3,059,439 字节、852 个文件；源码、样例、许可证和公开接口声明核对通过。打包来源提交为 `2eb0be8c805fedb61c54e94072aa6ce15434528f`，只排除包含私人用户路径的历史编译日志，完整原因见 [发布凭据](../verification/releases/0.9.1/publication.json)。
 
 在仓库之外的全新临时目录从注册表添加精确版本，验证版本、查询、geo、遍历、结构检查与 analytics，JS/WasmGC 均通过；没有本地 workspace 替代依赖。回执见 [`registry-0.9.1.json`](../verification/releases/0.9.1/registry-0.9.1.json)。
+
+## 公开交付复验
+
+| 交付 | 实际结果与回执 |
+|---|---|
+| GitHub | [v0.9.1 发布页](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.1)，[发布门禁运行](https://github.com/HhWw96/moonmmdb/actions/runs/36153955275)；目标提交 `2d5c5ba803c685a7bed162d3f80e51eae479fa5c` |
+| 在线与离线 | [网页](https://hhww96.github.io/moonmmdb/)与公开下载 HTML 字节一致；[Pages 部署](https://github.com/HhWw96/moonmmdb/actions/runs/36154138027)、[实际页面散列](../verification/releases/0.9.1/pages.json) |
+| 公开 Native 下载 | [三个系统复验](https://github.com/HhWw96/moonmmdb/actions/runs/36154156047)全部通过；每个环境校验四个公开资产散列，实际 Native 程序在移除开发工具路径后通过 11 项运行检查 |
+| 本机重新下载 | 全部公开资产与 SHA256SUMS 一致，见 [本机下载回执](../verification/releases/0.9.1/downloaded-local.json) |
+| 发布后注册表安装 | 再建独立临时目录，JS/WasmGC 消费通过，见 [安装回执](../verification/releases/0.9.1/registry-post-release.json) |
+
+完整发布凭据与报告列表见 [publication.json](../verification/releases/0.9.1/publication.json) 和 [证据索引](../verification/releases/0.9.1/evidence-index.json)。结论仅覆盖报告列出的平台、运行时、数据与负载；历史失败记录、商业数据库支持边界和浏览器大文件限制继续保留。

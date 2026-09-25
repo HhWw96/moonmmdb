@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "version": "0.9.1",
+  "platform": "linux",
+  "sha256": {
+    "moonmmdb-0.9.1-windows-x64.zip": "e02af7c89dedee9e4c8ce56718af7e0d006f5b91c350041df404eeb8aca3e68d",
+    "moonmmdb-0.9.1-linux-x64.tar.gz": "19b14b41b9fe3a16708b4b278fd593063ed9d3afab4fe3110af437ca475571a6",
+    "moonmmdb-0.9.1-offline.html": "3d856d3aece27b2978239868f43b4f393cc65072d32fe8feb71b12f78b1b4b7a",
+    "HhWw96-moonmmdb-0.9.1.zip": "3dffd46868f2569f93839e35677f3968b9ff1e1651689423f81cff7f1cf32126"
+  },
+  "native": {
+    "status": "passed",
+    "archive": "moonmmdb-0.9.1-linux-x64.tar.gz",
+    "sha256": "19b14b41b9fe3a16708b4b278fd593063ed9d3afab4fe3110af437ca475571a6",
+    "executable_sha256": "0eaef0ec6446d8f2f26f18f87b643dcb64975e1ce2a377634cb0d34aeb035a1f",
+    "without_developer_tools": true,
+    "commands": 11
+  }
+}
