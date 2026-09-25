@@ -18,16 +18,17 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.0.0
         with:
-          node-version: '24'
+          node-version: '24.20.0'
       - name: Download immutable release and check its published digest
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          VERSION=$(node scripts/version.mjs)
           mkdir -p dist/pages
-          gh release download v0.9.0 --repo HhWw96/moonmmdb --pattern moonmmdb-0.9.0-offline.html --pattern SHA256SUMS --dir dist/pages
+          gh release download "v$VERSION" --repo HhWw96/moonmmdb --pattern moonmmdb-${VERSION}-offline.html --pattern SHA256SUMS --dir dist/pages
           cd dist/pages
-          grep '  moonmmdb-0.9.0-offline.html$' SHA256SUMS | sha256sum --check
-          cp moonmmdb-0.9.0-offline.html index.html
+          grep "  moonmmdb-${VERSION}-offline.html$" SHA256SUMS | sha256sum --check
+          cp moonmmdb-${VERSION}-offline.html index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:

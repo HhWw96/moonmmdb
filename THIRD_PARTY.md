@@ -27,3 +27,7 @@ Native 分发包附带 MoonBit core 的 Apache-2.0 许可证、MinGW-w64 运行�
 # 浏览器界面依赖
 
 浏览器模块的 React、React DOM 和 Scheduler 使用 MIT 许可证，版本和完整性固定在 `web/package-lock.json`。离线 HTML 内置对应许可证全文；不依赖 CDN。Vite、TypeScript、Playwright 仅用于构建或验证，不参与 MMDB 查询算法。内置数据库使用项目人工生成器，遵循本项目 Apache-2.0；不嵌入生产数据库。
+
+## Browser incremental hashing (0.9.1)
+
+The offline browser worker uses the same pinned MoonBit `moonbitlang/x@0.5.5` crypto source as the Native tool, under Apache-2.0. Its source, license and provenance remain in `native_cli/vendor/x/`; the independent `web/hash` module adds no dependency to the public reader library. The offline HTML embeds the full upstream license. No CDN or external hashing service is used.

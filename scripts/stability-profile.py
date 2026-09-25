@@ -1,12 +1,12 @@
 """Run identical diagnostics against the two core revisions before default soaks."""
-import json, shutil, subprocess
+import json, shutil, subprocess, re
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
 baseline=ROOT/'verification/local/baseline'
 probe=baseline/'examples/allocation_probe';probe.mkdir(parents=True,exist_ok=True)
 for name in ('moon.mod','moon.pkg','moon.work','probe.mbt'):
  data=(ROOT/'examples/allocation_probe'/name).read_text(encoding='utf-8')
- if name=='moon.mod':data=data.replace('@0.9.0','@0.8.0')
+ if name=='moon.mod':data=re.sub(r'HhWw96/moonmmdb@\d+\.\d+\.\d+', 'HhWw96/moonmmdb@0.8.0', data)
  (probe/name).write_text(data,encoding='utf-8')
 shutil.copyfile(ROOT/'scripts/allocation-profile.mjs',baseline/'scripts/allocation-profile.mjs')
 data=baseline/'verification/local/production';data.mkdir(parents=True,exist_ok=True)

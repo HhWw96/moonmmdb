@@ -7,10 +7,9 @@ pub struct AnalysisHandle {
 }
 
 ///|
-#export_name("analysis_create")
-pub fn analysis_create(
-  city : Bytes,
-  asn : Bytes,
+pub fn analysis_from_readers(
+  city : @mmdb.Reader,
+  asn : @mmdb.Reader,
   top : Int,
   max_groups : Int,
   ip_path : String,
@@ -20,8 +19,6 @@ pub fn analysis_create(
   let analyzer = Some(
     {
       let _ = @mmdb.prepare_fields([ip_path])
-      let city = @mmdb.open_bytes(city)
-      let asn = @mmdb.open_bytes(asn)
       fn info(reader : @mmdb.Reader) -> Json {
         let m = reader.metadata()
         {

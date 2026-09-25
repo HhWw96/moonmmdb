@@ -31,6 +31,16 @@
       "current": "src/analytics/pkg.generated.mbti",
       "baseline": "analytics-0.9.0.mbti",
       "sha256": "c51fef9f7c994de1acbd4fa9a50e314ade8b2d62cdf6c9c091654cc3a5c2d234"
+    },
+    {
+      "current": "src/bridge/pkg.generated.mbti",
+      "baseline": "bridge-0.9.1.mbti",
+      "sha256": "8a196d04405ebaad36b3226a86642fea3bd1e1a547790b8d94b5f73d283dbfae"
+    },
+    {
+      "current": "src/analytics_bridge/pkg.generated.mbti",
+      "baseline": "analytics-bridge-0.9.1.mbti",
+      "sha256": "33478eaf734459f516349da5b73d87a2a8277fa944851471dd43ed4cf310a8dc"
     }
   ],
   "additional_baseline": {
@@ -40,5 +50,9 @@
   "analytics_baseline": {
     "version": "0.9.0",
     "origin": "Candidate interface; release only after formal product and stability gates."
+  },
+  "browser_analytics_baseline": {
+    "version": "0.9.1",
+    "origin": "Additive bridge declarations; retain all earlier baselines. Registry publication verifies matching declarations."
   }
 }

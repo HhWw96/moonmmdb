@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.0.0
         with:
-          node-version: '24'
+          node-version: '24.20.0'
       - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.12'
@@ -44,8 +44,9 @@ jobs:
           npm ci --prefix web
           node scripts/build.mjs
           python scripts/inspection-fixtures.py
-          npm run typecheck --prefix web
           npm run build --prefix web
+          npm run typecheck --prefix web
+          node web/hash-verify.mjs
           python -m pip install --target .reference-deps -r requirements-reference.txt
           python -m pip install psutil==7.2.2
           python scripts/download-production.py
@@ -57,12 +58,16 @@ jobs:
         run: |
           node web/verify.mjs
           node web/verify.mjs --file
+          node web/analytics-verify.mjs --production
+          node web/analytics-verify.mjs --file --production
       - name: Firefox online and offline product
         env:
           BROWSER_ENGINE: firefox
         run: |
           node web/verify.mjs
           node web/verify.mjs --file
+          node web/analytics-verify.mjs --production
+          node web/analytics-verify.mjs --file --production
       - name: Thirty minute isolated Chromium process-tree soak
         run: node web/soak.mjs
       - uses: actions/upload-artifact@v7.0.1

@@ -1,4 +1,5 @@
 import {
+  "HhWw96/moonmmdb/analytics_bridge",
   "HhWw96/moonmmdb" @mmdb,
   "moonbitlang/core/json",
 }

@@ -1,6 +1,8 @@
 import * as core from '../../dist/core.mjs';
+import {analyze} from './analysis';
 import {checkFiles, MAX_RESULT_BYTES, type Request, type Reply, type Database} from './protocol';
 let handles: unknown[] = [];
+let loaded: Database[] = [];
 let busy = false;
 function error(code: string, message: string, database?: string) { return {status: 'error' as const, code, offset: -1, message, ...(database ? {database} : {})}; }
 function checkJson(json: string) {
@@ -18,6 +20,7 @@ self.onmessage = async (event: MessageEvent<Request>) => {
   try {
     if (request.op === 'load') {
       handles = [];
+      loaded = [];
       checkFiles(request.files);
       if (!self.crypto?.subtle) throw error('browser-unsupported', '当前环境不支持本地 SHA-256，请使用受支持的桌面浏览器。');
       const opened: unknown[] = [];
@@ -32,10 +35,13 @@ self.onmessage = async (event: MessageEvent<Request>) => {
         databases.push({name: file.name, bytes: file.size, sha256: [...hash].map(b => b.toString(16).padStart(2, '0')).join(''), metadata: metadataFields(result.metadata)});
       }
       handles = opened;
+      loaded = databases;
       reply.databases = databases;
     } else {
       if (!handles.length) throw error('browser-not-loaded', '请先加载数据库。');
-      if (request.op === 'validate') {
+      if (request.op === 'analyze') {
+        reply.json=checkJson(await analyze(request.options,handles,loaded,progress=>self.postMessage({id:request.id,progress})));
+      } else if (request.op === 'validate') {
         const work = request.work ?? 100_000_000, state = request.state ?? 64 * 1024 * 1024;
         if (!Number.isInteger(work) || work < 1 || work > 1_000_000_000 || !Number.isInteger(state) || state < 1 || state > 256 * 1024 * 1024) throw error('browser-invalid-limit', '检查预算超出允许范围。');
         reply.json = checkJson(core.validate_database(handles[0], request.decode ?? false, work, state));

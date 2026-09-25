@@ -1,3 +1,4 @@
+import {VERSION} from '../scripts/version.mjs';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, mkdtempSync, writeFileSync, rmSync } from 'node:fs';
@@ -18,7 +19,7 @@ function cli(args) {
 
 test('help and version require no database or network', () => {
   assert.match(cli(['--help']).text, /offline MaxMind DB/);
-  assert.equal(cli(['--version']).text.trim(), '0.9.0');
+  assert.equal(cli(['--version']).text.trim(), VERSION);
   assert.equal(cli([]).code, 2);
 });
 

@@ -3,6 +3,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { root } from './moon.mjs';
 const steps=[
+  ['versions',['scripts/version.mjs','--check']],
   ['toolchain',['scripts/moon.mjs','version','--all']],
   ['format',['scripts/moon.mjs','fmt','--check']],
   ['api-compat',['scripts/api-compat.mjs']],
@@ -11,7 +12,7 @@ const steps=[
   ['wasm-check',['scripts/moon.mjs','check','--target','wasm-gc','--deny-warn']],
   ['wasm-tests',['scripts/moon.mjs','test','--target','wasm-gc','--deny-warn']],
   ['build',['scripts/build.mjs']],
-  ['cli-tests',['--test','tests/cli.test.mjs','tests/evidence.test.mjs','tests/api.test.mjs','tests/stream.test.mjs','tests/diff.test.mjs','tests/many.test.mjs','tests/api-compat.test.mjs','tests/analyze.test.mjs']],
+  ['cli-tests',['--test','tests/cli.test.mjs','tests/evidence.test.mjs','tests/api.test.mjs','tests/stream.test.mjs','tests/diff.test.mjs','tests/many.test.mjs','tests/api-compat.test.mjs','tests/analyze.test.mjs','tests/version.test.mjs','tests/browser-bridge.test.mjs']],
   ['adversarial',['scripts/adversarial-verify.mjs']],
   ['boundary',['scripts/boundary-verify.mjs']],
   ['mutation',['scripts/mutation-verify.mjs']],

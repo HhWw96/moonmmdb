@@ -100,7 +100,7 @@ fn analyze(args : Array[String]) -> Int raise {
   let report = analyzer.finish()
   analyzer.close()
   let result = object(report.to_json(), "host-input-error")
-  result["tool_version"] = "0.9.0"
+  result["tool_version"] = "0.9.1"
   result["parameters"] = {
     "ip_path": ip_path.to_json(),
     "top": top.to_json(),

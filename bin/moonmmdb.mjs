@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import {VERSION} from './version.mjs';
 // Host I/O only. MMDB parsing, traversal, typed results and diagnostics are MoonBit.
 import { openSync, fstatSync, readSync, closeSync } from 'node:fs';
 import { open_database, metadata, lookup, project, validate_paths, prepare_fields, selection_status, project_prepared, compare_prepared } from '../dist/core.mjs';
@@ -7,7 +8,7 @@ import { enrichMany } from './many.mjs';
 import { inspect } from './inspect.mjs';
 import { analyze } from './analyze.mjs';
 
-const help = `MoonMMDB 0.9.0 — offline MaxMind DB reader
+const help = `MoonMMDB ${VERSION} — offline MaxMind DB reader
 Usage:
   node bin/moonmmdb.mjs metadata DATABASE.mmdb
   node bin/moonmmdb.mjs lookup DATABASE.mmdb IP [IP ...]
@@ -84,7 +85,7 @@ async function main() {
     return;
   }
   if (command === '--help' && !database) { await write(help); return; }
-  if (command === '--version' && !database) { await write('0.9.0\n'); return; }
+  if (command === '--version' && !database) { await write(VERSION+'\n'); return; }
   if (!['metadata', 'lookup', 'project', 'enrich', 'diff'].includes(command) || !database ||
     (command === 'metadata' && args.length !== 0) ||
     (command === 'lookup' && (args.length === 0 || args.length > 10000)) ||

@@ -1,5 +1,7 @@
 # MoonMMDB
 
+**0.9.1 候选开发：** 浏览器新增 [本地 JSONL 日志分析](docs/BROWSER_ANALYTICS.md)，复用正式统计口径，支持分块读取、取消和带原始文件散列的报告。发布门槛完成前，以下公开下载和安装继续指向 0.9.0；进度见 [0.9.1 验证状态](docs/VERIFICATION_0_9_1.md)。
+
 **正式日志分析：** Native/Node 新增 `analyze` 命令，提供可复用的 [analytics 包](src/analytics/README.md)。一条命令统计国家、ASN 请求量，并生成附输入与数据库 SHA-256 的精确报告，见 [日志分析说明](docs/ANALYTICS.md)。
 
 **浏览器本地数据库工作台：** [网页入口](https://hhww96.github.io/moonmmdb/) · [独立离线 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.0/moonmmdb-0.9.0-offline.html) · [使用说明](docs/BROWSER.md)。本地查询、结构检查和指定 IP 更新对比，无需安装工具。网页、离线 HTML、Native 下载包与 Mooncakes 安装的完整回执见 [0.9.0 验证报告](docs/VERIFICATION_0_9.md)。

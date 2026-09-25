@@ -1,3 +1,6 @@
+import {VERSION} from '../scripts/version.mjs';
+import {runMoon} from '../scripts/moon.mjs';
+import {copyFileSync} from 'node:fs';
 import {build} from 'vite';
 import {readFileSync, mkdirSync, writeFileSync} from 'node:fs';
 import {resolve, dirname} from 'node:path';
@@ -14,19 +17,22 @@ async function bundle(entry,name) {
   if (chunks.filter(c => c.type==='chunk').length !== 1) throw new Error('Single self-contained chunk required');
   return {js:chunks.find(c=>c.type==='chunk').code, css:chunks.filter(c=>c.type==='asset' && c.fileName.endsWith('.css')).map(c=>c.source).join('\n')};
 }
+runMoon(['build','--target','js','--release'], resolve(here,'hash'));
+copyFileSync(resolve(here,'hash/_build/js/release/build/local/moonmmdb_browser_hash/moonmmdb_browser_hash.js'), resolve(root,'dist/browser-hash.mjs'));
 const worker = await bundle('src/worker.ts','MoonMMDBWorker');
 const app = await bundle('src/main.tsx','MoonMMDBApp');
 const samples = {};
-for (const [name,path] of Object.entries({asn:'tests/scenarios/asn.mmdb',tags:'tests/scenarios/tags.mmdb',updated:'tests/scenarios/tags-updated.mmdb',broken:'verification/local/inspection-hidden-corruption.mmdb'})) samples[name] = readFileSync(resolve(root,path)).toString('base64');
+for (const [name,path] of Object.entries({geo:'tests/scenarios/geo.mmdb',log:'examples/analysis-access.jsonl',asn:'tests/scenarios/asn.mmdb',tags:'tests/scenarios/tags.mmdb',updated:'tests/scenarios/tags-updated.mmdb',broken:'verification/local/inspection-hidden-corruption.mmdb'})) samples[name] = readFileSync(resolve(root,path)).toString('base64');
 const licenses = ['LICENSE','THIRD_PARTY.md'].map(p=>p+'\n'+readFileSync(resolve(root,p),'utf8').replaceAll('\r\n','\n'));
 for (const dep of ['react','react-dom','scheduler']) licenses.push(dep+'\n'+readFileSync(resolve(here,'node_modules',dep,'LICENSE'),'utf8').replaceAll('\r\n','\n'));
-const data = JSON.stringify({version:'0.9.0',worker:worker.js,samples,licenses:licenses.join('\n\n'),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs')))}).replaceAll('<','\\u003c');
+licenses.push('moonbitlang/x 0.5.5\n'+readFileSync(resolve(root,'native_cli/vendor/x/LICENSE'),'utf8'));
+const data = JSON.stringify({version:VERSION,worker:worker.js,samples,licenses:licenses.join('\n\n'),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),hash_bridge_sha256:hash(readFileSync(resolve(root,'dist/browser-hash.mjs'))),worker_sha256:hash(worker.js)}).replaceAll('<','\\u003c');
 const script = `window.__MOONMMDB_DATA__=${data};\n${app.js}`.replaceAll('</script','<\\/script');
 const sha = text => createHash('sha256').update(text).digest('base64');
 const csp = `default-src 'none'; script-src 'sha256-${sha(script)}'; style-src 'sha256-${sha(app.css)}'; worker-src blob:; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'`;
 const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta http-equiv="Content-Security-Policy" content="${csp}"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="referrer" content="no-referrer"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 32 32%22%3E%3Crect width=%2232%22 height=%2232%22 rx=%228%22 fill=%22%232563eb%22/%3E%3Cpath d=%22M8 23V9l8 9 8-9v14%22 fill=%22none%22 stroke=%22white%22 stroke-width=%223%22/%3E%3C/svg%3E"><title>MoonMMDB — 本地数据库工作台</title><style>${app.css}</style></head><body><div id="root"></div><noscript>需要启用 JavaScript 才能在本机查询数据库。</noscript><script>${script}</script></body></html>`;
 writeFileSync(resolve(output,'index.html'),html);
-writeFileSync(resolve(output,'moonmmdb-0.9.0-offline.html'),html);
-writeFileSync(resolve(output,'SHA256SUMS'),hash(html)+'  moonmmdb-0.9.0-offline.html\n');
-writeFileSync(resolve(output,'build.json'),JSON.stringify({version:'0.9.0',source_sha256:sourceFingerprint(),html_sha256:hash(html),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),bytes:Buffer.byteLength(html)},null,2)+'\n');
+writeFileSync(resolve(output,`moonmmdb-${VERSION}-offline.html`),html);
+writeFileSync(resolve(output,'SHA256SUMS'),hash(html)+`  moonmmdb-${VERSION}-offline.html\n`);
+writeFileSync(resolve(output,'build.json'),JSON.stringify({version:VERSION,source_sha256:sourceFingerprint(),html_sha256:hash(html),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),bytes:Buffer.byteLength(html)},null,2)+'\n');
 console.log('Built identical online/offline HTML:', Buffer.byteLength(html), 'bytes');

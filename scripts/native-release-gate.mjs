@@ -1,3 +1,6 @@
+import {VERSION, syncVersions, assertAdvance} from './version.mjs';
+syncVersions();
+const releaseNotes=`docs/RELEASE_${VERSION.replaceAll('.','_')}.md`;
 // Only publish artifacts from successful, code-matching validation runs.
 import {execFileSync} from 'node:child_process';
 import {mkdirSync,readFileSync,writeFileSync,existsSync} from 'node:fs';
@@ -15,14 +18,18 @@ for(const [key,name] of [['NATIVE_RUN','Native product validation'],['REGRESSION
  if(changed.some(path=>!(/^(docs\/|verification\/releases\/)/.test(path)||['README.md','CHANGELOG.md'].includes(path))))throw new Error('Implementation changed after validation: '+changed.join(','));
 }
 if(process.argv.includes('--publish')){
- const receipt=JSON.parse(readFileSync('verification/releases/0.9.0/registry-0.9.0.json','utf8'));
- if(receipt.status!=='passed'||receipt.version!=='0.9.0'||receipt.module!=='HhWw96/moonmmdb')throw new Error('Missing fresh Mooncakes receipt');
- const manifest=readFileSync('moon.mod','utf8');if(!/^version = "0.9.0"$/m.test(manifest))throw new Error('Manifest version mismatch');
- const paths=['dist/publish/windows/moonmmdb-0.9.0-windows-x64.zip','dist/publish/linux/moonmmdb-0.9.0-linux-x64.tar.gz'];
+ if(git(['status','--porcelain']).trim())throw new Error('Release checkout must be clean');
+ const previous=JSON.parse(gh(['api',`repos/${repo}/releases/latest`]));
+ if(!previous.tag_name.startsWith('v'))throw new Error('Unexpected previous release tag');
+ assertAdvance(VERSION,previous.tag_name.slice(1));
+ const receipt=JSON.parse(readFileSync(`verification/releases/${VERSION}/registry-${VERSION}.json`,'utf8'));
+ if(receipt.status!=='passed'||receipt.version!==`${VERSION}`||receipt.module!=='HhWw96/moonmmdb')throw new Error('Missing fresh Mooncakes receipt');
+ const manifest=readFileSync('moon.mod','utf8');if(manifest.match(/^version = "([^"]+)"$/m)?.[1]!==VERSION)throw new Error('Manifest version mismatch');
+ const paths=[`dist/publish/windows/moonmmdb-${VERSION}-windows-x64.zip`,`dist/publish/linux/moonmmdb-${VERSION}-linux-x64.tar.gz`];
  const checksum=[];
- const browserFile='dist/publish/browser/moonmmdb-0.9.0-offline.html';
+ const browserFile=`dist/publish/browser/moonmmdb-${VERSION}-offline.html`;
  const browserBuild=JSON.parse(readFileSync('dist/publish/browser/build.json','utf8'));
- if(browserBuild.version!=='0.9.0'||createHash('sha256').update(readFileSync(browserFile)).digest('hex')!==browserBuild.html_sha256)throw new Error('Browser artifact mismatch');
+ if(browserBuild.version!==`${VERSION}`||createHash('sha256').update(readFileSync(browserFile)).digest('hex')!==browserBuild.html_sha256)throw new Error('Browser artifact mismatch');
  if(!readFileSync('dist/publish/browser/index.html').equals(readFileSync(browserFile)))throw new Error('Online/offline artifacts differ');
  paths.push(browserFile);
  for(const path of paths){
@@ -31,15 +38,15 @@ if(process.argv.includes('--publish')){
   if(!readFileSync(folder+'/SHA256SUMS','utf8').split(/\r?\n/).includes(digest+'  '+file))throw new Error('Artifact checksum mismatch');
   checksum.push(digest+'  '+file);
  }
- const url='https://download.mooncakes.io/user/HhWw96/moonmmdb/0.9.0.zip';
+ const url=`https://download.mooncakes.io/user/HhWw96/moonmmdb/${VERSION}.zip`;
  const response=await fetch(url);if(!response.ok)throw new Error('Registry archive unavailable');
  const archive=Buffer.from(await response.arrayBuffer());
- const provenance=JSON.parse(readFileSync('verification/releases/0.9.0/publication.json','utf8'));
+ const provenance=JSON.parse(readFileSync(`verification/releases/${VERSION}/publication.json`,'utf8'));
  if(createHash('sha256').update(archive).digest('hex')!==provenance.registry_archive_sha256)throw new Error('Registry archive differs from verified upload');
- const source='dist/publish/HhWw96-moonmmdb-0.9.0.zip';writeFileSync(source,archive);paths.push(source);
- checksum.push(provenance.registry_archive_sha256+'  HhWw96-moonmmdb-0.9.0.zip');
+ const source=`dist/publish/HhWw96-moonmmdb-${VERSION}.zip`;writeFileSync(source,archive);paths.push(source);
+ checksum.push(provenance.registry_archive_sha256+`  HhWw96-moonmmdb-${VERSION}.zip`);
  writeFileSync('dist/publish/SHA256SUMS',checksum.join('\n')+'\n');paths.push('dist/publish/SHA256SUMS');
- if(!existsSync('docs/RELEASE_0_9.md'))throw new Error('Missing reviewed release notes');
- gh(['release','create','v0.9.0',...paths,'--repo',repo,'--target',git(['rev-parse','HEAD']),'--title','MoonMMDB v0.9.0 — Request analytics and default-runtime stability','--notes-file','docs/RELEASE_0_9.md']);
+ if(!existsSync(releaseNotes))throw new Error('Missing reviewed release notes');
+ gh(['release','create',`v${VERSION}`,...paths,'--repo',repo,'--target',git(['rev-parse','HEAD']),'--title',`MoonMMDB v${VERSION} — Local browser JSONL analytics`,'--notes-file',releaseNotes]);
 }
 console.log('Verified release gates passed');

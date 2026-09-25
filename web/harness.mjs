@@ -25,7 +25,7 @@ export async function workerHarness(page) {
   await page.evaluate(()=>{
     const input=document.createElement('input');input.type='file';input.multiple=true;input.id='test-files';input.hidden=true;document.body.append(input);
     let worker, pending, id=0;
-    window.testReset=()=>{worker?.terminate();if(pending)pending.reject(new Error('test-reset'));pending=null;const url=URL.createObjectURL(new Blob([window.__MOONMMDB_DATA__.worker],{type:'text/javascript'}));worker=new Worker(url);URL.revokeObjectURL(url);worker.onmessage=({data})=>{if(pending?.id===data.id){const p=pending;pending=null;p.resolve(data);}};worker.onerror=()=>{pending?.reject(new Error('worker-error'));pending=null;};};
+    window.testReset=(prefix='')=>{worker?.terminate();if(pending)pending.reject(new Error('test-reset'));pending=null;const url=URL.createObjectURL(new Blob([prefix,window.__MOONMMDB_DATA__.worker],{type:'text/javascript'}));worker=new Worker(url);URL.revokeObjectURL(url);worker.onmessage=({data})=>{if(data.progress){window.testProgress=data.progress;return;}if(pending?.id===data.id){const p=pending;pending=null;p.resolve(data);}};worker.onerror=()=>{pending?.reject(new Error('worker-error'));pending=null;};};
     window.testCall=operation=>new Promise((resolve,reject)=>{if(pending)throw new Error('test concurrent request');const requestId=++id;pending={id:requestId,resolve,reject};worker.postMessage({...operation,id:requestId});});
     window.testReset();
   });

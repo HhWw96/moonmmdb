@@ -1,3 +1,4 @@
+import {VERSION} from './version.mjs';
 // Transport and provenance only; parsing, queries, counters and reports are MoonBit.
 import { createHash } from 'node:crypto';
 import * as analytics from '../dist/formal-analytics.mjs';
@@ -55,7 +56,7 @@ export async function analyze(args, write) {
     for await (const { text } of boundedLines(observed(), options)) check(analytics.analysis_line(handle, text));
     const report = JSON.parse(analytics.analysis_finish(handle));
     if (report.status === 'error') check(JSON.stringify(report));
-    report.tool_version = '0.9.0';
+    report.tool_version = VERSION;
     report.parameters = { ip_path: options.ipPath, top: options.top, max_groups: options.maxGroups, max_records: options.maxRecords, max_input_bytes: options.maxBytes, max_line_bytes: options.maxLineBytes, max_json_depth: 128 };
     report.databases = databases;
     report.input = { bytes: String(bytes), sha256: hash.digest('hex') };

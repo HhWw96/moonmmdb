@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.0.0
         with:
-          node-version: '24'
+          node-version: '24.20.0'
       - uses: actions/setup-python@v7.0.0
         with:
           python-version: '3.12'
@@ -100,4 +100,5 @@ jobs:
           name: native-package-ubuntu-22.04
           path: dist/native/
       - name: Verify Ubuntu 22.04 artifact on Ubuntu 24.04
-        run: python scripts/native-package.py --verify dist/native/moonmmdb-0.9.0-linux-x64.tar.gz
+        shell: bash
+        run: python scripts/native-package.py --verify dist/native/moonmmdb-*-linux-x64.tar.gz

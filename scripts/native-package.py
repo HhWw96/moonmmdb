@@ -2,6 +2,7 @@
 import argparse,hashlib,json,os,re,shutil,subprocess,tarfile,tempfile,zipfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent.parent
+VERSION=re.search(r'^version = "([^"]+)"$', (ROOT/'moon.mod').read_text(), re.M)[1]
 parser=argparse.ArgumentParser();parser.add_argument('--verify',type=Path);args=parser.parse_args()
 def digest(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def verify(archive):
@@ -19,7 +20,7 @@ def verify(archive):
  for command in [['--version'],['metadata','examples/geo.mmdb'],['lookup','examples/asn.mmdb','192.0.2.1'],['project','examples/asn.mmdb','192.0.2.1','/autonomous_system_number'],['enrich-many','examples/many.json','examples/access.jsonl'],['diff','examples/tags.mmdb','examples/tags-updated.mmdb','examples/access.jsonl','--field','/site'],['networks','examples/asn.mmdb','192.0.2.0/24'],['validate','examples/asn.mmdb','--decode-data']]:
   result=subprocess.run([str(exe),*command],cwd=folder,env=env,capture_output=True,text=True,encoding='utf-8',timeout=20)
   assert result.returncode in (0,1),(command,result.stdout,result.stderr)
-  if command==['--version']:assert result.stdout.strip()=='0.9.0'
+  if command==['--version']:assert result.stdout.strip()==VERSION
   else:assert all(isinstance(json.loads(line),dict) for line in result.stdout.splitlines())
   if command[0] in ('enrich-many','diff'):assert json.loads(result.stderr)['status']=='summary'
  result=subprocess.run([str(exe),'analyze','examples/geo.mmdb','examples/asn.mmdb','examples/access.jsonl'],cwd=folder,env=env,capture_output=True,text=True,encoding='utf-8',timeout=20)
@@ -33,7 +34,7 @@ def verify(archive):
  return {'status':'passed','archive':archive.name,'sha256':digest(archive),'executable_sha256':digest(exe),'without_developer_tools':True,'commands':11}
 if args.verify:
  print(json.dumps(verify(args.verify.resolve())));raise SystemExit()
-platform='windows-x64' if os.name=='nt' else 'linux-x64';name='moonmmdb-0.9.0-'+platform
+platform='windows-x64' if os.name=='nt' else 'linux-x64';name='moonmmdb-'+VERSION+'-'+platform
 exe=ROOT/'dist'/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')
 report={'status':'running','platform':platform,'executable_sha256':digest(exe)}
 if os.name=='nt':
@@ -64,7 +65,7 @@ config=json.loads((ROOT/'examples/many.json').read_text())
 for source in config['sources']:source['database']=Path(source['database']).name
 (examples/'many.json').write_text(json.dumps(config,indent=2)+'\n',encoding='utf-8')
 files={str(p.relative_to(folder)).replace('\\','/'):digest(p) for p in sorted(folder.rglob('*')) if p.is_file()}
-(folder/'MANIFEST.json').write_text(json.dumps({'version':'0.9.0','platform':platform,'files':files,'build':report},indent=2)+'\n',encoding='utf-8')
+(folder/'MANIFEST.json').write_text(json.dumps({'version':VERSION,'platform':platform,'files':files,'build':report},indent=2)+'\n',encoding='utf-8')
 out=ROOT/'dist/native';out.mkdir(parents=True,exist_ok=True)
 archive=out/(name+('.zip' if os.name=='nt' else '.tar.gz'))
 if os.name=='nt':
