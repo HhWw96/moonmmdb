@@ -1,6 +1,6 @@
 # 0.9.2 验证及交付状态
 
-当前为开发候选，尚未发布。稳定版保留 0.9.1。本文件随实际证据更新，不将本机冒烟测试代替正式门禁。
+五组正式发布门禁全部通过，正在完成注册表与公开产物交付。本文件随实际发布回执更新，不将候选产物或本机冒烟测试当作公开发行验收。
 
 交付目标：四种操作的跨端任务复用、有界异常定位、报告内部检查与原文件重新计算，以及 Node diff 合计资源限制和网页键盘操作修复。
 
@@ -20,9 +20,9 @@
 | Windows/Linux Native 产品 | 两平台通过，Ubuntu 24.04 解压复验通过 | [36308877878](https://github.com/HhWw96/moonmmdb/actions/runs/36308877878) |
 | Windows/Linux 浏览器产品 | 两平台通过 | [36308877841](https://github.com/HhWw96/moonmmdb/actions/runs/36308877841) |
 | Node/Native 正式分析与报告复验 | 两平台、两种宿主通过 | [36308948170](https://github.com/HhWw96/moonmmdb/actions/runs/36308948170) |
-| 默认 Node 历史及 City/ASN 连续稳定性 | 正在执行 | [36308955862](https://github.com/HhWw96/moonmmdb/actions/runs/36308955862) |
+| 默认 Node 历史及 City/ASN 连续稳定性 | 两平台、两种负载各连续三次通过 | [36308955862](https://github.com/HhWw96/moonmmdb/actions/runs/36308955862) |
 
-常规回归已在两个平台通过：每个平台 67 项 JS、67 项 WasmGC MoonBit 测试及 59 项 Node 测试通过，保留原有独立参考、固定官方语料、兼容基线和隔离消费者验证。原始回执位于 [证据目录](../verification/releases/0.9.2/)。未完成门禁与发布回执仍在收集，不能据此表格推断已经发布。
+常规回归已在两个平台通过：每个平台 67 项 JS、67 项 WasmGC MoonBit 测试及 59 项 Node 测试通过，保留原有独立参考、固定官方语料、兼容基线和隔离消费者验证。原始回执位于 [证据目录](../verification/releases/0.9.2/)。公开发行状态由下文交付回执单独记录。
 
 ## 跨端验收
 
@@ -59,6 +59,10 @@ Windows/Linux 的 Chromium 和 Firefox 均已完成 HTTP 与禁用网络的 file
 Windows 下载包已在移除 Node/Python/MoonBit 路径的独立目录通过 23 项运行检查，另复验随包异常日志的固定报告一致。Linux 同一压缩包已在 Ubuntu 24.04 解压复验。两包的人工日志字节与固定源文件一致，包含许可证、第三方声明和四种任务；不含工具链或生产数据库。详细回执见 [候选包验收](../verification/releases/0.9.2/candidate-packages.json)。正式发行后仍须重新从公开发布页下载复验。
 
 ## 可复现入口与边界
+
+默认 Node 门禁固定 24.20.0，Windows/Linux 的 City＋Country、City＋ASN 各先执行一次 v0.8.0 基线，再连续执行三次 0.9.2 候选；四次基线及十二次候选全部完成至少 1800 秒并通过。候选最大 RSS 中位数增长 729,088 字节，Windows 最大私有内存增长 589,824 字节，均低于原定门槛。无强制 GC、无缩小堆参数；报告内部散列与下载原始字节逐一核对。见 [稳定性汇总](../verification/releases/0.9.2/stability-summary.json)。本次基线也通过，不据此宣称修复或重现旧 Windows/Node 24.13.0 环境的历史失败。
+
+全新目录的旧版 0.5.0 注册表消费在 JS/WasmGC 上通过，见 [旧版本安装回执](../verification/releases/0.9.2/registry-old-0.5.0.json)。该结果用于安装检查器兼容验证，不替代 0.9.2 自身的发布后安装。
 
 - `node --test tests/workflow.test.mjs`：四种任务、报告内部检查/重算、计数与来源篡改、输出安全、十万行诊断及随包预期报告。
 - 设置 `MOONMMDB_TEST_NATIVE=1` 后运行同一测试：实际 Native 程序的对应行为。

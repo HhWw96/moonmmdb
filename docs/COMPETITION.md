@@ -1,6 +1,6 @@
 # 参赛准备事实（不是人工申报书）
 
-项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库。当前公开稳定版本 0.9.1；浏览器日志分析已发布，公开交付状态见 [验证回执](VERIFICATION_0_9_1.md)。
+项目：MoonMMDB——MoonBit 原生离线 IP 数据库查询库。当前公开稳定版本 0.9.2；跨端任务、异常定位与报告复核已发布，公开交付状态见 [验证回执](VERIFICATION_0_9_2.md)。
 
 根据参赛者收到的通知，已通过报名初审。此状态来自参赛者提供的组委会邮件；最终验收和奖项结果尚未确认。
 
@@ -11,6 +11,8 @@ v0.7.0 增加 Native 数据库更新对比，直接使用日志检查旧、新�
 v0.8.0 增加浏览器本地工作台和独立离线 HTML，支持查询、检查和指定 IP 更新对比；数据库不上传，在线与离线使用同一份 HTML。见 [0.8.0 验证](VERIFICATION_0_8.md)。
 
 v0.9.0 将日志分析提升为正式 Native/Node 命令和独立 analytics 包，使用精确计数、互斥异常统计与输入散列。在固定 Node 24.20.0 的 Windows/Linux City＋Country、City＋ASN 负载下分别连续通过三次 30 分钟门槛；历史 Node 24.13.0 失败记录保留。见 [0.9.0 验证](VERIFICATION_0_9.md)。
+
+v0.9.2 打通网页与 Node/Native 的四种任务、有界异常行定位和报告原文件复验。所有处理保留在本机；内部自洽或散列匹配不被表述为独立正确性证明。见 [完整流程](WORKFLOWS.md)。
 
 ## 已完成的技术贡献
 
@@ -27,7 +29,7 @@ v0.9.0 将日志分析提升为正式 Native/Node 命令和独立 analytics 包�
 
 ## 使用场景与实际边界
 
-1. 访问日志分析：读取 IP 字段，打开 City 与 ASN 库各一次并多次查询，再分别统计国家与 ASN Top N。已实现多库 JSONL 补充、独立 MoonBit 包、Native/Node 正式命令以及错误/缺失统计；浏览器 JSONL 入口的交付状态以 0.9.1 验证回执为准。
+1. 访问日志分析：读取 IP 字段，打开 City 与 ASN 库各一次并多次查询，再分别统计国家与 ASN Top N。已实现多库 JSONL 补充、独立 MoonBit 包、Native/Node 正式命令以及错误/缺失统计；浏览器 JSONL 入口的交付状态以 0.9.2 验证回执为准。
 2. 离线网络流量：由 MoonCap 等上游提取源/目的 IP，再调用本库补充 ASN/地域记录。当前仅为拟集成场景，没有上游采用证明。
 3. 组织内部标签：读取组织借助其他工具生成的 MMDB，查询机房、用途等字段。已提供人工 lab-a/lab-b 标签及更新影响演示，未声称已有企业部署。
 
@@ -44,7 +46,7 @@ v0.9.0 将日志分析提升为正式 Native/Node 命令和独立 analytics 包�
 
 已完成 GitHub 公开发布：[HhWw96/moonmmdb](https://github.com/HhWw96/moonmmdb)，源码与提交历史均可见。[首次远端 CI](https://github.com/HhWw96/moonmmdb/actions/runs/35109825863)在 Ubuntu 与 Windows 两个环境通过。外部交付与验收状态如下：
 
-- Mooncakes 与 GitHub 各版本的真实发布、全新注册表安装和下载验收状态，以 [0.9.1 当前版本](VERIFICATION_0_9_1.md) 与 [0.9.0 历史版本](VERIFICATION_0_9.md) 的公开回执为准。
+- Mooncakes 与 GitHub 各版本的真实发布、全新注册表安装和下载验收状态，以 [0.9.2 当前版本](VERIFICATION_0_9_2.md) 与 [0.9.0 历史版本](VERIFICATION_0_9.md) 的公开回执为准。
 - 保持已通过初审的申报方向，提交与最终版本一致的成果。
 - 由赛方给出最终验收及奖项结果。
 

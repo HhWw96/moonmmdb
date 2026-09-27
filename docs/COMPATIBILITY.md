@@ -37,6 +37,6 @@ Node bridge 的公开导出、已声明的 CLI 参数、退出码、JSON 既有�
 
 维护者只修改主模块 `moon.mod` 的版本，然后执行 `node scripts/version.mjs --sync` 同步独立消费者、Native 字符串及网页／Node 版本标记，再运行正常构建与发布验证。`--check` 拒绝未同步状态；注册表检查按数字版本比较选择适用功能，保留旧版消费者验证。发布脚本拒绝回退和覆盖已发布版本。
 
-## 0.9.2 候选增强
+## 跨端任务、诊断与复核
 
-跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。
+新增 workflow 包、Analyzer.push_detailed、AnalysisRowOutcome 及桥接声明，冻结 0.9.2 基线；保留全部旧基线和原有统计口径。任务与报告 version:1 的规则见 [WORKFLOWS.md](WORKFLOWS.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是资源接受范围的收紧。报告超过 128 层时统一拒绝，可提取较浅字段重新生成；正常受支持输入的接口和结果语义不变。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。

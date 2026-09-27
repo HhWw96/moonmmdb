@@ -1,10 +1,10 @@
 # 浏览器本地数据库工作台
 
-0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.1/moonmmdb-0.9.1-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_9_1.md)。
+0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.2/moonmmdb-0.9.2-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_9_2.md)。
 
 ## 使用
 
-网页和离线 HTML 使用同一份构建产物。离线版保存到本机后直接用桌面浏览器打开，无需服务器、Node.js、Python 或 MoonBit。页面内置项目人工样例、帮助及许可证；人工 IP 标签不是实际归属。0.9.1 增加 City＋ASN 日志分析样例，发布状态见 [0.9.1 验证](VERIFICATION_0_9_1.md)。
+网页和离线 HTML 使用同一份构建产物。离线版保存到本机后直接用桌面浏览器打开，无需服务器、Node.js、Python 或 MoonBit。页面内置项目人工样例、帮助及许可证；人工 IP 标签不是实际归属。0.9.1 增加 City＋ASN 日志分析样例，发布状态见 [当前版本验证](VERIFICATION_0_9_2.md)。
 
 1. 选择或拖入 `.mmdb` 文件，等待元数据与 SHA-256 计算完成。
 2. **IP 查询**：输入一个 IPv4/IPv6 地址；字段框每行一个 JSON Pointer，留空查询完整记录。
@@ -15,7 +15,7 @@
 
 报告的 `version: 1` 是报告封装版本，`result` 保持现有核心类型化 JSON。整数为十进制字符串；浮点带原始位，字节为十六进制。不要在业务代码中无条件转换成 JavaScript Number。未命中、字段缺失、错误及检查未完成各自独立。
 
-取消会终止后台 Worker，清除可用 Reader 和当前结果；点击重新加载恢复。每次只执行一个任务；旧任务的结果不能覆盖新选择。查询和检查针对左侧第一份库；更新对比和日志分析分别通过角色选择框指定两份库。
+取消会终止后台 Worker，清除可用 Reader 和当前结果；点击重新加载恢复。每次只执行一个任务；旧任务的结果不能覆盖新选择。查询、检查、更新对比和日志分析均通过明确的角色选择指定目标库，不依赖文件加载顺序。
 
 ## 限制
 
@@ -65,6 +65,6 @@ node web/analytics-verify.mjs --file --production
 
 先安装 `python -m pip install psutil==7.2.2`，再执行 `node web/soak.mjs`，默认 30 分钟，使用隔离 Chromium 进程树，记录 RSS 合计及 Windows 私有内存。进程 RSS 求和可能重复计算共享页，报告明确度量口径。无强制 GC；历史 Node 默认 RSS 失败仍未因此解决。
 
-## 0.9.2 候选增强
+## 跨端任务、诊断与复核
 
-跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。
+四种操作支持导出/导入任务、显示命令行绑定方式，以及重新打开报告进行内部检查或原文件复验。任务导入只恢复参数，需重新选择文件后手动运行；目标库通过角色选择框明确指定。取消会作废旧任务，错误后焦点转到诊断区域。标签页采用手动激活：方向键及 Home/End 移动焦点，Enter/Space 激活。完整流程见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。

@@ -4,7 +4,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 
 ## 使用与构建
 
-八个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。0.9.0 新增 `analyze`，使用与报告口径见 [正式日志分析](ANALYTICS.md)；发布状态以 [版本验证](VERIFICATION_0_9_1.md) 为准。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
+十个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。0.9.0 新增 `analyze`，使用与报告口径见 [正式日志分析](ANALYTICS.md)；发布状态以 [版本验证](VERIFICATION_0_9_2.md) 为准。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
 
 开发环境沿用 MoonBit 0.10.11+6ff76a5f9；Windows 使用固定 w64devkit 2.10.0 / GCC 16.2.0，Linux 在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
 
@@ -69,6 +69,6 @@ v0.4.0 的默认 Node RSS 门槛失败记录保留在 [历史验证](VERIFICATIO
 
 `native-soaks.py` 同时运行旧联合补充、新 diff 产品命令及网段/检查 API 三个独立进程；各自报告 30 分钟采样及趋势门槛，报告注明并发宿主负载。diff 的真实负载使用固定 City 与 ASN 的不同字段结构，不冒称不同月份数据库的实际更新。
 
-## 0.9.2 候选增强
+## 跨端任务、诊断与复核
 
-跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。
+新增 `run-task` 与 `verify-report`。文件只能由用户通过 `--bind ROLE FILE` 绑定；任务不含路径或脚本。两命令支持原子 UTF-8 `--output`，默认拒绝覆盖，不能覆盖输入或其硬链接。报告复核区分内部自洽和原文件重新计算，退出码与示例见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。

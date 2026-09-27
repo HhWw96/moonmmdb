@@ -1,6 +1,6 @@
 # 日志分析
 
-0.9.0 新增功能；下载与安装回执见 [版本验证](VERIFICATION_0_9_1.md)。无需预先生成联合补充日志：
+0.9.0 新增功能；下载与安装回执见 [版本验证](VERIFICATION_0_9_2.md)。无需预先生成联合补充日志：
 
 ```text
 moonmmdb analyze CITY.mmdb ASN.mmdb access.jsonl --ip-path /client/ip --top 10
@@ -58,6 +58,6 @@ MoonBit API 见 [analytics 包](../src/analytics/README.md)。旧分析示例的
 默认 Node 历史负载的 A/B 和三次连续门禁由 `Default Node stability` 工作流执行；
 历史失败报告仍保留，不以新分析命令通过替代旧负载结论。
 
-## 0.9.2 候选增强
+## 跨端任务、诊断与复核
 
-跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。
+`--diagnostic-limit N` 默认为 0，范围 0—1,000，并受 512 KiB 缓冲区限制。诊断按异常行计数，同一行可含两维异常；达到容量后继续统计，附精确遗漏行数。`Analyzer.push_detailed` 一次查询返回分类，原有 push/finish 及报告类型保持兼容。任务执行与报告复验见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。

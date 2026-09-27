@@ -53,6 +53,6 @@ println(difference.to_json().stringify())
 
 Node.js 流式处理依据 [Stream 文档](https://nodejs.org/api/stream.html#consuming-readable-streams-with-async-iterators)，字段路径依据 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html)。完整参数及失败语义见 [支持范围](SUPPORT.md)。
 
-## 0.9.2 候选增强
+## 跨端任务、诊断与复核
 
-跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。
+网页导出四种操作的任务后，可用 Node/Native `run-task` 继续处理，并将报告导回网页。`verify-report` 支持内部检查或绑定原文件后重新计算；`analyze --diagnostic-limit N` 提供有界异常行位置。可直接运行的完整流程与输出安全规则见 [WORKFLOWS.md](WORKFLOWS.md)。Node diff 单库及两库合计不超过 256 MiB。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。

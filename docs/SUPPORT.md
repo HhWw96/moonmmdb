@@ -1,6 +1,6 @@
 # 支持范围
 
-v0.9.1 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_1.md)。
+v0.9.2 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_2.md)。
 
 0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
@@ -78,7 +78,7 @@ Native 产品提供 metadata、lookup、project、enrich-many、networks、valid
 
 Native 0.7.0 增加 `diff`，按输入 IP 比较两个快照；字段选择、变化状态、文件合计限制及完成汇总见 [更新对比](NATIVE_DIFF.md)。
 
-浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [0.9.1 验证](VERIFICATION_0_9_1.md)。不扩大到 Safari 或手机大数据库性能。
+浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [当前版本验证](VERIFICATION_0_9_2.md)。不扩大到 Safari 或手机大数据库性能。
 
 正式 `analytics` 包与 Native/Node `analyze` 的互斥计数、精确整数、来源散列及资源边界见 [日志分析](ANALYTICS.md)。旧分析示例输出保持不变。
 
@@ -86,6 +86,6 @@ Native 0.7.0 增加 `diff`，按输入 IP 比较两个快照；字段选择、�
 
 0.9.1 浏览器新增本地 JSONL 分析，默认 8 MiB／10,000 行，最大 64 MiB／1,000,000 行；分块读取、精确计数、取消恢复与原始日志散列见 [浏览器分析说明](BROWSER_ANALYTICS.md)。原有默认 Node 四组负载各连续三次通过 30 分钟复验，历史失败与运行时范围说明继续保留。
 
-## 0.9.2 候选增强
+## 跨端任务、诊断与复核
 
-跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。
+任务文件最多 64 KiB、JSON 深度 128；完整报告最多 8 MiB，页面预览最多 64 KiB。文件只能显式绑定；导入不自动执行。诊断最多 1,000 条异常行/512 KiB，不保存原行或 IP。报告内部自洽与同实现重算不能替代独立正确性证明。Node diff 单库及两库合计限制统一为 256 MiB。功能、错误与退出码见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。
