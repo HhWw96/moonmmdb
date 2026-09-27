@@ -41,6 +41,8 @@ try {
   }
   if(features.workflow) {
     const pkg=resolve(directory,'moon.pkg');writeFileSync(pkg,readFileSync(pkg,'utf8').replace(' @analytics }',' @analytics, "HhWw96/moonmmdb/workflow" @workflow }'));
+    const consumer=resolve(directory,'consumer.mbt');
+    writeFileSync(consumer,readFileSync(consumer,'utf8')+'///|\npub fn check_task(task : Json) -> Json raise @workflow.WorkflowError { @workflow.check_task(task) }\n');
     const file=resolve(directory,'consumer_wbtest.mbt');
     const extra=`  let detailed = @analytics.Analyzer::new(reader, reader)\n  let outcome = detailed.push_detailed("1.0.0.1")\n  assert_true(outcome.to_json() is Object(_))\n  assert_eq(detailed.finish().requests, 1UL)\n  detailed.close()\n  let task : Json = { "format": "moonmmdb-task", "version": 1, "operation": "lookup", "parameters": { "ip": "1.0.0.1", "fields": [] }, "files": [{ "role": "database", "name": "sample.mmdb" }] }\n  assert_eq(@workflow.check_task(task), task)\n`;
     writeFileSync(file,readFileSync(file,'utf8').replace(/}\n$/,extra+'}\n'));

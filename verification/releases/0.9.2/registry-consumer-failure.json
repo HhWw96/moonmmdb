@@ -1,0 +1,16 @@
+{
+  "started": "2026-09-27T11:26:09.189Z",
+  "status": "failed",
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.2",
+  "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+  "steps": [
+    {
+      "name": "add",
+      "output": ""
+    }
+  ],
+  "downloaded_manifest_sha256": "8f5d95d935da0cea25989b5ca169ce5abbe9b7d86180d410c595fb4e52069fbc",
+  "error": "MoonBit failed (1): Error: [0029]\n   \u256d\u2500[ <fresh-consumer>\\moon.pkg:1:103 ]\n   \u2502\n 1 \u2502 import { \"HhWw96/moonmmdb\" @mmdb, \"HhWw96/moonmmdb/geo\" @geo, \"HhWw96/moonmmdb/analytics\" @analytics, \"HhWw96/moonmmdb/workflow\" @workflow }\n   \u2502                                                                                                       \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500  \n   \u2502                                                                                                                    \u2570\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Error Warning (unused_package): Unused package 'HhWw96/moonmmdb/workflow'\n\u2500\u2500\u2500\u256f\nError: [0029]\n   \u256d\u2500[ <fresh-consumer>\\moon.pkg:1:130 ]\n   \u2502\n 1 \u2502 import { \"HhWw96/moonmmdb\" @mmdb, \"HhWw96/moonmmdb/geo\" @geo, \"HhWw96/moonmmdb/analytics\" @analytics, \"HhWw96/moonmmdb/workflow\" @workflow }\n   \u2502                                                                                                                                  \u2500\u2500\u2500\u2500\u252c\u2500\u2500\u2500\u2500  \n   \u2502                                                                                                                                      \u2570\u2500\u2500\u2500\u2500\u2500\u2500 Error Warning (unused_package): Unused package alias 'workflow'\n\u2500\u2500\u2500\u256f\n",
+  "finished": "2026-09-27T11:26:37.487Z"
+}

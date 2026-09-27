@@ -1,0 +1,10 @@
+{
+  "started": "2026-09-27T11:25:20.696Z",
+  "status": "failed",
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.2",
+  "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+  "steps": [],
+  "error": "MoonBit failed (4294967295): Warning: failed to update registry index, continuing with existing index: update failed\nWarning: you may need to run `moon update` to update the registry\nError: Failed to resolve registry dependency `HhWw96/moonmmdb` for module `local/registry_consumer`: no version satisfies requirement `0.9.2`\n",
+  "finished": "2026-09-27T11:25:21.539Z"
+}
