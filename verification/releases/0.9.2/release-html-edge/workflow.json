@@ -1,0 +1,27 @@
+{
+  "status": "passed",
+  "browser": "154.0.4258.37",
+  "engine": "chromium",
+  "transport": "http",
+  "checks": [
+    "manual keyboard tab activation",
+    "lookup: exported task -> node -> imported report -> replay",
+    "lookup: exported task -> native -> imported report -> replay",
+    "validate: exported task -> node -> imported report -> replay",
+    "validate: exported task -> native -> imported report -> replay",
+    "compare: exported task -> node -> imported report -> replay",
+    "compare: exported task -> native -> imported report -> replay",
+    "analyze: exported task -> node -> imported report -> replay",
+    "analyze: exported task -> native -> imported report -> replay",
+    "diagnostic local preview and explicit lookup target",
+    "replaced source mismatch",
+    "tampered report rejected and focus restored",
+    "100000 rows, full diagnostic buffer, renamed file replay",
+    "CLI-only task cannot relax browser cap"
+  ],
+  "hosts": [
+    "node",
+    "native"
+  ],
+  "html_sha256": "f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69"
+}
