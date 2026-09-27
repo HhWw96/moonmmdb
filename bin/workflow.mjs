@@ -11,7 +11,7 @@ import {analyze} from './analyze.mjs';
 
 export function checked(text) {
   const value=JSON.parse(text);
-  if(value.status==='error')throw new InputError(value.code,value.message??value.code);
+  if(value.status==='error'){const error=new InputError(value.code,value.message??value.code);if(Number.isInteger(value.offset))error.offset=value.offset;throw error;}
   return value;
 }
 const textFile=(path,limit)=>new TextDecoder('utf-8',{fatal:true}).decode(readFileBounded(path,limit));

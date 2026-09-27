@@ -184,6 +184,7 @@ try { await main(); }
 catch (error) {
   process.exitCode = 2;
   const diagnostic = { status: 'error', code: error instanceof OutputError ? 'host-output-error' : error instanceof InputError ? error.code : 'host-input-error', message: error.message };
+  if (Number.isInteger(error.offset)) diagnostic.offset = error.offset;
   if (error instanceof InputError && error.line !== undefined) diagnostic.line = error.line;
   if (error instanceof OutputError || ['analyze','run-task','verify-report'].includes(process.argv[2])) process.stderr.write(JSON.stringify(diagnostic) + '\n');
   else {

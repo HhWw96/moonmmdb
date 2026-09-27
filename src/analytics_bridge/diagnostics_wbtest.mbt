@@ -26,3 +26,28 @@ test "bounded diagnostics isolate caller objects and count omitted abnormal rows
     _ => abort("missing retained row")
   }
 }
+
+///|
+test "byte capacity seals diagnostics rather than selecting later smaller rows" {
+  let buffer = DiagnosticBuffer::new(1000)
+  buffer.add(
+    {
+      "input": "valid",
+      "issues": [
+        {
+          "dimension": "country",
+          "category": "query_error",
+          "code": "x".repeat(524288),
+        },
+      ],
+    },
+    1,
+    0,
+    1,
+  )
+  buffer.add({ "input": "missing-ip", "issues": [] }, 2, 1, 2)
+  match buffer.to_json() {
+    { "retained": "0", "omitted": "2", .. } => ()
+    _ => abort("diagnostic capacity must be sticky")
+  }
+}

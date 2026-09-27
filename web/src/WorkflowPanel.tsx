@@ -8,7 +8,7 @@ export function saveJSON(value:unknown,name:string) {
   const link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
 }
 export function RoleSelect({label,value,onChange,databases}:{label:string;value:number;onChange:(n:number)=>void;databases:Database[]}) {
-  return <label>{label}<select aria-label={label} value={value} onChange={e=>onChange(Number(e.target.value))}>{databases.map((db,i)=><option key={i} value={i}>{db.name}</option>)}</select></label>;
+  return <label>{label}<select aria-label={label} value={value} onChange={e=>onChange(Number(e.target.value))}>{databases.map((db,i)=><option key={i} value={i}>数据库 {i===0?'A':'B'} · {db.name}</option>)}</select></label>;
 }
 export function WorkflowPanel({busy,task,report,onImport,onExport,onVerify,onDetach}:{busy:boolean;task:Task|null;report:boolean;onImport:(file:File,kind:'task'|'report')=>void;onExport:(command:boolean)=>void;onVerify:()=>void;onDetach:()=>void}) {
   return <section className="workflow-panel" aria-label="任务与报告"><div className="workflow-actions">

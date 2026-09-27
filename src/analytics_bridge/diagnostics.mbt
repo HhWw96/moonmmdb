@@ -3,12 +3,19 @@ pub struct DiagnosticBuffer {
   priv limit : Int
   priv rows : Array[Json]
   priv mut bytes : Int
+  priv mut full : Bool
   priv mut omitted : UInt64
 }
 
 ///|
 pub fn DiagnosticBuffer::new(limit : Int) -> DiagnosticBuffer {
-  { limit: limit.max(0).min(1000), rows: [], bytes: 0, omitted: 0, }
+  {
+    limit: limit.max(0).min(1000),
+    rows: [],
+    bytes: 0,
+    full: false,
+    omitted: 0,
+  }
 }
 
 ///|
@@ -28,6 +35,10 @@ pub fn DiagnosticBuffer::add(
   if !abnormal {
     return
   }
+  if self.full || self.rows.length() >= self.limit {
+    self.omitted += 1
+    return
+  }
   let row : Json = {
     "line": line.to_string().to_json(),
     "start": start.to_string().to_json(),
@@ -37,7 +48,8 @@ pub fn DiagnosticBuffer::add(
     },
   }
   let length = @utf8.encode(row.stringify()[:]).length()
-  if self.rows.length() >= self.limit || self.bytes + length > 524288 {
+  if self.bytes + length > 524288 {
+    self.full = true
     self.omitted += 1
   } else {
     self.rows.push(row)
