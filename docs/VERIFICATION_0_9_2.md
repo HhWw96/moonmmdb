@@ -1,6 +1,10 @@
 # 0.9.2 验证及交付状态
 
-五组正式发布门禁全部通过，正在完成注册表与公开产物交付。本文件随实际发布回执更新，不将候选产物或本机冒烟测试当作公开发行验收。
+功能实现的五组正式发布门禁全部通过。Mooncakes 已发布并完成新目录安装；安装过程中发现并修复了消费者验证脚本的一处未使用导入错误。最终源码已重新启动五组门禁，GitHub Release 和网页暂未切换，稳定交付仍保留 0.9.1。本文件随实际发布回执更新。
+
+最终验证源码为 `4fa0e30b1fd93b1abe126cd34fe9a19ecf418318`，相对已通过的实现仅修正 `scripts/registry-verify.mjs` 的普通模块导入使用；查询、分析、任务、浏览器和 Native 运行代码未修改。新门禁：核心 [36315911777](https://github.com/HhWw96/moonmmdb/actions/runs/36315911777)、Native [36315911795](https://github.com/HhWw96/moonmmdb/actions/runs/36315911795)、浏览器 [36315911895](https://github.com/HhWw96/moonmmdb/actions/runs/36315911895)、分析 [36315926466](https://github.com/HhWw96/moonmmdb/actions/runs/36315926466)、默认稳定性 [36315937514](https://github.com/HhWw96/moonmmdb/actions/runs/36315937514)。下文当前采样绑定原实现，不冒充新运行。
+
+注册表归档保持不可变，库安装、查询和新增接口均正常。首次索引连接失败及消费者检查失败回执保留；修正后的检查器在新目录从注册表安装 0.9.2，JS/WasmGC 均通过。使用 GitHub 当前源码中的检查器复验；注册表源归档中的维护脚本保留上传时版本，不能把归档等同于最终 GitHub 树的全部文件。来源与散列见 [publication.json](../verification/releases/0.9.2/publication.json)。
 
 交付目标：四种操作的跨端任务复用、有界异常定位、报告内部检查与原文件重新计算，以及 Node diff 合计资源限制和网页键盘操作修复。
 
