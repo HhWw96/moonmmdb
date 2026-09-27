@@ -1,0 +1,110 @@
+[
+  {
+    "os": "ubuntu-22.04",
+    "host": "node",
+    "report": "analytics/analytics-evidence-ubuntu-22.04/analytics-soak-node.json",
+    "status": "passed",
+    "elapsed_seconds": 1803.842340558,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 221939712.0,
+      "last_median": 222867456.0,
+      "growth_bytes": 927744.0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 228671488
+    },
+    "handle_trend": {
+      "early": 21.0,
+      "late": 21.0,
+      "growth": 0.0,
+      "allowed": 4
+    },
+    "report_replay": "consistent"
+  },
+  {
+    "os": "ubuntu-22.04",
+    "host": "native",
+    "report": "analytics/analytics-evidence-ubuntu-22.04/analytics-soak-native.json",
+    "status": "passed",
+    "elapsed_seconds": 1803.232573826,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 140894208.0,
+      "last_median": 140894208.0,
+      "growth_bytes": 0.0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 140894208
+    },
+    "handle_trend": {
+      "early": 3.0,
+      "late": 3.0,
+      "growth": 0.0,
+      "allowed": 4
+    },
+    "report_replay": "consistent"
+  },
+  {
+    "os": "windows-2022",
+    "host": "node",
+    "report": "analytics/analytics-evidence-windows-2022/analytics-soak-node.json",
+    "status": "passed",
+    "elapsed_seconds": 1805.625,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 25401344.0,
+      "last_median": 17670144.0,
+      "growth_bytes": -7731200.0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 192327680
+    },
+    "private_memory_trend": {
+      "first_median": 178155520.0,
+      "last_median": 183046144.0,
+      "growth_bytes": 4890624.0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 183664640
+    },
+    "handle_trend": {
+      "early": 170.0,
+      "late": 170.0,
+      "growth": 0.0,
+      "allowed": 4
+    },
+    "report_replay": "consistent"
+  },
+  {
+    "os": "windows-2022",
+    "host": "native",
+    "report": "analytics/analytics-evidence-windows-2022/analytics-soak-native.json",
+    "status": "passed",
+    "elapsed_seconds": 1806.359,
+    "requests": 180000,
+    "rss_trend": {
+      "first_median": 17022976.0,
+      "last_median": 16957440.0,
+      "growth_bytes": -65536.0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 143310848
+    },
+    "private_memory_trend": {
+      "first_median": 148557824.0,
+      "last_median": 148557824.0,
+      "growth_bytes": 0.0,
+      "allowed_growth_bytes": 67108864,
+      "passed": true,
+      "peak": 148594688
+    },
+    "handle_trend": {
+      "early": 50.0,
+      "late": 50.0,
+      "growth": 0.0,
+      "allowed": 4
+    },
+    "report_replay": "consistent"
+  }
+]

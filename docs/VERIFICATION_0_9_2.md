@@ -1,78 +1,66 @@
-# 0.9.2 验证及交付状态
+# 0.9.2 验证与交付
 
-功能实现的五组正式发布门禁全部通过。Mooncakes 已发布并完成新目录安装；安装过程中发现并修复了消费者验证脚本的一处未使用导入错误。最终源码已重新启动五组门禁，GitHub Release 和网页暂未切换，稳定交付仍保留 0.9.1。本文件随实际发布回执更新。
+最终源码的五组发布门禁全部通过，Mooncakes 已发布并完成全新目录安装。GitHub、Pages 与公开下载复验状态由文末交付回执单独记录。
 
-最终验证源码为 `4fa0e30b1fd93b1abe126cd34fe9a19ecf418318`，相对已通过的实现仅修正 `scripts/registry-verify.mjs` 的普通模块导入使用；查询、分析、任务、浏览器和 Native 运行代码未修改。新门禁：核心 [36315911777](https://github.com/HhWw96/moonmmdb/actions/runs/36315911777)、Native [36315911795](https://github.com/HhWw96/moonmmdb/actions/runs/36315911795)、浏览器 [36315911895](https://github.com/HhWw96/moonmmdb/actions/runs/36315911895)、分析 [36315926466](https://github.com/HhWw96/moonmmdb/actions/runs/36315926466)、默认稳定性 [36315937514](https://github.com/HhWw96/moonmmdb/actions/runs/36315937514)。下文当前采样绑定原实现，不冒充新运行。
+## 源码与正式门禁
 
-注册表归档保持不可变，库安装、查询和新增接口均正常。首次索引连接失败及消费者检查失败回执保留；修正后的检查器在新目录从注册表安装 0.9.2，JS/WasmGC 均通过。使用 GitHub 当前源码中的检查器复验；注册表源归档中的维护脚本保留上传时版本，不能把归档等同于最终 GitHub 树的全部文件。来源与散列见 [publication.json](../verification/releases/0.9.2/publication.json)。
+最终验证源码：`4fa0e30b1fd93b1abe126cd34fe9a19ecf418318`。固定 MoonBit `0.10.11+6ff76a5f9`、正式 Node `24.20.0`；本机 Edge 运行使用独立回执，不替代跨平台门禁。
 
-交付目标：四种操作的跨端任务复用、有界异常定位、报告内部检查与原文件重新计算，以及 Node diff 合计资源限制和网页键盘操作修复。
+| 门禁 | 结果与记录 |
+|---|---|
+| 核心、Node、兼容性与独立参考 | [通过：36315911777](https://github.com/HhWw96/moonmmdb/actions/runs/36315911777) |
+| Windows/Linux Native 与 Ubuntu 24.04 解压验收 | [通过：36315911795](https://github.com/HhWw96/moonmmdb/actions/runs/36315911795) |
+| Windows/Linux 浏览器及离线流程 | [通过：36315911895](https://github.com/HhWw96/moonmmdb/actions/runs/36315911895) |
+| Node/Native 分析、诊断与报告复验 | [通过：36315926466](https://github.com/HhWw96/moonmmdb/actions/runs/36315926466) |
+| 默认 Node 历史及 City/ASN 连续稳定性 | [通过：36315937514](https://github.com/HhWw96/moonmmdb/actions/runs/36315937514) |
 
-正式发布要求保留原有回归、固定官方语料、独立 Python 参考、生产 City/ASN 各 7,114 个地址、JS/WasmGC/Windows/Linux Native、跨浏览器在线及离线验收。新增任务流程须覆盖 100,000 行及诊断满容量，持续运行的内存与句柄门槛不得降低。
+每个平台保留 67 项 JS、67 项 WasmGC MoonBit 测试和 59 项 Node 测试。Native 运行共享分析、诊断及工作流测试；新增命令的任务绑定、输出安全、报告篡改、十万行诊断和原有分析边界在 Node/Native 使用同一组测试。兼容检查保留 0.5.0、0.6.0、0.9.0、0.9.1 和新增 0.9.2 基线。
 
-既有默认 Node 历史负载与 City/ASN 每个平台连续三次 30 分钟门禁继续执行。历史 Node 24.13.0 RSS 失败记录保留；本轮正式 Node 固定 24.20.0，不使用强制 GC。
+保留全部 73 个固定官方文件的适用查询与检查预期，以及固定 DB-IP City/ASN 每库 7,114 个地址的 Python 独立聚合。四种网页任务均实际导出到 Node/Native 执行，再导回网页核对原文件；覆盖错误/替换来源、诊断截断、精确遗漏计数、旧报告、深层报告、原子输出、输入别名保护、键盘和错误焦点。
 
-只有全部门禁通过，才能发布 GitHub、Mooncakes、Pages、同字节离线 HTML 和 Native 包，并补齐新目录注册表安装、公网下载校验和隔离执行回执。
+## 浏览器与持续运行
 
-## 验证来源
+两个平台验证同一份 HTML：593,636 字节，SHA-256 `f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69`。Chromium、Firefox 均验证 HTTP 和禁用网络的 file 入口，包含 100,000 行、64 MiB 边界及每库 7,114 个地址。实际版本和完整检查列表保存在各平台原始回执中。
 
-候选实现提交：`c174f699a052820256a169c05845b0ef59bc116c`。下列门禁均绑定该提交；文档和发布凭据允许在功能冻结后补充，代码变更必须重新验证。
+| 环境 | 秒数 | 循环 | 最大 Worker | RSS 增长 / 允许增长（字节） |
+|---|---:|---:|---:|---:|
+| ubuntu-22.04 / 145.0.7632.6 | 1800.108 | 6,645 | 1 | 7,876,608 / 182,270,976 |
+| windows-2022 / 145.0.7632.6 | 1800.091 | 6,042 | 1 | -2,777,088 / 83,534,848 |
+| local-windows-edge / 154.0.4258.37 | 1800.103 | 7,606 | 1 | 26,791,936 / 130,772,480 |
 
-| 门禁 | 状态 | 运行记录 |
-|---|---|---|
-| 核心、Node、独立参考和兼容性 | 两平台通过 | [36308877854](https://github.com/HhWw96/moonmmdb/actions/runs/36308877854) |
-| Windows/Linux Native 产品 | 两平台通过，Ubuntu 24.04 解压复验通过 | [36308877878](https://github.com/HhWw96/moonmmdb/actions/runs/36308877878) |
-| Windows/Linux 浏览器产品 | 两平台通过 | [36308877841](https://github.com/HhWw96/moonmmdb/actions/runs/36308877841) |
-| Node/Native 正式分析与报告复验 | 两平台、两种宿主通过 | [36308948170](https://github.com/HhWw96/moonmmdb/actions/runs/36308948170) |
-| 默认 Node 历史及 City/ASN 连续稳定性 | 两平台、两种负载各连续三次通过 | [36308955862](https://github.com/HhWw96/moonmmdb/actions/runs/36308955862) |
+每 30 秒采样，预热五分钟后比较前后各十个样本中位数；不强制 GC。Windows 另记录私有内存并通过同一门槛。Edge 回执绑定的 HTML 与最终产物逐字节相同，维护检查器修正未改变这份 HTML；没有把新源码身份冒充一次新的 Edge 运行。完整数据见 [浏览器汇总](../verification/releases/0.9.2/browser-summary.json)。
 
-常规回归已在两个平台通过：每个平台 67 项 JS、67 项 WasmGC MoonBit 测试及 59 项 Node 测试通过，保留原有独立参考、固定官方语料、兼容基线和隔离消费者验证。原始回执位于 [证据目录](../verification/releases/0.9.2/)。公开发行状态由下文交付回执单独记录。
+## 正式分析与默认 Node 稳定性
 
-## 跨端验收
+Windows/Linux 的 Node、Native 四项分析均处理 180,000 行并持续至少 1800 秒，诊断满容量后仍保持精确统计；原文件报告复验一致，句柄早晚中位数增长均为 0。内存、采样及重算见 [分析持续运行汇总](../verification/releases/0.9.2/analytics-soak-summary.json)。
 
-网页构建先生成一份不可变 HTML，再交给 Windows/Linux 的 Chromium、Firefox 验证；不再将不同平台独立构建的 HTML 当作同一个发布文件。候选 HTML 为 593,636 字节，SHA-256：`f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69`。
+默认 Node 在两平台分别执行 City＋Country、City＋ASN；每组先跑 v0.8.0 基线，再连续跑三次候选。四次基线和十二次候选均完成至少 1800 秒并通过。候选最大 RSS 中位数增长 32,768 字节，Windows 最大私有内存增长 638,976 字节，低于原定“64 MiB 或早期中位数 25%，取较大值”门槛。无强制 GC、无缩小堆参数；报告内部散列与原始字节逐一核对。见 [稳定性汇总](../verification/releases/0.9.2/stability-summary.json)。
 
-本机 Edge 154.0.4258.37 已通过这份下载产物的 14 项任务流程检查，包括四种网页任务到 Node/Native 的执行、报告重新导入及原文件复验、异常原行预览、替换来源、篡改拒绝、键盘操作和 100,000 行诊断。实际网页验证另保留 73 个官方文件与两份固定真实库的 31,259 次查询检查。短时通过不是持续运行结论。
+历史 Node 24.13.0 RSS 失败完整保留。本次 v0.8.0 基线也通过，不据此宣称重现或修复旧操作系统/机器/运行时组合的失败。浏览器和正式分析通过不能替代历史负载门禁。
 
-随包人工 JSONL 统一为 LF 字节，配套固定报告可在 Windows/Linux 复验；用户文件仍按原始字节计算散列，CRLF、BOM 或末行换行的差异不会被掩盖。深层完整记录如果会使报告超过 128 层，两端都明确拒绝导出；可提取较浅字段后重新生成报告。
-
-Windows/Linux 的 Chromium 和 Firefox 均已完成 HTTP 与禁用网络的 file 入口验收。两平台使用同一 HTML SHA-256，保留旧功能、独立参考、7114 地址分析、十万行、64 MiB、任务互操作和报告复验。浏览器持续运行结果如下，采样间隔 30 秒，预热五分钟后比较前后各十个样本中位数：
-
-| 环境 | 实际秒数 | RSS 增长 | 允许增长 |
-|---|---:|---:|---:|
-| Linux Chromium | 1800.149 | 7,553,024 字节 | 184,242,688 字节 |
-| Windows Chromium | 1800.026 | -14,221,312 字节 | 89,703,424 字节 |
-| 本机 Edge | 1800.103 | 26,791,936 字节 | 130,772,480 字节 |
-
-三项均通过，最大 Worker 数为 1。Windows Chromium 私有内存增长 -3,276,800 字节，允许 91,955,200 字节；Edge 私有内存增长 33,216,512 字节，允许 120,998,912 字节。不强制 GC，不把数据库或状态预算称作进程内存上限。完整采样和实际浏览器版本见 [浏览器汇总](../verification/releases/0.9.2/browser-summary.json)。
-
-## 正式分析持续运行
-
-正式分析门禁另在 Windows/Linux 的 Node、Native 四种组合各完成 180,000 行和至少 1800 秒持续输入，并检查诊断容量、精确遗漏计数、独立聚合、原始字节散列和结束后的报告原文件复验。四项重算均一致，句柄早晚中位数增长均为 0。Linux Node RSS 增长 927,744 字节、Native 增长 0；Windows Node RSS 增长 -7,731,200 字节、私有内存增长 4,890,624 字节；Windows Native RSS 增长 -65,536 字节、私有内存增长 0。四项允许增长均为 67,108,864 字节，全部通过。采样与回执见 [分析持续运行汇总](../verification/releases/0.9.2/analytics-soak-summary.json)。这些结果不替代默认 Node 历史负载门禁。
-
-## 下载候选包复验
-
-以下为已通过 CI 的候选资产，尚不是公开发行回执：
+## 产物与注册表来源
 
 | 产物 | 字节数 | SHA-256 |
 |---|---:|---|
-| Windows x64 ZIP | 375,986 | `0749a106e7d159d98f43303ed89953e5d8aa6971ba3d3128d0f9a6799e3e812d` |
-| Linux x64 tar.gz | 381,922 | `eafb67662f34563e06273ef0e6dfea5250aa5c9e7d12798a415808caa3d3d16c` |
+| moonmmdb-0.9.2-windows-x64.zip | 375,986 | `a04200540037992a3e3b4fb217c8d910a5dbbefc1f5dc29979576685e1a06372` |
+| moonmmdb-0.9.2-linux-x64.tar.gz | 381,943 | `6251b4c28cfb96de65033a32e48ad50e3e66d902ff231ab89a82d26e96b9fe7a` |
 | 网页/离线 HTML | 593,636 | `f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69` |
+| Mooncakes 注册表归档 | 3,934,106 | `8d2a525644e6124f70442bb19f9ed1e265f600b35b0ddce9466f82cf64251b49` |
 
-Windows 下载包已在移除 Node/Python/MoonBit 路径的独立目录通过 23 项运行检查，另复验随包异常日志的固定报告一致。Linux 同一压缩包已在 Ubuntu 24.04 解压复验。两包的人工日志字节与固定源文件一致，包含许可证、第三方声明和四种任务；不含工具链或生产数据库。详细回执见 [候选包验收](../verification/releases/0.9.2/candidate-packages.json)。正式发行后仍须重新从公开发布页下载复验。
+两份 Native 包包含许可证、第三方声明和四种离线任务；JSONL 样例统一 LF，用户自己的输入仍按原始字节散列。下载 Windows 包在移除开发工具路径的目录通过 23 项命令检查，另核对异常日志固定报告。Linux 同一包在 Ubuntu 24.04 解压验收；声明支持下限仍为 glibc 2.35。
 
-## 可复现入口与边界
+Mooncakes `HhWw96/moonmmdb@0.9.2` 已返回 200 OK；公开归档与上传文件逐字节相同，1,035 个文件，源码、样例和许可证检查通过。打包来源提交为 `45428a1c6ed4b3707fb3d897f81ff76b25c466df`。只排除含私人用户路径的历史编译日志，原始项目历史保持不变。
 
-默认 Node 门禁固定 24.20.0，Windows/Linux 的 City＋Country、City＋ASN 各先执行一次 v0.8.0 基线，再连续执行三次 0.9.2 候选；四次基线及十二次候选全部完成至少 1800 秒并通过。候选最大 RSS 中位数增长 729,088 字节，Windows 最大私有内存增长 589,824 字节，均低于原定门槛。无强制 GC、无缩小堆参数；报告内部散列与下载原始字节逐一核对。见 [稳定性汇总](../verification/releases/0.9.2/stability-summary.json)。本次基线也通过，不据此宣称修复或重现旧 Windows/Node 24.13.0 环境的历史失败。
+首次安装遭遇注册表索引连接失败；随后严格消费者发现普通模块未使用 workflow 导入的验证脚本缺陷。该脚本已在最终 GitHub 源码修正，重新从注册表安装、JS/WasmGC 消费通过；失败回执分别保留在 [索引失败](../verification/releases/0.9.2/registry-first-attempt.json)和[消费者失败](../verification/releases/0.9.2/registry-consumer-failure.json)，私人临时路径已脱敏。
 
-全新目录的旧版 0.5.0 注册表消费在 JS/WasmGC 上通过，见 [旧版本安装回执](../verification/releases/0.9.2/registry-old-0.5.0.json)。该结果用于安装检查器兼容验证，不替代 0.9.2 自身的发布后安装。
+注册表归档保持不可变，其中 123 个运行源码文件与最终源码逐字节相同；维护脚本保留上传时版本。复验使用 GitHub 当前源码中的 `scripts/registry-verify.mjs`，不要把注册表归档等同于最终 GitHub 树的每个文件。新版本安装回执见 [registry-0.9.2.json](../verification/releases/0.9.2/registry-0.9.2.json)；旧 0.5.0 的新目录安装也通过，见 [旧版回执](../verification/releases/0.9.2/registry-old-0.5.0.json)。
 
-- `node --test tests/workflow.test.mjs`：四种任务、报告内部检查/重算、计数与来源篡改、输出安全、十万行诊断及随包预期报告。
-- 设置 `MOONMMDB_TEST_NATIVE=1` 后运行同一测试：实际 Native 程序的对应行为。
-- `node web/workflow-verify.mjs`：真实界面导出任务、两端执行、导回网页重算及异常定位；隔离 CI 另运行 `--file` 断网入口。
-- `node web/analytics-verify.mjs --production`：保留 City/ASN 每库 7,114 个地址的独立聚合及浏览器输入边界。
-- `python scripts/analytics-soak.py --host node` 或 `--host native`：实际分析命令持续运行、诊断满容量、内存/句柄趋势与结束后的报告原文件复验。
-- `node web/soak.mjs`：同一浏览器进程中交替执行任务、诊断、报告复验、取消重载和原有操作，不强制 GC。
+## 复现与证据边界
 
-报告内部自洽、文件散列相同和使用同一实现重算一致，均不能替代独立参考正确性检查。验证只覆盖列出的平台、数据和负载；商业数据库支持及历史 Node 24.13.0 RSS 失败边界继续保留。
+使用步骤、参数、资源限制和退出码见 [WORKFLOWS.md](WORKFLOWS.md)。内部自洽、散列匹配和同实现重算一致均不是独立正确性证明。完整验证入口为 `node scripts/release-verify.mjs`、`node --test tests/workflow.test.mjs`、`node web/workflow-verify.mjs`、`node web/analytics-verify.mjs --production`、`python scripts/analytics-soak.py --host node` 和 `node web/soak.mjs`；Native 分析验证使用 --host native；具体选项按各脚本说明执行。
+
+原始 CI 和 Edge 回执字节保存在 `validation-original-bytes.zip`，用于核对报告内部散列；Git 单独列出的 JSON 可能经过文本换行转换，最终证据索引按提交中的 Git blob 字节计算。安装检查器修正前已经通过的一组完整门禁保存在 `prior-validation/`，不作为最终源码门禁的替代。支持结论仅覆盖记录的平台、数据、版本和负载。
+
+## 公开交付复验
+
+GitHub、Pages、公开下载和发布后注册表安装回执正在补齐；以 [publication.json](../verification/releases/0.9.2/publication.json) 的状态为准。

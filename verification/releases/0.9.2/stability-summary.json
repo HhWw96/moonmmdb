@@ -3,14 +3,14 @@
     "platform": "default-stability-ubuntu-22.04-asn",
     "run": "baseline",
     "status": "passed",
-    "elapsed_seconds": 1800.0087486349998,
+    "elapsed_seconds": 1800.011909248,
     "rss": {
-      "first_median": 350859264.0,
-      "last_median": 350883840.0,
-      "growth_bytes": 24576.0,
-      "allowed_growth_bytes": 87714816.0,
+      "first_median": 346017792.0,
+      "last_median": 346017792.0,
+      "growth_bytes": 0.0,
+      "allowed_growth_bytes": 86504448.0,
       "passed": true,
-      "peak": 350883840
+      "peak": 346017792
     },
     "report": "stability/default-stability-ubuntu-22.04-asn/stability-asn/baseline.json"
   },
@@ -18,14 +18,14 @@
     "platform": "default-stability-ubuntu-22.04-asn",
     "run": "candidate-1",
     "status": "passed",
-    "elapsed_seconds": 1800.0046069009998,
+    "elapsed_seconds": 1800.00498528,
     "rss": {
-      "first_median": 345092096.0,
-      "last_median": 345116672.0,
-      "growth_bytes": 24576.0,
-      "allowed_growth_bytes": 86273024.0,
+      "first_median": 362733568.0,
+      "last_median": 362745856.0,
+      "growth_bytes": 12288.0,
+      "allowed_growth_bytes": 90683392.0,
       "passed": true,
-      "peak": 345120768
+      "peak": 362745856
     },
     "report": "stability/default-stability-ubuntu-22.04-asn/stability-asn/candidate-1.json"
   },
@@ -33,14 +33,14 @@
     "platform": "default-stability-ubuntu-22.04-asn",
     "run": "candidate-2",
     "status": "passed",
-    "elapsed_seconds": 1800.001636872,
+    "elapsed_seconds": 1800.0107280900002,
     "rss": {
-      "first_median": 363352064.0,
-      "last_median": 363364352.0,
-      "growth_bytes": 12288.0,
-      "allowed_growth_bytes": 90838016.0,
+      "first_median": 361695232.0,
+      "last_median": 361709568.0,
+      "growth_bytes": 14336.0,
+      "allowed_growth_bytes": 90423808.0,
       "passed": true,
-      "peak": 365432832
+      "peak": 361754624
     },
     "report": "stability/default-stability-ubuntu-22.04-asn/stability-asn/candidate-2.json"
   },
@@ -48,14 +48,14 @@
     "platform": "default-stability-ubuntu-22.04-asn",
     "run": "candidate-3",
     "status": "passed",
-    "elapsed_seconds": 1800.005772257,
+    "elapsed_seconds": 1800.011581871,
     "rss": {
-      "first_median": 346619904.0,
-      "last_median": 347348992.0,
-      "growth_bytes": 729088.0,
-      "allowed_growth_bytes": 86654976.0,
+      "first_median": 346099712.0,
+      "last_median": 346128384.0,
+      "growth_bytes": 28672.0,
+      "allowed_growth_bytes": 86524928.0,
       "passed": true,
-      "peak": 347348992
+      "peak": 346128384
     },
     "report": "stability/default-stability-ubuntu-22.04-asn/stability-asn/candidate-3.json"
   },
@@ -63,14 +63,14 @@
     "platform": "default-stability-ubuntu-22.04-country",
     "run": "baseline",
     "status": "passed",
-    "elapsed_seconds": 1800.036974929,
+    "elapsed_seconds": 1800.007715954,
     "rss": {
-      "first_median": 277198848.0,
-      "last_median": 334082048.0,
-      "growth_bytes": 56883200.0,
-      "allowed_growth_bytes": 69299712.0,
+      "first_median": 286261248.0,
+      "last_median": 353468416.0,
+      "growth_bytes": 67207168.0,
+      "allowed_growth_bytes": 71565312.0,
       "passed": true,
-      "peak": 398196736
+      "peak": 405544960
     },
     "report": "stability/default-stability-ubuntu-22.04-country/stability-country/baseline.json"
   },
@@ -78,14 +78,14 @@
     "platform": "default-stability-ubuntu-22.04-country",
     "run": "candidate-1",
     "status": "passed",
-    "elapsed_seconds": 1800.026111852,
+    "elapsed_seconds": 1800.022724375,
     "rss": {
-      "first_median": 344166400.0,
-      "last_median": 344190976.0,
+      "first_median": 344678400.0,
+      "last_median": 344702976.0,
       "growth_bytes": 24576.0,
-      "allowed_growth_bytes": 86041600.0,
+      "allowed_growth_bytes": 86169600.0,
       "passed": true,
-      "peak": 344190976
+      "peak": 344702976
     },
     "report": "stability/default-stability-ubuntu-22.04-country/stability-country/candidate-1.json"
   },
@@ -93,14 +93,14 @@
     "platform": "default-stability-ubuntu-22.04-country",
     "run": "candidate-2",
     "status": "passed",
-    "elapsed_seconds": 1800.025045242,
+    "elapsed_seconds": 1800.029319102,
     "rss": {
-      "first_median": 347840512.0,
-      "last_median": 347840512.0,
-      "growth_bytes": 0.0,
-      "allowed_growth_bytes": 86960128.0,
+      "first_median": 344834048.0,
+      "last_median": 344866816.0,
+      "growth_bytes": 32768.0,
+      "allowed_growth_bytes": 86208512.0,
       "passed": true,
-      "peak": 347840512
+      "peak": 403324928
     },
     "report": "stability/default-stability-ubuntu-22.04-country/stability-country/candidate-2.json"
   },
@@ -108,14 +108,14 @@
     "platform": "default-stability-ubuntu-22.04-country",
     "run": "candidate-3",
     "status": "passed",
-    "elapsed_seconds": 1800.00208002,
+    "elapsed_seconds": 1800.010361459,
     "rss": {
-      "first_median": 344444928.0,
-      "last_median": 344465408.0,
-      "growth_bytes": 20480.0,
-      "allowed_growth_bytes": 86111232.0,
+      "first_median": 344399872.0,
+      "last_median": 344428544.0,
+      "growth_bytes": 28672.0,
+      "allowed_growth_bytes": 86099968.0,
       "passed": true,
-      "peak": 344465408
+      "peak": 344432640
     },
     "report": "stability/default-stability-ubuntu-22.04-country/stability-country/candidate-3.json"
   },
@@ -123,184 +123,184 @@
     "platform": "default-stability-windows-2022-asn",
     "run": "baseline",
     "status": "passed",
-    "elapsed_seconds": 1800.0129643,
+    "elapsed_seconds": 1800.0268922,
     "rss": {
-      "first_median": 148680704.0,
-      "last_median": 143988736.0,
-      "growth_bytes": -4691968.0,
+      "first_median": 144648192.0,
+      "last_median": 143763456.0,
+      "growth_bytes": -884736.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 250576896
+      "peak": 250085376
     },
     "report": "stability/default-stability-windows-2022-asn/stability-asn/baseline.json",
     "private": {
-      "first_median": 302051328.0,
-      "last_median": 303005696.0,
-      "growth_bytes": 954368.0,
-      "allowed_growth_bytes": 75512832.0,
+      "first_median": 302129152.0,
+      "last_median": 302235648.0,
+      "growth_bytes": 106496.0,
+      "allowed_growth_bytes": 75532288.0,
       "passed": true,
-      "peak": 303005696
+      "peak": 302305280
     }
   },
   {
     "platform": "default-stability-windows-2022-asn",
     "run": "candidate-1",
     "status": "passed",
-    "elapsed_seconds": 1800.0049489,
+    "elapsed_seconds": 1800.0199172,
     "rss": {
-      "first_median": 146882560.0,
-      "last_median": 143040512.0,
-      "growth_bytes": -3842048.0,
+      "first_median": 144918528.0,
+      "last_median": 143136768.0,
+      "growth_bytes": -1781760.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 250085376
+      "peak": 250339328
     },
     "report": "stability/default-stability-windows-2022-asn/stability-asn/candidate-1.json",
     "private": {
-      "first_median": 302813184.0,
-      "last_median": 302829568.0,
-      "growth_bytes": 16384.0,
-      "allowed_growth_bytes": 75703296.0,
+      "first_median": 301879296.0,
+      "last_median": 301936640.0,
+      "growth_bytes": 57344.0,
+      "allowed_growth_bytes": 75469824.0,
       "passed": true,
-      "peak": 302854144
+      "peak": 301961216
     }
   },
   {
     "platform": "default-stability-windows-2022-asn",
     "run": "candidate-2",
     "status": "passed",
-    "elapsed_seconds": 1800.0229385,
+    "elapsed_seconds": 1800.005858,
     "rss": {
-      "first_median": 144635904.0,
-      "last_median": 142761984.0,
-      "growth_bytes": -1873920.0,
+      "first_median": 149379072.0,
+      "last_median": 143218688.0,
+      "growth_bytes": -6160384.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 250322944
+      "peak": 250384384
     },
     "report": "stability/default-stability-windows-2022-asn/stability-asn/candidate-2.json",
     "private": {
-      "first_median": 302694400.0,
-      "last_median": 302702592.0,
-      "growth_bytes": 8192.0,
-      "allowed_growth_bytes": 75673600.0,
+      "first_median": 302870528.0,
+      "last_median": 302903296.0,
+      "growth_bytes": 32768.0,
+      "allowed_growth_bytes": 75717632.0,
       "passed": true,
-      "peak": 302731264
+      "peak": 302919680
     }
   },
   {
     "platform": "default-stability-windows-2022-asn",
     "run": "candidate-3",
     "status": "passed",
-    "elapsed_seconds": 1800.0162633999998,
+    "elapsed_seconds": 1800.0240290000002,
     "rss": {
-      "first_median": 145068032.0,
-      "last_median": 143011840.0,
-      "growth_bytes": -2056192.0,
+      "first_median": 144732160.0,
+      "last_median": 142997504.0,
+      "growth_bytes": -1734656.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 250322944
+      "peak": 250130432
     },
     "report": "stability/default-stability-windows-2022-asn/stability-asn/candidate-3.json",
     "private": {
-      "first_median": 303949824.0,
-      "last_median": 303243264.0,
-      "growth_bytes": -706560.0,
-      "allowed_growth_bytes": 75987456.0,
+      "first_median": 302510080.0,
+      "last_median": 303149056.0,
+      "growth_bytes": 638976.0,
+      "allowed_growth_bytes": 75627520.0,
       "passed": true,
-      "peak": 303984640
+      "peak": 303235072
     }
   },
   {
     "platform": "default-stability-windows-2022-country",
     "run": "baseline",
     "status": "passed",
-    "elapsed_seconds": 1800.0210097000001,
+    "elapsed_seconds": 1800.0098515000002,
     "rss": {
-      "first_median": 149499904.0,
-      "last_median": 138358784.0,
-      "growth_bytes": -11141120.0,
+      "first_median": 148373504.0,
+      "last_median": 137994240.0,
+      "growth_bytes": -10379264.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 254803968
+      "peak": 254763008
     },
     "report": "stability/default-stability-windows-2022-country/stability-country/baseline.json",
     "private": {
-      "first_median": 301506560.0,
-      "last_median": 301506560.0,
-      "growth_bytes": 0.0,
-      "allowed_growth_bytes": 75376640.0,
+      "first_median": 300441600.0,
+      "last_median": 302063616.0,
+      "growth_bytes": 1622016.0,
+      "allowed_growth_bytes": 75110400.0,
       "passed": true,
-      "peak": 301539328
+      "peak": 302063616
     }
   },
   {
     "platform": "default-stability-windows-2022-country",
     "run": "candidate-1",
     "status": "passed",
-    "elapsed_seconds": 1800.0232189999997,
+    "elapsed_seconds": 1800.0166805999997,
     "rss": {
-      "first_median": 151300096.0,
-      "last_median": 143114240.0,
-      "growth_bytes": -8185856.0,
+      "first_median": 143769600.0,
+      "last_median": 143044608.0,
+      "growth_bytes": -724992.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 257576960
+      "peak": 249098240
     },
     "report": "stability/default-stability-windows-2022-country/stability-country/candidate-1.json",
     "private": {
-      "first_median": 300830720.0,
-      "last_median": 301420544.0,
-      "growth_bytes": 589824.0,
-      "allowed_growth_bytes": 75207680.0,
+      "first_median": 300978176.0,
+      "last_median": 301203456.0,
+      "growth_bytes": 225280.0,
+      "allowed_growth_bytes": 75244544.0,
       "passed": true,
-      "peak": 301895680
+      "peak": 301203456
     }
   },
   {
     "platform": "default-stability-windows-2022-country",
     "run": "candidate-2",
     "status": "passed",
-    "elapsed_seconds": 1800.0097110000002,
+    "elapsed_seconds": 1800.0243701,
     "rss": {
-      "first_median": 144455680.0,
-      "last_median": 142831616.0,
-      "growth_bytes": -1624064.0,
+      "first_median": 145002496.0,
+      "last_median": 142921728.0,
+      "growth_bytes": -2080768.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 249274368
+      "peak": 257286144
     },
     "report": "stability/default-stability-windows-2022-country/stability-country/candidate-2.json",
     "private": {
-      "first_median": 301416448.0,
-      "last_median": 301469696.0,
-      "growth_bytes": 53248.0,
-      "allowed_growth_bytes": 75354112.0,
+      "first_median": 301596672.0,
+      "last_median": 302010368.0,
+      "growth_bytes": 413696.0,
+      "allowed_growth_bytes": 75399168.0,
       "passed": true,
-      "peak": 301469696
+      "peak": 302010368
     }
   },
   {
     "platform": "default-stability-windows-2022-country",
     "run": "candidate-3",
     "status": "passed",
-    "elapsed_seconds": 1800.0194338,
+    "elapsed_seconds": 1800.0232075000001,
     "rss": {
-      "first_median": 144029696.0,
-      "last_median": 142954496.0,
-      "growth_bytes": -1075200.0,
+      "first_median": 144343040.0,
+      "last_median": 143220736.0,
+      "growth_bytes": -1122304.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 249122816
+      "peak": 257433600
     },
     "report": "stability/default-stability-windows-2022-country/stability-country/candidate-3.json",
     "private": {
-      "first_median": 301146112.0,
-      "last_median": 301469696.0,
-      "growth_bytes": 323584.0,
-      "allowed_growth_bytes": 75286528.0,
+      "first_median": 300961792.0,
+      "last_median": 301129728.0,
+      "growth_bytes": 167936.0,
+      "allowed_growth_bytes": 75240448.0,
       "passed": true,
-      "peak": 301469696
+      "peak": 301441024
     }
   }
 ]

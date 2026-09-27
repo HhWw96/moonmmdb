@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-27T09:19:10.571Z",
+  "timestamp": "2026-09-27T11:31:13.429Z",
   "node": "v24.20.0",
   "platform": "linux",
   "arch": "x64",
@@ -7,8 +7,8 @@
   "toolchain": "moon 0.1.20260827 (d0aaa07 2026-08-27) ~/.moon/bin/moon\nmoonc v0.10.11+6ff76a5f9 (2026-08-28) ~/.moon/bin/moonc\nmoonrun 0.1.20260827 (d0aaa07 2026-08-27) ~/.moon/bin/moonrun\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
   "core_sha256": "571f16e62a40ceea7c54fc409e8a3e13abb33f39bba3d4afdfc687e1ccf40ae8",
   "scope": "Small official fixtures; hot in-memory lookup includes MoonBit typed JSON serialization. Open includes snapshot copy and metadata serialization. Not a full GeoLite/GeoIP production benchmark; no cross-language speed claim.",
-  "rss_end_bytes": 82657280,
-  "max_rss_kib": 80720,
+  "rss_end_bytes": 81117184,
+  "max_rss_kib": 79216,
   "results": [
     {
       "file": "GeoLite2-ASN-Test.mmdb",
@@ -20,12 +20,12 @@
         "255.255.255.255"
       ],
       "open_iterations": 100,
-      "mean_open_and_metadata_ms": 0.26939130999999994,
+      "mean_open_and_metadata_ms": 0.24275275000000002,
       "warmup": 200,
       "query_iterations": 10000,
-      "query_elapsed_ms": 77.498168,
-      "mean_query_us": 7.7498168000000005,
-      "queries_per_second": 129035.30829270699,
+      "query_elapsed_ms": 80.79488799999999,
+      "mean_query_us": 8.0794888,
+      "queries_per_second": 123770.20684774019,
       "output_characters": 1556716
     },
     {
@@ -38,12 +38,12 @@
         "255.255.255.255"
       ],
       "open_iterations": 100,
-      "mean_open_and_metadata_ms": 0.12199418000000009,
+      "mean_open_and_metadata_ms": 0.15356216000000017,
       "warmup": 200,
       "query_iterations": 10000,
-      "query_elapsed_ms": 482.88913600000006,
-      "mean_query_us": 48.28891360000001,
-      "queries_per_second": 20708.68705565577,
+      "query_elapsed_ms": 475.66082900000004,
+      "mean_query_us": 47.566082900000005,
+      "queries_per_second": 21023.383449554556,
       "output_characters": 14926954
     }
   ]

@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "started": "2026-09-27T09:18:42.563352+00:00",
+  "started": "2026-09-27T11:30:45.677222+00:00",
   "reference": "maxminddb 3.2.0 MODE_MEMORY",
   "production": false,
   "target": "MoonBit JS typed consumer",
@@ -87,5 +87,5 @@
       ]
     }
   ],
-  "finished": "2026-09-27T09:18:45.416658+00:00"
+  "finished": "2026-09-27T11:30:48.470175+00:00"
 }

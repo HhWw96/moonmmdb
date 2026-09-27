@@ -4,15 +4,15 @@
     "host": "node",
     "report": "analytics/analytics-evidence-ubuntu-22.04/analytics-soak-node.json",
     "status": "passed",
-    "elapsed_seconds": 1803.842340558,
+    "elapsed_seconds": 1805.614054821,
     "requests": 180000,
     "rss_trend": {
-      "first_median": 221939712.0,
-      "last_median": 222867456.0,
-      "growth_bytes": 927744.0,
+      "first_median": 219467776.0,
+      "last_median": 220344320.0,
+      "growth_bytes": 876544.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 228671488
+      "peak": 226275328
     },
     "handle_trend": {
       "early": 21.0,
@@ -27,15 +27,15 @@
     "host": "native",
     "report": "analytics/analytics-evidence-ubuntu-22.04/analytics-soak-native.json",
     "status": "passed",
-    "elapsed_seconds": 1803.232573826,
+    "elapsed_seconds": 1804.3053377690003,
     "requests": 180000,
     "rss_trend": {
-      "first_median": 140894208.0,
-      "last_median": 140894208.0,
+      "first_median": 140890112.0,
+      "last_median": 140890112.0,
       "growth_bytes": 0.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 140894208
+      "peak": 140890112
     },
     "handle_trend": {
       "early": 3.0,
@@ -50,23 +50,23 @@
     "host": "node",
     "report": "analytics/analytics-evidence-windows-2022/analytics-soak-node.json",
     "status": "passed",
-    "elapsed_seconds": 1805.625,
+    "elapsed_seconds": 1805.61,
     "requests": 180000,
     "rss_trend": {
-      "first_median": 25401344.0,
-      "last_median": 17670144.0,
-      "growth_bytes": -7731200.0,
+      "first_median": 23492608.0,
+      "last_median": 17158144.0,
+      "growth_bytes": -6334464.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 192327680
+      "peak": 192913408
     },
     "private_memory_trend": {
-      "first_median": 178155520.0,
-      "last_median": 183046144.0,
-      "growth_bytes": 4890624.0,
+      "first_median": 177590272.0,
+      "last_median": 181739520.0,
+      "growth_bytes": 4149248.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 183664640
+      "peak": 183046144
     },
     "handle_trend": {
       "early": 170.0,
@@ -81,23 +81,23 @@
     "host": "native",
     "report": "analytics/analytics-evidence-windows-2022/analytics-soak-native.json",
     "status": "passed",
-    "elapsed_seconds": 1806.359,
+    "elapsed_seconds": 1806.562,
     "requests": 180000,
     "rss_trend": {
-      "first_median": 17022976.0,
-      "last_median": 16957440.0,
-      "growth_bytes": -65536.0,
+      "first_median": 17145856.0,
+      "last_median": 17137664.0,
+      "growth_bytes": -8192.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 143310848
+      "peak": 143339520
     },
     "private_memory_trend": {
-      "first_median": 148557824.0,
-      "last_median": 148557824.0,
+      "first_median": 148549632.0,
+      "last_median": 148549632.0,
       "growth_bytes": 0.0,
       "allowed_growth_bytes": 67108864,
       "passed": true,
-      "peak": 148594688
+      "peak": 148615168
     },
     "handle_trend": {
       "early": 50.0,

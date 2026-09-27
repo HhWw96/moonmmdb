@@ -1,14 +1,14 @@
 {
-  "timestamp": "2026-09-27T09:19:21.877Z",
+  "timestamp": "2026-09-27T11:32:06.584Z",
   "node": "v24.20.0",
   "platform": "win32",
   "arch": "x64",
-  "cpu": "Intel(R) Xeon(R) 6973P-C",
+  "cpu": "AMD EPYC 7763 64-Core Processor                ",
   "toolchain": "moon 0.1.20260827 (d0aaa07 2026-08-27) ~\\.moon\\bin\\moon.exe\nmoonc v0.10.11+6ff76a5f9 (2026-08-28) ~\\.moon\\bin\\moonc.exe\nmoonrun 0.1.20260827 (d0aaa07 2026-08-27) ~\\.moon\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg",
   "core_sha256": "fb3ede56b982d3547eb3210e9630672010b4cd4c3de828914562c3d6cf99eb25",
   "scope": "Small official fixtures; hot in-memory lookup includes MoonBit typed JSON serialization. Open includes snapshot copy and metadata serialization. Not a full GeoLite/GeoIP production benchmark; no cross-language speed claim.",
-  "rss_end_bytes": 57188352,
-  "max_rss_kib": 58732,
+  "rss_end_bytes": 57122816,
+  "max_rss_kib": 55972,
   "results": [
     {
       "file": "GeoLite2-ASN-Test.mmdb",
@@ -20,12 +20,12 @@
         "255.255.255.255"
       ],
       "open_iterations": 100,
-      "mean_open_and_metadata_ms": 0.234445,
+      "mean_open_and_metadata_ms": 0.2927909999999999,
       "warmup": 200,
       "query_iterations": 10000,
-      "query_elapsed_ms": 60.74010000000001,
-      "mean_query_us": 6.074010000000001,
-      "queries_per_second": 164635.88304925407,
+      "query_elapsed_ms": 85.4892,
+      "mean_query_us": 8.548919999999999,
+      "queries_per_second": 116973.83997042902,
       "output_characters": 1556716
     },
     {
@@ -38,12 +38,12 @@
         "255.255.255.255"
       ],
       "open_iterations": 100,
-      "mean_open_and_metadata_ms": 0.12175899999999984,
+      "mean_open_and_metadata_ms": 0.17849999999999994,
       "warmup": 200,
       "query_iterations": 10000,
-      "query_elapsed_ms": 324.63530000000003,
-      "mean_query_us": 32.463530000000006,
-      "queries_per_second": 30803.79736892445,
+      "query_elapsed_ms": 517.0148,
+      "mean_query_us": 51.701480000000004,
+      "queries_per_second": 19341.806075957593,
       "output_characters": 14926954
     }
   ]

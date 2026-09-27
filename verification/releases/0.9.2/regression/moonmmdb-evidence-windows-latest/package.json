@@ -1,5 +1,5 @@
 {
-  "started": "2026-09-27T09:19:18.263471+00:00",
+  "started": "2026-09-27T11:32:01.400110+00:00",
   "status": "passed",
   "scope": "Fresh local workspace importing a newly extracted moon package, not Mooncakes registry installation.",
   "steps": [
@@ -65,8 +65,8 @@
     }
   ],
   "archive": "HhWw96-moonmmdb-0.9.2.zip",
-  "sha256": "f6d77fb3acbbb343a2e7df2083db988e56fa6dc49ba229ed94e308cd99253219",
-  "file_count": 890,
+  "sha256": "aca2e47cae87bf5e95b30e1e25b89c7aa8e9eb1605b9fca0ea7a000732e5b81d",
+  "file_count": 1040,
   "contains_scenario_licenses": true,
-  "finished": "2026-09-27T09:19:21.369283+00:00"
+  "finished": "2026-09-27T11:32:05.822860+00:00"
 }

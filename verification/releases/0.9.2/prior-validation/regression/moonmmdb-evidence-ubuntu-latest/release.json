@@ -1,0 +1,82 @@
+{
+  "started": "2026-09-27T09:18:06.217Z",
+  "status": "passed",
+  "source_sha256": "ef5753b27a8efb326bdb399aa0eb6e871a1766b90ef57b4a3d016d63a4c46678",
+  "steps": [
+    {
+      "name": "verification",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "corpus",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "typed",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "inspection-js",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "comparison",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "enrichment",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "analytics-reference",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "scale",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "package",
+      "passed": true,
+      "exit_code": 0
+    },
+    {
+      "name": "benchmark",
+      "passed": true,
+      "exit_code": 0
+    }
+  ],
+  "core_sha256": "571f16e62a40ceea7c54fc409e8a3e13abb33f39bba3d4afdfc687e1ccf40ae8",
+  "evidence": {
+    "verification": "165f0da991baa5d64a85e2aa6208318d2738b414e6848546109f0b45ee6b49f7",
+    "api-compat": "ae7107c2d3c9548de8322270713c9eca7534b8a12b08f819c39ca5b6e3abf56f",
+    "reference": "4c562f569834010ade9842df529cdfa36aa6116b19c3b82cd20bc5a2421afd8f",
+    "corpus": "136095c6f8f1893f586f7832f0e4d9ef893fa783f0dcfa7476304b6046219089",
+    "typed": "7e6fbd9600b10441beb756c278bf1308db576d310f0ce0d58d7f25d79b747ebe",
+    "inspection-js": "0b8f5aed3c54612f2a3cf1f9f70693931cb22cca344555c0f126b04f29ef76b9",
+    "comparison": "1c4d5e5c6bf4aba103cb44be298e7127640dca18a067a1af55eb2063d4e1c638",
+    "enrichment": "ee2eb8b79e848b52e23e275e42adb08c76369919089f7c014713347960005228",
+    "analytics-reference": "0dce5bb6e3741b09d0cb07b33535a14ed5e5266a6c238e73522011a6e22647c0",
+    "adversarial": "9e601f9344f8f04045eec5679b773a29dc9bf3890e537122a67344057f95133e",
+    "boundary": "f2850dff6c3ccdf218e8138a96ca1e5972972a427c079bb21cdf1cf2bc0129b6",
+    "mutation": "004dfa74059db8457f54718575aadae91bfc80728f4d71a4e772efa4e84a4332",
+    "consumer": "acfc0eabd627aa024d86238b6e410cc16a515ab681c40c119b6670aabe653e45",
+    "scale": "1128d9abe35fba6a8bd769a6bcac3c2ba2ed76ef7a7258d2a595795e30fbc3f1",
+    "package": "cd93eea0cf830a535227e97d86f18632a0c66b8df522969d311c4952985cd546",
+    "benchmark": "00d6bccdb0b9c1fa015a8aeeed3862d0d9e9de5f8cd12c5ee32250bbca9bdb57"
+  },
+  "finished": "2026-09-27T09:19:10.620Z"
+}

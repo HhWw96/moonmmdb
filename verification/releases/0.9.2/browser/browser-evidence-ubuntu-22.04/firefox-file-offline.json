@@ -2,7 +2,7 @@
   "status": "passed",
   "engine": "firefox",
   "transport": "file-offline",
-  "started": "2026-09-27T09:23:44.961Z",
+  "started": "2026-09-27T11:36:01.158Z",
   "files": [
     {
       "file": "tests/fixtures/upstream/bad-data/libmaxminddb/libmaxminddb-corrupt-search-tree.mmdb",
@@ -949,7 +949,7 @@
   ],
   "html_sha256": "f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69",
   "browser": "146.0.1",
-  "finished": "2026-09-27T09:25:02.660Z",
+  "finished": "2026-09-27T11:37:18.374Z",
   "requests": [],
   "console_errors": []
 }

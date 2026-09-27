@@ -1,0 +1,147 @@
+{
+  "status": "passed",
+  "baseline": "0.5.0",
+  "scope": "Existing public declarations, imports and checked-in interface freshness. Behavior is covered separately by regression tests.",
+  "packages": [
+    {
+      "path": "src/pkg.generated.mbti",
+      "issues": [],
+      "existing": 44,
+      "added": [
+        "fn MmdbError::to_validation_json",
+        "fn MmdbError::validation_status",
+        "struct NetworkCursor",
+        "fn NetworkCursor::close",
+        "fn NetworkCursor::emitted_count",
+        "fn NetworkCursor::next",
+        "fn NetworkCursor::work_used",
+        "struct NetworkRecord",
+        "fn NetworkRecord::to_json",
+        "fn Reader::networks",
+        "fn Reader::validate",
+        "struct TraversalLimits",
+        "fn TraversalLimits::default",
+        "struct ValidationLimits",
+        "fn ValidationLimits::default",
+        "struct ValidationReport",
+        "fn ValidationReport::to_json"
+      ]
+    },
+    {
+      "path": "src/bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 15,
+      "added": [
+        "fn analysis_close",
+        "fn analysis_error",
+        "fn analysis_finish",
+        "fn analysis_line",
+        "fn analysis_line_detailed",
+        "fn analysis_metadata",
+        "fn analysis_start",
+        "fn close_networks",
+        "fn diagnostics_add",
+        "fn diagnostics_create",
+        "fn diagnostics_finish",
+        "fn extract_input_ip",
+        "fn network_stats",
+        "fn next_network",
+        "fn prepare_networks",
+        "fn validate_database",
+        "struct NetworkHandle"
+      ]
+    },
+    {
+      "path": "src/pkg.generated.mbti",
+      "issues": [],
+      "existing": 61,
+      "added": []
+    },
+    {
+      "path": "src/bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 21,
+      "added": [
+        "fn analysis_close",
+        "fn analysis_error",
+        "fn analysis_finish",
+        "fn analysis_line",
+        "fn analysis_line_detailed",
+        "fn analysis_metadata",
+        "fn analysis_start",
+        "fn diagnostics_add",
+        "fn diagnostics_create",
+        "fn diagnostics_finish",
+        "fn extract_input_ip"
+      ]
+    },
+    {
+      "path": "src/geo/pkg.generated.mbti",
+      "issues": [],
+      "existing": 16,
+      "added": []
+    },
+    {
+      "path": "src/analytics/pkg.generated.mbti",
+      "issues": [],
+      "existing": 16,
+      "added": [
+        "struct AnalysisRowOutcome",
+        "fn AnalysisRowOutcome::to_json",
+        "fn Analyzer::push_detailed"
+      ]
+    },
+    {
+      "path": "src/bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 27,
+      "added": [
+        "fn analysis_line_detailed",
+        "fn diagnostics_add",
+        "fn diagnostics_create",
+        "fn diagnostics_finish",
+        "fn extract_input_ip"
+      ]
+    },
+    {
+      "path": "src/analytics_bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 9,
+      "added": [
+        "fn analysis_line_detailed",
+        "fn diagnostics_add",
+        "fn diagnostics_create",
+        "fn diagnostics_finish",
+        "fn extract_input_ip",
+        "struct DiagnosticBuffer",
+        "fn DiagnosticBuffer::add",
+        "fn DiagnosticBuffer::new",
+        "fn DiagnosticBuffer::to_json"
+      ]
+    },
+    {
+      "path": "src/workflow/pkg.generated.mbti",
+      "issues": [],
+      "existing": 16,
+      "added": []
+    },
+    {
+      "path": "src/analytics/pkg.generated.mbti",
+      "issues": [],
+      "existing": 19,
+      "added": []
+    },
+    {
+      "path": "src/analytics_bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 18,
+      "added": []
+    },
+    {
+      "path": "src/bridge/pkg.generated.mbti",
+      "issues": [],
+      "existing": 32,
+      "added": []
+    }
+  ]
+}

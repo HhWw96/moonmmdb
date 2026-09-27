@@ -1,0 +1,73 @@
+{
+  "status": "passed",
+  "shared_online_offline_html_sha256": "f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69",
+  "all_platforms_same_html": true,
+  "soaks": [
+    {
+      "os": "ubuntu-22.04",
+      "report": "browser/browser-evidence-ubuntu-22.04/soak.json",
+      "browser": "145.0.7632.6",
+      "elapsed_seconds": 1800.149213483,
+      "cycles": 6553,
+      "analyses": 6553,
+      "max_workers": 1,
+      "gates": {
+        "rss": {
+          "early_median": 736970752,
+          "late_median": 744523776,
+          "growth": 7553024,
+          "allowed": 184242688
+        }
+      },
+      "html_sha256": "f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69"
+    },
+    {
+      "os": "windows-2022",
+      "report": "browser/browser-evidence-windows-2022/soak.json",
+      "browser": "145.0.7632.6",
+      "elapsed_seconds": 1800.0263469999998,
+      "cycles": 7805,
+      "analyses": 7805,
+      "max_workers": 1,
+      "gates": {
+        "rss": {
+          "early_median": 358813696,
+          "late_median": 344592384,
+          "growth": -14221312,
+          "allowed": 89703424
+        },
+        "private": {
+          "early_median": 367820800,
+          "late_median": 364544000,
+          "growth": -3276800,
+          "allowed": 91955200
+        }
+      },
+      "html_sha256": "f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69"
+    },
+    {
+      "os": "local-windows-edge",
+      "report": "release-html-edge/soak.json",
+      "browser": "154.0.4258.37",
+      "elapsed_seconds": 1800.1030067,
+      "cycles": 7606,
+      "analyses": 7606,
+      "max_workers": 1,
+      "gates": {
+        "rss": {
+          "early_median": 523089920,
+          "late_median": 549881856,
+          "growth": 26791936,
+          "allowed": 130772480
+        },
+        "private": {
+          "early_median": 483995648,
+          "late_median": 517212160,
+          "growth": 33216512,
+          "allowed": 120998912
+        }
+      },
+      "html_sha256": "f60fbbf567c123d435389e38f037e86b36cad61748a7e17c948b4528885c9d69"
+    }
+  ]
+}

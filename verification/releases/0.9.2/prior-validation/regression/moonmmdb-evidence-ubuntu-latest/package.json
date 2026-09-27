@@ -1,0 +1,72 @@
+{
+  "started": "2026-09-27T09:19:07.541294+00:00",
+  "status": "passed",
+  "scope": "Fresh local workspace importing a newly extracted moon package, not Mooncakes registry installation.",
+  "steps": [
+    {
+      "args": [
+        "/home/runner/.moon/bin/moon",
+        "package"
+      ],
+      "exit_code": 0,
+      "output": "Running moon check ...\nFinished. moon: ran 17 tasks, now up to date\nCheck passed\nPackage to /home/runner/work/moonmmdb/moonmmdb/_build/publish/HhWw96-moonmmdb-0.9.2.zip\n"
+    },
+    {
+      "args": [
+        "/home/runner/.moon/bin/moon",
+        "test",
+        "-p",
+        "local/moonmmdb_log_example",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "/home/runner/.moon/bin/moon",
+        "test",
+        "-p",
+        "local/moonmmdb_typed_example",
+        "--target",
+        "js",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "/home/runner/.moon/bin/moon",
+        "test",
+        "-p",
+        "local/moonmmdb_log_example",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "args": [
+        "/home/runner/.moon/bin/moon",
+        "test",
+        "-p",
+        "local/moonmmdb_typed_example",
+        "--target",
+        "wasm-gc",
+        "--deny-warn"
+      ],
+      "exit_code": 0,
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "archive": "HhWw96-moonmmdb-0.9.2.zip",
+  "sha256": "f0fd7af3d3899c7e4b706c7c15d537d88f278e4af57eec317abeff4820cffaf9",
+  "file_count": 890,
+  "contains_scenario_licenses": true,
+  "finished": "2026-09-27T09:19:09.888339+00:00"
+}

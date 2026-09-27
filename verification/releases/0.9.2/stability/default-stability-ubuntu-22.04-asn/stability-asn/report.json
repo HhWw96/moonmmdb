@@ -12,27 +12,27 @@
     {
       "name": "baseline",
       "passed": true,
-      "sha256": "a459799b72d1677a95c6e8c74f7beb75e5730676f3742727859f2698e9f20cd9",
+      "sha256": "741658cd9be43739b26d3c84e9dc44f0fc66b6a51803bba211f9d323aee27abb",
       "exit_code": 0
     },
     {
       "name": "candidate-1",
       "passed": true,
-      "sha256": "ee7448ccf7d66ac239d1fd1f41ca1bfea1634a7cff21785624668b117a767d46",
+      "sha256": "9d178c5d67aaab38657b2e2570f5779e1951f47cfb1e953c5665215d1ed0ce0f",
       "exit_code": 0
     },
     {
       "name": "candidate-2",
       "passed": true,
-      "sha256": "d188f1f09796522c5d59b41b58099318c7bcfdc637f948b907b54f54783c4eb8",
+      "sha256": "9d74197f06049b60f23b0b34a9bab5b196b10cbba18e81846d0d01a1a43807a3",
       "exit_code": 0
     },
     {
       "name": "candidate-3",
       "passed": true,
-      "sha256": "265706478b0311685db06b7871c1d7d389684a459d69bd03e0bba6770e50fe65",
+      "sha256": "c2ff43c7922e21f3dc04a32d7fd75e19229c97f4be30d7306b086d79e9e6f4eb",
       "exit_code": 0
     }
   ],
-  "finished": "2026-09-27T11:19:06.768264+00:00"
+  "finished": "2026-09-27T13:30:44.272436+00:00"
 }

@@ -2,7 +2,7 @@
   "status": "passed",
   "target": "js",
   "platform": "linux",
-  "source_sha256": "ef5753b27a8efb326bdb399aa0eb6e871a1766b90ef57b4a3d016d63a4c46678",
+  "source_sha256": "75aaf574f02d09b6846a09ed8cd83bd0c128ad682e90fbee0d1adb20223a61ac",
   "artifact_sha256": "571f16e62a40ceea7c54fc409e8a3e13abb33f39bba3d4afdfc687e1ccf40ae8",
   "checks": [
     "Unicode networks",
@@ -21,22 +21,22 @@
     {
       "name": "131072 records throughput",
       "received": 131072,
-      "seconds": 1.1550549330000002
+      "seconds": 1.099258879
     },
     {
       "name": "131072 records slow consumer",
       "received": 131072,
-      "seconds": 1.1686866009999999
+      "seconds": 1.1299021249999999
     },
     {
       "name": "record limit is incomplete",
       "received": 100000,
-      "seconds": 0.9993864809999995
+      "seconds": 0.9437943339999997
     },
     {
       "name": "early output close",
       "received": 100,
-      "seconds": 0.08618598399999973
+      "seconds": 0.08319533200000023
     }
   ]
 }

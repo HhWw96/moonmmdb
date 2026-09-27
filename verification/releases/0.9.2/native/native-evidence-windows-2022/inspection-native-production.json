@@ -1,12 +1,12 @@
 {
   "status": "passed",
-  "started": "2026-09-27T09:21:28.603308+00:00",
+  "started": "2026-09-27T11:34:00.265418+00:00",
   "target": "native",
   "artifact_sha256": "539de3a4a1e0cc313bf2b6a4b37303777dae1f5a52ea038b515b2449e804611a",
   "files": [
     {
       "file": "dbip-city-lite-2026-09.mmdb",
-      "seconds": 27.109000000000037,
+      "seconds": 26.968000000000018,
       "status": "valid",
       "scope": "all-tree-nodes-and-referenced-records",
       "checked_nodes": 14346080,
@@ -22,7 +22,7 @@
     },
     {
       "file": "dbip-asn-lite-2026-09.mmdb",
-      "seconds": 1.843999999999994,
+      "seconds": 1.875,
       "status": "valid",
       "scope": "all-tree-nodes-and-referenced-records",
       "checked_nodes": 1146501,
@@ -38,5 +38,5 @@
     }
   ],
   "network_checks": 68,
-  "finished": "2026-09-27T09:21:57.557064+00:00"
+  "finished": "2026-09-27T11:34:29.108468+00:00"
 }

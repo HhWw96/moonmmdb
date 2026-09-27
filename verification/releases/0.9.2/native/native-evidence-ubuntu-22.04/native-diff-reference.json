@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "started": "2026-09-27T09:18:50.094517+00:00",
+  "started": "2026-09-27T11:31:57.525905+00:00",
   "executable_sha256": "d0de3df35c487e186a2ee0b458762784bf2a104d5a027b5c9f21bf67f6b817f4",
   "reference": "maxminddb 3.2.0 MODE_MEMORY",
   "production": false,
@@ -128,5 +128,5 @@
   ],
   "checks": 1425,
   "scope": "Independent lookup and prefix comparison for selected IPs; same-release production snapshots and explicitly artificial changes, not a real monthly update or exhaustive database diff.",
-  "finished": "2026-09-27T09:18:50.150780+00:00"
+  "finished": "2026-09-27T11:31:57.642944+00:00"
 }

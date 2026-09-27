@@ -2,7 +2,7 @@
   "status": "passed",
   "target": "native",
   "platform": "win32",
-  "source_sha256": "e3c8dd562ebf85ae6c91c0cc6b384096cbf87c2210e722e2675fe050203e7214",
+  "source_sha256": "0f6719dc0e0ff2cb4ea83fbcc758404a07542eb180e4946b5d82ac4ed02c8e8c",
   "artifact_sha256": "539de3a4a1e0cc313bf2b6a4b37303777dae1f5a52ea038b515b2449e804611a",
   "checks": [
     "Unicode networks",
@@ -21,22 +21,22 @@
     {
       "name": "131072 records throughput",
       "received": 131072,
-      "seconds": 0.8870866000000001
+      "seconds": 0.9232525999999998
     },
     {
       "name": "131072 records slow consumer",
       "received": 131072,
-      "seconds": 1.1054901
+      "seconds": 1.1694488
     },
     {
       "name": "record limit is incomplete",
       "received": 100000,
-      "seconds": 0.6770685999999996
+      "seconds": 0.6746052
     },
     {
       "name": "early output close",
       "received": 100,
-      "seconds": 0.04418639999999959
+      "seconds": 0.04419380000000001
     }
   ]
 }

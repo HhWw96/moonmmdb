@@ -1,7 +1,7 @@
 {
   "status": "passed",
   "platform": "linux",
-  "source_sha256": "ef5753b27a8efb326bdb399aa0eb6e871a1766b90ef57b4a3d016d63a4c46678",
+  "source_sha256": "75aaf574f02d09b6846a09ed8cd83bd0c128ad682e90fbee0d1adb20223a61ac",
   "executable_sha256": "d0de3df35c487e186a2ee0b458762784bf2a104d5a027b5c9f21bf67f6b817f4",
   "checks": [
     "version and help",
@@ -45,20 +45,20 @@
     "early closed stdout",
     "runtime without development tools"
   ],
-  "started": "2026-09-27T09:17:42.330Z",
+  "started": "2026-09-27T11:30:41.650Z",
   "stream": {
     "lines": 100000,
     "code": 0,
-    "seconds": 51.657572393,
-    "lines_per_second": 1935.8246113313442,
+    "seconds": 52.715174197,
+    "lines_per_second": 1896.9869970702089,
     "scope": "100000-row pipeline with a slow consumer"
   },
   "broken_pipe": {
     "lines": 4,
     "code": 2,
-    "seconds": 0.002270280000004277,
-    "lines_per_second": 1761.8972109133958,
+    "seconds": 0.0037465479999955276,
+    "lines_per_second": 1067.6494735967015,
     "scope": "early close"
   },
-  "finished": "2026-09-27T09:18:34.991Z"
+  "finished": "2026-09-27T11:31:36.342Z"
 }

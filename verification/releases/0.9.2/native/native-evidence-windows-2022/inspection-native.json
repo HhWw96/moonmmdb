@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "started": "2026-09-27T09:21:17.533627+00:00",
+  "started": "2026-09-27T11:33:49.100626+00:00",
   "target": "native",
   "artifact_sha256": "539de3a4a1e0cc313bf2b6a4b37303777dae1f5a52ea038b515b2449e804611a",
   "files": [
@@ -445,5 +445,5 @@
   ],
   "network_checks": 53343,
   "synthetic_networks": 65536,
-  "finished": "2026-09-27T09:21:28.462102+00:00"
+  "finished": "2026-09-27T11:34:00.124781+00:00"
 }

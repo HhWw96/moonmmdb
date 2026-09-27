@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-27T09:18:41.139Z",
+  "timestamp": "2026-09-27T11:31:12.063Z",
   "status": "passed",
   "scope": "Separate MoonBit module via local workspace dependency; not registry installation.",
   "results": [

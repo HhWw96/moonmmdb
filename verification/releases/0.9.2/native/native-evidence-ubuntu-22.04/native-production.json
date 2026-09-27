@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "started": "2026-09-27T09:18:46.792367+00:00",
+  "started": "2026-09-27T11:31:50.655954+00:00",
   "executable_sha256": "d0de3df35c487e186a2ee0b458762784bf2a104d5a027b5c9f21bf67f6b817f4",
   "reference": "maxminddb 3.2.0 MODE_MEMORY",
   "checks": 14228,
@@ -25,5 +25,5 @@
     }
   ],
   "aggregate_limit_verified": true,
-  "finished": "2026-09-27T09:18:50.018352+00:00"
+  "finished": "2026-09-27T11:31:57.401662+00:00"
 }

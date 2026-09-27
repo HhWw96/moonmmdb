@@ -1,6 +1,6 @@
 {
   "status": "passed",
-  "started": "2026-09-27T09:18:57.377487+00:00",
+  "started": "2026-09-27T11:31:33.200263+00:00",
   "target": "js",
   "artifact_sha256": "fb3ede56b982d3547eb3210e9630672010b4cd4c3de828914562c3d6cf99eb25",
   "files": [
@@ -445,5 +445,5 @@
   ],
   "network_checks": 53343,
   "synthetic_networks": 65536,
-  "finished": "2026-09-27T09:19:16.178933+00:00"
+  "finished": "2026-09-27T11:31:58.630188+00:00"
 }

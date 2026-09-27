@@ -5,6 +5,6 @@
   "rejected": 836,
   "failures": [],
   "status": "passed",
-  "timestamp": "2026-09-27T09:18:27.418Z",
+  "timestamp": "2026-09-27T11:30:30.726Z",
   "scope": "Deterministic truncation/bit-mutation smoke test; not a proof all corrupt inputs are detected."
 }

@@ -31,13 +31,13 @@
   },
   "requests": [
     "file:///home/runner/work/moonmmdb/moonmmdb/dist/web/index.html",
-    "blob:null/57ba39c9-47dc-48bf-ab7c-0aa927def155",
-    "blob:null/3786523e-3ff9-4850-802c-75f025920b12",
-    "blob:null/b6e43828-efac-42ed-804d-02816f2407ac",
-    "blob:null/487a6504-7fc5-4d4f-adb5-6d4c09814ed7",
-    "blob:null/26da5cef-0386-461f-9c2a-196581233f6b",
-    "blob:null/1f9aa936-efd6-4d7e-a7a1-e9b44359339a",
-    "blob:null/114daf01-2c17-46bf-9766-a24acf5c79b5"
+    "blob:null/13864e9e-c66a-4496-b965-bc6cd1a947b3",
+    "blob:null/4addfef4-d69c-4d47-aeb4-22d5f0824e9e",
+    "blob:null/e5c7f88e-24e6-40de-82f5-20701cddb3de",
+    "blob:null/6a75a936-1126-4f10-8bca-4eb0154177d4",
+    "blob:null/6b6f6727-aa23-4ca1-803e-c6d074a73a05",
+    "blob:null/7463f7dd-b04f-4261-b4c5-240da30c9f8f",
+    "blob:null/7d15d08b-3d48-42f2-aa82-adcd82309212"
   ],
   "console_errors": []
 }

@@ -1,5 +1,5 @@
 {
-  "started": "2026-09-27T09:19:17.039525+00:00",
+  "started": "2026-09-27T11:31:59.800653+00:00",
   "status": "passed",
   "database_bytes": 31064069,
   "database_sha256": "79147e27d62208f9705cce45e19f7a036b8dff5f130f9de3b2989b2819db28aa",
@@ -19,13 +19,13 @@
   "failure_count": 0,
   "failures": [],
   "measurement": {
-    "initialization_ms": 122.70209999999999,
+    "initialization_ms": 154.8362,
     "query_count": 5000,
-    "elapsed_ms": 93.13600000000002,
-    "mean_us": 18.627200000000006,
-    "rss_bytes": 129929216,
-    "max_rss_kib": 126892,
+    "elapsed_ms": 136.0055,
+    "mean_us": 27.2011,
+    "rss_bytes": 129921024,
+    "max_rss_kib": 126884,
     "core_sha256": "fb3ede56b982d3547eb3210e9630672010b4cd4c3de828914562c3d6cf99eb25"
   },
-  "finished": "2026-09-27T09:19:18.197838+00:00"
+  "finished": "2026-09-27T11:32:01.320505+00:00"
 }

@@ -3,7 +3,7 @@
   "node": "v24.20.0",
   "environment": {
     "platform": "Windows-2022Server-10.0.20348-SP0",
-    "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+    "processor": "Intel64 Family 6 Model 106 Stepping 6, GenuineIntel"
   },
   "workload": "country",
   "baseline_tag": "v0.8.0",
@@ -12,27 +12,27 @@
     {
       "name": "baseline",
       "passed": true,
-      "sha256": "3d19f06a1c54c04c2f7af83527cf7384a60b1f52854f65bd1e592382e2e0d698",
+      "sha256": "c3b5e039c66c6d537b3adc3143d9017998e615394023a2dfae2952785722dc8c",
       "exit_code": 0
     },
     {
       "name": "candidate-1",
       "passed": true,
-      "sha256": "114c6e540bc18e262048bb28cba49a9dd7449620a6bc6ef9b566d9b03621c925",
+      "sha256": "0f9b633c56533e50019471127ebf108a5ec8a744f6dce8c10b4a6e7b4df66aa2",
       "exit_code": 0
     },
     {
       "name": "candidate-2",
       "passed": true,
-      "sha256": "f0b9472a04f735bd1e43bc7911b8e162aa91b59c6e721535212641e19044ec6a",
+      "sha256": "0cfd1ebb161dcbe3fb5a69b3d6344c358f04d9cb2176749502882f33d755ab4e",
       "exit_code": 0
     },
     {
       "name": "candidate-3",
       "passed": true,
-      "sha256": "56b3c0e5f34f7515de538cb2be2f9b978660808f67b17620660d5445d5e181a8",
+      "sha256": "6f00409efca6b000e8fb64d1eee4431b1f0e46288c85ca75f584ff1df7edd97c",
       "exit_code": 0
     }
   ],
-  "finished": "2026-09-27T11:19:38.535179+00:00"
+  "finished": "2026-09-27T13:31:13.841827+00:00"
 }
