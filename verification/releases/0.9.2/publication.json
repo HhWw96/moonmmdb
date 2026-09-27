@@ -5,7 +5,7 @@
   "registry_archive_sha256": "8d2a525644e6124f70442bb19f9ed1e265f600b35b0ddce9466f82cf64251b49",
   "registry_archive_bytes": 3934106,
   "uploaded_downloaded_bytes_equal": true,
-  "status": "registry-published-github-pending",
+  "status": "published-and-verified",
   "excluded_files": [
     {
       "path": "verification/regressions/native-mingw-missing-rand-s.json",
@@ -22,5 +22,14 @@
   "required_sources_and_licenses": true,
   "runtime_implementation_commit": "c174f699a052820256a169c05845b0ef59bc116c",
   "runtime_source_files_equal": 123,
-  "registry_maintenance_script_note": "Registry archive is immutable; use the corrected registry verifier from the final GitHub source. Runtime source bytes are identical."
+  "registry_maintenance_script_note": "Registry archive is immutable; use the corrected registry verifier from the final GitHub source. Runtime source bytes are identical.",
+  "release_url": "https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.2",
+  "release_published_at": "2026-09-27T13:36:08Z",
+  "release_commit": "8b4e089c488801c65ea9ccc3d117683470a40064",
+  "release_run": 36322935365,
+  "pages_run": 36323013703,
+  "published_artifacts_run": 36323017772,
+  "public_download_receipt": "public-download-windows.json",
+  "registry_post_release_receipt": "registry-post-release.json",
+  "pages_receipt": "pages.json"
 }

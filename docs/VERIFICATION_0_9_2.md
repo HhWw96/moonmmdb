@@ -1,6 +1,6 @@
 # 0.9.2 验证与交付
 
-最终源码的五组发布门禁全部通过，Mooncakes 已发布并完成全新目录安装。GitHub、Pages 与公开下载复验状态由文末交付回执单独记录。
+最终源码的五组发布门禁全部通过。GitHub、Mooncakes、Pages 与离线 HTML 已同步发布，公开下载、隔离运行和全新目录注册表安装复验通过。
 
 ## 源码与正式门禁
 
@@ -63,4 +63,9 @@ Mooncakes `HhWw96/moonmmdb@0.9.2` 已返回 200 OK；公开归档与上传文件
 
 ## 公开交付复验
 
-GitHub、Pages、公开下载和发布后注册表安装回执正在补齐；以 [publication.json](../verification/releases/0.9.2/publication.json) 的状态为准。
+- [GitHub v0.9.2](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.2) 于 2026-09-27 13:36:08 UTC 发布；[发布门禁](https://github.com/HhWw96/moonmmdb/actions/runs/36322935365)成功，标签绑定 `8b4e089c488801c65ea9ccc3d117683470a40064`。
+- [网页](https://hhww96.github.io/moonmmdb/)已部署同版本；直接下载页面与公开离线 HTML 逐字节相同，见 [Pages 回执](../verification/releases/0.9.2/pages.json)。
+- Windows、Ubuntu 22.04、Ubuntu 24.04 从公开 Release 下载后均通过散列校验及隔离运行；[公开产物验收](https://github.com/HhWw96/moonmmdb/actions/runs/36323017772)成功。本机另执行 23 项 Native 命令，见 [下载回执](../verification/releases/0.9.2/public-download-windows.json)。
+- 发布后再次从全新目录安装 `HhWw96/moonmmdb@0.9.2`，JS/WasmGC 消费通过，未使用本地 workspace；见 [安装回执](../verification/releases/0.9.2/registry-post-release.json)。
+
+完整来源关系见 [publication.json](../verification/releases/0.9.2/publication.json)。上述发布后补充仅涉及文档与验证证据，不改变已验证的运行源码或发布产物。

@@ -1,6 +1,5 @@
 # MoonMMDB
 
-> 0.9.2 正在完成最终交付：Mooncakes 安装已验证，GitHub Release 与网页尚未切换。当前稳定下载请使用 [v0.9.1](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.1)。以下新功能对应 0.9.2 源码；最终进度见 [验证报告](docs/VERIFICATION_0_9_2.md)。
 
 **0.9.2 跨端任务与报告复核：** 网页导出查询、检查、对比或分析任务，Node/Native 用明确的文件绑定继续执行；异常可定位到行，保存的报告可重新打开并核对原文件。见 [完整使用流程](docs/WORKFLOWS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_2.md)。
 
