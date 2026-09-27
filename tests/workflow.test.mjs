@@ -79,3 +79,19 @@ test('100000 rows fill diagnostics without changing totals and replay by sources
   assert.equal(r.status,1,r.stderr);assert.equal(r.json.result.requests,'100000');assert.equal(r.json.result.diagnostics.retained,'1000');assert.equal(r.json.result.diagnostics.omitted,'99000');assert.equal(r.json.result.diagnostics.rows[0].outcome.issues.length,2);
   const replay=cli(['verify-report',save('scale-report.json',r.json),'--bind','city',db('geo'),'--bind','asn',db('asn'),'--bind','input',input]);assert.equal(replay.status,0,replay.stderr);
 });
+
+test('deep valid records cannot produce a report that violates the import depth cap',()=>{
+  // Small independent encoder for this single artificial record, not a product writer.
+  const field=(type,data,size=data.length)=>Buffer.concat([Buffer.from(type<8?[(type<<5)|size]:[size,type-7]),data]);
+  const text=s=>field(2,Buffer.from(s)),number=(type,n)=>field(type,n?Buffer.from([n]):Buffer.alloc(0));
+  const map=entries=>field(7,Buffer.concat(entries.flatMap(([k,v])=>[text(k),v])),entries.length);
+  let payload=text('leaf');for(let i=0;i<63;i++)payload=map([['child',payload]]);
+  const metadata=map([['node_count',number(6,1)],['record_size',number(5,24)],['ip_version',number(5,4)],['database_type',text('Artificial-Depth')],['binary_format_major_version',number(5,2)],['binary_format_minor_version',number(5,0)],['build_epoch',number(9,0)]]);
+  const file=resolve(dir,'nested.mmdb');writeFileSync(file,Buffer.concat([Buffer.from([0,0,17,0,0,17]),Buffer.alloc(16),payload,Buffer.from('\xab\xcd\xefMaxMind.com','latin1'),metadata]));
+  const value=JSON.parse(readFileSync(task('lookup')));value.parameters={ip:'1.1.1.1',fields:[]};
+  const path=save('nested-task.json',value),r=cli(['run-task',path,'--bind','database',file]);
+  assert.equal(r.status,2,r.stdout);assert.equal(r.stdout,'');assert.equal(JSON.parse(r.stderr).code,'invalid-workflow');
+  value.parameters.fields=['/child'.repeat(63)];
+  const projected=cli(['run-task',save('projected-task.json',value),'--bind','database',file]);assert.equal(projected.status,0,projected.stderr);
+  assert.equal(projected.json.result.fields[value.parameters.fields[0]].value.value,'leaf');
+});

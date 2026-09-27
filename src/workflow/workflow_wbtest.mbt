@@ -106,3 +106,20 @@ test "complete diagnostic report checks and tampering fails on every backend" {
   }
   assert_false(accepted)
 }
+
+///|
+test "constructed reports obey the same depth cap as parsed reports" {
+  let report = complete_report()
+  let mut value : Json = "leaf"
+  for _ in 0..<129 {
+    value = [value].to_json()
+  }
+  obj(report)["extra"] = value
+  let accepted = try {
+    ignore(check_report(report))
+    true
+  } catch {
+    _ => false
+  }
+  assert_false(accepted)
+}

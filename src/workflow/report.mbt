@@ -454,7 +454,32 @@ fn check_fields(
 }
 
 ///|
+fn check_document_depth(value : Json, depth : Int) -> Unit raise WorkflowError {
+  match value {
+    Array(items) => {
+      if depth >= 128 {
+        reject("Report depth exceeds 128")
+      }
+      for child in items {
+        check_document_depth(child, depth + 1)
+      }
+    }
+    Object(items) => {
+      if depth >= 128 {
+        reject("Report depth exceeds 128")
+      }
+      for _, child in items {
+        check_document_depth(child, depth + 1)
+      }
+    }
+    _ => ()
+  }
+}
+
+///|
 pub fn check_report(report : Json) -> Json raise WorkflowError {
+  // Native callers may construct a Json tree without going through parse_json.
+  check_document_depth(report, 0)
   let outer = obj(report)
   if outer.get("format") is Some(format) && format != "moonmmdb-report" {
     reject("Unsupported report format")
