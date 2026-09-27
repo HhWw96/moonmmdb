@@ -8,7 +8,34 @@ on:
 permissions:
   contents: read
 jobs:
+  bundle:
+    runs-on: ubuntu-22.04
+    env:
+      MOONBIT_INSTALL_VERSION: 0.10.11+6ff76a5f9
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: '24.20.0'
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Build one immutable HTML for both test platforms
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
+          export PATH="$HOME/.moon/bin:$PATH"
+          npm ci --prefix web
+          node scripts/build.mjs
+          python scripts/inspection-fixtures.py
+          npm run build --prefix web
+      - uses: actions/upload-artifact@v7.0.1
+        with:
+          name: browser-shared-bundle
+          path: dist/web/
   browser:
+    needs: bundle
     strategy:
       fail-fast: false
       matrix:
@@ -56,6 +83,11 @@ jobs:
           python -m pip install psutil==7.2.2
           python scripts/download-production.py
           python web/oracle.py --production
+      - name: Use the exact same HTML bytes on Windows and Linux
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: browser-shared-bundle
+          path: dist/web/
       - name: Install isolated test browsers
         working-directory: web
         run: npx playwright install --with-deps chromium firefox

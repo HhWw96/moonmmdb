@@ -12,3 +12,6 @@ tests/fixtures/upstream/source-data/*.json -text
 # Preserve upstream notices and source bytes, including upstream whitespace.
 native_cli/licenses/** -whitespace
 native_cli/vendor/** -whitespace
+
+# Portable task examples must bind identical original bytes on every platform.
+*.jsonl text eol=lf

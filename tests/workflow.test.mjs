@@ -95,3 +95,8 @@ test('deep valid records cannot produce a report that violates the import depth 
   const projected=cli(['run-task',save('projected-task.json',value),'--bind','database',file]);assert.equal(projected.status,0,projected.stderr);
   assert.equal(projected.json.result.fields[value.parameters.fields[0]].value.value,'leaf');
 });
+
+test('bundled anomaly report replays against identical portable sample bytes',()=>{
+  const r=cli(['verify-report',resolve(root,'examples/workflow-reports/anomalies.json'),'--bind','city',db('geo'),'--bind','asn',db('asn'),'--bind','input',resolve(root,'examples/workflow-errors.jsonl')]);
+  assert.equal(r.status,0,r.stderr);assert.equal(r.json.status,'consistent');
+});
