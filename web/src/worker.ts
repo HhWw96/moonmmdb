@@ -1,6 +1,7 @@
 import * as core from '../../dist/core.mjs';
 import {analyze} from './analysis';
-import {checkFiles, MAX_RESULT_BYTES, type Request, type Reply, type Database} from './protocol';
+import {execute,readDocument,compareReports} from './workflow';
+import {checkFiles, preview, MAX_RESULT_BYTES, type Request, type Reply, type Database} from './protocol';
 let handles: unknown[] = [];
 let loaded: Database[] = [];
 let busy = false;
@@ -37,9 +38,26 @@ self.onmessage = async (event: MessageEvent<Request>) => {
       handles = opened;
       loaded = databases;
       reply.databases = databases;
+    } else if(request.op==='line-preview') {
+      const {file,start,end,pointer}=request;
+      if(!Number.isSafeInteger(start)||!Number.isSafeInteger(end)||start<0||end<=start||end>file.size||end-start>8388609)throw error('invalid-range','原行范围无效。');
+      let text=new TextDecoder('utf-8',{fatal:true,ignoreBOM:true}).decode(await file.slice(start,end).arrayBuffer());
+      if(start===0&&text.startsWith('\uFEFF'))text=text.slice(1);
+      const ip=JSON.parse(core.extract_input_ip(text,pointer)).ip;
+      reply.json=JSON.stringify({...preview(text),...(typeof ip==='string'?{ip}:{})});
+    } else if(request.op==='document') {
+      reply.json=JSON.stringify(await readDocument(request.file,request.kind));
     } else {
       if (!handles.length) throw error('browser-not-loaded', '请先加载数据库。');
-      if (request.op === 'analyze') {
+      if(request.op==='run-task'||request.op==='verify-report') {
+        try {
+          const report=await execute(request.task,request.bindings,request.file,handles,loaded,progress=>self.postMessage({id:request.id,progress}));
+          reply.json=request.op==='verify-report'?JSON.stringify(compareReports(request.report!,report)):report;
+        } catch(cause) {
+          if(request.op==='verify-report'&&cause&&typeof cause==='object'&&'code' in cause&&cause.code==='source-mismatch')reply.json=JSON.stringify({status:'different',level:'source',recomputed:false,exit_code:1});
+          else throw cause;
+        }
+      } else if (request.op === 'analyze') {
         reply.json=checkJson(await analyze(request.options,handles,loaded,progress=>self.postMessage({id:request.id,progress})));
       } else if (request.op === 'validate') {
         const work = request.work ?? 100_000_000, state = request.state ?? 64 * 1024 * 1024;

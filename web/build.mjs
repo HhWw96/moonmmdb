@@ -26,7 +26,7 @@ for (const [name,path] of Object.entries({geo:'tests/scenarios/geo.mmdb',log:'ex
 const licenses = ['LICENSE','THIRD_PARTY.md'].map(p=>p+'\n'+readFileSync(resolve(root,p),'utf8').replaceAll('\r\n','\n'));
 for (const dep of ['react','react-dom','scheduler']) licenses.push(dep+'\n'+readFileSync(resolve(here,'node_modules',dep,'LICENSE'),'utf8').replaceAll('\r\n','\n'));
 licenses.push('moonbitlang/x 0.5.5\n'+readFileSync(resolve(root,'native_cli/vendor/x/LICENSE'),'utf8'));
-const data = JSON.stringify({version:VERSION,worker:worker.js,samples,licenses:licenses.join('\n\n'),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),hash_bridge_sha256:hash(readFileSync(resolve(root,'dist/browser-hash.mjs'))),worker_sha256:hash(worker.js)}).replaceAll('<','\\u003c');
+const data = JSON.stringify({version:VERSION,worker:worker.js,samples,licenses:licenses.join('\n\n'),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),workflow_sha256:hash(readFileSync(resolve(root,'dist/workflow.mjs'))),hash_bridge_sha256:hash(readFileSync(resolve(root,'dist/browser-hash.mjs'))),worker_sha256:hash(worker.js)}).replaceAll('<','\\u003c');
 const script = `window.__MOONMMDB_DATA__=${data};\n${app.js}`.replaceAll('</script','<\\/script');
 const sha = text => createHash('sha256').update(text).digest('base64');
 const csp = `default-src 'none'; script-src 'sha256-${sha(script)}'; style-src 'sha256-${sha(app.css)}'; worker-src blob:; connect-src 'none'; img-src data:; base-uri 'none'; form-action 'none'`;
@@ -34,5 +34,5 @@ const html = `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><met
 writeFileSync(resolve(output,'index.html'),html);
 writeFileSync(resolve(output,`moonmmdb-${VERSION}-offline.html`),html);
 writeFileSync(resolve(output,'SHA256SUMS'),hash(html)+`  moonmmdb-${VERSION}-offline.html\n`);
-writeFileSync(resolve(output,'build.json'),JSON.stringify({version:VERSION,source_sha256:sourceFingerprint(),html_sha256:hash(html),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),bytes:Buffer.byteLength(html)},null,2)+'\n');
+writeFileSync(resolve(output,'build.json'),JSON.stringify({version:VERSION,source_sha256:sourceFingerprint(),html_sha256:hash(html),core_sha256:hash(readFileSync(resolve(root,'dist/core.mjs'))),workflow_sha256:hash(readFileSync(resolve(root,'dist/workflow.mjs'))),bytes:Buffer.byteLength(html)},null,2)+'\n');
 console.log('Built identical online/offline HTML:', Buffer.byteLength(html), 'bytes');

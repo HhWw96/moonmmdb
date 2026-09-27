@@ -31,7 +31,15 @@ def verify(archive):
   result=subprocess.run([str(exe),*command],cwd=folder,env=env,capture_output=True,text=True,encoding='utf-8',timeout=20)
   assert result.returncode==code,(command,result.stdout,result.stderr)
   if code==2:assert json.loads(result.stdout)['code']=='invalid-tree-pointer'
- return {'status':'passed','archive':archive.name,'sha256':digest(archive),'executable_sha256':digest(exe),'without_developer_tools':True,'commands':11}
+ for operation,bindings in [('lookup',['--bind','database','examples/asn.mmdb']),('validate',['--bind','database','examples/asn.mmdb']),('compare',['--bind','before','examples/tags.mmdb','--bind','after','examples/tags-updated.mmdb']),('analyze',['--bind','city','examples/geo.mmdb','--bind','asn','examples/asn.mmdb','--bind','input','examples/access.jsonl'])]:
+  target=folder/(operation+'-report.json')
+  result=subprocess.run([str(exe),'run-task','examples/tasks/'+operation+'.json',*bindings,'--output',str(target)],cwd=folder,env=env,capture_output=True,timeout=20)
+  assert result.returncode==(1 if operation in ('compare','analyze') else 0),(operation,result.stdout,result.stderr)
+  for selected in [[],bindings]:
+   check=subprocess.run([str(exe),'verify-report',str(target),*selected],cwd=folder,env=env,capture_output=True,timeout=20)
+   assert check.returncode==0,(operation,check.stdout,check.stderr)
+   assert json.loads(check.stdout)['level']==('recomputed' if selected else 'internal')
+ return {'status':'passed','archive':archive.name,'sha256':digest(archive),'executable_sha256':digest(exe),'without_developer_tools':True,'commands':23}
 if args.verify:
  print(json.dumps(verify(args.verify.resolve())));raise SystemExit()
 platform='windows-x64' if os.name=='nt' else 'linux-x64';name='moonmmdb-'+VERSION+'-'+platform
@@ -54,10 +62,13 @@ else:
 staging=Path(tempfile.mkdtemp(prefix='moonmmdb-package-'));folder=staging/name;folder.mkdir()
 shutil.copy2(exe,folder/exe.name)
 if os.name!='nt':(folder/exe.name).chmod(0o755)
-for source,target in [('LICENSE','LICENSE'),('THIRD_PARTY.md','THIRD_PARTY.md'),('native_cli/QUICKSTART.md','QUICKSTART.md')]:shutil.copyfile(ROOT/source,folder/target)
+for source,target in [('LICENSE','LICENSE'),('THIRD_PARTY.md','THIRD_PARTY.md'),('native_cli/QUICKSTART.md','QUICKSTART.md'),('docs/WORKFLOWS.md','WORKFLOWS.md')]:shutil.copyfile(ROOT/source,folder/target)
 shutil.copytree(ROOT/'native_cli/licenses',folder/'licenses')
 shutil.copyfile(ROOT/'native_cli/vendor/x/PROVENANCE.json',folder/'licenses/moonbitlang-x-provenance.json')
 examples=folder/'examples';examples.mkdir()
+shutil.copytree(ROOT/'examples/tasks',examples/'tasks')
+shutil.copytree(ROOT/'examples/workflow-reports',examples/'workflow-reports')
+shutil.copyfile(ROOT/'examples/workflow-errors.jsonl',examples/'workflow-errors.jsonl')
 for f in ('geo.mmdb','asn.mmdb','tags.mmdb','tags-updated.mmdb','manifest.json'):shutil.copyfile(ROOT/'tests/scenarios'/f,examples/f)
 shutil.copyfile(ROOT/'examples/analysis-access.jsonl',examples/'access.jsonl')
 shutil.copyfile(ROOT/'verification/local/inspection-hidden-corruption.mmdb',examples/'hidden-corruption.mmdb')

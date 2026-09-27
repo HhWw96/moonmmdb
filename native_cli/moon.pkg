@@ -1,6 +1,8 @@
 import {
   "HhWw96/moonmmdb" @mmdb,
   "HhWw96/moonmmdb/analytics",
+  "HhWw96/moonmmdb/workflow",
+  "HhWw96/moonmmdb/analytics_bridge",
   "moonbitlang/core/env",
   "moonbitlang/core/json",
   "moonbitlang/core/encoding/utf8",

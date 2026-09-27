@@ -1,6 +1,6 @@
 import type {Database} from './protocol';
-export type AnalysisForm = {file: File|null; city: number; asn: number; ipPath: string; top: string; maxMiB: string; maxRecords: string};
-export const initialAnalysis: AnalysisForm = {file:null,city:0,asn:1,ipPath:'/ip',top:'10',maxMiB:'8',maxRecords:'10000'};
+export type AnalysisForm = {file: File|null; city: number; asn: number; ipPath: string; top: string; maxMiB: string; maxRecords: string; maxGroups:string; maxLineBytes:string; diagnosticLimit:string};
+export const initialAnalysis: AnalysisForm = {file:null,city:0,asn:1,ipPath:'/ip',top:'10',maxMiB:'8',maxRecords:'10000',maxGroups:'10000',maxLineBytes:'8388608',diagnosticLimit:'100'};
 export function AnalysisFields({value,change,databases}: {value: AnalysisForm; change:(value:AnalysisForm)=>void; databases:Database[]}) {
   const update=(part:Partial<AnalysisForm>)=>change({...value,...part});
   return <>
@@ -10,7 +10,7 @@ export function AnalysisFields({value,change,databases}: {value: AnalysisForm; c
       <span>{value.file?`${value.file.name} · ${value.file.size.toLocaleString()} 字节`:'每行一个 JSON 对象，仅在本机分析'}</span>
     </label>
     <div className="analysis-roles"><label>IP 字段路径<input aria-label="IP 字段路径" value={value.ipPath} spellCheck={false} onChange={e=>update({ipPath:e.target.value})}/></label><label>Top N<input aria-label="Top N" type="number" min="1" max="100" step="1" value={value.top} onChange={e=>update({top:e.target.value})}/></label></div>
-    <details className="limits"><summary>日志资源限制</summary><label>最大日志大小（MiB，1—64）<input aria-label="最大日志大小" type="number" min="1" max="64" step="1" value={value.maxMiB} onChange={e=>update({maxMiB:e.target.value})}/></label><label>最大行数（1—1,000,000）<input aria-label="最大行数" type="number" min="1" max="1000000" step="1" value={value.maxRecords} onChange={e=>update({maxRecords:e.target.value})}/></label><p className="hint">单行最多 8 MiB，JSON 深度 128，每维最多 10,000 组。文件上限不是浏览器内存上限；更大日志请使用 Native 工具。</p></details>
+    <details className="limits"><summary>日志资源限制</summary><label>最大日志大小（MiB，浏览器最多 64，命令行最多 1024）<input aria-label="最大日志大小" type="number" min={1/1048576} max="1024" step="any" value={value.maxMiB} onChange={e=>update({maxMiB:e.target.value})}/></label><label>最大行数（1—1,000,000）<input aria-label="最大行数" type="number" min="1" max="1000000" step="1" value={value.maxRecords} onChange={e=>update({maxRecords:e.target.value})}/></label><label>保留异常行数（0—1000）<input aria-label="保留异常行数" type="number" min="0" max="1000" step="1" value={value.diagnosticLimit} onChange={e=>update({diagnosticLimit:e.target.value})}/></label><label>每维分组上限<input aria-label="每维分组上限" type="number" min="1" max="10000" value={value.maxGroups} onChange={e=>update({maxGroups:e.target.value})}/></label><label>单行字节上限<input aria-label="单行字节上限" type="number" min="1" max="8388608" value={value.maxLineBytes} onChange={e=>update({maxLineBytes:e.target.value})}/></label><p className="hint">大于 64 MiB 的预算仅供导出命令行任务。单行最多 8 MiB，JSON 深度 128，每维最多 10,000 组。文件上限不是浏览器内存上限；更大日志请使用 Native 工具。</p></details>
     <p className="hint">统计请求次数，不对 IP 去重。国家字段固定为 /country/iso_code，ASN 字段固定为 /autonomous_system_number。</p>
   </>;
 }

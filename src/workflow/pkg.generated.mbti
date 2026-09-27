@@ -1,0 +1,43 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "HhWw96/moonmmdb/workflow"
+
+// Values
+pub fn check_hash(Json) -> Unit raise WorkflowError
+
+pub fn check_report(Json) -> Json raise WorkflowError
+
+pub fn check_task(Json) -> Json raise WorkflowError
+
+pub fn decimal(Json) -> UInt64 raise WorkflowError
+
+pub fn get(Json, String) -> Json raise WorkflowError
+
+pub fn integer(Json, Int, Int) -> Int raise WorkflowError
+
+pub fn obj(Json) -> Map[String, Json] raise WorkflowError
+
+pub fn parse_json(String, Int) -> Json raise WorkflowError
+
+pub fn report_check(String) -> String
+
+pub fn report_compare(String, String) -> String
+
+pub fn roles(String) -> Array[String] raise WorkflowError
+
+pub fn str(Json) -> String raise WorkflowError
+
+pub fn strings(Json) -> Array[String] raise WorkflowError
+
+pub fn task_check(String) -> String
+
+// Errors
+pub suberror WorkflowError {
+  WorkflowError(String)
+}
+pub fn WorkflowError::to_json(Self) -> Json
+
+// Types and methods
+
+// Type aliases
+
+// Traits

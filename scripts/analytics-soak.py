@@ -1,5 +1,5 @@
 """Actual analyze command, paced input, independent Python aggregate, bounded output."""
-import argparse, collections, datetime, hashlib, json, os, shutil, subprocess, sys, threading, time
+import argparse, collections, datetime, hashlib, json, os, shutil, subprocess, sys, threading, time, statistics
 from pathlib import Path
 from process_memory import ProcessMemory, trend
 ROOT=Path(__file__).resolve().parent.parent
@@ -23,7 +23,9 @@ for path,field in zip(paths,('country','autonomous_system_number')):
  patterns.append(rows)
 out=ROOT/f'verification/local/analytics-soak-{args.host}.json'
 report={'status':'running','formal_gate':args.seconds>=1800,'host':args.host,'platform':os.name,'duration_requested':args.seconds,'rate_cap':100,'samples':[],'databases':[{'file':p.name,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in paths],'scope':'Actual CLI on fixed City+ASN, default runtime, 100 requests/second, independent Python aggregates, no forced GC. Normal EOF is not proof against upstream silent truncation.'}
-child=subprocess.Popen([*command,'analyze',*map(str,paths),'-','--max-records','1000000','--max-input-bytes','1073741824'],cwd=ROOT,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+log_path=ROOT/f'verification/local/analytics-soak-{args.host}-input.jsonl'
+log_stream=log_path.open('wb')
+child=subprocess.Popen([*command,'analyze',*map(str,paths),'-','--max-records','1000000','--max-input-bytes','1073741824','--diagnostic-limit','1000'],cwd=ROOT,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
 monitor=ProcessMemory(child.pid);start=time.monotonic();stop=threading.Event();errors=[]
 state={'sent':0,'stdout':b'','stderr':b'','bytes':0};hash_input=hashlib.sha256()
 def drain(name,stream):
@@ -38,8 +40,8 @@ def writer():
    if stop.wait(max(0,state['sent']/100-(time.monotonic()-start))):break
    if time.monotonic()-start>=args.seconds:break
    raw=b''.join(lines[(state['sent']+i)%len(lines)] for i in range(10))
-   child.stdin.write(raw);child.stdin.flush();hash_input.update(raw);state['bytes']+=len(raw);state['sent']+=10
-  child.stdin.close()
+   log_stream.write(raw);child.stdin.write(raw);child.stdin.flush();hash_input.update(raw);state['bytes']+=len(raw);state['sent']+=10
+  log_stream.close();child.stdin.close()
  except Exception as e:errors.append(repr(e));stop.set()
 threads=[threading.Thread(target=drain,args=('stdout',child.stdout),daemon=True),threading.Thread(target=drain,args=('stderr',child.stderr),daemon=True),threading.Thread(target=writer,daemon=True)]
 for t in threads:t.start()
@@ -71,9 +73,23 @@ try:
  if args.seconds>=1800:
   report['rss_trend']=trend(report['samples']);assert report['rss_trend']['passed']
   if os.name=='nt':report['private_memory_trend']=trend(report['samples'],'private_bytes');assert report['private_memory_trend']['passed']
+ assert result['diagnostics']['retained']=='1000'
+ abnormal_indices={i for i in range(len(lines)) if i>=len(ips) or any(pattern[i][0]!='counted' for pattern in patterns)}
+ abnormal=sum(n//len(lines)+(i<n%len(lines)) for i in abnormal_indices)
+ assert result['diagnostics']['omitted']==str(abnormal-1000)
+ if args.seconds>=1800:
+  settled=[s for s in report['samples'] if s['seconds']>=300]
+  first=statistics.median(s['handles'] for s in settled[:10]);last=statistics.median(s['handles'] for s in settled[-10:])
+  report['handle_trend']={'early':first,'late':last,'growth':last-first,'allowed':4};assert last-first<=4
+ completed=ROOT/f'verification/local/analytics-soak-{args.host}-report.json';completed.write_bytes(state['stdout'])
+ for bindings in [[],['--bind','city',str(paths[0]),'--bind','asn',str(paths[1]),'--bind','input',str(log_path)]]:
+  replay=subprocess.run([*command,'verify-report',str(completed),*bindings],cwd=ROOT,capture_output=True,timeout=120)
+  assert replay.returncode==0,(replay.stdout,replay.stderr)
+  checked=json.loads(replay.stdout);assert checked['level']==('recomputed' if bindings else 'internal')
+ report['report_replay']='consistent'
  report.update(status='passed' if args.seconds>=1800 else 'diagnostic-passed',requests=n,result=result)
 except Exception as e:report.update(status='failed',error=repr(e));raise
 finally:
- stop.set();monitor.close()
+ stop.set();monitor.close();log_stream.close()
  if child.poll() is None:child.kill();child.wait()
  report['elapsed_seconds']=time.monotonic()-start;report['finished']=datetime.datetime.now(datetime.timezone.utc).isoformat();out.write_text(json.dumps(report,indent=2)+'\n')

@@ -1,0 +1,16 @@
+{
+  "format": "moonmmdb-task",
+  "version": 1,
+  "operation": "validate",
+  "parameters": {
+    "decode_data": true,
+    "max_work": 100000000,
+    "max_state_bytes": 67108864
+  },
+  "files": [
+    {
+      "role": "database",
+      "name": "database.mmdb"
+    }
+  ]
+}

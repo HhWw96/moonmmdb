@@ -23,7 +23,7 @@ try {
     await page.getByRole('button',{name:'开始分析',exact:true}).click();
     await expect(page.locator('.analytics-result')).toBeVisible();
     const actual=JSON.parse(await page.locator('.json').innerText());
-    assert.deepEqual(actual,cli(readFileSync(resolve(root,'examples/analysis-access.jsonl'))));
+    assert.deepEqual(actual,cli(readFileSync(resolve(root,'examples/analysis-access.jsonl')),['--diagnostic-limit','100']));
     await expect(page.getByText('分析完成，存在未命中',{exact:true})).toBeVisible();
     const event=page.waitForEvent('download');await page.getByRole('button',{name:'下载 JSON',exact:true}).click();
     const download=await event;const path=resolve(out,`analysis-download-${engine}.json`);await download.saveAs(path);

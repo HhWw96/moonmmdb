@@ -39,6 +39,12 @@ try {
     const extra=`  let analysis = @analytics.Analyzer::new(reader, reader)\n  analysis.push("1.0.0.1")\n  analysis.invalid_input()\n  let report = analysis.finish()\n  assert_eq(report.requests, 2UL)\n  assert_eq(report.country.missing_field, 1UL)\n  assert_eq(report.asn.top[0].key, "15169")\n  assert_eq(report.exit_code, 2)\n  analysis.close()\n`;
     writeFileSync(file,readFileSync(file,'utf8').replace(/}\n$/,extra+'}\n'));
   }
+  if(features.workflow) {
+    const pkg=resolve(directory,'moon.pkg');writeFileSync(pkg,readFileSync(pkg,'utf8').replace(' @analytics }',' @analytics, "HhWw96/moonmmdb/workflow" @workflow }'));
+    const file=resolve(directory,'consumer_wbtest.mbt');
+    const extra=`  let detailed = @analytics.Analyzer::new(reader, reader)\n  let outcome = detailed.push_detailed("1.0.0.1")\n  assert_true(outcome.to_json() is Object(_))\n  assert_eq(detailed.finish().requests, 1UL)\n  detailed.close()\n  let task : Json = { "format": "moonmmdb-task", "version": 1, "operation": "lookup", "parameters": { "ip": "1.0.0.1", "fields": [] }, "files": [{ "role": "database", "name": "sample.mmdb" }] }\n  assert_eq(@workflow.check_task(task), task)\n`;
+    writeFileSync(file,readFileSync(file,'utf8').replace(/}\n$/,extra+'}\n'));
+  }
   report.steps.push({name:'add',output:runMoon(['add','HhWw96/moonmmdb@'+version],directory,true)});
   if(existsSync(resolve(directory,'moon.work')))throw new Error('Unexpected workspace override');
   const packagePath=resolve(directory,'.mooncakes/HhWw96/moonmmdb/moon.mod');

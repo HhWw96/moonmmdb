@@ -153,3 +153,55 @@ int32_t mm_cli_write(moonbit_bytes_t bytes,int32_t length,int32_t channel) {
   if(fwrite(bytes,1,length,f)!=(size_t)length || fflush(f))return 1;
   return 0;
 }
+
+// Reject output aliases before processing and immediately before publication.
+int32_t mm_cli_output_check(moonbit_bytes_t output,moonbit_bytes_t protected_path,int32_t overwrite) {
+#ifdef _WIN32
+  wchar_t *out=wide_path((char*)output),*src=wide_path((char*)protected_path);
+  if(!out||!src){free(out);free(src);return 1;}
+  wchar_t *a=_wfullpath(NULL,out,0),*b=_wfullpath(NULL,src,0);
+  int bad=!a||!b||_wcsicmp(a,b)==0;free(a);free(b);
+  DWORD attr=GetFileAttributesW(out);
+  if(attr!=INVALID_FILE_ATTRIBUTES && (!overwrite||(attr&(FILE_ATTRIBUTE_DIRECTORY|FILE_ATTRIBUTE_REPARSE_POINT))))bad=1;
+  HANDLE x=CreateFileW(out,0,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
+  HANDLE y=CreateFileW(src,0,FILE_SHARE_READ|FILE_SHARE_WRITE|FILE_SHARE_DELETE,NULL,OPEN_EXISTING,FILE_ATTRIBUTE_NORMAL,NULL);
+  BY_HANDLE_FILE_INFORMATION xi,yi;
+  if(y==INVALID_HANDLE_VALUE)bad=1;
+  if(x!=INVALID_HANDLE_VALUE&&y!=INVALID_HANDLE_VALUE&&GetFileInformationByHandle(x,&xi)&&GetFileInformationByHandle(y,&yi)&&xi.dwVolumeSerialNumber==yi.dwVolumeSerialNumber&&xi.nFileIndexHigh==yi.nFileIndexHigh&&xi.nFileIndexLow==yi.nFileIndexLow)bad=1;
+  if(x!=INVALID_HANDLE_VALUE)CloseHandle(x);if(y!=INVALID_HANDLE_VALUE)CloseHandle(y);
+  free(out);free(src);return bad;
+#else
+  struct stat a,b;
+  if(stat((char*)protected_path,&b))return 1;
+  if(!lstat((char*)output,&a))return !overwrite||!S_ISREG(a.st_mode)||(a.st_dev==b.st_dev&&a.st_ino==b.st_ino);
+  return errno!=ENOENT;
+#endif
+}
+
+int32_t mm_cli_publish(moonbit_bytes_t path,moonbit_bytes_t bytes,int32_t length,int32_t overwrite) {
+#ifdef _WIN32
+  wchar_t *out=wide_path((char*)path);if(!out)return 1;
+  size_t cap=wcslen(out)+80;wchar_t *temp=malloc(cap*sizeof(wchar_t));if(!temp){free(out);return 1;}
+  HANDLE file=INVALID_HANDLE_VALUE;
+  for(int n=0;n<100&&file==INVALID_HANDLE_VALUE;n++){
+    swprintf(temp,cap,L"%ls.moonmmdb-%lu-%d.tmp",out,GetCurrentProcessId(),n);
+    file=CreateFileW(temp,GENERIC_WRITE,0,NULL,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,NULL);
+    if(file==INVALID_HANDLE_VALUE&&GetLastError()!=ERROR_FILE_EXISTS)break;
+  }
+  int bad=1;
+  if(file!=INVALID_HANDLE_VALUE){DWORD written=0;bad=!WriteFile(file,bytes,(DWORD)length,&written,NULL)||written!=(DWORD)length||!FlushFileBuffers(file);if(!CloseHandle(file))bad=1;
+    if(!bad)bad=!MoveFileExW(temp,out,MOVEFILE_WRITE_THROUGH|(overwrite?MOVEFILE_REPLACE_EXISTING:0));
+    if(bad)DeleteFileW(temp);
+  }
+  free(temp);free(out);return bad;
+#else
+  size_t cap=strlen((char*)path)+40;char *temp=malloc(cap);if(!temp)return 1;
+  snprintf(temp,cap,"%s.moonmmdb-XXXXXX",(char*)path);
+  int fd=mkstemp(temp);if(fd<0){free(temp);return 1;}
+  int bad=0;size_t used=0;
+  while(used<(size_t)length){ssize_t n=write(fd,bytes+used,(size_t)length-used);if(n<0&&errno==EINTR)continue;if(n<=0){bad=1;break;}used+=(size_t)n;}
+  if(fsync(fd))bad=1;if(close(fd))bad=1;
+  if(!bad){if(overwrite)bad=rename(temp,(char*)path)!=0;else bad=link(temp,(char*)path)!=0;}
+  unlink(temp);free(temp);return bad;
+#endif
+}

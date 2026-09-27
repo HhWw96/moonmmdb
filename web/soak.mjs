@@ -24,8 +24,17 @@ try{
      const outcome=await page.evaluate(async()=>{const pending=window.testCall({op:'analyze',options:{file:new File(['{"ip":"8.8.8.8"}\n'.repeat(100000)],'cancel.jsonl'),city:0,asn:1,ipPath:'/ip',top:10,maxBytes:8388608,maxRecords:100000}}).then(()=>false,()=>true);setTimeout(()=>window.testReset(),20);return pending;});
      assert.equal(outcome,true);report.cancellations++;assert.ok((await load(page,paths)).databases);
    }}
-  const analysis=await page.evaluate(()=>window.testCall({op:'analyze',options:{file:new File(['{"ip":"8.8.8.8"}\n{"ip":"1.1.1.1"}\n'.repeat(500)],'soak.jsonl'),city:0,asn:1,ipPath:'/ip',top:10,maxBytes:8388608,maxRecords:10000}}));
-  assert.ok(analysis.json,JSON.stringify(analysis));if(baseline.has('analysis'))assert.equal(analysis.json,baseline.get('analysis'),'Analysis drift');else baseline.set('analysis',analysis.json);assert.equal(JSON.parse(analysis.json).requests,'1000');report.analyses++;
+  const analysis=await page.evaluate(async()=>{
+    const text='{"ip":"8.8.8.8"}\n{"ip":"bad"}\n'.repeat(500),file=new File([text],'soak.jsonl');
+    const task={format:'moonmmdb-task',version:1,operation:'analyze',parameters:{ip_path:'/ip',top:10,max_groups:10000,max_records:10000,max_input_bytes:8388608,max_line_bytes:8388608,diagnostic_limit:100},files:[{role:'city',name:'city.mmdb'},{role:'asn',name:'asn.mmdb'},{role:'input',name:'soak.jsonl'}]};
+    const imported=await window.testCall({op:'document',kind:'task',file:new File([JSON.stringify(task)],'task.json')});if(imported.error)return imported;
+    const run=await window.testCall({op:'run-task',task,bindings:{city:0,asn:1},file});if(run.error)return run;
+    const saved=JSON.parse(run.json);
+    const checked=await window.testCall({op:'document',kind:'report',file:new File([run.json],'report.json')});if(checked.error)return checked;
+    const replay=await window.testCall({op:'verify-report',task:saved.task,report:run.json,bindings:{city:0,asn:1},file});if(replay.error||JSON.parse(replay.json).status!=='consistent')throw new Error('Workflow replay mismatch');
+    return {json:JSON.stringify(saved.result)};
+  });
+  assert.ok(analysis.json,JSON.stringify(analysis));if(baseline.has('analysis'))assert.equal(analysis.json,baseline.get('analysis'),'Analysis drift');else baseline.set('analysis',analysis.json);assert.equal(JSON.parse(analysis.json).requests,'1000');assert.equal(JSON.parse(analysis.json).diagnostics.retained,'100');assert.equal(JSON.parse(analysis.json).diagnostics.omitted,'400');report.analyses++;
   const operations=[{op:'lookup',ip:'8.8.8.8'},{op:'compare',ip:'8.8.8.8',fields:['/country/iso_code','/autonomous_system_number']}];
   if(seconds>=nextValidation){operations.push({op:'validate',decode:report.cycles%2===0,work:1_000_000_000,state:64*1024*1024});nextValidation=seconds+60;}
   for(const operation of operations){const reply=await call(page,operation);assert.ok(reply.json,JSON.stringify(reply));const key=JSON.stringify(operation);if(baseline.has(key))assert.equal(reply.json,baseline.get(key),'Result drift');else baseline.set(key,reply.json);assert.notEqual(JSON.parse(reply.json).status,'error');}

@@ -13,7 +13,10 @@ fn analysis_database(reader : @mmdb.Reader, bytes : Bytes) -> Json {
 }
 
 ///|
-fn analyze(args : Array[String]) -> Int raise {
+fn analyze_report(
+  args : Array[String],
+  expected? : Array[Json] = [],
+) -> Json raise {
   if args.length() < 5 || args.length() % 2 != 1 {
     fail("host-input-error", "Expected CITY ASN INPUT and option/value pairs")
   }
@@ -23,6 +26,7 @@ fn analyze(args : Array[String]) -> Int raise {
   let mut max_records = 10000
   let mut top = 10
   let mut max_groups = 10000
+  let mut diagnostic_limit = 0
   let seen : Map[String, Bool] = Map([])
   for i = 5; i < args.length(); i = i + 2 {
     let flag = args[i]
@@ -35,22 +39,18 @@ fn analyze(args : Array[String]) -> Int raise {
       "--max-input-bytes" => max_bytes = positive(args[i + 1], 1073741824)
       "--max-line-bytes" => max_line = positive(args[i + 1], 8388608)
       "--max-records" => max_records = positive(args[i + 1], 1000000)
+      "--diagnostic-limit" =>
+        diagnostic_limit = if args[i + 1] == "0" {
+          0
+        } else {
+          positive(args[i + 1], 1000)
+        }
       "--top" => top = positive(args[i + 1], 100)
       "--max-groups" => max_groups = positive(args[i + 1], 10000)
       _ => fail("host-input-error", "Unknown option: " + flag)
     }
   }
   @mmdb.validate_paths([ip_path])
-  let tokens = if ip_path == "" {
-    []
-  } else {
-    ip_path[1:]
-    .split("/")
-    .map(fn(t) {
-      t.to_owned().replace_all(old="~1", new="/").replace_all(old="~0", new="~")
-    })
-    .to_array()
-  }
   let city_bytes = read_file(args[2], 268435456)
   let asn_bytes = read_file(args[3], 268435456 - city_bytes.length())
   let city = @mmdb.open_bytes(city_bytes)
@@ -59,9 +59,27 @@ fn analyze(args : Array[String]) -> Int raise {
     "city": analysis_database(city, city_bytes),
     "asn": analysis_database(asn, asn_bytes),
   }
-  let analyzer = @analytics.Analyzer::new(city, asn, limits={ top, max_groups, })
+  for file in expected {
+    let role = @workflow.str(@workflow.get(file, "role"))
+    if role != "input" {
+      verify_source(file, @workflow.get(databases, role))
+    }
+  }
+  let session = @analytics_bridge.analysis_from_readers(
+    city, asn, top, max_groups, ip_path,
+  )
+  let diagnostics = @analytics_bridge.DiagnosticBuffer::new(diagnostic_limit)
+  fn check_analysis(text : String) -> Unit raise CliError {
+    if text != "" {
+      let value = object(parse(text, "analysis-error"), "analysis-error")
+      fail(string(required(value, "code"), "analysis-error"), "Analysis failed")
+    }
+  }
+  check_analysis(@analytics_bridge.analysis_error(session))
+  defer @analytics_bridge.analysis_close(session)
   host_open(c_path(args[4]), max_bytes, max_line)
   check_io()
+  defer host_close()
   let hash = @crypto.SHA256::new()
   let mut input_bytes : UInt64 = 0
   let mut rows = 0
@@ -88,19 +106,31 @@ fn analyze(args : Array[String]) -> Int raise {
       _ => raise CliError("invalid-utf8", "Input must be UTF-8", rows)
     }
     let text = if rows == 1 { strip_bom(text) } else { text }
-    let ip = Some(select_ip(parse(text, "invalid-jsonl"), tokens)) catch {
-      _ => None
-    }
-    match ip {
-      Some(ip) => analyzer.push(ip)
-      None => analyzer.invalid_input()
+    if diagnostic_limit > 0 {
+      let outcome = @analytics_bridge.analysis_line_detailed(session, text)
+      let value = parse(outcome, "analysis-error")
+      if value is { "status": "error", .. } {
+        check_analysis(outcome)
+      }
+      diagnostics.add(
+        value,
+        rows,
+        input_bytes.to_int() - raw.length(),
+        input_bytes.to_int(),
+      )
+    } else {
+      check_analysis(@analytics_bridge.analysis_line(session, text))
     }
   }
   host_close()
-  let report = analyzer.finish()
-  analyzer.close()
-  let result = object(report.to_json(), "host-input-error")
-  result["tool_version"] = "0.9.1"
+  let result = object(
+    parse(@analytics_bridge.analysis_finish(session), "analysis-error"),
+    "analysis-error",
+  )
+  if result.get("status") == Some("error") {
+    check_analysis(result.to_json().stringify())
+  }
+  result["tool_version"] = "0.9.2"
   result["parameters"] = {
     "ip_path": ip_path.to_json(),
     "top": top.to_json(),
@@ -115,6 +145,17 @@ fn analyze(args : Array[String]) -> Int raise {
     "bytes": input_bytes.to_string().to_json(),
     "sha256": @crypto.bytes_to_hex_string(hash.finalize()).to_json(),
   }
-  emit(result.to_json())
-  report.exit_code
+  if diagnostic_limit > 0 {
+    result["diagnostics"] = diagnostics.to_json()
+    let parameters = object(result["parameters"], "analysis-error")
+    parameters["diagnostic_limit"] = diagnostic_limit.to_json()
+  }
+  result.to_json()
+}
+
+///|
+fn analyze(args : Array[String]) -> Int raise {
+  let result = analyze_report(args)
+  emit(result)
+  @workflow.integer(@workflow.get(result, "exit_code"), 0, 2)
 }

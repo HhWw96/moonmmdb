@@ -54,3 +54,44 @@ pub fn analysis_finish(handle : @analytics_bridge.AnalysisHandle) -> String {
 pub fn analysis_close(handle : @analytics_bridge.AnalysisHandle) -> Unit {
   @analytics_bridge.analysis_close(handle)
 }
+
+///|
+#export_name("analysis_line_detailed")
+pub fn analysis_line_detailed(
+  handle : @analytics_bridge.AnalysisHandle,
+  line : String,
+) -> String {
+  @analytics_bridge.analysis_line_detailed(handle, line)
+}
+
+///|
+#export_name("diagnostics_create")
+pub fn diagnostics_create(limit : Int) -> @analytics_bridge.DiagnosticBuffer {
+  @analytics_bridge.diagnostics_create(limit)
+}
+
+///|
+#export_name("diagnostics_add")
+pub fn diagnostics_add(
+  buffer : @analytics_bridge.DiagnosticBuffer,
+  outcome : String,
+  line : Int,
+  start : Int,
+  end : Int,
+) -> Unit {
+  @analytics_bridge.diagnostics_add(buffer, outcome, line, start, end)
+}
+
+///|
+#export_name("diagnostics_finish")
+pub fn diagnostics_finish(
+  buffer : @analytics_bridge.DiagnosticBuffer,
+) -> String {
+  @analytics_bridge.diagnostics_finish(buffer)
+}
+
+///|
+#export_name("extract_input_ip")
+pub fn extract_input_ip(text : String, path : String) -> String {
+  @analytics_bridge.extract_input_ip(text, path)
+}

@@ -1,6 +1,6 @@
 name = "HhWw96/moonmmdb"
 
-version = "0.9.1"
+version = "0.9.2"
 
 repository = "https://github.com/HhWw96/moonmmdb"
 

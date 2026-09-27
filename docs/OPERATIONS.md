@@ -52,3 +52,7 @@ println(difference.to_json().stringify())
 ```
 
 Node.js 流式处理依据 [Stream 文档](https://nodejs.org/api/stream.html#consuming-readable-streams-with-async-iterators)，字段路径依据 [RFC 6901](https://www.rfc-editor.org/rfc/rfc6901.html)。完整参数及失败语义见 [支持范围](SUPPORT.md)。
+
+## 0.9.2 候选增强
+
+跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。

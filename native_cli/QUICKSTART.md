@@ -87,3 +87,13 @@ City Lite 大库完整解码建议显式 `--max-work 1000000000`。更多说明�
 退出码：0 全部未变化；1 存在变化；2 存在错误，优先级最高。错误行继续，UTF-8、资源、读写或管道错误立即终止。只在完整完成时输出 stderr 汇总，包含 processed、changed、unchanged、errors、fields 及 databases.before/after 的版本与 SHA-256。即使已有输出，也必须检查最终退出码。
 
 继承上述 JSONL 限制和 128 层嵌套限制。两个数据库每个最多 256 MiB，合计最多 256 MiB；全部参数、字段及数据库验证后才消费日志，两个快照各打开一次。Node diff 的既有单库上限保持不变；Native 合计上限更严格。Map 键顺序不影响比较，数组顺序、数值类型和浮点原始位参与比较。
+
+## 任务与报告
+
+```text
+moonmmdb run-task examples/tasks/analyze.json --bind city examples/geo.mmdb --bind asn examples/asn.mmdb --bind input examples/access.jsonl --output report.json
+moonmmdb verify-report report.json
+moonmmdb verify-report report.json --bind city examples/geo.mmdb --bind asn examples/asn.mmdb --bind input examples/access.jsonl
+```
+
+不绑定文件时只做内部检查；绑定全部文件后才会重新计算。覆盖已有输出需显式 --overwrite，不能覆盖输入。详细边界见随包 WORKFLOWS.md。

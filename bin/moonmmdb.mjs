@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 import {VERSION} from './version.mjs';
 // Host I/O only. MMDB parsing, traversal, typed results and diagnostics are MoonBit.
-import { openSync, fstatSync, readSync, closeSync } from 'node:fs';
+import { openSync, fstatSync, readSync, closeSync, statSync } from 'node:fs';
 import { open_database, metadata, lookup, project, validate_paths, prepare_fields, selection_status, project_prepared, compare_prepared } from '../dist/core.mjs';
 import { InputError, streamOptions, inputSelector, openInput, boundedLines } from './jsonl.mjs';
 import { enrichMany } from './many.mjs';
 import { inspect } from './inspect.mjs';
+import {runWorkflow} from './workflow.mjs';
 import { analyze } from './analyze.mjs';
 
 const help = `MoonMMDB ${VERSION} — offline MaxMind DB reader
@@ -19,6 +20,8 @@ Usage:
   node bin/moonmmdb.mjs analyze CITY.mmdb ASN.mmdb INPUT.jsonl|- [OPTIONS]
   node bin/moonmmdb.mjs networks DATABASE CIDR [--max-records N] [--max-work N]
   node bin/moonmmdb.mjs validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]
+  node bin/moonmmdb.mjs run-task TASK.json --bind ROLE FILE [...] [--output FILE] [--overwrite]
+  node bin/moonmmdb.mjs verify-report REPORT.json [--bind ROLE FILE ...] [--output FILE] [--overwrite]
   node bin/moonmmdb.mjs --help | --version
 
 Inspection: networks defaults to 100000 records (cap 1000000). Both commands use\n100000000 work units (cap 1000000000); validate state defaults to 64 MiB (cap 256 MiB).\nStream options:
@@ -28,6 +31,7 @@ Inspection: networks defaults to 100000 records (cap 1000000). Both commands use
   --max-input-bytes N    Default 8388608; maximum 1073741824.
   --max-line-bytes N     Default 8388608; maximum 8388608 (LF excluded).
   --top N               analyze: default 10; maximum 100.
+  --diagnostic-limit N  analyze: default 0; maximum 1000 abnormal rows.
   --max-groups N        analyze: default/maximum 10000 per dimension.
 
 enrich expects a JSON object per line; output preserves the original under
@@ -72,6 +76,7 @@ function statusCode(value) { return value.status === 'error' ? 2 : value.status 
 
 async function main() {
   const [command, database, ...args] = process.argv.slice(2);
+  if (command === 'run-task' || command === 'verify-report') { process.exitCode=await runWorkflow(command,process.argv.slice(3),write); return; }
   if (command === 'analyze') {
     process.exitCode = await analyze(process.argv.slice(3), write);
     return;
@@ -107,7 +112,20 @@ async function main() {
       if (validation.status === 'error') { await emit(validation); process.exitCode = 2; return; }
     }
   }
-  const reader = open_database(readBounded(database, 268435456));
+  let remaining = 268435456;
+  if (isDiff) {
+    const sizes = [database, args[0]].map(path => {
+      const stat = statSync(path);
+      if (!stat.isFile()) throw new InputError('host-input-error', 'Database must be a regular file');
+      return stat.size;
+    });
+    if (sizes.some(size => size > remaining) || sizes[0] + sizes[1] > remaining)
+      throw new InputError('file-limit', 'Combined databases exceed 256 MiB');
+  }
+  let firstBytes = readBounded(database, remaining);
+  remaining -= firstBytes.length;
+  const reader = open_database(firstBytes);
+  firstBytes = null;
   const info = JSON.parse(metadata(reader));
   if (info.status === 'error' || command === 'metadata') {
     await emit(info);
@@ -127,7 +145,7 @@ async function main() {
   } else {
     let other;
     if (isDiff) {
-      other = open_database(readBounded(args[0], 268435456));
+      other = open_database(readBounded(args[0], remaining));
       const opened = JSON.parse(metadata(other));
       if (opened.status === 'error') { await emit({ ...opened, database: 'after' }); process.exitCode = 2; return; }
     }
@@ -167,7 +185,7 @@ catch (error) {
   process.exitCode = 2;
   const diagnostic = { status: 'error', code: error instanceof OutputError ? 'host-output-error' : error instanceof InputError ? error.code : 'host-input-error', message: error.message };
   if (error instanceof InputError && error.line !== undefined) diagnostic.line = error.line;
-  if (error instanceof OutputError || process.argv[2] === 'analyze') process.stderr.write(JSON.stringify(diagnostic) + '\n');
+  if (error instanceof OutputError || ['analyze','run-task','verify-report'].includes(process.argv[2])) process.stderr.write(JSON.stringify(diagnostic) + '\n');
   else {
     try { await emit(diagnostic); }
     catch (outputError) { process.stderr.write(JSON.stringify({ status: 'error', code: 'host-output-error', message: outputError.message }) + '\n'); }

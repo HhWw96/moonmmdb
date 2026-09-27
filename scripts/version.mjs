@@ -17,7 +17,7 @@ export const VERSION = readFileSync(resolve(root,'moon.mod'),'utf8').match(/^ver
 parseVersion(VERSION);
 export function capabilities(version) {
   if(!atLeast(version,'0.3.0')) throw new Error('Registry verification requires version >= 0.3.0');
-  return {enrichment:atLeast(version,'0.4.0'), geo:atLeast(version,'0.6.0'), analytics:atLeast(version,'0.9.0')};
+  return {enrichment:atLeast(version,'0.4.0'), geo:atLeast(version,'0.6.0'), analytics:atLeast(version,'0.9.0'),workflow:atLeast(version,'0.9.2')};
 }
 export function assertAdvance(version, previous) {
   if(!atLeast(version,previous)||version===previous)throw new Error('Release version must advance without replacing history');

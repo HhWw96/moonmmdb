@@ -41,6 +41,26 @@
       "current": "src/analytics_bridge/pkg.generated.mbti",
       "baseline": "analytics-bridge-0.9.1.mbti",
       "sha256": "33478eaf734459f516349da5b73d87a2a8277fa944851471dd43ed4cf310a8dc"
+    },
+    {
+      "current": "src/workflow/pkg.generated.mbti",
+      "baseline": "workflow-0.9.2.mbti",
+      "sha256": "ecaa28467079bdd1e6cc07d7909f9c2dad81ffe43923b3bb25fbc6243f5e26f0"
+    },
+    {
+      "current": "src/analytics/pkg.generated.mbti",
+      "baseline": "analytics-0.9.2.mbti",
+      "sha256": "4b56666518b9b86ac832f76757d985e17b3b918e406b842eca75c10423cf8915"
+    },
+    {
+      "current": "src/analytics_bridge/pkg.generated.mbti",
+      "baseline": "analytics-bridge-0.9.2.mbti",
+      "sha256": "41c0d8b348a812b89d2a78972c33d2a4c5fa9c4a87a9442a634b5de80bcf8e62"
+    },
+    {
+      "current": "src/bridge/pkg.generated.mbti",
+      "baseline": "bridge-0.9.2.mbti",
+      "sha256": "e5176d7dfc01172c494f499e5b72fbc01dea47fb65fa90694c5f6fd0472f8c27"
     }
   ],
   "additional_baseline": {
@@ -54,5 +74,9 @@
   "browser_analytics_baseline": {
     "version": "0.9.1",
     "origin": "Additive bridge declarations; retain all earlier baselines. Registry publication verifies matching declarations."
+  },
+  "workflow_baseline": {
+    "version": "0.9.2",
+    "origin": "Additive workflow, diagnostics and bridge declarations; previous released baselines retained."
   }
 }

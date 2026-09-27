@@ -1,0 +1,17 @@
+{
+  "format": "moonmmdb-task",
+  "version": 1,
+  "operation": "lookup",
+  "parameters": {
+    "ip": "192.0.2.1",
+    "fields": [
+      "/autonomous_system_number"
+    ]
+  },
+  "files": [
+    {
+      "role": "database",
+      "name": "database.mmdb"
+    }
+  ]
+}

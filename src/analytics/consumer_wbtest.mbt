@@ -47,3 +47,35 @@ test "default cap accepts exactly 10000 distinct groups" {
   assert_eq(code, "group-limit")
   assert_eq(a.valid, 10001)
 }
+
+///|
+test "detailed outcomes preserve legacy counts and isolate returned JSON" {
+  let reader = @mmdb.open_bytes(asn_fixture())
+  let detailed = Analyzer::new(reader, reader)
+  let legacy = Analyzer::new(reader, reader)
+  for ip in ["1.0.0.1", "2001:db8::1", "bad-ip", "1.0.0.1"] {
+    legacy.push(ip)
+    let outcome = detailed.push_detailed(ip)
+    let result = outcome.to_json()
+    match result {
+      { "issues": Array(issues), .. } => issues.clear()
+      _ => abort("expected issues")
+    }
+    if ip == "1.0.0.1" {
+      match outcome.to_json() {
+        { "issues": Array(issues), .. } => assert_eq(issues.length(), 1)
+        _ => abort("expected missing country")
+      }
+    }
+  }
+  assert_eq(detailed.finish().to_json(), legacy.finish().to_json())
+  let code = try {
+    ignore(detailed.push_detailed("1.0.0.1"))
+    "none"
+  } catch {
+    e => e.code()
+  }
+  assert_eq(code, "analyzer-closed")
+  detailed.close()
+  detailed.close()
+}

@@ -3,10 +3,12 @@ export const MAX_FILE_BYTES = 256 * 1024 * 1024;
 export const MAX_RESULT_BYTES = 8 * 1024 * 1024;
 export const PREVIEW_BYTES = 64 * 1024;
 export type Mode = 'lookup' | 'validate' | 'compare' | 'analyze';
-export type AnalysisOptions = {city: number; asn: number; file: File; ipPath: string; top: number; maxBytes: number; maxRecords: number};
+export type AnalysisOptions = {city: number; asn: number; file: File; ipPath: string; top: number; maxBytes: number; maxRecords: number; maxLineBytes?:number; maxGroups?:number; diagnosticLimit?:number};
+export type TaskFile = {role:string;name:string;bytes?:string;sha256?:string};
+export type Task = {format:'moonmmdb-task';version:1;operation:Mode;parameters:Record<string,unknown>;files:TaskFile[]};
 export type Progress = {bytes: number; total: number; lines: number};
 export type Database = {name: string; bytes: number; sha256: string; metadata: Record<string, unknown>};
-export type Request = {id: number; op: 'load'; files: File[]} | {id: number; op: 'analyze'; options: AnalysisOptions} | {id: number; op: Exclude<Mode,'analyze'>; ip?: string; fields?: string[]; decode?: boolean; work?: number; state?: number};
+export type Request = {id:number;op:'line-preview';file:File;start:number;end:number;pointer:string} | {id:number;op:'document';kind:'task'|'report';file:File} | {id:number;op:'run-task';task:Task;bindings:Record<string,number>;file?:File;report?:string} | {id:number;op:'verify-report';task:Task;bindings:Record<string,number>;file?:File;report?:string} | {id: number; op: 'load'; files: File[]} | {id: number; op: 'analyze'; options: AnalysisOptions} | {id: number; op: Exclude<Mode,'analyze'>; ip?: string; fields?: string[]; decode?: boolean; work?: number; state?: number};
 export type Reply = {id: number; progress?: Progress; databases?: Database[]; json?: string; error?: {status: 'error'; code: string; offset: number; message: string; database?: string}};
 export function checkFiles(files: File[]) {
   if (files.length < 1 || files.length > 2) throw Object.assign(new Error('请选择一至两份数据库。'),{code:'browser-file-count'});

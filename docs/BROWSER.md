@@ -64,3 +64,7 @@ node web/analytics-verify.mjs --file --production
 `python web/oracle.py --production` 使用固定 Python maxminddb 3.2.0、原始物理树检查和已审阅异常策略生成答案。Anonymous 等已知参考器枚举缺陷沿用官方源地址；参考失败不会算作通过。真实数据仅用于验证，不内置在 HTML 中。
 
 先安装 `python -m pip install psutil==7.2.2`，再执行 `node web/soak.mjs`，默认 30 分钟，使用隔离 Chromium 进程树，记录 RSS 合计及 Windows 私有内存。进程 RSS 求和可能重复计算共享页，报告明确度量口径。无强制 GC；历史 Node 默认 RSS 失败仍未因此解决。
+
+## 0.9.2 候选增强
+
+跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。

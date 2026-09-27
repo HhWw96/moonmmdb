@@ -9,6 +9,9 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-22.04, windows-2022]
+    defaults:
+      run:
+        shell: bash
     runs-on: ${{ matrix.os }}
     timeout-minutes: 90
     env:
@@ -43,12 +46,18 @@ jobs:
           node scripts/moon.mjs test --target js -p HhWw96/moonmmdb/analytics --deny-warn
           node scripts/moon.mjs test --target wasm-gc -p HhWw96/moonmmdb/analytics --deny-warn
           node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs';import {runMoon} from './scripts/moon.mjs';nativeToolchain();runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb/analytics','--deny-warn']);"
+      - name: Shared workflow and diagnostics on all backends
+        run: |
+          node scripts/moon.mjs test --target js -p HhWw96/moonmmdb/workflow --deny-warn
+          node scripts/moon.mjs test --target wasm-gc -p HhWw96/moonmmdb/workflow --deny-warn
+          node scripts/moon.mjs test --target wasm-gc -p HhWw96/moonmmdb/analytics_bridge --deny-warn
+          node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs';import {runMoon} from './scripts/moon.mjs';nativeToolchain();for(const p of ['workflow','analytics_bridge'])runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb/'+p,'--deny-warn']);"
       - name: Node transport and 100000 rows
-        run: node --test tests/analyze.test.mjs
+        run: node --test tests/analyze.test.mjs tests/workflow.test.mjs
       - name: Native transport and 100000 rows
         env:
           MOONMMDB_TEST_NATIVE: '1'
-        run: node --test tests/analyze.test.mjs
+        run: node --test tests/analyze.test.mjs tests/workflow.test.mjs
       - name: Independent aggregation on samples and 7114 production addresses per source
         run: |
           python -m pip install --target .reference-deps -r requirements-reference.txt

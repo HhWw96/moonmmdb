@@ -1,5 +1,7 @@
 # MoonMMDB
 
+**开发候选 0.9.2：** 跨端任务、异常定位和报告复核正在验收，见 [完整使用流程](docs/WORKFLOWS.md) 与 [候选验证状态](docs/VERIFICATION_0_9_2.md)。下列 0.9.1 链接仍为当前稳定交付。
+
 **0.9.1 浏览器本地日志分析：** 选择 City、ASN 数据库与 JSONL 日志，查看国家／ASN 分布、精确异常统计，并导出带原始文件散列的报告。支持分块读取、取消恢复和离线运行，见 [使用说明](docs/BROWSER_ANALYTICS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_1.md)。
 
 **正式日志分析：** Native/Node 新增 `analyze` 命令，提供可复用的 [analytics 包](src/analytics/README.md)。一条命令统计国家、ASN 请求量，并生成附输入与数据库 SHA-256 的精确报告，见 [日志分析说明](docs/ANALYTICS.md)。

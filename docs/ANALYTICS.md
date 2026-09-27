@@ -57,3 +57,7 @@ MoonBit API 见 [analytics 包](../src/analytics/README.md)。旧分析示例的
 `python scripts/analytics-soak.py --host node` / `--host native` 分别运行实际命令 30 分钟。
 默认 Node 历史负载的 A/B 和三次连续门禁由 `Default Node stability` 工作流执行；
 历史失败报告仍保留，不以新分析命令通过替代旧负载结论。
+
+## 0.9.2 候选增强
+
+跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。

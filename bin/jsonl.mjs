@@ -63,8 +63,8 @@ export function openInput(path, maxBytes) {
 export async function* boundedLines(source, options) {
   const lineBuffer = Buffer.allocUnsafe(options.maxLineBytes);
   const decoder = new TextDecoder('utf-8', { fatal: true, ignoreBOM: true });
-  let used = 0, total = 0, line = 0;
-  function complete() {
+  let used = 0, total = 0, line = 0, offset = 0;
+  function complete(newline = false) {
     line++;
     if (line > options.maxRecords) throw new InputError('record-limit', 'JSONL exceeds configured record limit', line);
     let length = used;
@@ -73,8 +73,10 @@ export async function* boundedLines(source, options) {
     try { text = decoder.decode(lineBuffer.subarray(0, length)); }
     catch { throw new InputError('invalid-utf8', 'JSONL is not valid UTF-8', line); }
     if (line === 1 && text.startsWith('\uFEFF')) text = text.slice(1);
+    const start = offset;
+    offset += used + (newline ? 1 : 0);
     used = 0;
-    return { line, text };
+    return options.ranges ? { line, text, start, end: offset } : { line, text };
   }
   try {
     for await (const chunk of source) {
@@ -89,7 +91,7 @@ export async function* boundedLines(source, options) {
         chunk.copy(lineBuffer, used, start, end);
         used += size;
         start = end + 1;
-        if (newline >= 0) yield complete();
+        if (newline >= 0) yield complete(true);
       }
     }
     if (used) yield complete();

@@ -10,6 +10,9 @@ jobs:
       matrix:
         os: [ubuntu-22.04, windows-2022]
         workload: [country, asn]
+    defaults:
+      run:
+        shell: bash
     runs-on: ${{ matrix.os }}
     timeout-minutes: 145
     env:

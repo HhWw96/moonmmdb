@@ -1,0 +1,21 @@
+{
+  "format": "moonmmdb-task",
+  "version": 1,
+  "operation": "compare",
+  "parameters": {
+    "ip": "192.0.2.1",
+    "fields": [
+      "/site"
+    ]
+  },
+  "files": [
+    {
+      "role": "before",
+      "name": "before.mmdb"
+    },
+    {
+      "role": "after",
+      "name": "after.mmdb"
+    }
+  ]
+}

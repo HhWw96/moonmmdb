@@ -68,3 +68,7 @@ v0.4.0 的默认 Node RSS 门槛失败记录保留在 [历史验证](VERIFICATIO
 0.7.0 增加 Native `diff BEFORE AFTER INPUT|-`，比较输入 IP 的字段、存在性与前缀变化；不是整库差异枚举。协议与 Node diff 一致，Native 顶层错误写 stderr，完成汇总额外提供 fields 和 databases 来源散列。Native 两库合计 256 MiB，比 Node 历史的每库 256 MiB 更严格。下载包包含人工旧、新标签库。
 
 `native-soaks.py` 同时运行旧联合补充、新 diff 产品命令及网段/检查 API 三个独立进程；各自报告 30 分钟采样及趋势门槛，报告注明并发宿主负载。diff 的真实负载使用固定 City 与 ASN 的不同字段结构，不冒称不同月份数据库的实际更新。
+
+## 0.9.2 候选增强
+
+跨端任务、异常诊断与报告复核的格式、限制、退出码和使用流程见 [WORKFLOWS.md](WORKFLOWS.md)。开发候选尚未替代稳定版；验证进度见 [0.9.2 状态](VERIFICATION_0_9_2.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是对资源接受范围的收紧，既有 API 和正常结果语义保持兼容。

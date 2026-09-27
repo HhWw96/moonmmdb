@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, writeFileSync, mkdtempSync, rmSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdtempSync, rmSync, rmdirSync, openSync, closeSync, ftruncateSync, unlinkSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -77,4 +77,10 @@ test('invalid database selector and input limits cannot produce a successful sum
   const selector = prepare_fields(['/ip']);
   assert.equal(JSON.parse(compare_prepared(handle, invalid, '1.1.1.1', selector)).code, 'missing-metadata');
   assert.equal(JSON.parse(compare_prepared(invalid, handle, '1.1.1.1', selector)).code, 'missing-metadata');
+});
+
+test('combined database file cap fails before reading or consuming log input',()=>{
+  const dir=mkdtempSync(join(tmpdir(),'moonmmdb-diff-limit-')),path=join(dir,'large.mmdb'),fd=openSync(path,'w');
+  try {ftruncateSync(fd,268435456);const result=cli(path,'');assert.equal(result.code,2);assert.equal(result.rows[0].code,'file-limit');assert.equal(result.summary,null);}
+  finally{closeSync(fd);unlinkSync(path);rmdirSync(dir);}
 });
