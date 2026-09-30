@@ -6,7 +6,7 @@ OUT=ROOT/'verification/local/toolchains'
 if os.name!='nt':raise SystemExit('This helper provisions Windows x64 only; use MOON_CC on other systems.')
 OUT.mkdir(parents=True,exist_ok=True)
 assets=[
- ('w64devkit-x64-2.10.0.7z.exe','https://api.github.com/repos/skeeto/w64devkit/releases/assets/562510315','18d0a4c71a166f8401ab6305781bec5882b40b5e06ba9807c61cb5f3b3c6325e'),
+ ('w64devkit-x64-2.10.0.7z.exe','https://github.com/skeeto/w64devkit/releases/download/v2.10.0/w64devkit-x64-2.10.0.7z.exe','18d0a4c71a166f8401ab6305781bec5882b40b5e06ba9807c61cb5f3b3c6325e'),
  ('7zr.exe','https://github.com/ip7z/7zip/releases/download/26.03/7zr.exe','ad4c82fadcbdf93c03b4fc440f300509c7d60c5c2f4d183e35d9d70d6957037d'),
 ]
 for name,url,expected in assets:
