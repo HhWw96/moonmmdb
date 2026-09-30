@@ -37,8 +37,8 @@ try {
     report.compatibility={macro:'_CRT_RAND_S',reason:'Expose MinGW CRT rand_s declaration required by pinned MoonBit runtime',launcher_sha256:sha256(readFileSync(launcher)),runtime_modified:false};
   }
   run('probe-format',['fmt','--check'],resolve(root,'examples/native_probe'));
-  run('debug',['test','--target','native','-p','HhWw96/moonmmdb','--deny-warn'],root,43);
-  run('release',['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn'],root,43);
+  run('debug',['test','--target','native','-p','HhWw96/moonmmdb','--deny-warn'],root,45);
+  run('release',['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn'],root,45);
   run('geo',['test','--target','native','--release','-p','HhWw96/moonmmdb/geo','--deny-warn'],root,8);
   run('typed-consumer',['test','--target','native','--release','-p','local/moonmmdb_typed_example','--deny-warn'],resolve(root,'examples/typed_consumer'),1);
   run('consumer',['test','--target','native','--release','-p','local/moonmmdb_log_example','--deny-warn'],resolve(root,'examples/log_consumer'),1);

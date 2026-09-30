@@ -1,0 +1,43 @@
+{
+  "version": "0.9.3",
+  "status": "diagnostic-only",
+  "node": "v24.13.0",
+  "platform": "win32",
+  "before_commit": "6c5a37254e52256e55df6e31d673d750e7039e39",
+  "candidate_source_sha256": "73601ea523c73400468308ab27a747121b8350c920e18d17bc6c31fdfd1222de",
+  "databases_sha256": [
+    "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+    "d284ae2e7427fe33d83465e1506b2b21aae47eb8a9b099f8f4dac6a98c99f041"
+  ],
+  "scope": "Same local runtime, database bytes and 20000 operations per stage. Inspector sampled allocations include collected objects. Sampling and short duration are diagnostic and cannot establish the formal Node24.20.0 memory-trend gate. No forced GC, cache or lazy decoding introduced.",
+  "stages": [
+    {
+      "stage": "query",
+      "operations": 20000,
+      "before_sampled_bytes": 699147384,
+      "after_sampled_bytes": 745154952
+    },
+    {
+      "stage": "typed_serialization",
+      "operations": 20000,
+      "before_sampled_bytes": 332253624,
+      "after_sampled_bytes": 294018568
+    },
+    {
+      "stage": "host_parse",
+      "operations": 20000,
+      "before_sampled_bytes": 9738168,
+      "after_sampled_bytes": 8526208
+    },
+    {
+      "stage": "host_stringify_and_output",
+      "operations": 20000,
+      "before_sampled_bytes": 46465328,
+      "after_sampled_bytes": 45741016
+    }
+  ],
+  "input_report_sha256": [
+    "ca8de24f0982e98750d0d8a7633b7df44e08a592d102ac0e489f9e54c130e89c",
+    "818c022b9f909c3acd151ebf9af149a8a05f3991d635a1a35d1eb75dfe932cfa"
+  ]
+}
