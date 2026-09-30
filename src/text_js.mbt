@@ -6,6 +6,22 @@ extern "js" fn text_range_js(data : Bytes, start : Int, size : Int) -> String =
   #| (function() {
   #|   const codec = new TextDecoder('utf-8', {fatal: true, ignoreBOM: true});
   #|   return function(data, start, size) {
+  #|     // Short ASCII keys and values need no temporary typed-array view.
+  #|     if (size <= 8) {
+  #|       let ascii = true;
+  #|       for (let i = 0; i < size; i++) if (data[start + i] >= 128) { ascii = false; break; }
+  #|       if (ascii) switch (size) {
+  #|         case 0: return '';
+  #|         case 1: return String.fromCharCode(data[start]);
+  #|         case 2: return String.fromCharCode(data[start], data[start + 1]);
+  #|         case 3: return String.fromCharCode(data[start], data[start + 1], data[start + 2]);
+  #|         case 4: return String.fromCharCode(data[start], data[start + 1], data[start + 2], data[start + 3]);
+  #|         case 5: return String.fromCharCode(data[start], data[start + 1], data[start + 2], data[start + 3], data[start + 4]);
+  #|         case 6: return String.fromCharCode(data[start], data[start + 1], data[start + 2], data[start + 3], data[start + 4], data[start + 5]);
+  #|         case 7: return String.fromCharCode(data[start], data[start + 1], data[start + 2], data[start + 3], data[start + 4], data[start + 5], data[start + 6]);
+  #|         case 8: return String.fromCharCode(data[start], data[start + 1], data[start + 2], data[start + 3], data[start + 4], data[start + 5], data[start + 6], data[start + 7]);
+  #|       }
+  #|     }
   #|     try { return codec.decode(data.subarray(start, start + size)); }
   #|     catch (_) { return ''; }
   #|   };

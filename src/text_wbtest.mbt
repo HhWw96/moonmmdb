@@ -51,3 +51,13 @@ test "range text decoding preserves Unicode BOM NUL and rejects malformed scalar
     assert_eq(text_actual(bytes), "invalid")
   }
 }
+
+///|
+test "short ASCII fast decoding keeps every code unit and range boundary" {
+  for size in 0..<65 {
+    for shift in 0..<128 {
+      let bytes = Bytes::makei(size, i => ((i * 17 + shift) % 128).to_byte())
+      assert_eq(text_actual(bytes), text_expected(bytes))
+    }
+  }
+}

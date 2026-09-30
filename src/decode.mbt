@@ -206,7 +206,17 @@ fn decode_value(
       }
       let duplicate = match seen {
         Some(seen) => seen.contains(name)
-        None => items.any(fn(item) { item.0 == name })
+        None => {
+          // Keep the bounded duplicate scan free of a per-key closure.
+          let mut found = false
+          for item in items {
+            if item.0 == name {
+              found = true
+              break
+            }
+          }
+          found
+        }
       }
       if duplicate {
         raise MmdbError(

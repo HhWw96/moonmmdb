@@ -5,7 +5,10 @@
 fn wire_string(out : StringBuilder, text : String) -> Unit {
   out.write_char('"')
   let mut needs_escape = false
-  for ch in text.iter() {
+  // Escaping only depends on ASCII code units. Scan without a Unicode
+  // iterator; the unchanged writer below handles escaped Unicode text.
+  for i in 0..<text.length() {
+    let ch = text[i]
     if ch == '"' || ch == '\\' || ch.to_int() < 32 {
       needs_escape = true
       break
