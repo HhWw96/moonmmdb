@@ -60,4 +60,4 @@ MoonBit API 见 [analytics 包](../src/analytics/README.md)。旧分析示例的
 
 ## 跨端任务、诊断与复核
 
-`--diagnostic-limit N` 默认为 0，范围 0—1,000，并受 512 KiB 缓冲区限制。诊断按异常行计数，同一行可含两维异常；达到容量后继续统计，附精确遗漏行数。`Analyzer.push_detailed` 一次查询返回分类，原有 push/finish 及报告类型保持兼容。任务执行与报告复验见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。
+`--diagnostic-limit N` 默认为 0，范围 0—1,000，并受 512 KiB 缓冲区限制。诊断按异常行计数，同一行可含两维异常；达到容量后继续统计，附精确遗漏行数。`Analyzer.push_detailed` 一次查询返回分类，原有 push/finish 及报告类型保持兼容。任务执行与报告复验见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [当前验证](VERIFICATION_0_9_3.md)。
