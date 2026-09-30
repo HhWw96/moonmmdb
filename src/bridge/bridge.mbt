@@ -190,7 +190,7 @@ pub fn enrichment_status(handle : EnrichmentHandle) -> String {
 pub fn enrich_ip(handle : EnrichmentHandle, ip : String) -> String {
   match handle.enricher {
     Some(enricher) =>
-      enricher.lookup(ip).to_json().stringify() catch {
+      wire_enrichment(enricher.lookup(ip)) catch {
         e => e.to_json().stringify()
       }
     None => handle.error.unwrap()

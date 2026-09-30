@@ -13,18 +13,24 @@ const { probe_open, probe_query, probe_serialize } = await import(pathToFileURL(
 const db = kind => readFileSync(resolve(root, `verification/local/production/dbip-${kind}-lite-2026-09.mmdb`));
 const city = db('city'), country = db('country');
 const handle = probe_open(city, country);
+const bridge = await import(pathToFileURL(resolve(root, 'dist/core.mjs')));
+const joint = bridge.prepare_enrichment(['geo', 'country'],
+  [bridge.open_database(city), bridge.open_database(country)],
+  [bridge.prepare_fields(['/country/iso_code', '/city/names/en']), bridge.prepare_fields(['/country/iso_code'])]);
+if (JSON.parse(bridge.enrichment_status(joint)).status !== 'valid') throw new Error('Invalid production bridge probe');
 const ips = ['1.1.1.1', '8.8.8.8', '81.2.69.160', '2001:4860:4860::8888', '2606:4700:4700::1111', '::1', '10.0.0.1', '255.255.255.255'];
 const records = ips.map(ip => probe_query(handle, ip)), texts = records.map(probe_serialize);
 const sink = new Writable({ write(_chunk, _encoding, callback) { callback(); } });
 const session = new Session(); session.connect();
 const report = { status: 'running', node: process.version, platform: process.platform, source_sha256: sourceFingerprint(), probe_sha256: sha256(readFileSync(path)), databases: [city, country].map(sha256), scope: 'Inspector sampled allocation diagnostics, fixed 20000 operations per independent stage; synthetic drained output, not filesystem throughput or formal soak.', stages: [] };
-for (const stage of ['query', 'typed_serialization', 'host_parse', 'host_stringify_and_output']) {
+for (const stage of ['query', 'typed_serialization', 'production_bridge', 'host_parse', 'host_stringify_and_output']) {
   await session.post('HeapProfiler.startSampling', { samplingInterval: 32768, includeObjectsCollectedByMajorGC: true, includeObjectsCollectedByMinorGC: true });
   const before = process.memoryUsage(), started = performance.now();
   for (let i = 0; i < 20000; i++) {
     const j = i % ips.length;
     if (stage === 'query') probe_query(handle, ips[j]);
     else if (stage === 'typed_serialization') probe_serialize(records[j]);
+    else if (stage === 'production_bridge') bridge.enrich_ip(joint, ips[j]);
     else if (stage === 'host_parse') JSON.parse(texts[j]);
     else await new Promise((resolve, reject) => sink.write(JSON.stringify(JSON.parse(texts[j])) + '\n', e => e ? reject(e) : resolve()));
   }
