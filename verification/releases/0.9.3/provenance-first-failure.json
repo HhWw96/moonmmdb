@@ -1,0 +1,10 @@
+{
+  "status": "failed-first-attempt-corrected",
+  "checked_at": "2026-09-30T09:51:55.930641+00:00",
+  "file": "native_cli/vendor/x/crypto/aes.mbt",
+  "recorded_sha256": "140b40e2954af19982432b2d0125ff11d915b5e7a218e5b410eae27d77c808f9",
+  "actual_and_corrected_sha256": "ca780b404ab26794c8675b2d1c9806d2ba340bc0d75807c094763cd2d4ff89e9",
+  "upstream_body_sha256": "db76521242b4b22614cb7fdce280bac34899fc9b38ea6f45da13ce5de8e25e08",
+  "upstream_body_equal_after_removing_notice": true,
+  "scope": "Provenance mismatch; algorithm bytes unchanged; corrected before any v0.9.3 publication. Automated regression added."
+}
