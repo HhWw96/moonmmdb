@@ -1,0 +1,24 @@
+{
+  "version": "0.9.3",
+  "public_artifact_commit": "45c81c38ca5b7d666ebbe73348fb8417e0713724",
+  "final_main_commit": "2064211626dae08bd7449914c4357a4a00618d22",
+  "results": [
+    {
+      "platform": "windows-2022",
+      "public_executable_sha256": "8a3237dbedeec6e15bc9a2d433e67a157161f57cb0bb12053f6695bc1ad1d6e5",
+      "final_main_executable_sha256": "8a3237dbedeec6e15bc9a2d433e67a157161f57cb0bb12053f6695bc1ad1d6e5",
+      "matches": true
+    },
+    {
+      "platform": "ubuntu-22.04",
+      "public_executable_sha256": "3d3541148316d93b3a0e2e3da2776ac97c8d1e6d6b1a062323bf5c133bd4de08",
+      "final_main_executable_sha256": "3d3541148316d93b3a0e2e3da2776ac97c8d1e6d6b1a062323bf5c133bd4de08",
+      "matches": true
+    },
+    {
+      "platform": "browser",
+      "matches": true,
+      "sha256": "b18a6156a9bbd935983be2cdfb7abb2c94a2c8db5e283055039dd922e59eb3e7"
+    }
+  ]
+}

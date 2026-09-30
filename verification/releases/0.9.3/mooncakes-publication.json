@@ -1,0 +1,49 @@
+{
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.3",
+  "status": "published",
+  "implementation_commit": "2064211626dae08bd7449914c4357a4a00618d22",
+  "official_documentation": "https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.3/",
+  "official_archive": "https://download.mooncakes.io/user/HhWw96/moonmmdb/0.9.3.zip",
+  "archive_bytes": 4791008,
+  "archive_sha256": "97ecd6669792f104780a7796d4c0c1dab8ef942c5d929c06ed22c2ec03693d83",
+  "public_archive_matches_upload": true,
+  "compiler": "0.10.14+7d59c7ec9",
+  "package_checks": {
+    "js": {
+      "passed": 69,
+      "failed": 0
+    },
+    "wasm-gc": {
+      "passed": 69,
+      "failed": 0
+    }
+  },
+  "registry_consumer": {
+    "status": "passed",
+    "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+    "steps": [
+      {
+        "name": "add",
+        "output": ""
+      },
+      {
+        "target": "js",
+        "output": "Total tests: 1, passed: 1, failed: 0.\n"
+      },
+      {
+        "target": "wasm-gc",
+        "output": "Total tests: 1, passed: 1, failed: 0.\n"
+      }
+    ],
+    "downloaded_manifest_sha256": "1265d70153696e71d84bd9e186a98758039ae0c870fc40255b8dfa31ce1e63cf"
+  },
+  "documentation_updates": {
+    "README.md": "23fe5030968f292d99c9e6721aca4bb5571e80641af1585070f186edaea405b4",
+    "CHANGELOG.md": "c113e08e24139deeaf88dd114df6b4929704c05802567811f0eeba84ed1c2272"
+  },
+  "package_excluded_historical_receipts": [
+    "verification/regressions/native-mingw-missing-rand-s.json"
+  ],
+  "temporary_credential_copy_removed": true
+}
