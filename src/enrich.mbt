@@ -61,9 +61,9 @@ pub fn Enricher::lookup(
   self : Enricher,
   ip : String,
 ) -> Enrichment raise MmdbError {
-  ignore(parse_ip(ip))
+  let addr = parse_ip(ip)
   let sources = self.sources.map(source => {
-    let result = Selected(source.reader.project_prepared(ip, source.fields)) catch {
+    let result = Selected(source.reader.project_address(addr, source.fields)) catch {
       e => Failed(e)
     }
     (source.name, result)
@@ -98,7 +98,7 @@ pub fn Enrichment::to_json(self : Enrichment) -> Json {
       1 => "not_found"
       _ => "found"
     }).to_json(),
-    "sources": sources.to_json(),
+    "sources": Json::object(sources),
   }
 }
 

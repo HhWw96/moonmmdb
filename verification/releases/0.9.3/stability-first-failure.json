@@ -1,0 +1,115 @@
+{
+  "version": "0.9.3",
+  "status": "release-blocked",
+  "implementation_commit": "6c5a37254e52256e55df6e31d673d750e7039e39",
+  "workflow_run": 36699865080,
+  "workflow_url": "https://github.com/HhWw96/moonmmdb/actions/runs/36699865080",
+  "evidence_source": "Public workflow API and original uploaded sampling artifacts, downloaded through authenticated GitHub CLI",
+  "jobs": [
+    {
+      "platform": "ubuntu-22.04",
+      "workload": "country",
+      "job": 109836520756,
+      "conclusion": "success"
+    },
+    {
+      "platform": "ubuntu-22.04",
+      "workload": "asn",
+      "job": 109836521007,
+      "conclusion": "success"
+    },
+    {
+      "platform": "windows-2022",
+      "workload": "country",
+      "job": 109836520939,
+      "conclusion": "failure",
+      "runs": [
+        {
+          "name": "baseline",
+          "combined_gate_passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "candidate-1",
+          "combined_gate_passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "candidate-2",
+          "combined_gate_passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "candidate-3",
+          "combined_gate_passed": false,
+          "exit_code": 0,
+          "report_sha256": "f4f45899e15d3118c8ccdd04ed7e32d1d086c8153a1c9d40bade07ac06ef1030",
+          "private_memory_trend": {
+            "first_median": 231237632.0,
+            "last_median": 301268992.0,
+            "growth_bytes": 70031360.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": false,
+            "peak": 310816768
+          },
+          "os_rss_trend": {
+            "first_median": 90390528.0,
+            "last_median": 143177728.0,
+            "growth_bytes": 52787200.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 249503744
+          }
+        }
+      ]
+    },
+    {
+      "platform": "windows-2022",
+      "workload": "asn",
+      "job": 109836520964,
+      "conclusion": "failure",
+      "runs": [
+        {
+          "name": "baseline",
+          "combined_gate_passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "candidate-1",
+          "combined_gate_passed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "candidate-2",
+          "combined_gate_passed": false,
+          "exit_code": 0,
+          "report_sha256": "59274952817893d103e49256a37e774a726e37346e22573ed2ca804552686669",
+          "private_memory_trend": {
+            "first_median": 230610944.0,
+            "last_median": 301932544.0,
+            "growth_bytes": 71321600.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": false,
+            "peak": 310824960
+          },
+          "os_rss_trend": {
+            "first_median": 86030336.0,
+            "last_median": 142958592.0,
+            "growth_bytes": 56928256.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 250400768
+          }
+        }
+      ]
+    }
+  ],
+  "failure": "Candidate default-memory gate failed; do not publish",
+  "interpretation": "Windows private-memory trend failed in Country candidate-3 and ASN candidate-2. Node RSS, external RSS and result-drift checks passed. Heap capacity expanded while external memory remained broadly stable; this does not independently prove or rule out a leak. Retain the failure and rerun unchanged gates after an allocation reduction.",
+  "release_policy": "Preserve this failure, investigate and fix the cause, then require all normal regression and unchanged stability gates before publishing. No forced GC, heap cap, lowered threshold, or selective successful retry is accepted.",
+  "public_stable_version_retained": "0.9.2",
+  "original_reports_archive": {
+    "file": "stability-first-failure-original-bytes.zip",
+    "sha256": "dd71d6444920064fc7c3dad09d6f00842acbbe65357749069ae0133806ffd181"
+  }
+}

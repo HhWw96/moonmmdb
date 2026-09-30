@@ -213,9 +213,18 @@ pub fn Reader::project_prepared(
   ip : String,
   selector : FieldSelector,
 ) -> Projection raise MmdbError {
+  self.project_address(parse_ip(ip), selector)
+}
+
+///|
+fn Reader::project_address(
+  self : Reader,
+  addr : Address,
+  selector : FieldSelector,
+) -> Projection raise MmdbError {
   let paths = selector.paths
   let parsed = selector.tokens
-  let record = self.lookup(ip)
+  let record = self.lookup_address(addr)
   // Charge repeated selections too; overlapping paths cannot multiply output freely.
   let budget = {
     values: self.limits.max_values,
@@ -252,7 +261,7 @@ pub fn Projection::to_json(self : Projection) -> Json {
   {
     "status": (if self.record_found { "found" } else { "not_found" }).to_json(),
     "prefix_length": self.prefix_length.to_json(),
-    "fields": fields.to_json(),
+    "fields": Json::object(fields),
   }
 }
 

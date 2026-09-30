@@ -182,7 +182,14 @@ fn Reader::branch(self : Reader, node : UInt, bit : Int) -> UInt {
 ///|
 /// Mapped/6to4 aliases follow database edges; no implicit Teredo rewriting.
 pub fn Reader::lookup(self : Reader, ip : String) -> Lookup raise MmdbError {
-  let addr = parse_ip(ip)
+  self.lookup_address(parse_ip(ip))
+}
+
+///|
+fn Reader::lookup_address(
+  self : Reader,
+  addr : Address,
+) -> Lookup raise MmdbError {
   if addr.version == 6 && self.meta.ip_version == 4 {
     raise MmdbError(
       "ip-version-mismatch", -1, "IPv6 lookup against IPv4 database",
