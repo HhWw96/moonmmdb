@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "version": "0.9.3",
+  "transport": "artifact-only localhost",
+  "html_sha256": "b18a6156a9bbd935983be2cdfb7abb2c94a2c8db5e283055039dd922e59eb3e7",
+  "checks": [
+    "ASN field query returns exact uint32 64512",
+    "Internal label comparison lab-a to lab-a-new",
+    "Hidden branch invalid-tree-pointer at offset 6",
+    "Synthetic analysis requests 4; valid 4; both dimensions counted 3 and not_found 1",
+    "Diagnostic line 4 and exact raw byte range",
+    "Reopen actual rendered analyze report; internal-only label is explicit",
+    "Rebind original City, ASN and JSONL; recomputation consistent",
+    "Home moves focus without activating tab; Enter activates query",
+    "Copy control displays completed UI status; clipboard readback is not asserted"
+  ],
+  "console_logs": []
+}
