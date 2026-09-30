@@ -14,6 +14,7 @@ pub suberror AnalyticsError {
 } derive(@debug.Debug)
 pub fn AnalyticsError::code(Self) -> String
 pub fn AnalyticsError::to_json(Self) -> Json
+pub fn AnalyticsError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 pub struct AnalysisRowOutcome {
@@ -26,6 +27,9 @@ pub(all) struct AnalyticsLimits {
   max_groups : Int
 } derive(Eq, @debug.Debug)
 pub fn AnalyticsLimits::default() -> Self
+pub fn AnalyticsLimits::equal(Self, Self) -> Bool
+pub fn AnalyticsLimits::not_equal(Self, Self) -> Bool
+pub fn AnalyticsLimits::to_repr(Self) -> @debug.Repr
 
 pub(all) struct AnalyticsReport {
   requests : UInt64
@@ -35,7 +39,10 @@ pub(all) struct AnalyticsReport {
   country : DimensionReport
   asn : DimensionReport
 } derive(Eq, @debug.Debug)
+pub fn AnalyticsReport::equal(Self, Self) -> Bool
+pub fn AnalyticsReport::not_equal(Self, Self) -> Bool
 pub fn AnalyticsReport::to_json(Self) -> Json
+pub fn AnalyticsReport::to_repr(Self) -> @debug.Repr
 
 pub struct Analyzer {
   // private fields
@@ -57,12 +64,18 @@ pub(all) struct DimensionReport {
   other_requests : UInt64
   top : Array[GroupCount]
 } derive(Eq, @debug.Debug)
+pub fn DimensionReport::equal(Self, Self) -> Bool
+pub fn DimensionReport::not_equal(Self, Self) -> Bool
 pub fn DimensionReport::to_json(Self) -> Json
+pub fn DimensionReport::to_repr(Self) -> @debug.Repr
 
 pub(all) struct GroupCount {
   key : String
   count : UInt64
 } derive(Eq, @debug.Debug)
+pub fn GroupCount::equal(Self, Self) -> Bool
+pub fn GroupCount::not_equal(Self, Self) -> Bool
+pub fn GroupCount::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

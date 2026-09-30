@@ -1,11 +1,28 @@
-import {useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import type {Task,Database} from './protocol';
 
-export function saveJSON(value:unknown,name:string) {
-  const text=typeof value==='string'?value:JSON.stringify(value,null,2)+'\n';
-  if(new TextEncoder().encode(text).length>8388608)throw new Error('完整文件超过 8 MiB。');
-  const url=URL.createObjectURL(new Blob([text],{type:'application/json;charset=utf-8'}));
-  const link=document.createElement('a');link.href=url;link.download=name;link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+export function useJSONDownload() {
+  const active=useRef<string|null>(null);
+  const [file,setFile]=useState<{url:string;name:string;kind:'任务'|'报告'}|null>(null);
+  function release() {if(active.current){URL.revokeObjectURL(active.current);active.current=null;}}
+  useEffect(()=>()=>release(),[]);
+  function clear() {release();setFile(null);}
+  function save(value:unknown,name:string,kind:'任务'|'报告') {
+    const text=typeof value==='string'?value:JSON.stringify(value,null,2)+'\n';
+    if(new TextEncoder().encode(text).length>8388608)throw new Error('完整文件超过 8 MiB。');
+    const url=URL.createObjectURL(new Blob([text],{type:'application/json;charset=utf-8'}));
+    const link=document.createElement('a');link.href=url;link.download=name;link.hidden=true;
+    // Attach the link for browsers that require a document-owned download target.
+    // Keep a visible retry link until replacement/clear; a click does not prove a disk save.
+    try {document.body.appendChild(link);link.click();}
+    catch(e){URL.revokeObjectURL(url);throw e;}
+    finally{link.remove();}
+    release();active.current=url;setFile({url,name,kind});
+  }
+  return {save,clear,file};
+}
+export function DownloadFallback({file}:{file:{url:string;name:string;kind:'任务'|'报告'}|null}) {
+  return file?<p className="notice" role="status">已发起{file.kind}下载。若未出现保存提示，可<a href={file.url} download={file.name}>再次保存{file.kind} JSON</a>。请在浏览器下载列表中确认文件。</p>:null;
 }
 export function RoleSelect({label,value,onChange,databases}:{label:string;value:number;onChange:(n:number)=>void;databases:Database[]}) {
   return <label>{label}<select aria-label={label} value={value} onChange={e=>onChange(Number(e.target.value))}>{databases.map((db,i)=><option key={i} value={i}>数据库 {i===0?'A':'B'} · {db.name}</option>)}</select></label>;

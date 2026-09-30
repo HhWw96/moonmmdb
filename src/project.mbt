@@ -255,3 +255,9 @@ pub fn Projection::to_json(self : Projection) -> Json {
     "fields": fields.to_json(),
   }
 }
+
+///|
+pub extend Projection with Eq::{not_equal, equal}
+
+///|
+pub extend Projection with @debug.Debug::{to_repr}

@@ -350,3 +350,30 @@ pub fn Analyzer::close(self : Analyzer) -> Unit {
     groups.clear()
   }
 }
+
+///|
+pub extend AnalyticsError with @debug.Debug::{to_repr}
+
+///|
+pub extend AnalyticsLimits with Eq::{not_equal, equal}
+
+///|
+pub extend AnalyticsLimits with @debug.Debug::{to_repr}
+
+///|
+pub extend GroupCount with Eq::{not_equal, equal}
+
+///|
+pub extend GroupCount with @debug.Debug::{to_repr}
+
+///|
+pub extend DimensionReport with Eq::{not_equal, equal}
+
+///|
+pub extend DimensionReport with @debug.Debug::{to_repr}
+
+///|
+pub extend AnalyticsReport with Eq::{not_equal, equal}
+
+///|
+pub extend AnalyticsReport with @debug.Debug::{to_repr}

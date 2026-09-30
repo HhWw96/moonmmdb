@@ -1,5 +1,7 @@
 # MoonMMDB
 
+**源码候选 0.9.3：** 固定 MoonBit `0.10.14+7d59c7ec9`，保留既有接口并优化浏览器报告下载。当前公开稳定版仍为 0.9.2；候选完成跨平台门禁后再发布。
+
 
 **0.9.2 跨端任务与报告复核：** 网页导出查询、检查、对比或分析任务，Node/Native 用明确的文件绑定继续执行；异常可定位到行，保存的报告可重新打开并核对原文件。见 [完整使用流程](docs/WORKFLOWS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_2.md)。
 
@@ -49,7 +51,7 @@ Native `diff` 按输入 IP 比较旧、新数据库，默认比较完整记录�
 
 ## 从源码运行 Node.js 工具
 
-需要 Node.js 22+ 和 MoonBit 工具链。0.9.2 正式稳定性对照固定 Node.js 24.20.0；本机诊断使用 24.13.0，工具链固定 `moonc v0.10.11+6ff76a5f9`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；个人工具链配置 `.local-toolchain.json` 不随仓库提交。
+需要 Node.js 22+ 和 MoonBit 工具链。0.9.2 正式稳定性对照固定 Node.js 24.20.0；本机诊断使用 24.13.0，工具链固定 `moonc v0.10.14+7d59c7ec9`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；个人工具链配置 `.local-toolchain.json` 不随仓库提交。
 
 ```text
 git clone https://github.com/HhWw96/moonmmdb.git

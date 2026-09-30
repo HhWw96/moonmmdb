@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 145
     env:
-      MOONBIT_INSTALL_VERSION: 0.10.11+6ff76a5f9
+      MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/checkout@v7.0.1

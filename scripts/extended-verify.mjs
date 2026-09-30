@@ -42,7 +42,7 @@ try {
   }
   const joined=read('enrichment-production');
   if(joined.core_sha256!==report.core_sha256 || joined.native_executable_sha256!==report.executable_sha256)throw new Error('Production enrichment evidence mismatch');
-  report.scope='Pinned Windows x64 MoonBit 0.10.11 + GCC 16.2.0; three real DB-IP Lite September 2026 files plus City/ASN joint lookup and analysis; deterministic sampled correctness, not full database certification or production service SLA.';
+  report.scope='Pinned Windows x64 MoonBit 0.10.14+7d59c7ec9 + GCC 16.2.0; three real DB-IP Lite September 2026 files plus City/ASN joint lookup and analysis; deterministic sampled correctness, not full database certification or production service SLA.';
   report.status='passed';
 } catch(error) {report.status='failed';report.error=error.message;console.error(error.message);process.exitCode=1;}
 report.finished=new Date().toISOString();save();

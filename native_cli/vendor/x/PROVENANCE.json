@@ -2,12 +2,12 @@
   "version": "0.5.5",
   "source": "https://download.mooncakes.io/user/moonbitlang/x/0.5.5.zip",
   "scope": "crypto implementation files only; upstream test and benchmark files omitted",
-  "patch": "Four AES Array(capacity=data_length) calls changed to Array::new(capacity=data_length) for pinned MoonBit 0.10.11; hashing implementation unchanged",
+  "patch": "Earlier releases adapted four AES Array constructors to Array::new for MoonBit 0.10.11. In v0.9.3 those calls are restored to upstream syntax for MoonBit 0.10.14; aes.mbt retains a prominent modification notice. Algorithms unchanged.",
   "files": [
     {
       "path": "crypto/aes.mbt",
       "upstream_sha256": "db76521242b4b22614cb7fdce280bac34899fc9b38ea6f45da13ce5de8e25e08",
-      "local_sha256": "a02e1fee0b1adb7f69fea858f970d7851e1b65287f4eaf9266ed6418efefc65e"
+      "local_sha256": "140b40e2954af19982432b2d0125ff11d915b5e7a218e5b410eae27d77c808f9"
     },
     {
       "path": "crypto/byte_source.mbt",

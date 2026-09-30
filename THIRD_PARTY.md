@@ -21,7 +21,7 @@ tests/scenarios 中的四份数据库由本项目 scripts/prepare-scenarios.py �
 
 ## Native 产品中的第三方实现
 
-Native 工具使用 `moonbitlang/x@0.5.5` crypto 源码（International Digital Economy Academy，Apache-2.0）。固定 MoonBit 0.10.11 无法编译其中四处旧 AES 数组构造语法，因此在 `native_cli/vendor/x` 保留实现源码并将这四处改为 `Array::new`；SHA-256 算法未改动。包内的 PROVENANCE.json 记录上游 URL、原始及本地文件散列。没有修改用户的全局包缓存，也没有增加核心读取库的依赖。源码子集不包含上游测试与基准，项目另验 SHA-256 标准向量。
+Native 工具使用 `moonbitlang/x@0.5.5` crypto 源码（International Digital Economy Academy，Apache-2.0）。历史版本为适配 MoonBit 0.10.11 将 AES 四处数组构造改为 `Array::new`；0.9.3 使用 MoonBit 0.10.14 后恢复上游数组语法，并在 `aes.mbt` 顶部保留显著的修改说明。SHA-256 与 AES 算法未改动。包内的 PROVENANCE.json 记录上游 URL、原始及本地文件散列。没有修改用户的全局包缓存，也没有增加核心读取库的依赖。源码子集不包含上游测试与基准，项目另验 SHA-256 标准向量。
 
 Native 分发包附带 MoonBit core 的 Apache-2.0 许可证、MinGW-w64 运行库声明，以及 GCC GPLv3 和 Runtime Library Exception 3.1 文本。GCC 工具链本身不随程序分发。文本分别取自固定工具链、官方 core 和 gcc-mirror/gcc 的 COPYING3 / COPYING.RUNTIME。二进制附带源码仓库地址，可核对构建版本与第三方修改。
 # 浏览器界面依赖

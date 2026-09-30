@@ -59,7 +59,7 @@ node web/analytics-verify.mjs --production
 node web/analytics-verify.mjs --file --production
 ```
 
-前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.11+6ff76a5f9。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机可用 `node web/serve.mjs` 在 http://127.0.0.1:4173/ 预览；服务器只返回生成的 HTML，不提供工作区文件访问。Linux 缺少浏览器系统库时，在隔离测试环境使用 `npx playwright install --with-deps chromium firefox`。
+前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.14+7d59c7ec9。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机可用 `node web/serve.mjs` 在 http://127.0.0.1:4173/ 预览；服务器只返回生成的 HTML，不提供工作区文件访问。Linux 缺少浏览器系统库时，在隔离测试环境使用 `npx playwright install --with-deps chromium firefox`。
 
 `python web/oracle.py --production` 使用固定 Python maxminddb 3.2.0、原始物理树检查和已审阅异常策略生成答案。Anonymous 等已知参考器枚举缺陷沿用官方源地址；参考失败不会算作通过。真实数据仅用于验证，不内置在 HTML 中。
 

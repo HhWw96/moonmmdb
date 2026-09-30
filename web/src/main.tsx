@@ -2,7 +2,7 @@ import {useEffect, useMemo, useRef, useState, type DragEvent} from 'react';
 import {createRoot} from 'react-dom/client';
 import {BrowserClient, type Operation} from './client';
 import {checkFiles, fieldsFromText, preview, VERSION, type Database, type Mode} from './protocol';
-import {WorkflowPanel,RoleSelect,DiagnosticPanel,saveJSON} from './WorkflowPanel';
+import {WorkflowPanel,RoleSelect,DiagnosticPanel,useJSONDownload,DownloadFallback} from './WorkflowPanel';
 import type {Task} from './protocol';
 import {AnalysisFields, AnalyticsResult, initialAnalysis, type AnalysisForm} from './Analytics';
 import type {Progress} from './protocol';
@@ -37,16 +37,14 @@ function DatabaseInfo({database, index}: {database: Database; index: number; ana
     <dt>大小</dt><dd>{bytes(database.bytes)}</dd><dt>类型</dt><dd>{String(m.database_type)}</dd><dt>地址族</dt><dd>IPv{String(m.ip_version)}</dd><dt>节点数</dt><dd>{String(m.node_count)}</dd><dt>构建时间（Unix 秒）</dt><dd>{String(m.build_epoch)}</dd><dt>SHA-256</dt><dd><code>{database.sha256}</code></dd>
   </dl></details>;
 }
-function ResultPanel({result, notice, setNotice, inspect, query}: {result: Result|null; notice: string; setNotice: (s:string)=>void; inspect:(row:{start:string;end:string})=>Promise<{text:string;ip?:string;truncated:boolean}>; query:(ip:string)=>void}) {
+function ResultPanel({result, notice, setNotice, inspect, query, save}: {result: Result|null; notice: string; setNotice: (s:string)=>void; inspect:(row:{start:string;end:string})=>Promise<{text:string;ip?:string;truncated:boolean}>; query:(ip:string)=>void; save:(value:unknown,name:string,kind:"任务"|"报告")=>void}) {
   const data = useMemo(()=>result ? JSON.parse(result.json) : null,[result]);
   const shown = useMemo(()=>result ? preview(result.json.length < 65536 ? JSON.stringify(data,null,2) : result.json) : null,[result,data]);
   const download = () => {
     if (!result) return;
-    if(result.report){try{saveJSON(result.report,`moonmmdb-${result.operation.op}.json`)}catch(e){setNotice((e as Error).message)}return;}
+    if(result.report){try{save(result.report,`moonmmdb-${result.operation.op}.json`,'报告')}catch(e){setNotice((e as Error).message)}return;}
     const report = {version:1, tool:{name:'MoonMMDB',version:VERSION,core_sha256:embedded.core_sha256,hash_bridge_sha256:embedded.hash_bridge_sha256,worker_sha256:embedded.worker_sha256}, operation:result.operation.op==='analyze'?{op:'analyze',options:{...result.operation.options,file:{name:result.operation.options.file.name,bytes:result.operation.options.file.size}}}:result.operation, databases:result.databases, finished:result.finished, result:data};
-    const url = URL.createObjectURL(new Blob([JSON.stringify(report,null,2)+'\n'],{type:'application/json;charset=utf-8'}));
-    const link = document.createElement('a'); link.href=url; link.download=`moonmmdb-${result.operation.op}.json`; link.click();
-    setTimeout(()=>URL.revokeObjectURL(url),1000);
+    try{save(report,`moonmmdb-${result.operation.op}.json`,'报告')}catch(e){setNotice((e as Error).message)}
   };
   const copy = async () => {try {await navigator.clipboard.writeText(result!.json);setNotice('已复制完整结果 JSON。');} catch {setNotice('浏览器未允许复制，请下载 JSON，或手动选中预览文本。');}};
   return <section className="results" aria-labelledby="result-title"><div className="result-header"><h2 id="result-title">{result?.operation.op==='analyze'?'分析结果':result?.operation.op==='compare'?'对比结果':result?.operation.op==='validate'?'检查结果':'查询结果'}</h2><div className="actions"><button disabled={!result} onClick={copy}>复制 JSON</button><button disabled={!result} onClick={download}>下载 JSON</button></div></div>
@@ -60,6 +58,7 @@ function ResultPanel({result, notice, setNotice, inspect, query}: {result: Resul
   </section>;
 }
 function App() {
+  const download=useJSONDownload();
   const [client] = useState(()=>new BrowserClient(embedded.worker));
   const generation = useRef(0), files = useRef<File[]>([]);
   const errorRef=useRef<HTMLParagraphElement>(null);
@@ -76,8 +75,8 @@ function App() {
   const busy = started!==null;
   useEffect(()=>()=>client.close(),[client]);
   useEffect(()=>{if(error)errorRef.current?.focus();},[error]);
-  function resetResult() {setProgress(null);setResult(null);setNotice('');setError('');}
-  function cancel() {generation.current++;client.close();setStarted(null);setDatabases([]);setResult(null);setNotice('');setError('操作已取消；请重新加载已选数据库。');}
+  function resetResult() {download.clear();setProgress(null);setResult(null);setNotice('');setError('');}
+  function cancel() {download.clear();generation.current++;client.close();setStarted(null);setDatabases([]);setResult(null);setNotice('');setError('操作已取消；请重新加载已选数据库。');}
   function clear() {generation.current++;client.close();files.current=[];setSelectedNames([]);setDatabases([]);setStarted(null);setIp('');setFields('');setAnalysis({...initialAnalysis});setTarget(0);setBefore(0);setAfter(1);setImported(null);setOriginalReport(null);setCommandHelp('');resetResult();}
   async function load(next: File[]) {
     resetResult();
@@ -134,7 +133,7 @@ function App() {
   }
   async function exportTask(command:boolean) {
     const epoch=generation.current;
-    try{const value=task();setStarted(Date.now());const reply=await client.request({op:'document',kind:'task',file:new File([JSON.stringify(value)],'task.json')});if(epoch!==generation.current)return;if(reply.error)throw new Error(reply.error.message);const checked=JSON.parse(reply.json!).value as Task;saveJSON(JSON.stringify(checked),'moonmmdb-task.json');if(command)setCommandHelp(`Windows PowerShell:\n.\\moonmmdb.exe run-task 'moonmmdb-task.json' ${checked.files.map(f=>`--bind ${f.role} '<${f.role.toUpperCase()}_FILE>'`).join(' ')} --output 'moonmmdb-report.json'\n\nLinux:\n./moonmmdb run-task 'moonmmdb-task.json' ${checked.files.map(f=>`--bind ${f.role} '<${f.role.toUpperCase()}_FILE>'`).join(' ')} --output 'moonmmdb-report.json'\n\n请将占位符替换为实际路径；保持引号。文件只在本机处理。`);else setNotice('已导出任务；在其他入口重新绑定文件即可运行。');}
+    try{const value=task();setStarted(Date.now());const reply=await client.request({op:'document',kind:'task',file:new File([JSON.stringify(value)],'task.json')});if(epoch!==generation.current)return;if(reply.error)throw new Error(reply.error.message);const checked=JSON.parse(reply.json!).value as Task;download.save(JSON.stringify(checked),'moonmmdb-task.json','任务');if(command)setCommandHelp(`Windows PowerShell:\n.\\moonmmdb.exe run-task 'moonmmdb-task.json' ${checked.files.map(f=>`--bind ${f.role} '<${f.role.toUpperCase()}_FILE>'`).join(' ')} --output 'moonmmdb-report.json'\n\nLinux:\n./moonmmdb run-task 'moonmmdb-task.json' ${checked.files.map(f=>`--bind ${f.role} '<${f.role.toUpperCase()}_FILE>'`).join(' ')} --output 'moonmmdb-report.json'\n\n请将占位符替换为实际路径；保持引号。文件只在本机处理。`);else setNotice('已导出任务；在其他入口重新绑定文件即可运行。');}
     catch(e){setError((e as Error).message)}finally{if(epoch===generation.current)setStarted(null)}
   }
   async function run(verify=false) {
@@ -163,13 +162,13 @@ function App() {
       {selectedNames.length?<div className="file-controls"><p>{!databases.length?selectedNames.join('、'):null}</p><button disabled={busy} onClick={()=>load(files.current)}>重新加载</button><button onClick={clear}>清空</button></div>:null}
       <section className="samples"><h3>离线样例</h3><button disabled={busy} onClick={()=>sample('asn')}>ASN 查询样例</button><button disabled={busy} onClick={()=>sample('tags')}>内部标签更新</button><button disabled={busy} onClick={()=>sample('broken')}>损坏分支检查</button><button disabled={busy} onClick={()=>sample('analysis')}>日志分析样例</button><p>样例为人工数据，不代表真实 IP 归属。</p></section>
       <div className="privacy">数据库与 IP 仅在本机处理<br/>不上传，不保存查询历史</div>
-    </aside><main><WorkflowPanel busy={busy} task={imported} report={!!originalReport} onImport={importDocument} onExport={exportTask} onVerify={()=>run(true)} onDetach={()=>{setImported(null);setOriginalReport(null);resetResult();}}/>{commandHelp?<section className="command-help"><p>任务文件已下载。Native 下载：<a href={`https://github.com/HhWw96/moonmmdb/releases/tag/v${VERSION}`} target="_blank" rel="noreferrer">Windows / Linux</a></p><pre className="json">{commandHelp}</pre><button onClick={()=>setCommandHelp('')}>关闭运行说明</button></section>:null}<div className="tabs" role="tablist" aria-label="数据库操作" onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node|null))setFocusTab(mode)}} onKeyDown={e=>{const keys=['ArrowLeft','ArrowRight','Home','End'];if(!keys.includes(e.key))return;e.preventDefault();const buttons=Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=tab]'));const index=buttons.indexOf(document.activeElement as HTMLButtonElement);const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;buttons[next]?.focus();}}>{(Object.keys(labels) as Mode[]).map(key=><button key={key} id={`tab-${key}`} role="tab" tabIndex={focusTab===key?0:-1} onFocus={()=>setFocusTab(key)} aria-selected={mode===key} aria-controls="operation" disabled={busy} className={mode===key?'active':''} onClick={()=>{setMode(key);resetResult();}}>{labels[key]}</button>)}</div>
+    </aside><main><DownloadFallback file={download.file}/><WorkflowPanel busy={busy} task={imported} report={!!originalReport} onImport={importDocument} onExport={exportTask} onVerify={()=>run(true)} onDetach={()=>{setImported(null);setOriginalReport(null);resetResult();}}/>{commandHelp?<section className="command-help"><p>任务下载已发起。Native 下载：<a href={`https://github.com/HhWw96/moonmmdb/releases/tag/v${VERSION}`} target="_blank" rel="noreferrer">Windows / Linux</a></p><pre className="json">{commandHelp}</pre><button onClick={()=>setCommandHelp('')}>关闭运行说明</button></section>:null}<div className="tabs" role="tablist" aria-label="数据库操作" onBlur={e=>{if(!e.currentTarget.contains(e.relatedTarget as Node|null))setFocusTab(mode)}} onKeyDown={e=>{const keys=['ArrowLeft','ArrowRight','Home','End'];if(!keys.includes(e.key))return;e.preventDefault();const buttons=Array.from(e.currentTarget.querySelectorAll<HTMLButtonElement>('[role=tab]'));const index=buttons.indexOf(document.activeElement as HTMLButtonElement);const next=e.key==='Home'?0:e.key==='End'?buttons.length-1:(index+(e.key==='ArrowRight'?1:-1)+buttons.length)%buttons.length;buttons[next]?.focus();}}>{(Object.keys(labels) as Mode[]).map(key=><button key={key} id={`tab-${key}`} role="tab" tabIndex={focusTab===key?0:-1} onFocus={()=>setFocusTab(key)} aria-selected={mode===key} aria-controls="operation" disabled={busy} className={mode===key?'active':''} onClick={()=>{setMode(key);resetResult();}}>{labels[key]}</button>)}</div>
       <section id="operation" role="tabpanel" tabIndex={0} aria-labelledby={`tab-${mode}`}><h1>{mode==='lookup'?'查询 IP 记录':mode==='validate'?'检查数据库结构':mode==='analyze'?'分析本地访问日志':'比较数据库更新'}</h1><p className="intro">{mode==='lookup'?'选择本地数据库，或加载左侧样例开始。':mode==='validate'?'检查全部物理树节点，发现普通查询未经过的损坏分支。':mode==='analyze'?'选择 City、ASN 数据库和 JSONL 日志，统计国家及 ASN 来源分布。':'选择旧库和新库，查看一个 IP 的记录与字段变化。'}</p>
       {databases.length?<fieldset disabled={busy} className="analysis-roles">{mode==='lookup'||mode==='validate'?<RoleSelect label="目标数据库" databases={databases} value={target} onChange={n=>{setTarget(n);resetResult();}}/>:mode==='compare'?<><RoleSelect label="旧数据库角色" databases={databases} value={before} onChange={n=>{setBefore(n);resetResult();}}/><RoleSelect label="新数据库角色" databases={databases} value={after} onChange={n=>{setAfter(n);resetResult();}}/></>:null}</fieldset>:null}<form onSubmit={e=>{e.preventDefault();void run();}}><fieldset disabled={busy}>
         {mode==='analyze'?<AnalysisFields value={analysis} change={value=>{setAnalysis(value);resetResult();}} databases={databases}/>:mode!=='validate'?<><label htmlFor="ip">IP 地址</label><input id="ip" autoComplete="off" spellCheck={false} value={ip} onChange={e=>{setIp(e.target.value);resetResult();}} placeholder="例如 192.0.2.1 或 2001:db8::1"/><label htmlFor="fields">{mode==='compare'?'比较字段（可选）':'提取字段（可选）'}</label><textarea id="fields" rows={3} spellCheck={false} value={fields} onChange={e=>{setFields(e.target.value);resetResult();}} placeholder={'/country/iso_code\n/autonomous_system_number'}/><p className="hint">留空{mode==='compare'?'比较':'返回'}完整记录；每行一个 JSON Pointer。</p></>:<><label className="checkbox"><input type="checkbox" checked={decode} onChange={e=>{setDecode(e.target.checked);resetResult();}}/>解码引用记录</label><p className="hint">包括不可达节点引用的数据。通过不代表地理信息准确。</p><details className="limits"><summary>检查预算</summary><label htmlFor="work">最大工作单位（1—1,000,000,000）</label><input id="work" type="number" min="1" max="1000000000" step="1" value={work} onChange={e=>{setWork(e.target.value);resetResult();}}/><label htmlFor="state">辅助状态上限（MiB，最多 256）</label><input id="state" type="number" min={1/1048576} max="256" step="any" value={state} onChange={e=>{setState(e.target.value);resetResult();}}/><p className="hint">不包含数据库快照及运行时开销，不是进程内存上限。</p></details></>}
         <button className="primary" type="submit" disabled={!databases.length || ((mode==='compare'||mode==='analyze') && databases.length!==2) || (mode==='compare'&&before===after) || (mode==='analyze'?(!analysis.file||analysis.city===analysis.asn):(mode!=='validate'&&!ip.trim()))}>{mode==='lookup'?'查询':mode==='validate'?'开始检查':mode==='analyze'?'开始分析':'开始对比'}</button>
       </fieldset></form>{busy?<div className="running" role="status"><Elapsed start={started!}/>{mode==='analyze'&&progress?<span>已读取 {bytes(progress.bytes)} / {bytes(progress.total)}（{progress.total?Math.floor(progress.bytes*100/progress.total):100}%）· 已处理 {progress.lines} 行；读取结束后仍需完成报告</span>:null}<button onClick={cancel}>取消操作</button></div>:null}{error?<p ref={errorRef} tabIndex={-1} className="error" role="alert">{error}</p>:null}</section>
-      <ResultPanel result={result} notice={notice} setNotice={setNotice} inspect={inspect} query={value=>{setMode('lookup');setIp(value);setFields('');setImported(null);setOriginalReport(null);resetResult();}}/>
+      <ResultPanel save={download.save} result={result} notice={notice} setNotice={setNotice} inspect={inspect} query={value=>{setMode('lookup');setIp(value);setFields('');setImported(null);setOriginalReport(null);resetResult();}}/>
     </main></div><footer>Apache-2.0 · MoonBit 原生解析</footer>{help?<Help close={()=>setHelp(false)}/>:null}</>;
 }
 createRoot(document.getElementById('root')!).render(<App/>);

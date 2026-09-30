@@ -25,6 +25,6 @@ if not compiler.exists():
     run=subprocess.run([str(OUT/'7zr.exe'),'x',str(OUT/assets[0][0]),'-o'+str(OUT/'extracted'),'-y'],cwd=ROOT,timeout=180)
     if run.returncode:raise RuntimeError('Pinned compiler extraction failed')
 version=subprocess.check_output([str(compiler),'--version'],text=True,encoding='utf-8')
-report={'source':'https://github.com/skeeto/w64devkit/releases/tag/v2.10.0','archive_sha256':assets[0][2],'compiler_sha256':hashlib.sha256(compiler.read_bytes()).hexdigest(),'compiler':str(compiler),'version':version,'scope':'Workspace-local portable tools. No registry, global PATH or MoonBit runtime modifications.','note':'Pinned MoonBit 0.10.11 verification with MinGW compatibility launcher; does not certify current MoonBit MSVC ABI/toolchain support.'}
+report={'source':'https://github.com/skeeto/w64devkit/releases/tag/v2.10.0','archive_sha256':assets[0][2],'compiler_sha256':hashlib.sha256(compiler.read_bytes()).hexdigest(),'compiler':str(compiler),'version':version,'scope':'Workspace-local portable tools. No registry, global PATH or MoonBit runtime modifications.','note':'Pinned MoonBit 0.10.14+7d59c7ec9 verification with MinGW compatibility launcher; does not certify current MoonBit MSVC ABI/toolchain support.'}
 (OUT/'provenance.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
 print(version)

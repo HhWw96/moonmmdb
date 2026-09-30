@@ -101,3 +101,9 @@ pub fn Enrichment::to_json(self : Enrichment) -> Json {
     "sources": sources.to_json(),
   }
 }
+
+///|
+pub extend SourceResult with @debug.Debug::{to_repr}
+
+///|
+pub extend Enrichment with @debug.Debug::{to_repr}
