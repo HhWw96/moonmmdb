@@ -130,7 +130,7 @@ fn analyze_report(
   if result.get("status") == Some("error") {
     check_analysis(result.to_json().stringify())
   }
-  result["tool_version"] = "0.9.3"
+  result["tool_version"] = "0.9.4"
   result["parameters"] = {
     "ip_path": ip_path.to_json(),
     "top": top.to_json(),

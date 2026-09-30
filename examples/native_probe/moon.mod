@@ -1,11 +1,11 @@
 name = "local/moonmmdb_native_probe"
 
-version = "0.9.3"
+version = "0.9.4"
 
 license = "Apache-2.0"
 
 preferred_target = "native"
 
 import {
-  "HhWw96/moonmmdb@0.9.3",
+  "HhWw96/moonmmdb@0.9.4",
 }
