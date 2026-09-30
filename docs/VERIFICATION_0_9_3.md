@@ -22,6 +22,8 @@ Codex 内置浏览器已确认 ASN 查询和保存入口显示；下载与再次
 
 ## 发布门禁
 
+本节以下保留早期候选的验证记录；当前源码和交付状态以末尾的实际运行入口、Mooncakes 发布回执，以及 Release 附件 `FINAL_VERIFICATION.json` 为准。
+
 保留完整回归、Native、浏览器、正式分析与默认 Node 稳定性五组门禁；本版本不缩短持续运行、不强制 GC、不降低资源和内存趋势门槛。旧版本及历史失败报告保持不变。新编译器下任何门禁未通过时，继续保留 0.9.2 为公开稳定版本。
 
 2026-09-30 源码 `6c5a37254e52256e55df6e31d673d750e7039e39` 的核心、Native、浏览器及分析门禁通过；[默认 Node 门禁](https://github.com/HhWw96/moonmmdb/actions/runs/36699865080) 的 Linux 两组通过，Windows Country 第三次候选及 ASN 第二次候选的组合内存门禁失败，因此本版本仍不能发布。完整采样显示 RSS 与结果稳定性通过，Windows 私有内存分别增长 70,031,360 和 71,321,600 字节，超过 67,108,864 字节门槛。堆容量扩大而外部内存相对稳定，不能据此认定对象泄漏或排除泄漏。事实、原报告散列及采样见 [失败回执](../verification/releases/0.9.3/stability-first-failure.json)，保留本次记录。
@@ -41,3 +43,5 @@ Codex 内置浏览器已确认 ASN 查询和保存入口显示；下载与再次
 | 默认 Node 连续稳定性 | [36741834100](https://github.com/HhWw96/moonmmdb/actions/runs/36741834100) |
 
 网页部署校验兼容 Windows 生成的 CRLF 校验清单，保留 SHA-256 校验与失败终止；网页必须直接使用 Release 附件的相同 HTML 字节。
+
+公开 Windows/Linux 可执行文件与最终主分支 CI 生成的程序逐字节一致；公开 HTML 与两平台共享测试 HTML 也一致。压缩包本身可能因构建元数据不同而有不同散列，程序及网页的对应散列分别核对；不以“源码相同”代替实际字节比较。最终摘要见 Release 附件 `FINAL_VERIFICATION.json`，早期的 `VALIDATION_STATUS.json` 仍作为发布时快照保留。
