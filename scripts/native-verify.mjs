@@ -3,6 +3,7 @@ import {resolve} from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {root,runMoon} from './moon.mjs';
 import {sourceFingerprint,sha256} from './evidence.mjs';
+import {assertToolchain} from './toolchain.mjs';
 const localCompiler=resolve(root,'verification/local/toolchains/extracted/w64devkit/bin/gcc.exe');
 const configured=process.env.MOON_CC || (existsSync(localCompiler)?localCompiler:null);
 if(configured) process.env.MOON_CC=configured;
@@ -18,7 +19,7 @@ function run(name,args,cwd=root,expectedTests=null) {
 }
 try {
   if(process.platform!=='win32' || process.arch!=='x64') throw new Error('This verifier and file probe currently target Windows x64; other hosts are not certified.');
-  report.toolchain=runMoon(['version','--all'],root,true);
+  report.toolchain=assertToolchain();
   if(configured) {
     const version=spawnSync(configured,['--version'],{encoding:'utf8'});
     if(version.status!==0) throw new Error('Cannot execute configured C compiler');
@@ -36,8 +37,8 @@ try {
     report.compatibility={macro:'_CRT_RAND_S',reason:'Expose MinGW CRT rand_s declaration required by pinned MoonBit runtime',launcher_sha256:sha256(readFileSync(launcher)),runtime_modified:false};
   }
   run('probe-format',['fmt','--check'],resolve(root,'examples/native_probe'));
-  run('debug',['test','--target','native','-p','HhWw96/moonmmdb','--deny-warn'],root,40);
-  run('release',['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn'],root,40);
+  run('debug',['test','--target','native','-p','HhWw96/moonmmdb','--deny-warn'],root,43);
+  run('release',['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn'],root,43);
   run('geo',['test','--target','native','--release','-p','HhWw96/moonmmdb/geo','--deny-warn'],root,8);
   run('typed-consumer',['test','--target','native','--release','-p','local/moonmmdb_typed_example','--deny-warn'],resolve(root,'examples/typed_consumer'),1);
   run('consumer',['test','--target','native','--release','-p','local/moonmmdb_log_example','--deny-warn'],resolve(root,'examples/log_consumer'),1);

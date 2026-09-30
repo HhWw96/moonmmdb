@@ -19,23 +19,33 @@ pub suberror GeoError {
 pub fn GeoError::code(Self) -> String
 pub fn GeoError::message(Self) -> String
 pub fn GeoError::path(Self) -> String?
+pub fn GeoError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 pub(all) struct AsnLookup {
   record : AsnRecord?
   prefix_length : Int
 } derive(Eq, @debug.Debug)
+pub fn AsnLookup::equal(Self, Self) -> Bool
+pub fn AsnLookup::not_equal(Self, Self) -> Bool
+pub fn AsnLookup::to_repr(Self) -> @debug.Repr
 
 pub(all) struct AsnRecord {
   autonomous_system_number : UInt?
   autonomous_system_organization : String?
 } derive(Eq, @debug.Debug)
+pub fn AsnRecord::equal(Self, Self) -> Bool
 pub fn AsnRecord::from_value(@moonmmdb.Value) -> Self raise GeoError
+pub fn AsnRecord::not_equal(Self, Self) -> Bool
+pub fn AsnRecord::to_repr(Self) -> @debug.Repr
 
 pub(all) struct CityLookup {
   record : CityRecord?
   prefix_length : Int
 } derive(Eq, @debug.Debug)
+pub fn CityLookup::equal(Self, Self) -> Bool
+pub fn CityLookup::not_equal(Self, Self) -> Bool
+pub fn CityLookup::to_repr(Self) -> @debug.Repr
 
 pub(all) struct CityRecord {
   continent_code : String?
@@ -46,7 +56,10 @@ pub(all) struct CityRecord {
   postal_code : String?
   location : Location?
 } derive(Eq, @debug.Debug)
+pub fn CityRecord::equal(Self, Self) -> Bool
 pub fn CityRecord::from_value(@moonmmdb.Value) -> Self raise GeoError
+pub fn CityRecord::not_equal(Self, Self) -> Bool
+pub fn CityRecord::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Country {
   iso_code : String?
@@ -54,6 +67,9 @@ pub(all) struct Country {
   names : Map[String, String]
   is_in_european_union : Bool?
 } derive(Eq, @debug.Debug)
+pub fn Country::equal(Self, Self) -> Bool
+pub fn Country::not_equal(Self, Self) -> Bool
+pub fn Country::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Location {
   latitude : Double?
@@ -62,17 +78,26 @@ pub(all) struct Location {
   time_zone : String?
   metro_code : UInt?
 } derive(Eq, @debug.Debug)
+pub fn Location::equal(Self, Self) -> Bool
+pub fn Location::not_equal(Self, Self) -> Bool
+pub fn Location::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Place {
   geoname_id : UInt?
   names : Map[String, String]
 } derive(Eq, @debug.Debug)
+pub fn Place::equal(Self, Self) -> Bool
+pub fn Place::not_equal(Self, Self) -> Bool
+pub fn Place::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Subdivision {
   iso_code : String?
   geoname_id : UInt?
   names : Map[String, String]
 } derive(Eq, @debug.Debug)
+pub fn Subdivision::equal(Self, Self) -> Bool
+pub fn Subdivision::not_equal(Self, Self) -> Bool
+pub fn Subdivision::to_repr(Self) -> @debug.Repr
 
 // Type aliases
 

@@ -309,3 +309,54 @@ pub fn lookup_city(
     },
   }
 }
+
+///|
+pub extend GeoError with @debug.Debug::{to_repr}
+
+///|
+pub extend AsnRecord with Eq::{not_equal, equal}
+
+///|
+pub extend AsnRecord with @debug.Debug::{to_repr}
+
+///|
+pub extend Country with Eq::{not_equal, equal}
+
+///|
+pub extend Country with @debug.Debug::{to_repr}
+
+///|
+pub extend Place with Eq::{not_equal, equal}
+
+///|
+pub extend Place with @debug.Debug::{to_repr}
+
+///|
+pub extend Subdivision with Eq::{not_equal, equal}
+
+///|
+pub extend Subdivision with @debug.Debug::{to_repr}
+
+///|
+pub extend Location with Eq::{not_equal, equal}
+
+///|
+pub extend Location with @debug.Debug::{to_repr}
+
+///|
+pub extend CityRecord with Eq::{not_equal, equal}
+
+///|
+pub extend CityRecord with @debug.Debug::{to_repr}
+
+///|
+pub extend AsnLookup with Eq::{not_equal, equal}
+
+///|
+pub extend AsnLookup with @debug.Debug::{to_repr}
+
+///|
+pub extend CityLookup with Eq::{not_equal, equal}
+
+///|
+pub extend CityLookup with @debug.Debug::{to_repr}

@@ -22,6 +22,7 @@ pub fn MmdbError::code(Self) -> String
 pub fn MmdbError::message(Self) -> String
 pub fn MmdbError::offset(Self) -> Int
 pub fn MmdbError::to_json(Self) -> Json
+pub fn MmdbError::to_repr(Self) -> @debug.Repr
 pub fn MmdbError::to_validation_json(Self) -> Json
 pub fn MmdbError::validation_status(Self) -> String
 
@@ -37,6 +38,7 @@ pub(all) struct Enrichment {
 } derive(@debug.Debug)
 pub fn Enrichment::status_code(Self) -> Int
 pub fn Enrichment::to_json(Self) -> Json
+pub fn Enrichment::to_repr(Self) -> @debug.Repr
 
 pub(all) struct EnrichmentSource {
   name : String
@@ -51,12 +53,18 @@ pub struct FieldSelector {
 pub(all) struct Float32Value {
   bits : UInt
 } derive(Eq, @debug.Debug)
+pub fn Float32Value::equal(Self, Self) -> Bool
+pub fn Float32Value::not_equal(Self, Self) -> Bool
 pub fn Float32Value::number(Self) -> Float
+pub fn Float32Value::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Float64Value {
   bits : UInt64
 } derive(Eq, @debug.Debug)
+pub fn Float64Value::equal(Self, Self) -> Bool
+pub fn Float64Value::not_equal(Self, Self) -> Bool
 pub fn Float64Value::number(Self) -> Double
+pub fn Float64Value::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Limits {
   max_depth : Int
@@ -65,12 +73,18 @@ pub(all) struct Limits {
   max_file_bytes : Int
 } derive(Eq, @debug.Debug)
 pub fn Limits::default() -> Self
+pub fn Limits::equal(Self, Self) -> Bool
+pub fn Limits::not_equal(Self, Self) -> Bool
+pub fn Limits::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Lookup {
   value : Value?
   prefix_length : Int
 } derive(Eq, @debug.Debug)
+pub fn Lookup::equal(Self, Self) -> Bool
+pub fn Lookup::not_equal(Self, Self) -> Bool
 pub fn Lookup::to_json(Self) -> Json
+pub fn Lookup::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Metadata {
   node_count : UInt
@@ -82,6 +96,9 @@ pub(all) struct Metadata {
   build_epoch : UInt64
   raw : Value
 } derive(Eq, @debug.Debug)
+pub fn Metadata::equal(Self, Self) -> Bool
+pub fn Metadata::not_equal(Self, Self) -> Bool
+pub fn Metadata::to_repr(Self) -> @debug.Repr
 
 pub struct NetworkCursor {
   // private fields
@@ -95,14 +112,20 @@ pub(all) struct NetworkRecord {
   network : String
   value : Value
 } derive(Eq, @debug.Debug)
+pub fn NetworkRecord::equal(Self, Self) -> Bool
+pub fn NetworkRecord::not_equal(Self, Self) -> Bool
 pub fn NetworkRecord::to_json(Self) -> Json
+pub fn NetworkRecord::to_repr(Self) -> @debug.Repr
 
 pub(all) struct Projection {
   record_found : Bool
   prefix_length : Int
   fields : Array[(String, Value?)]
 } derive(Eq, @debug.Debug)
+pub fn Projection::equal(Self, Self) -> Bool
+pub fn Projection::not_equal(Self, Self) -> Bool
 pub fn Projection::to_json(Self) -> Json
+pub fn Projection::to_repr(Self) -> @debug.Repr
 
 pub struct Reader {
   // private fields
@@ -124,24 +147,34 @@ pub(all) struct RecordDiff {
   changed_fields : Array[String]
 } derive(Eq, @debug.Debug)
 pub fn RecordDiff::changed(Self) -> Bool
+pub fn RecordDiff::equal(Self, Self) -> Bool
+pub fn RecordDiff::not_equal(Self, Self) -> Bool
 pub fn RecordDiff::to_json(Self) -> Json
+pub fn RecordDiff::to_repr(Self) -> @debug.Repr
 
 pub(all) enum SourceResult {
   Selected(Projection)
   Failed(MmdbError)
 } derive(@debug.Debug)
+pub fn SourceResult::to_repr(Self) -> @debug.Repr
 
 pub(all) struct TraversalLimits {
   max_records : Int
   max_work : Int
 } derive(Eq, @debug.Debug)
 pub fn TraversalLimits::default() -> Self
+pub fn TraversalLimits::equal(Self, Self) -> Bool
+pub fn TraversalLimits::not_equal(Self, Self) -> Bool
+pub fn TraversalLimits::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ValidationLimits {
   max_work : Int
   max_state_bytes : Int
 } derive(Eq, @debug.Debug)
 pub fn ValidationLimits::default() -> Self
+pub fn ValidationLimits::equal(Self, Self) -> Bool
+pub fn ValidationLimits::not_equal(Self, Self) -> Bool
+pub fn ValidationLimits::to_repr(Self) -> @debug.Repr
 
 pub(all) struct ValidationReport {
   checked_nodes : Int
@@ -152,7 +185,10 @@ pub(all) struct ValidationReport {
   work_used : Int
   peak_state_bytes : Int
 } derive(Eq, @debug.Debug)
+pub fn ValidationReport::equal(Self, Self) -> Bool
+pub fn ValidationReport::not_equal(Self, Self) -> Bool
 pub fn ValidationReport::to_json(Self) -> Json
+pub fn ValidationReport::to_repr(Self) -> @debug.Repr
 
 pub(all) enum Value {
   Text(String)
@@ -169,8 +205,11 @@ pub(all) enum Value {
   Object(Array[(String, Value)])
 } derive(Eq, @debug.Debug)
 pub fn Value::at_pointer(Self, String) -> Self? raise MmdbError
+pub fn Value::equal(Self, Self) -> Bool
 pub fn Value::get(Self, String) -> Self?
+pub fn Value::not_equal(Self, Self) -> Bool
 pub fn Value::text(Self) -> String?
+pub fn Value::to_repr(Self) -> @debug.Repr
 pub fn Value::to_tagged_json(Self) -> Json
 
 // Type aliases

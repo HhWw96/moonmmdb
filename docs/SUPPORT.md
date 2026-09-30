@@ -70,7 +70,7 @@ CLI diff 未给 --field 时选择整个记录（空路径），只检查输入�
 
 ## 后端
 
-后端验证范围为 JavaScript、WasmGC 及固定 MoonBit 0.10.11 的 Windows/Linux x64 Native。Windows 使用 GCC 16.2.0；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、MSVC、macOS、ARM64、Alpine 或 WASI Component 支持。
+后端验证范围为 JavaScript、WasmGC 及固定 MoonBit 0.10.14 的 Windows/Linux x64 Native。Windows 使用 GCC 16.2.0；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、MSVC、macOS、ARM64、Alpine 或 WASI Component 支持。
 
 Native 产品提供 metadata、lookup、project、enrich-many、networks、validate、diff、analyze；Node.js 保留 enrich、diff 和分析示例等完整功能。Native 的参数、JSON、查询与统计在 MoonBit 实现，C 只负责宿主输入输出，不依赖 C/Python MMDB 读取器。Unicode 路径、十万行流式输入、慢消费者与提前关闭管道已在 Windows/Linux 验证。Native JSON 上限 128 层，拒绝未配对 Unicode 代理项转义，其他边界见 [Native 说明](NATIVE_CLI.md)。
 

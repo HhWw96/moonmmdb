@@ -4,6 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {root,runMoon} from './moon.mjs';
 import {sourceFingerprint,sha256} from './evidence.mjs';
+import {assertToolchain} from './toolchain.mjs';
 
 export function nativeToolchain() {
   if(process.arch!=='x64'||!['win32','linux'].includes(process.platform))throw new Error('Native product builds support Windows/Linux x64');
@@ -24,8 +25,7 @@ export function nativeToolchain() {
 
 export function buildNative() {
   const compiler=nativeToolchain();
-  const toolchain=runMoon(['version','--all'],root,true);
-  if(!toolchain.includes('0.10.11+6ff76a5f9'))throw new Error('Expected pinned MoonBit 0.10.11+6ff76a5f9');
+  const toolchain=assertToolchain();
   const directory=resolve(root,'native_cli');
   const output=runMoon(['build','.','--target','native','--release','--deny-warn'],directory,true);
   const name='moonmmdb_native_cli'+(process.platform==='win32'?'.exe':'.exe');

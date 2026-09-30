@@ -1,0 +1,8 @@
+{
+  "status": "failed",
+  "stage": "consumer",
+  "code": "unused_package",
+  "location": "examples/log_consumer/moon.pkg:3",
+  "compiler": "0.10.14+7d59c7ec9",
+  "correction": "Remove unused core/json import; original local receipt is retained in verification/local/moon-0.10.14/release-first-failure.json"
+}

@@ -92,7 +92,7 @@ pub(all) struct Lookup {
 
 ///|
 pub fn version() -> String {
-  "0.9.2"
+  "0.9.3"
 }
 
 ///|
@@ -137,3 +137,42 @@ pub fn MmdbError::message(self : MmdbError) -> String {
   let MmdbError(_, _, message) = self
   message
 }
+
+///|
+pub extend MmdbError with @debug.Debug::{to_repr}
+
+///|
+pub extend Value with Eq::{not_equal, equal}
+
+///|
+pub extend Value with @debug.Debug::{to_repr}
+
+///|
+pub extend Float32Value with Eq::{not_equal, equal}
+
+///|
+pub extend Float32Value with @debug.Debug::{to_repr}
+
+///|
+pub extend Float64Value with Eq::{not_equal, equal}
+
+///|
+pub extend Float64Value with @debug.Debug::{to_repr}
+
+///|
+pub extend Limits with Eq::{not_equal, equal}
+
+///|
+pub extend Limits with @debug.Debug::{to_repr}
+
+///|
+pub extend Metadata with Eq::{not_equal, equal}
+
+///|
+pub extend Metadata with @debug.Debug::{to_repr}
+
+///|
+pub extend Lookup with Eq::{not_equal, equal}
+
+///|
+pub extend Lookup with @debug.Debug::{to_repr}

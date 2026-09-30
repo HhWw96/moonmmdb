@@ -3,6 +3,8 @@ syncVersions();
 import { copyFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { root, runMoon } from './moon.mjs';
+import {assertToolchain} from './toolchain.mjs';
+assertToolchain();
 runMoon(['build', '--target', 'js', '--release']);
 mkdirSync(resolve(root, 'dist'), {recursive: true});
 copyFileSync(resolve(root, '_build/js/release/build/bridge/bridge.js'), resolve(root, 'dist/core.mjs'));

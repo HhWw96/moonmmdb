@@ -107,3 +107,9 @@ pub fn RecordDiff::to_json(self : RecordDiff) -> Json {
     "after": self.after.to_json(),
   }
 }
+
+///|
+pub extend RecordDiff with Eq::{not_equal, equal}
+
+///|
+pub extend RecordDiff with @debug.Debug::{to_repr}

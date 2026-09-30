@@ -1,0 +1,5 @@
+{
+  "status": "failed",
+  "reason": "Verifier expected 40 tests but actual debug execution passed all 43 tests",
+  "correction": "Assert 43 for debug/release; rerun passed 8 steps"
+}

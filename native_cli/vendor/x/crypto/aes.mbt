@@ -1,5 +1,10 @@
 // Copyright 2025 International Digital Economy Academy
 //
+// Modified by MoonMMDB contributors: compiler compatibility edits from earlier
+// releases are reverted to upstream Array(capacity=data_length) in v0.9.3.
+// This source retains an added modification notice; algorithms are unchanged.
+// See ../PROVENANCE.json for upstream and local source hashes.
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -331,7 +336,7 @@ pub fn aes_ecb_encrypt(
     raise InvalidCrypto(msg="invalid AES data length")
   }
   let schedule = aes_schedule(key)
-  let out : Array[Byte] = Array::new(capacity=data_length)
+  let out : Array[Byte] = Array(capacity=data_length)
   let state = Array::make(16, Byte::default())
   let mut offset = 0
   while offset < data_length {
@@ -358,7 +363,7 @@ pub fn aes_ecb_decrypt(
     raise InvalidCrypto(msg="invalid AES data length")
   }
   let schedule = aes_schedule(key)
-  let out : Array[Byte] = Array::new(capacity=data_length)
+  let out : Array[Byte] = Array(capacity=data_length)
   let state = Array::make(16, Byte::default())
   let mut offset = 0
   while offset < data_length {
@@ -390,7 +395,7 @@ pub fn aes_cbc_encrypt(
     raise InvalidCrypto(msg="invalid AES data length")
   }
   let schedule = aes_schedule(key)
-  let out : Array[Byte] = Array::new(capacity=data_length)
+  let out : Array[Byte] = Array(capacity=data_length)
   let prev = iv.to_array()
   let state = Array::make(16, Byte::default())
   let mut offset = 0
@@ -425,7 +430,7 @@ pub fn aes_cbc_decrypt(
     raise InvalidCrypto(msg="invalid AES data length")
   }
   let schedule = aes_schedule(key)
-  let out : Array[Byte] = Array::new(capacity=data_length)
+  let out : Array[Byte] = Array(capacity=data_length)
   let prev = iv.to_array()
   let state = Array::make(16, Byte::default())
   let mut offset = 0

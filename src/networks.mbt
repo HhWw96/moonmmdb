@@ -57,7 +57,7 @@ priv struct NetworkFrame {
 ///|
 pub struct NetworkCursor {
   priv mut reader : Reader?
-  priv frames : Array[NetworkFrame]
+  priv mut frames : Array[NetworkFrame]
   priv work : OperationWork
   priv limits : TraversalLimits
   priv padding : Int
@@ -215,7 +215,8 @@ pub fn Reader::networks(
 ///|
 pub fn NetworkCursor::close(self : NetworkCursor) -> Unit {
   self.reader = None
-  self.frames.clear()
+  // Drop the backing array too: clear() in 0.10.14 retains unused slots.
+  self.frames = []
 }
 
 ///|
@@ -309,3 +310,15 @@ pub fn NetworkCursor::next(
       }
   }
 }
+
+///|
+pub extend TraversalLimits with Eq::{not_equal, equal}
+
+///|
+pub extend TraversalLimits with @debug.Debug::{to_repr}
+
+///|
+pub extend NetworkRecord with Eq::{not_equal, equal}
+
+///|
+pub extend NetworkRecord with @debug.Debug::{to_repr}

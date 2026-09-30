@@ -34,12 +34,16 @@ try {
    else {await page.getByRole('button',{name:sample,exact:true}).click();await expect(page.getByRole('button',{name:'重新加载',exact:true})).toBeEnabled();}
    const taskPath=resolve(dir,op+'-task.json'),task=await download('导出任务',taskPath);
    assert.equal(task.operation,op);assert.equal(task.format,'moonmmdb-task');
+   const retryTask=page.waitForEvent('download');await page.getByRole('link',{name:'再次保存任务 JSON',exact:true}).click();const retryPath=resolve(dir,op+'-task-retry.json');await(await retryTask).saveAs(retryPath);assert.deepEqual(readFileSync(retryPath),readFileSync(taskPath));
    for(const [host,command] of Object.entries(commands)){
      const dest=resolve(dir,op+'-'+host+'.json');const bindings=Object.entries(roles[op]).flatMap(([role,path])=>['--bind',role,path]);
      const run=cli(command,['run-task',taskPath,...bindings,'--output',dest,'--overwrite']);assert.ok([0,1].includes(run.status),run.stderr);
      await page.getByLabel('打开报告',{exact:true}).setInputFiles(dest);await expect(page.getByText('报告内部检查通过，尚未重新计算。请重新绑定全部原文件后复验。',{exact:true})).toBeVisible();
      assert.equal(await page.getByRole('button',{name:'重新加载',exact:true}).count(),0,'Import must not retain or execute old files');
      await bindUI(op);await page.getByRole('button',{name:'原文件复验',exact:true}).click();await expect(page.getByText('原文件重新计算一致。',{exact:true})).toBeVisible();
+     await expect(page.getByRole('link',{name:'再次保存任务 JSON',exact:true})).toHaveCount(0);
+     const exported=resolve(dir,op+'-'+host+'-download.json');const saved=await download('下载 JSON',exported);assert.equal(saved.format,'moonmmdb-report');assert.deepEqual(saved.result,(await json()));
+     const retryReport=page.waitForEvent('download');await page.getByRole('link',{name:'再次保存报告 JSON',exact:true}).click();const savedRetry=resolve(dir,op+'-'+host+'-retry.json');await(await retryReport).saveAs(savedRetry);assert.deepEqual(readFileSync(savedRetry),readFileSync(exported));
      if(op==='analyze'){assert.equal((await json()).diagnostics.retained,'1');await page.getByRole('button',{name:'查看原行',exact:true}).click();await expect(page.getByText('以下为本机临时预览，不会写入报告。',{exact:true})).toBeVisible();await page.getByRole('button',{name:'关闭原行预览',exact:true}).click();}
      report.checks.push(`${op}: exported task -> ${host} -> imported report -> replay`);
    }

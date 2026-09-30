@@ -209,3 +209,15 @@ pub fn Reader::validate(
     peak_state_bytes: peak,
   }
 }
+
+///|
+pub extend ValidationLimits with Eq::{not_equal, equal}
+
+///|
+pub extend ValidationLimits with @debug.Debug::{to_repr}
+
+///|
+pub extend ValidationReport with Eq::{not_equal, equal}
+
+///|
+pub extend ValidationReport with @debug.Debug::{to_repr}

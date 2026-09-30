@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "source_sha256": "36726ddf158dc7640f91c159a8da2cd8c0daa26958fb76f0c256ec61fb644f7f",
+  "platform": "win32",
+  "arch": "x64",
+  "executable_sha256": "e9be37f8fe367f1c4d1c2d7d5ab1f61d250fc2c4d07f3e8f8033a21d60736beb",
+  "started": "2026-09-30T08:33:29.980Z",
+  "finished": "2026-09-30T08:35:57.550Z",
+  "steps": [
+    {
+      "name": "probe-format",
+      "expected_tests": null,
+      "passed": true
+    },
+    {
+      "name": "debug",
+      "expected_tests": 43,
+      "passed": true
+    },
+    {
+      "name": "release",
+      "expected_tests": 43,
+      "passed": true
+    },
+    {
+      "name": "geo",
+      "expected_tests": 8,
+      "passed": true
+    },
+    {
+      "name": "typed-consumer",
+      "expected_tests": 1,
+      "passed": true
+    },
+    {
+      "name": "consumer",
+      "expected_tests": 1,
+      "passed": true
+    },
+    {
+      "name": "analytics",
+      "expected_tests": 4,
+      "passed": true
+    },
+    {
+      "name": "probe",
+      "expected_tests": null,
+      "passed": true
+    }
+  ]
+}

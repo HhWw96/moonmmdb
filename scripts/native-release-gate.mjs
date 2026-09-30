@@ -47,6 +47,6 @@ if(process.argv.includes('--publish')){
  checksum.push(provenance.registry_archive_sha256+`  HhWw96-moonmmdb-${VERSION}.zip`);
  writeFileSync('dist/publish/SHA256SUMS',checksum.join('\n')+'\n');paths.push('dist/publish/SHA256SUMS');
  if(!existsSync(releaseNotes))throw new Error('Missing reviewed release notes');
- gh(['release','create',`v${VERSION}`,...paths,'--repo',repo,'--target',git(['rev-parse','HEAD']),'--title',`MoonMMDB v${VERSION} — Portable tasks, diagnostics and report verification`,'--notes-file',releaseNotes]);
+ gh(['release','create',`v${VERSION}`,...paths,'--repo',repo,'--target',git(['rev-parse','HEAD']),'--title',`MoonMMDB v${VERSION}`,'--notes-file',releaseNotes]);
 }
 console.log('Verified release gates passed');
