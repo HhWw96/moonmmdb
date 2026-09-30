@@ -261,10 +261,7 @@ fn decode_value(
         work.charge((size + 63) / 64, offset)
       }
       if kind == 2 {
-        let text = @utf8.decode(ctx.data[pos:end], ignore_bom=false) catch {
-          _ => raise MmdbError("invalid-utf8", pos, "String is not valid UTF-8")
-        }
-        Text(text)
+        Text(text_range(ctx.data, pos, size))
       } else {
         Blob(ctx.data[pos:end].to_owned())
       }
