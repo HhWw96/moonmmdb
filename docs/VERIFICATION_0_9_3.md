@@ -1,6 +1,6 @@
-# 0.9.3 候选验证
+# 0.9.3 验证与平台交付
 
-当前公开稳定版仍为 0.9.2。0.9.3 未发布至 GitHub Release、Mooncakes 或 Pages；完成全部跨平台与持续运行门禁后再更新交付状态。
+官方 [Mooncakes 0.9.3](https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.3/) 已发布；全新目录注册表安装及 JS/WasmGC 消费者测试通过。公开归档与上传包逐字节一致，见 [发布回执](../verification/releases/0.9.3/mooncakes-publication.json)。[GitHub v0.9.3](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.3) 提供 Native 与离线 HTML 下载；正式验证与状态更新继续绑定实际任务，不修改历史失败记录。
 
 ## 编译器及兼容
 
@@ -27,3 +27,17 @@ Codex 内置浏览器已确认 ASN 查询和保存入口显示；下载与再次
 2026-09-30 源码 `6c5a37254e52256e55df6e31d673d750e7039e39` 的核心、Native、浏览器及分析门禁通过；[默认 Node 门禁](https://github.com/HhWw96/moonmmdb/actions/runs/36699865080) 的 Linux 两组通过，Windows Country 第三次候选及 ASN 第二次候选的组合内存门禁失败，因此本版本仍不能发布。完整采样显示 RSS 与结果稳定性通过，Windows 私有内存分别增长 70,031,360 和 71,321,600 字节，超过 67,108,864 字节门槛。堆容量扩大而外部内存相对稳定，不能据此认定对象泄漏或排除泄漏。事实、原报告散列及采样见 [失败回执](../verification/releases/0.9.3/stability-first-failure.json)，保留本次记录。
 
 候选修复复用单次 IP 解析，直接包装已经填充的 JSON 映射，避免二次复制。返回的映射仍为每次调用新建；完整解码、每库资源限制和公开接口保持不变。新增四库跨地址族对照与 JSON 修改隔离回归。本机 JS、WasmGC、Windows Native 及独立参考回归通过；正式 Node 24.20.0 同负载、同门槛的两平台持续验证仍需重新完成，不能用本机短期分配诊断替代。
+
+## 当前源码与验证入口
+
+实现提交 `2064211626dae08bd7449914c4357a4a00618d22`；公开二进制来自其父提交 `45c81c38ca5b7d666ebbe73348fb8417e0713724`，合并未修改实现。
+
+| 检查 | 实际运行 |
+|---|---|
+| 核心与独立参考 | [36741729577](https://github.com/HhWw96/moonmmdb/actions/runs/36741729577) |
+| Native 与 Ubuntu 24.04 复验 | [36741729670](https://github.com/HhWw96/moonmmdb/actions/runs/36741729670) |
+| Chromium/Firefox 在线与离线 | [36741729646](https://github.com/HhWw96/moonmmdb/actions/runs/36741729646) |
+| Node/Native 分析 | [36741825783](https://github.com/HhWw96/moonmmdb/actions/runs/36741825783) |
+| 默认 Node 连续稳定性 | [36741834100](https://github.com/HhWw96/moonmmdb/actions/runs/36741834100) |
+
+网页部署校验兼容 Windows 生成的 CRLF 校验清单，保留 SHA-256 校验与失败终止；网页必须直接使用 Release 附件的相同 HTML 字节。

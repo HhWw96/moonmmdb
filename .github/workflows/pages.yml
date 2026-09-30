@@ -23,11 +23,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          set -euo pipefail
           VERSION=$(node scripts/version.mjs)
           mkdir -p dist/pages
           gh release download "v$VERSION" --repo HhWw96/moonmmdb --pattern moonmmdb-${VERSION}-offline.html --pattern SHA256SUMS --dir dist/pages
           cd dist/pages
-          grep "  moonmmdb-${VERSION}-offline.html$" SHA256SUMS | sha256sum --check
+          tr -d '\r' < SHA256SUMS | grep "  moonmmdb-${VERSION}-offline.html$" | sha256sum --check
           cp moonmmdb-${VERSION}-offline.html index.html
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4

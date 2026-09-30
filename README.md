@@ -1,19 +1,20 @@
 # MoonMMDB
 
-**源码候选 0.9.3：** 固定 MoonBit `0.10.14+7d59c7ec9`，保留既有接口并优化浏览器报告下载。当前公开稳定版仍为 0.9.2；候选完成跨平台门禁后再发布。
+**0.9.3：** 固定 MoonBit `0.10.14+7d59c7ec9`，保持公开接口兼容，优化多库查询与类型化 JSON 序列化，完善任务和报告保存。
 
 
-**0.9.2 跨端任务与报告复核：** 网页导出查询、检查、对比或分析任务，Node/Native 用明确的文件绑定继续执行；异常可定位到行，保存的报告可重新打开并核对原文件。见 [完整使用流程](docs/WORKFLOWS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_2.md)。
 
-**浏览器本地日志分析：** 选择 City、ASN 数据库与 JSONL 日志，查看国家／ASN 分布、精确异常统计，并导出带原始文件散列的报告。支持分块读取、取消恢复和离线运行，见 [使用说明](docs/BROWSER_ANALYTICS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_2.md)。
+**跨端任务与报告复核：** 网页导出查询、检查、对比或分析任务，Node/Native 用明确的文件绑定继续执行；异常可定位到行，保存的报告可重新打开并核对原文件。见 [完整使用流程](docs/WORKFLOWS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_3.md)。
+
+**浏览器本地日志分析：** 选择 City、ASN 数据库与 JSONL 日志，查看国家／ASN 分布、精确异常统计，并导出带原始文件散列的报告。支持分块读取、取消恢复和离线运行，见 [使用说明](docs/BROWSER_ANALYTICS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_3.md)。
 
 **正式日志分析：** Native/Node 新增 `analyze` 命令，提供可复用的 [analytics 包](src/analytics/README.md)。一条命令统计国家、ASN 请求量，并生成附输入与数据库 SHA-256 的精确报告，见 [日志分析说明](docs/ANALYTICS.md)。
 
-**浏览器本地数据库工作台：** [网页入口](https://hhww96.github.io/moonmmdb/) · [独立离线 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.2/moonmmdb-0.9.2-offline.html) · [使用说明](docs/BROWSER.md)。本地查询、结构检查、指定 IP 更新对比和 JSONL 日志分析，无需安装工具。网页、离线 HTML、Native 下载包与 Mooncakes 安装的完整回执见 [0.9.2 验证报告](docs/VERIFICATION_0_9_2.md)。
+**浏览器本地数据库工作台：** [网页入口](https://hhww96.github.io/moonmmdb/) · [独立离线 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.3/moonmmdb-0.9.3-offline.html) · [使用说明](docs/BROWSER.md)。本地查询、结构检查、指定 IP 更新对比和 JSONL 日志分析，无需安装工具。网页、离线 HTML、Native 下载包与 Mooncakes 安装的完整回执见 [0.9.2 验证报告](docs/VERIFICATION_0_9_2.md)。
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**本版本：0.9.2。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.2/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_9_2.md) · [支持范围](docs/SUPPORT.md)
+**本版本：0.9.3。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.3/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_9_3.md) · [支持范围](docs/SUPPORT.md)
 
 解压 Native 程序后运行十个命令：[Native 离线演示](docs/DEMO_0_5.md)。三个完整源码场景见 [多库与分析演示](docs/DEMO_0_4.md)。正式发布与 Mooncakes 安装状态以版本验证页为准。
 
@@ -27,7 +28,7 @@ MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格�
 
 Windows/Linux x64 可执行程序支持 `metadata`、`lookup`、`project`、`enrich-many`、`networks`、`validate`、`diff`、`analyze`、`run-task` 和 `verify-report`，解压即可运行，无需安装 Node.js、Python 或 MoonBit。
 
-[Windows x64 ZIP](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.2/moonmmdb-0.9.2-windows-x64.zip) · [Linux x64 tar.gz](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.2/moonmmdb-0.9.2-linux-x64.tar.gz) · [发布页与 SHA256SUMS](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.2)
+[Windows x64 ZIP](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.3/moonmmdb-0.9.3-windows-x64.zip) · [Linux x64 tar.gz](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.3/moonmmdb-0.9.3-linux-x64.tar.gz) · [发布页与 SHA256SUMS](https://github.com/HhWw96/moonmmdb/releases/tag/v0.9.3)
 
 在解压目录执行（Linux 将 `moonmmdb` 写为 `./moonmmdb`；PowerShell 写为 `.\moonmmdb.exe`）：
 
@@ -100,10 +101,10 @@ node examples/log_analytics/run.mjs tests/scenarios/geo.mmdb tests/scenarios/asn
 核心包名为 `HhWw96/moonmmdb`。在自己的 MoonBit 项目中从 Mooncakes 安装：
 
 ```text
-moon add HhWw96/moonmmdb@0.9.2
+moon add HhWw96/moonmmdb@0.9.3
 ```
 
-完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_9_2.md)。
+完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_9_3.md)。
 
 ```moonbit
 // moon.pkg: import { "HhWw96/moonmmdb" @mmdb }
