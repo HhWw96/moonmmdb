@@ -189,6 +189,7 @@ pub fn Reader::lookup(self : Reader, ip : String) -> Lookup raise MmdbError {
 fn Reader::lookup_address(
   self : Reader,
   addr : Address,
+  retention? : Retention = All,
 ) -> Lookup raise MmdbError {
   if addr.version == 6 && self.meta.ip_version == 4 {
     raise MmdbError(
@@ -226,6 +227,6 @@ fn Reader::lookup_address(
     )
   }
   let ctx = decoder(self.data, self.tree_end + 16, self.data_end, self.limits)
-  let (value, _) = decode(ctx, offset.to_int(), 0)
+  let (value, _) = decode(ctx, offset.to_int(), 0, retention~)
   { value: Some(value), prefix_length, }
 }

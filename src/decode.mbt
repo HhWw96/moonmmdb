@@ -92,8 +92,9 @@ fn decode(
   ctx : Decode,
   offset : Int,
   depth : Int,
+  retention? : Retention = All,
 ) -> (Value, Int) raise MmdbError {
-  let value = decode_into(ctx, offset, depth)
+  let value = decode_into(ctx, offset, depth, retention~)
   (value, ctx.next)
 }
 
@@ -105,6 +106,7 @@ fn decode_into(
   ctx : Decode,
   offset : Int,
   depth : Int,
+  retention? : Retention = All,
 ) -> Value raise MmdbError {
   bounded(ctx, offset, 1)
   if depth > ctx.limits.max_depth {
@@ -121,7 +123,7 @@ fn decode_into(
     work.charge(1, offset)
   }
   ctx.active.push(offset)
-  let result = decode_value(ctx, offset, depth)
+  let result = decode_value(ctx, offset, depth, retention~)
   ignore(ctx.active.pop())
   result
 }
@@ -131,6 +133,7 @@ fn decode_value(
   ctx : Decode,
   offset : Int,
   depth : Int,
+  retention? : Retention = All,
 ) -> Value raise MmdbError {
   let control = ctx.data[offset].to_int()
   let mut kind = control >> 5
@@ -156,7 +159,7 @@ fn decode_value(
         "pointer-to-pointer", offset, "Pointer targets another pointer",
       )
     }
-    let value = decode_into(ctx, target, depth + 1)
+    let value = decode_into(ctx, target, depth + 1, retention~)
     ctx.next = pos + width
     return value
   }
@@ -181,19 +184,31 @@ fn decode_value(
     }
     if kind == 11 {
       let items : Array[Value] = []
-      for _ in 0..<size {
-        let value = decode_into(ctx, pos, depth + 1)
-        items.push(value)
+      for index in 0..<size {
+        let child = match retention {
+          RetainFields(_) => retained_child(retention, index.to_string())
+          other => other
+        }
+        let value = decode_into(ctx, pos, depth + 1, retention=child)
+        // Keep original array positions for canonical JSON Pointer indexes.
+        if !(retention is Discard) {
+          items.push(value)
+        }
         pos = ctx.next
       }
       ctx.next = pos
-      return List(items)
+      return if retention is Discard { discarded_value } else { List(items) }
     }
     let items : Array[(String, Value)] = []
     // Small MMDB maps already retain their keys in items. Reuse that storage
     // for duplicate checks, bounding the linear scan to at most 16 entries.
     // Large maps keep hash lookup to avoid quadratic hostile-input work.
     let seen : Map[String, Bool]? = if size > 16 { Some(Map([])) } else { None }
+    let names : Array[String]? = if size <= 16 && !(retention is All) {
+      Some([])
+    } else {
+      None
+    }
     for _ in 0..<size {
       let key = decode_into(ctx, pos, depth + 1)
       let next = ctx.next
@@ -209,11 +224,21 @@ fn decode_value(
         None => {
           // Keep the bounded duplicate scan free of a per-key closure.
           let mut found = false
-          for item in items {
-            if item.0 == name {
-              found = true
-              break
-            }
+          match names {
+            Some(names) =>
+              for key in names {
+                if key == name {
+                  found = true
+                  break
+                }
+              }
+            None =>
+              for item in items {
+                if item.0 == name {
+                  found = true
+                  break
+                }
+              }
           }
           found
         }
@@ -226,12 +251,18 @@ fn decode_value(
       if seen is Some(seen) {
         seen[name] = true
       }
-      let value = decode_into(ctx, next, depth + 1)
-      items.push((name, value))
+      if names is Some(names) {
+        names.push(name)
+      }
+      let child = retained_child(retention, name)
+      let value = decode_into(ctx, next, depth + 1, retention=child)
+      if !(child is Discard) {
+        items.push((name, value))
+      }
       pos = ctx.next
     }
     ctx.next = pos
-    return Object(items)
+    return if retention is Discard { discarded_value } else { Object(items) }
   }
   if kind == 14 {
     if size > 1 {
@@ -240,7 +271,11 @@ fn decode_value(
       )
     }
     ctx.next = pos
-    return Boolean(size == 1)
+    return if !(retention is All) {
+      discarded_value
+    } else {
+      Boolean(size == 1)
+    }
   }
   let max_size = match kind {
     2 | 4 => size
@@ -271,18 +306,76 @@ fn decode_value(
         work.charge((size + 63) / 64, offset)
       }
       if kind == 2 {
-        Text(text_range(ctx.data, pos, size))
+        if retention is All {
+          Text(text_range(ctx.data, pos, size))
+        } else {
+          if !valid_text_range(ctx.data, pos, size) {
+            raise MmdbError("invalid-utf8", pos, "String is not valid UTF-8")
+          }
+          discarded_value
+        }
+      } else if !(retention is All) {
+        discarded_value
       } else {
         Blob(ctx.data[pos:end].to_owned())
       }
     }
-    3 => Real64({ bits: uint_be(ctx, pos, size), })
-    5 => Unsigned16(uint32_be(ctx, pos, size))
-    6 => Unsigned32(uint32_be(ctx, pos, size))
-    8 => Signed32(uint32_be(ctx, pos, size).reinterpret_as_int())
-    9 => Unsigned64(uint_be(ctx, pos, size))
-    10 => Unsigned128(decimal_bytes(ctx.data, pos, size))
-    15 => Real32({ bits: uint32_be(ctx, pos, size), })
+    3 => {
+      let bits = uint_be(ctx, pos, size)
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Real64({ bits, })
+      }
+    }
+    5 => {
+      let value = uint32_be(ctx, pos, size)
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Unsigned16(value)
+      }
+    }
+    6 => {
+      let value = uint32_be(ctx, pos, size)
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Unsigned32(value)
+      }
+    }
+    8 => {
+      let value = uint32_be(ctx, pos, size).reinterpret_as_int()
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Signed32(value)
+      }
+    }
+    9 => {
+      let value = uint_be(ctx, pos, size)
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Unsigned64(value)
+      }
+    }
+    10 => {
+      let value = decimal_bytes(ctx.data, pos, size)
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Unsigned128(value)
+      }
+    }
+    15 => {
+      let bits = uint32_be(ctx, pos, size)
+      if !(retention is All) {
+        discarded_value
+      } else {
+        Real32({ bits, })
+      }
+    }
     _ => raise MmdbError("unsupported-type", offset, "Unsupported MMDB scalar")
   }
   ctx.next = end
