@@ -1,0 +1,79 @@
+{
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.4",
+  "status": "published",
+  "implementation_commit": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+  "source_tree": "8249f91e241293d3b05e284aadf3f0c439bce253",
+  "gates": {
+    "stability": {
+      "id": 36809513174,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809513174",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+      "conclusion": "success"
+    },
+    "analytics": {
+      "id": 36809522835,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809522835",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+      "conclusion": "success"
+    },
+    "regression": {
+      "id": 36809507399,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809507399",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+      "conclusion": "success"
+    },
+    "native": {
+      "id": 36809507330,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809507330",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+      "conclusion": "success"
+    },
+    "browser": {
+      "id": 36809507444,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809507444",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+      "conclusion": "success"
+    }
+  },
+  "official_documentation": "https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.4/",
+  "official_archive": "https://download.mooncakes.io/user/HhWw96/moonmmdb/0.9.4.zip",
+  "archive_bytes": 4808797,
+  "archive_sha256": "7fe7eb0cc304157b6dc8ad699c086ac4a206eb0538fc78dff14247e539e8a449",
+  "public_archive_matches_upload": true,
+  "compiler": "0.10.14+7d59c7ec9",
+  "package_checks": {
+    "version": "0.9.4",
+    "status": "passed",
+    "compiler": "0.10.14+7d59c7ec9",
+    "source_tree": "8249f91e241293d3b05e284aadf3f0c439bce253",
+    "steps": [
+      {
+        "name": "check-js",
+        "status": "passed"
+      },
+      {
+        "name": "tests-js",
+        "status": "passed",
+        "tests": 85
+      },
+      {
+        "name": "check-wasm",
+        "status": "passed"
+      },
+      {
+        "name": "tests-wasm",
+        "status": "passed",
+        "tests": 85
+      },
+      {
+        "name": "package",
+        "status": "passed"
+      }
+    ]
+  },
+  "temporary_credential_copy_removed": true,
+  "package_excluded_historical_receipts": [
+    "verification/regressions/native-mingw-missing-rand-s.json"
+  ]
+}

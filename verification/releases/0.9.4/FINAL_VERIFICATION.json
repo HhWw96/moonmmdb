@@ -1,0 +1,411 @@
+{
+  "version": "0.9.4",
+  "status": "passed",
+  "implementation_commit": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+  "source_tree": "8249f91e241293d3b05e284aadf3f0c439bce253",
+  "runs": {
+    "stability": {
+      "id": 36809513174,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809513174",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7"
+    },
+    "analytics": {
+      "id": 36809522835,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809522835",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7"
+    },
+    "regression": {
+      "id": 36809507399,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809507399",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7"
+    },
+    "native": {
+      "id": 36809507330,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809507330",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7"
+    },
+    "browser": {
+      "id": 36809507444,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/36809507444",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "d79fa7a12dc69011ddc053c68e54832763afccc7"
+    }
+  },
+  "toolchain": {
+    "moonc": "0.10.14+7d59c7ec9",
+    "formal_node": "24.20.0"
+  },
+  "artifacts": {
+    "windows": {
+      "file": "moonmmdb-0.9.4-windows-x64.zip",
+      "bytes": 387707,
+      "sha256": "860832c8ee89b2544d4ec31c8a75b8b26864c755875a5626a5d5c31b7a8ac01c",
+      "executable_sha256": "7aaf62e5017ccbd62f5fbf2886bb3007537f0bf1210e60f268a46723b0191c2a"
+    },
+    "linux": {
+      "file": "moonmmdb-0.9.4-linux-x64.tar.gz",
+      "bytes": 389636,
+      "sha256": "ca4d1f038dda792fe6b28fedff12b71d19aac7bfe7fd5935e31324cd106ccef8",
+      "executable_sha256": "8829cc04843a7a14b1fe97bb654c6797e7b5535c58f8ffbd7ec787b49ae23933"
+    },
+    "offline_html": {
+      "file": "moonmmdb-0.9.4-offline.html",
+      "bytes": 602077,
+      "sha256": "7725e10636cb16d92b2568a9d50fb770f715dbaad0333893037c5fbfc82ad70d"
+    }
+  },
+  "browser_build": {
+    "version": "0.9.4",
+    "source_sha256": "ff72c6513659c0f7b4a3ac9f87de5264de0e723758766a08f1fa307554eb458a",
+    "html_sha256": "7725e10636cb16d92b2568a9d50fb770f715dbaad0333893037c5fbfc82ad70d",
+    "core_sha256": "9f80e98a06cda104fd10f73c31b31d669ec915ad5fa275a765b3947c7e698f12",
+    "workflow_sha256": "09dc593e6c474ca51bf906b89c283f4a28cf1e435bf83722226af22815d0eda7",
+    "bytes": 602077
+  },
+  "local_edge": {
+    "status": "passed",
+    "version": "0.9.4",
+    "implementation_commit": "d1421af5c4db591079921053f4fad1bce434c75c",
+    "ci_run": 36806212286,
+    "html_sha256": "7725e10636cb16d92b2568a9d50fb770f715dbaad0333893037c5fbfc82ad70d",
+    "scope": "Exact downloaded CI HTML; Edge HTTP and file offline core/analytics/workflow, including one million row cancellation and default process-tree soak.",
+    "main_source_binding": {
+      "status": "passed",
+      "version": "0.9.4",
+      "implementation_commit": "d79fa7a12dc69011ddc053c68e54832763afccc7",
+      "source_tree": "8249f91e241293d3b05e284aadf3f0c439bce253",
+      "main_browser_run": 36809507444,
+      "edge_tested_commit": "d1421af5c4db591079921053f4fad1bce434c75c",
+      "edge_tested_ci_run": 36806212286,
+      "html_sha256": "7725e10636cb16d92b2568a9d50fb770f715dbaad0333893037c5fbfc82ad70d",
+      "identical_source_tree": true,
+      "identical_html_bytes": true
+    }
+  },
+  "default_node_stability": {
+    "ubuntu-22.04-country": {
+      "node": "v24.20.0",
+      "status": "passed",
+      "environment": {
+        "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+        "processor": "x86_64"
+      },
+      "candidates": [
+        {
+          "name": "candidate-1",
+          "elapsed_seconds": 1800.00761995,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 243773440,
+            "last_median": 278192128,
+            "growth_bytes": 34418688,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 278192128
+          }
+        },
+        {
+          "name": "candidate-2",
+          "elapsed_seconds": 1800.005184411,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 274591744,
+            "last_median": 274632704,
+            "growth_bytes": 40960,
+            "allowed_growth_bytes": 68647936,
+            "passed": true,
+            "peak": 274632704
+          }
+        },
+        {
+          "name": "candidate-3",
+          "elapsed_seconds": 1800.00625042,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 258351104,
+            "last_median": 274817024,
+            "growth_bytes": 16465920,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 274821120
+          }
+        }
+      ]
+    },
+    "ubuntu-22.04-asn": {
+      "node": "v24.20.0",
+      "status": "passed",
+      "environment": {
+        "platform": "Linux-6.8.0-1064-azure-x86_64-with-glibc2.35",
+        "processor": "x86_64"
+      },
+      "candidates": [
+        {
+          "name": "candidate-1",
+          "elapsed_seconds": 1800.002841248,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 274198528,
+            "last_median": 331935744,
+            "growth_bytes": 57737216,
+            "allowed_growth_bytes": 68549632,
+            "passed": true,
+            "peak": 331972608
+          }
+        },
+        {
+          "name": "candidate-2",
+          "elapsed_seconds": 1800.00195682,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 273457152,
+            "last_median": 271802368,
+            "growth_bytes": -1654784,
+            "allowed_growth_bytes": 68364288,
+            "passed": true,
+            "peak": 331902976
+          }
+        },
+        {
+          "name": "candidate-3",
+          "elapsed_seconds": 1800.004787095,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 270630912,
+            "last_median": 327225344,
+            "growth_bytes": 56594432,
+            "allowed_growth_bytes": 67657728,
+            "passed": true,
+            "peak": 327270400
+          }
+        }
+      ]
+    },
+    "windows-2022-country": {
+      "node": "v24.20.0",
+      "status": "passed",
+      "environment": {
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "processor": "Intel64 Family 6 Model 207 Stepping 2, GenuineIntel"
+      },
+      "candidates": [
+        {
+          "name": "candidate-1",
+          "elapsed_seconds": 1800.0028901,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 70512640,
+            "last_median": 68995072,
+            "growth_bytes": -1517568,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 214704128
+          },
+          "private_memory_trend": {
+            "first_median": 230526976,
+            "last_median": 230612992,
+            "growth_bytes": 86016,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 230633472
+          }
+        },
+        {
+          "name": "candidate-2",
+          "elapsed_seconds": 1800.0092109,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 51769344,
+            "last_median": 68425728,
+            "growth_bytes": 16656384,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 214089728
+          },
+          "private_memory_trend": {
+            "first_median": 195299328,
+            "last_median": 230772736,
+            "growth_bytes": 35473408,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 230772736
+          }
+        },
+        {
+          "name": "candidate-3",
+          "elapsed_seconds": 1800.0132115,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 72153088,
+            "last_median": 69545984,
+            "growth_bytes": -2607104,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 214278144
+          },
+          "private_memory_trend": {
+            "first_median": 230420480,
+            "last_median": 230957056,
+            "growth_bytes": 536576,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 230957056
+          }
+        }
+      ]
+    },
+    "windows-2022-asn": {
+      "node": "v24.20.0",
+      "status": "passed",
+      "environment": {
+        "platform": "Windows-2022Server-10.0.20348-SP0",
+        "processor": "AMD64 Family 25 Model 1 Stepping 1, AuthenticAMD"
+      },
+      "candidates": [
+        {
+          "name": "candidate-1",
+          "elapsed_seconds": 1800.0063712,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 55842816,
+            "last_median": 65091584,
+            "growth_bytes": 9248768,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 216309760
+          },
+          "private_memory_trend": {
+            "first_median": 195942400,
+            "last_median": 231329792,
+            "growth_bytes": 35387392,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 242442240
+          }
+        },
+        {
+          "name": "candidate-2",
+          "elapsed_seconds": 1800.0092731000002,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 71878656,
+            "last_median": 65103872,
+            "growth_bytes": -6774784,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 216010752
+          },
+          "private_memory_trend": {
+            "first_median": 232615936,
+            "last_median": 232730624,
+            "growth_bytes": 114688,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 233730048
+          }
+        },
+        {
+          "name": "candidate-3",
+          "elapsed_seconds": 1800.0105922,
+          "combined_gate_passed": true,
+          "os_rss_trend": {
+            "first_median": 68513792,
+            "last_median": 64964608,
+            "growth_bytes": -3549184,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 216170496
+          },
+          "private_memory_trend": {
+            "first_median": 231673856,
+            "last_median": 231505920,
+            "growth_bytes": -167936,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 231763968
+          }
+        }
+      ]
+    }
+  },
+  "production_sources": [
+    {
+      "file": "dbip-country-lite-2026-09.mmdb",
+      "url": "https://dbip.mirror.framasoft.org/files/dbip-country-lite-2026-09.mmdb.gz",
+      "official_download": "https://download.db-ip.com/free/dbip-country-lite-2026-09.mmdb.gz",
+      "official_page": "https://db-ip.com/db/download/ip-to-country-lite",
+      "retrieved_at": "2026-09-16T13:35:26.663217+00:00",
+      "bytes": 8340464,
+      "md5": "d4c12ea6949d09b6a975084ea405d51c",
+      "sha1": "385d4ab1e08417634a0a64921ac0e9c15c4c5e8a",
+      "sha256": "d284ae2e7427fe33d83465e1506b2b21aae47eb8a9b099f8f4dac6a98c99f041",
+      "gzip_sha256": "cb0578ce59f569f2c933bb40feb820804a334855a60739011b0a89cab1d6e4ed",
+      "license": "CC BY 4.0",
+      "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
+      "origin_note": "Official download returned HTTP 403; public Framasoft mirror bytes checked against official uncompressed SHA1."
+    },
+    {
+      "file": "dbip-city-lite-2026-09.mmdb",
+      "url": "https://dbip.mirror.framasoft.org/files/dbip-city-lite-2026-09.mmdb.gz",
+      "official_download": "https://download.db-ip.com/free/dbip-city-lite-2026-09.mmdb.gz",
+      "official_page": "https://db-ip.com/db/download/ip-to-city-lite",
+      "retrieved_at": "2026-09-16T13:39:15.173152+00:00",
+      "bytes": 127339927,
+      "md5": "8a0a03f5b9098ba9f2e28f920473d6c1",
+      "sha1": "6ea870a637b5460023643fc18fdea84dcea14b9c",
+      "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d",
+      "gzip_sha256": "c5d05b35a45c3eea0cadc728c8f5ad751693d4e270529b731442172a73f05954",
+      "license": "CC BY 4.0",
+      "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
+      "origin_note": "Official download returned HTTP 403; public Framasoft mirror bytes checked against official uncompressed SHA1."
+    },
+    {
+      "file": "dbip-asn-lite-2026-09.mmdb",
+      "url": "https://github.com/lwpk110/free-geoip-databases/releases/download/dbip-20260915/dbip-asn-lite-2026-09.mmdb",
+      "official_download": "https://download.db-ip.com/free/dbip-asn-lite-2026-09.mmdb.gz",
+      "official_page": "https://db-ip.com/db/download/ip-to-asn-lite",
+      "retrieved_at": "2026-09-20T02:39:09.847816+00:00",
+      "bytes": 9511026,
+      "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406",
+      "sha1": "ed77172c63fcc2b949fd5e998a3575e13ab9ef1d",
+      "md5": "89762c245e79382df2bdf834b166c506",
+      "compression": "none",
+      "license": "CC BY 4.0",
+      "attribution": "IP Geolocation by DB-IP https://db-ip.com/",
+      "origin_note": "Public lwpk110/free-geoip-databases mirror; original uncompressed bytes match DB-IP official SHA1 and MD5. Framasoft did not list ASN."
+    }
+  ],
+  "official_registry": {
+    "documentation": "https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.4/",
+    "archive": "https://download.mooncakes.io/user/HhWw96/moonmmdb/0.9.4.zip",
+    "archive_bytes": 4808797,
+    "archive_sha256": "7fe7eb0cc304157b6dc8ad699c086ac4a206eb0538fc78dff14247e539e8a449",
+    "public_archive_matches_upload": true,
+    "fresh_standalone_consumer": {
+      "status": "passed",
+      "module": "HhWw96/moonmmdb",
+      "version": "0.9.4",
+      "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+      "targets": [
+        "js",
+        "wasm-gc"
+      ]
+    },
+    "temporary_credential_copy_removed": true
+  },
+  "validation_reports": {
+    "file": "VALIDATION_REPORTS.zip",
+    "sha256": "86904be225db7a50bfcddee1cdc0d6f4de51730bac729794c02708d4182f1b59",
+    "reports": 154
+  },
+  "scope": "All five formal main-source gates passed. Native, browser, independent references and default Node stability are bound to the tested implementation. Historical failures remain distinct and preserved. Public download/installation/Pages checks after release are recorded separately in POST_PUBLICATION.json."
+}
