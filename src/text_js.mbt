@@ -40,3 +40,17 @@ fn text_range(data : Bytes, start : Int, size : Int) -> String raise MmdbError {
   }
   text
 }
+
+///|
+fn text_range_into(ctx : Decode, start : Int, size : Int) -> String {
+  let text = text_range_js(ctx.data, start, size)
+  if size != 0 && text.is_empty() {
+    return text_range(ctx.data, start, size) catch {
+      error => {
+        ctx.failure = Some(error)
+        ""
+      }
+    }
+  }
+  text
+}

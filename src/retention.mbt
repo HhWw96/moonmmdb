@@ -11,6 +11,7 @@ priv enum Retention {
   All
   RetainFields(SelectionTrie)
   Discard
+  MapKey
 }
 
 ///|
@@ -47,7 +48,7 @@ fn selection_retention(tokens : Array[Array[String]]) -> Retention {
 fn retained_child(retention : Retention, key : String) -> Retention {
   match retention {
     All => All
-    Discard => Discard
+    Discard | MapKey => Discard
     RetainFields(node) =>
       match node.children.get(key) {
         None => Discard
