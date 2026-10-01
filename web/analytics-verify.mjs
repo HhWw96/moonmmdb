@@ -88,12 +88,18 @@ try {
   await page.evaluate(()=>{window.testReset();});
   await check('cancel running analysis, reload and retry without stale result',async()=>{
     await page.getByRole('button',{name:'日志分析样例',exact:true}).click();
-    await page.getByLabel('选择 JSONL 日志',{exact:true}).setInputFiles({name:'long.jsonl',mimeType:'application/json',buffer:Buffer.from('{"ip":"192.0.2.1"}\n'.repeat(100000))});
-    await page.getByText('日志资源限制',{exact:true}).click();await page.getByLabel('最大行数',{exact:true}).fill('100000');
-    await page.getByRole('button',{name:'开始分析',exact:true}).click();await page.getByRole('button',{name:'取消操作',exact:true}).click();
+    // Keep this generated log below the existing 64 MiB / one-million-row caps.
+    // A short fixture can finish between mouse-down and mouse-up on a fast
+    // runner. Observe actual stream progress, then activate cancellation by
+    // keyboard while the longer task is still running.
+    await page.getByLabel('选择 JSONL 日志',{exact:true}).setInputFiles({name:'long.jsonl',mimeType:'application/json',buffer:Buffer.from('{"ip":"192.0.2.1"}\n'.repeat(1000000))});
+    await page.getByText('日志资源限制',{exact:true}).click();await page.getByLabel('最大行数',{exact:true}).fill('1000000');await page.getByLabel('最大日志大小',{exact:true}).fill('32');
+    await page.getByRole('button',{name:'开始分析',exact:true}).click();
+    await expect(page.locator('.running')).toContainText('已处理');
+    await page.getByRole('button',{name:'取消操作',exact:true}).press('Enter');
     await expect(page.getByRole('alert')).toContainText('操作已取消');await expect(page.locator('.analytics-result')).toHaveCount(0);
     await page.getByRole('button',{name:'重新加载',exact:true}).click();await page.getByRole('button',{name:'开始分析',exact:true}).click();await expect(page.locator('.analytics-result')).toBeVisible({timeout:60000});
-    assert.equal(JSON.parse(await page.locator('.json').innerText()).requests,'100000');
+    assert.equal(JSON.parse(await page.locator('.json').innerText()).requests,'1000000');
   });
   assert.deepEqual(env.errors,[]);assert.ok(env.requests.every(u=>u===env.url||u.startsWith('blob:')||u.startsWith('data:')));
   report.status='passed';

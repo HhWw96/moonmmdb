@@ -6,7 +6,10 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 export const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 export const out=resolve(root,'verification/local/browser');mkdirSync(out,{recursive:true});
 export async function environment(engine='chromium',file=false) {
-  if(file&&!process.env.CI)throw new Error('Local file URL testing is reserved for isolated CI. Local preview uses an artifact-only server.');
+  // Every run below launches a dedicated browser process and fresh context.
+  // Local file acceptance additionally requires explicit opt-in and an exact
+  // browser executable; interactive previews continue to use the HTTP server.
+  if(file&&!process.env.CI&&!(process.env.MOONMMDB_ISOLATED_FILE_TESTS==='1'&&process.env.BROWSER_EXECUTABLE))throw new Error('File URL testing requires isolated CI or an explicitly selected dedicated test browser.');
   const html=readFileSync(resolve(root,'dist/web/index.html'));
   const server=createServer((req,res)=>{if(req.url!=='/'){res.writeHead(404).end();return;}res.writeHead(200,{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store'}).end(html);});
   await new Promise(r=>server.listen(0,'127.0.0.1',r));
