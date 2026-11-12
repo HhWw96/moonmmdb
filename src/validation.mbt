@@ -1,8 +1,9 @@
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct ValidationLimits {
-  max_work : Int
-  max_state_bytes : Int
-} derive(Eq, @debug.Debug)
+  max_work : Int32
+  max_state_bytes : Int32
+}
 
 ///|
 pub fn ValidationLimits::default() -> ValidationLimits {
@@ -10,31 +11,34 @@ pub fn ValidationLimits::default() -> ValidationLimits {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct ValidationReport {
-  checked_nodes : Int
-  reachable_nodes : Int
-  unreachable_nodes : Int
-  decoded_records : Int
+  checked_nodes : Int32
+  reachable_nodes : Int32
+  unreachable_nodes : Int32
+  decoded_records : Int32
   decoded_data : Bool
-  work_used : Int
-  peak_state_bytes : Int
-} derive(Eq, @debug.Debug)
+  work_used : Int32
+  peak_state_bytes : Int32
+}
 
 ///|
 pub fn ValidationReport::to_json(self : ValidationReport) -> Json {
   {
     "status": "valid",
-    "scope": (if self.decoded_data {
-      "all-tree-nodes-and-referenced-records"
-    } else {
-      "all-tree-nodes"
-    }).to_json(),
-    "checked_nodes": self.checked_nodes.to_json(),
-    "reachable_nodes": self.reachable_nodes.to_json(),
-    "unreachable_nodes": self.unreachable_nodes.to_json(),
-    "decoded_records": self.decoded_records.to_json(),
-    "work_used": self.work_used.to_json(),
-    "peak_state_bytes": self.peak_state_bytes.to_json(),
+    "scope": @json.to_json(
+      if self.decoded_data {
+        "all-tree-nodes-and-referenced-records"
+      } else {
+        "all-tree-nodes"
+      },
+    ),
+    "checked_nodes": @json.to_json(self.checked_nodes),
+    "reachable_nodes": @json.to_json(self.reachable_nodes),
+    "unreachable_nodes": @json.to_json(self.unreachable_nodes),
+    "decoded_records": @json.to_json(self.decoded_records),
+    "work_used": @json.to_json(self.work_used),
+    "peak_state_bytes": @json.to_json(self.peak_state_bytes),
   }
 }
 
@@ -56,18 +60,18 @@ pub fn MmdbError::validation_status(self : MmdbError) -> String {
 ///|
 pub fn MmdbError::to_validation_json(self : MmdbError) -> Json {
   {
-    "status": self.validation_status().to_json(),
-    "code": self.code().to_json(),
-    "offset": self.offset().to_json(),
-    "message": self.message().to_json(),
+    "status": @json.to_json(self.validation_status()),
+    "code": @json.to_json(self.code()),
+    "offset": @json.to_json(self.offset()),
+    "message": @json.to_json(self.message()),
   }
 }
 
 ///|
 pub fn Reader::validate(
   self : Reader,
-  decode_data? : Bool = false,
-  limits? : ValidationLimits = ValidationLimits::default(),
+  decode_data~ : Bool = false,
+  limits~ : ValidationLimits = ValidationLimits::default(),
 ) -> ValidationReport raise MmdbError {
   let work = operation_work(limits.max_work)
   if limits.max_state_bytes < 1 || limits.max_state_bytes > 268435456 {
@@ -92,7 +96,7 @@ pub fn Reader::validate(
   let states : FixedArray[Byte] = FixedArray::make(count, b'\x00')
   let heights : FixedArray[Byte] = FixedArray::make(count, b'\x00')
   let seen : FixedArray[Byte] = FixedArray::make(bitmap_size, b'\x00')
-  let mut stack : FixedArray[Int] = FixedArray::make(capacity, 0)
+  let mut stack : FixedArray[Int32] = FixedArray::make(capacity, 0)
   let mut peak = base_size.to_int() + capacity * 4
   let mut checked = 0
   let mut reachable = 0

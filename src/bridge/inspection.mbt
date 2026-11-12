@@ -9,8 +9,8 @@ pub struct NetworkHandle {
 pub fn prepare_networks(
   handle : Handle,
   cidr : String,
-  max_records : Int,
-  max_work : Int,
+  max_records : Int32,
+  max_work : Int32,
 ) -> NetworkHandle {
   match handle.reader {
     None => { cursor: None, error: handle.error, }
@@ -51,8 +51,8 @@ pub fn network_stats(handle : NetworkHandle) -> String {
     None => handle.error.unwrap()
     Some(cursor) => {
       let result : Json = {
-        "records": cursor.emitted_count().to_json(),
-        "work_used": cursor.work_used().to_json(),
+        "records": @json.to_json(cursor.emitted_count()),
+        "work_used": @json.to_json(cursor.work_used()),
       }
       result.stringify()
     }
@@ -72,8 +72,8 @@ pub fn close_networks(handle : NetworkHandle) -> Unit {
 pub fn validate_database(
   handle : Handle,
   decode_data : Bool,
-  max_work : Int,
-  max_state_bytes : Int,
+  max_work : Int32,
+  max_state_bytes : Int32,
 ) -> String {
   match handle.reader {
     None => handle.validation_error.unwrap()

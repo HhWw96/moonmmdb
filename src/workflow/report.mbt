@@ -111,7 +111,7 @@ fn check_analytics(result : Json) -> Unit raise WorkflowError {
       code = 2
     }
   }
-  if get(result, "exit_code") != code.to_json() {
+  if get(result, "exit_code") != @json.to_json(code) {
     reject("Exit code contradicts counters")
   }
   let input = get(result, "input")
@@ -262,10 +262,10 @@ fn file_ref(
     _ => integer(bytes, 0, 1073741824).to_uint64()
   }
   {
-    "role": role.to_json(),
-    "name": name.to_json(),
+    "role": @json.to_json(role),
+    "name": @json.to_json(name),
     "sha256": hash,
-    "bytes": size.to_string().to_json(),
+    "bytes": @json.to_json(size.to_string()),
   }
 }
 
@@ -308,9 +308,9 @@ fn legacy_task(report : Json, result : Json) -> Json raise WorkflowError {
   {
     "format": "moonmmdb-task",
     "version": 1,
-    "operation": op.to_json(),
+    "operation": @json.to_json(op),
     "parameters": params,
-    "files": files.to_json(),
+    "files": @json.to_json(files),
   }
 }
 
@@ -371,7 +371,7 @@ fn tagged(value : Json) -> Unit raise WorkflowError {
       let s = str(data)
       let negative = s.has_prefix("-")
       let magnitude = decimal(
-        (if negative { s[1:].to_owned() } else { s }).to_json(),
+        @json.to_json(if negative { s[1:].to_owned() } else { s }),
       )
       if magnitude > (if negative { 2147483648 } else { 2147483647 }) {
         reject("Invalid int32")
@@ -454,7 +454,10 @@ fn check_fields(
 }
 
 ///|
-fn check_document_depth(value : Json, depth : Int) -> Unit raise WorkflowError {
+fn check_document_depth(
+  value : Json,
+  depth : Int32,
+) -> Unit raise WorkflowError {
   match value {
     Array(items) => {
       if depth >= 128 {
@@ -535,8 +538,8 @@ pub fn check_report(report : Json) -> Json raise WorkflowError {
         let record_changed = get(before, "status") != get(after, "status")
         let prefix_changed = get(before, "prefix_length") !=
           get(after, "prefix_length")
-        if get(result, "record_changed") != record_changed.to_json() ||
-          get(result, "prefix_changed") != prefix_changed.to_json() {
+        if get(result, "record_changed") != @json.to_json(record_changed) ||
+          get(result, "prefix_changed") != @json.to_json(prefix_changed) {
           reject("Comparison flags contradict records")
         }
         let paths = strings(get(get(task, "parameters"), "fields"))
@@ -547,7 +550,7 @@ pub fn check_report(report : Json) -> Json raise WorkflowError {
             changed.push(path)
           }
         }
-        if get(result, "changed_fields") != changed.to_json() {
+        if get(result, "changed_fields") != @json.to_json(changed) {
           reject("Changed fields contradict values")
         }
         let status : Json = if record_changed ||
@@ -637,7 +640,7 @@ fn semantic(value : Json) -> Json {
           out[key] = v
         }
       }
-      out.to_json()
+      @json.to_json(out)
     }
     _ => value
   }

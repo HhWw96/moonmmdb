@@ -1,14 +1,14 @@
 ///|
 priv struct OperationWork {
-  mut remaining : Int
-  maximum : Int
+  mut remaining : Int32
+  maximum : Int32
 }
 
 ///|
 fn OperationWork::charge(
   self : OperationWork,
-  amount : Int,
-  offset : Int,
+  amount : Int32,
+  offset : Int32,
 ) -> Unit raise MmdbError {
   if amount > self.remaining {
     raise MmdbError("work-limit", offset, "Operation work budget exhausted")
@@ -17,7 +17,7 @@ fn OperationWork::charge(
 }
 
 ///|
-fn operation_work(maximum : Int) -> OperationWork raise MmdbError {
+fn operation_work(maximum : Int32) -> OperationWork raise MmdbError {
   if maximum < 1 || maximum > 1000000000 {
     raise MmdbError("invalid-limits", -1, "Work limit must be 1..1000000000")
   }
@@ -25,10 +25,11 @@ fn operation_work(maximum : Int) -> OperationWork raise MmdbError {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct TraversalLimits {
-  max_records : Int
-  max_work : Int
-} derive(Eq, @debug.Debug)
+  max_records : Int32
+  max_work : Int32
+}
 
 ///|
 pub fn TraversalLimits::default() -> TraversalLimits {
@@ -36,22 +37,26 @@ pub fn TraversalLimits::default() -> TraversalLimits {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct NetworkRecord {
   network : String
   value : Value
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 pub fn NetworkRecord::to_json(self : NetworkRecord) -> Json {
-  { "network": self.network.to_json(), "value": self.value.to_tagged_json() }
+  {
+    "network": @json.to_json(self.network),
+    "value": self.value.to_tagged_json(),
+  }
 }
 
 ///|
 priv struct NetworkFrame {
-  node : UInt
-  depth : Int
-  bytes : Array[Int]
-  ancestors : Array[UInt]
+  node : UInt32
+  depth : Int32
+  bytes : Array[Int32]
+  ancestors : Array[UInt32]
 }
 
 ///|
@@ -60,14 +65,14 @@ pub struct NetworkCursor {
   priv mut frames : Array[NetworkFrame]
   priv work : OperationWork
   priv limits : TraversalLimits
-  priv padding : Int
-  priv bits : Int
-  priv mut emitted : Int
+  priv padding : Int32
+  priv bits : Int32
+  priv mut emitted : Int32
   priv mut failure : MmdbError?
 }
 
 ///|
-fn cidr(text : String) -> (Address, Int) raise MmdbError {
+fn cidr(text : String) -> (Address, Int32) raise MmdbError {
   if text.length() < 3 || text.length() > 49 {
     raise MmdbError("invalid-cidr", -1, "Invalid CIDR length")
   }
@@ -104,7 +109,7 @@ fn cidr(text : String) -> (Address, Int) raise MmdbError {
 }
 
 ///|
-fn network_text(bytes : Array[Int], prefix : Int) -> String {
+fn network_text(bytes : Array[Int32], prefix : Int32) -> String {
   if bytes.length() == 4 {
     return bytes.map(n => n.to_string()).join(".") + "/" + prefix.to_string()
   }
@@ -147,9 +152,9 @@ fn network_text(bytes : Array[Int], prefix : Int) -> String {
 ///|
 fn Reader::data_offset(
   self : Reader,
-  node : UInt,
-  at : Int,
-) -> Int raise MmdbError {
+  node : UInt32,
+  at : Int32,
+) -> Int32 raise MmdbError {
   let relative = node.to_uint64() - self.meta.node_count.to_uint64()
   let offset = self.tree_end.to_uint64() + relative
   if relative < 16 || offset >= self.data_end.to_uint64() {
@@ -164,7 +169,7 @@ fn Reader::data_offset(
 pub fn Reader::networks(
   self : Reader,
   text : String,
-  limits? : TraversalLimits = TraversalLimits::default(),
+  limits~ : TraversalLimits = TraversalLimits::default(),
 ) -> NetworkCursor raise MmdbError {
   let work = operation_work(limits.max_work)
   if limits.max_records < 1 || limits.max_records > 1000000 {
@@ -178,8 +183,8 @@ pub fn Reader::networks(
   }
   let bits = if self.meta.ip_version == 4 { 32 } else { 128 }
   let padding = if addr.version == 4 && bits == 128 { 96 } else { 0 }
-  let mut node : UInt = 0
-  let ancestors : Array[UInt] = []
+  let mut node : UInt32 = 0
+  let ancestors : Array[UInt32] = []
   for depth in 0..<(padding + prefix) {
     if node >= self.meta.node_count {
       break
@@ -220,12 +225,12 @@ pub fn NetworkCursor::close(self : NetworkCursor) -> Unit {
 }
 
 ///|
-pub fn NetworkCursor::emitted_count(self : NetworkCursor) -> Int {
+pub fn NetworkCursor::emitted_count(self : NetworkCursor) -> Int32 {
   self.emitted
 }
 
 ///|
-pub fn NetworkCursor::work_used(self : NetworkCursor) -> Int {
+pub fn NetworkCursor::work_used(self : NetworkCursor) -> Int32 {
   self.work.maximum - self.work.remaining
 }
 

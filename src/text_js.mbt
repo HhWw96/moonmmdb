@@ -2,7 +2,11 @@
 // Strict UTF-8 decoding needs only the string. Avoid allocating a MoonBit
 // BytesView and a success-result array for every MMDB text value. The codec is
 // stateless between calls: no streaming mode or retained database payload.
-extern "js" fn text_range_js(data : Bytes, start : Int, size : Int) -> String =
+extern "js" fn text_range_js(
+  data : Bytes,
+  start : Int32,
+  size : Int32,
+) -> String =
   #| (function() {
   #|   const codec = new TextDecoder('utf-8', {fatal: true, ignoreBOM: true});
   #|   return function(data, start, size) {
@@ -28,7 +32,11 @@ extern "js" fn text_range_js(data : Bytes, start : Int, size : Int) -> String =
   #| })()
 
 ///|
-fn text_range(data : Bytes, start : Int, size : Int) -> String raise MmdbError {
+fn text_range(
+  data : Bytes,
+  start : Int32,
+  size : Int32,
+) -> String raise MmdbError {
   let text = text_range_js(data, start, size)
   // A nonempty, valid UTF-8 sequence cannot decode to an empty string when
   // the BOM is preserved. Empty input remains a valid empty MMDB string.
@@ -42,7 +50,7 @@ fn text_range(data : Bytes, start : Int, size : Int) -> String raise MmdbError {
 }
 
 ///|
-fn text_range_into(ctx : Decode, start : Int, size : Int) -> String {
+fn text_range_into(ctx : Decode, start : Int32, size : Int32) -> String {
   let text = text_range_js(ctx.data, start, size)
   if size != 0 && text.is_empty() {
     return text_range(ctx.data, start, size) catch {

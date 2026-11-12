@@ -13,7 +13,7 @@ fn state() -> Analytics {
 }
 
 ///|
-fn row(country : String, asn : UInt) -> @mmdb.Enrichment {
+fn row(country : String, asn : UInt32) -> @mmdb.Enrichment {
   {
     sources: [
       (

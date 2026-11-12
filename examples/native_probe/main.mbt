@@ -1,28 +1,28 @@
 ///|
 #borrow(path)
-extern "C" fn read_host(path : Bytes, limit : Int) -> Bytes = "moonmmdb_probe_read"
+extern "C" fn read_host(path : Bytes, limit : Int32) -> Bytes = "moonmmdb_probe_read"
 
 ///|
-extern "C" fn read_error() -> Int = "moonmmdb_probe_error"
+extern "C" fn read_error() -> Int32 = "moonmmdb_probe_error"
 
 ///|
 #borrow(fallback)
-extern "C" fn host_arg(index : Int, fallback : String) -> String = "moonmmdb_probe_arg"
+extern "C" fn host_arg(index : Int32, fallback : String) -> String = "moonmmdb_probe_arg"
 
 ///|
 extern "C" fn now_ms() -> Double = "moonmmdb_probe_now"
 
 ///|
-extern "C" fn exit_process(code : Int) -> Unit = "exit"
+extern "C" fn exit_process(code : Int32) -> Unit = "exit"
 
 ///|
-fn read_file(path : String, limit : Int) -> Bytes {
+fn read_file(path : String, limit : Int32) -> Bytes {
   let result = read_host(@utf8.encode((path + "\u{0000}")[:]), limit)
   if read_error() != 0 {
     let error : Json = {
       "status": "error",
       "code": "host-input-error",
-      "io_code": read_error().to_json(),
+      "io_code": @json.to_json(read_error()),
     }
     println(error.stringify())
     exit_process(2)
@@ -58,7 +58,7 @@ fn main {
     let opened : Json = {
       "status": "opened",
       "metadata": reader.metadata().raw.to_tagged_json(),
-      "open_ms": open_ms.to_json(),
+      "open_ms": @json.to_json(open_ms),
     }
     println(opened.stringify())
     let paths = [
@@ -87,7 +87,7 @@ fn main {
           e => e.to_json()
         }
       let row : Json = {
-        "ip": ip.to_json(),
+        "ip": @json.to_json(ip),
         "lookup": lookup,
         "projection": projection,
         "enrichment": match joint {
@@ -102,8 +102,8 @@ fn main {
     }
     let result : Json = {
       "status": "complete",
-      "queries": ips.length().to_json(),
-      "elapsed_ms": (now_ms() - query_started).to_json(),
+      "queries": @json.to_json(ips.length()),
+      "elapsed_ms": @json.to_json(now_ms() - query_started),
     }
     println(result.stringify())
   } catch {

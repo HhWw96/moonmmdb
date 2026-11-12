@@ -17,7 +17,7 @@ fn retained_decode(
 }
 
 ///|
-fn retained_error(bytes : Bytes, paths : Array[String]) -> (String, Int) {
+fn retained_error(bytes : Bytes, paths : Array[String]) -> (String, Int32) {
   try {
     ignore(retained_decode(bytes, paths))
     ("none", -1)

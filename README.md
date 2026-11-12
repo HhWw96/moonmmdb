@@ -1,8 +1,6 @@
 # MoonMMDB
 
-**0.9.4：** 保持 MoonBit `0.10.14+7d59c7ec9` 和公开接口兼容，减少联合查询桥接的中间 JSON 分配；查询、任务、分析和报告流程继续共用同一套 MoonBit 规则。
-
-
+**0.9.5 兼容性维护：** 源码适配当前官方工具链 `moonc v0.10.20+65efd5b93`，修复 JSON 转换与 JavaScript 数组桥接；Windows Native 构建改用官方支持的 MSVC，保留既有公开接口及结果语义。验证范围见 [维护报告](docs/MAINTENANCE_2026_11_12.md)。
 
 **跨端任务与报告复核：** 网页导出查询、检查、对比或分析任务，Node/Native 用明确的文件绑定继续执行；异常可定位到行，保存的报告可重新打开并核对原文件。见 [完整使用流程](docs/WORKFLOWS.md) 与 [版本验证及交付状态](docs/VERIFICATION_0_9_4.md)。
 
@@ -14,7 +12,7 @@
 
 MoonBit 原生离线 IP 数据库查询库，读取 MaxMind DB（`.mmdb`）格式。
 
-**本版本：0.9.4。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.4/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_9_4.md) · [支持范围](docs/SUPPORT.md)
+**已发布稳定版：0.9.4；当前维护源码：0.9.5。** [Mooncakes 包与 API 文档](https://mooncakes.io/docs/HhWw96/moonmmdb@0.9.4/)。查询、解码、字段选择、联合查询和日志统计使用 MoonBit 实现。支持同时补充地域、ASN 与内部标签。[多库查询与分析](docs/MULTI_SOURCE.md) · [实用操作示例](docs/OPERATIONS.md) · [版本验证](docs/VERIFICATION_0_9_4.md) · [支持范围](docs/SUPPORT.md)
 
 解压 Native 程序后运行十个命令：[Native 离线演示](docs/DEMO_0_5.md)。三个完整源码场景见 [多库与分析演示](docs/DEMO_0_4.md)。正式发布与 Mooncakes 安装状态以版本验证页为准。
 
@@ -52,7 +50,7 @@ Native `diff` 按输入 IP 比较旧、新数据库，默认比较完整记录�
 
 ## 从源码运行 Node.js 工具
 
-需要 Node.js 22+ 和 MoonBit 工具链。正式稳定性对照固定 Node.js 24.20.0；本机诊断使用 24.13.0，工具链固定 `moonc v0.10.14+7d59c7ec9`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；个人工具链配置 `.local-toolchain.json` 不随仓库提交。
+需要 Node.js 22+ 和 MoonBit 工具链。正式稳定性对照固定 Node.js 24.20.0；本机诊断使用 24.13.0，当前维护源码固定 `moonc v0.10.20+65efd5b93`。将 `moon` 加入 PATH 或设置 `MOON_HOME`；个人工具链配置 `.local-toolchain.json` 不随仓库提交。
 
 ```text
 git clone https://github.com/HhWw96/moonmmdb.git
@@ -103,6 +101,8 @@ node examples/log_analytics/run.mjs tests/scenarios/geo.mmdb tests/scenarios/asn
 ```text
 moon add HhWw96/moonmmdb@0.9.4
 ```
+
+注册表稳定包 0.9.4 按 `moonc v0.10.14+7d59c7ec9` 验证。使用当前 `0.10.20+65efd5b93` 时，请使用本仓库 0.9.5 维护源码及下述独立 workspace 示例；维护版尚未发布到注册表。已下载的 Native 程序和离线 HTML 无需安装 MoonBit。
 
 完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_9_4.md)。
 

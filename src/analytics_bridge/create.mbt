@@ -8,8 +8,8 @@ pub fn analysis_rejected(error : String) -> AnalysisHandle {
 pub fn analysis_create(
   city : Bytes,
   asn : Bytes,
-  top : Int,
-  max_groups : Int,
+  top : Int32,
+  max_groups : Int32,
   ip_path : String,
 ) -> AnalysisHandle {
   try {

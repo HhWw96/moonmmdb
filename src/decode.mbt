@@ -2,13 +2,13 @@
 /// One operation owns its budget, including keys and pointer traversal.
 priv struct Decode {
   data : Bytes
-  base : Int
-  end : Int
+  base : Int32
+  end : Int32
   limits : Limits
-  mut remaining : Int
-  mut payload : Int
-  mut next : Int
-  active : Array[Int]
+  mut remaining : Int32
+  mut payload : Int32
+  mut next : Int32
+  active : Array[Int32]
   work : OperationWork?
   mut failure : MmdbError?
   mut key_text : String
@@ -18,10 +18,10 @@ priv struct Decode {
 ///|
 fn decoder(
   data : Bytes,
-  base : Int,
-  end : Int,
+  base : Int32,
+  end : Int32,
   limits : Limits,
-  work? : OperationWork? = None,
+  work~ : OperationWork? = None,
 ) -> Decode {
   {
     data,
@@ -45,7 +45,7 @@ fn decoder(
 fn decode_failure(
   ctx : Decode,
   code : String,
-  offset : Int,
+  offset : Int32,
   message : String,
 ) -> Value {
   if ctx.failure is None {
@@ -55,7 +55,7 @@ fn decode_failure(
 }
 
 ///|
-fn bounded(ctx : Decode, offset : Int, size : Int) -> Bool {
+fn bounded(ctx : Decode, offset : Int32, size : Int32) -> Bool {
   if offset < ctx.base ||
     size < 0 ||
     offset > ctx.end ||
@@ -69,12 +69,12 @@ fn bounded(ctx : Decode, offset : Int, size : Int) -> Bool {
 }
 
 ///|
-fn uint_be(ctx : Decode, offset : Int, size : Int) -> UInt64 {
+fn uint_be(ctx : Decode, offset : Int32, size : Int32) -> UInt64 {
   if !bounded(ctx, offset, size) {
     return 0
   }
-  let mut high : UInt = 0
-  let mut low : UInt = 0
+  let mut high : UInt32 = 0
+  let mut low : UInt32 = 0
   for i in offset..<(offset + size) {
     high = (high << 8) | (low >> 24)
     low = (low << 8) | ctx.data[i].to_uint()
@@ -84,11 +84,11 @@ fn uint_be(ctx : Decode, offset : Int, size : Int) -> UInt64 {
 
 ///|
 // Encoded offsets and 16/32-bit scalars do not need a 64-bit accumulator.
-fn uint32_be(ctx : Decode, offset : Int, size : Int) -> UInt {
+fn uint32_be(ctx : Decode, offset : Int32, size : Int32) -> UInt32 {
   if !bounded(ctx, offset, size) {
     return 0
   }
-  let mut value : UInt = 0
+  let mut value : UInt32 = 0
   for i in offset..<(offset + size) {
     value = (value << 8) | ctx.data[i].to_uint()
   }
@@ -97,8 +97,8 @@ fn uint32_be(ctx : Decode, offset : Int, size : Int) -> UInt {
 
 ///|
 /// Base-10 arithmetic avoids any floating-point conversion of UInt128.
-fn decimal_bytes(data : Bytes, offset : Int, size : Int) -> String {
-  let digits : Array[Int] = [0]
+fn decimal_bytes(data : Bytes, offset : Int32, size : Int32) -> String {
+  let digits : Array[Int32] = [0]
   for i in offset..<(offset + size) {
     let mut carry = data[i].to_int()
     for j in 0..<digits.length() {
@@ -121,10 +121,10 @@ fn decimal_bytes(data : Bytes, offset : Int, size : Int) -> String {
 ///|
 fn decode(
   ctx : Decode,
-  offset : Int,
-  depth : Int,
-  retention? : Retention = All,
-) -> (Value, Int) raise MmdbError {
+  offset : Int32,
+  depth : Int32,
+  retention~ : Retention = All,
+) -> (Value, Int32) raise MmdbError {
   let value = decode_into(ctx, offset, depth, retention~)
   if ctx.failure is Some(error) {
     raise error
@@ -138,9 +138,9 @@ fn decode(
 // own encoded end; they never expose the referenced record's end to a parent.
 fn decode_into(
   ctx : Decode,
-  offset : Int,
-  depth : Int,
-  retention? : Retention = All,
+  offset : Int32,
+  depth : Int32,
+  retention~ : Retention = All,
 ) -> Value {
   if ctx.failure is Some(_) {
     return discarded_value
@@ -189,9 +189,9 @@ fn decode_into(
 ///|
 fn decode_value(
   ctx : Decode,
-  offset : Int,
-  depth : Int,
-  retention? : Retention = All,
+  offset : Int32,
+  depth : Int32,
+  retention~ : Retention = All,
 ) -> Value {
   let control = ctx.data[offset].to_int()
   let mut kind = control >> 5

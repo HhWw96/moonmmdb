@@ -1,6 +1,6 @@
 ///|
 suberror CliError {
-  CliError(String, String, Int)
+  CliError(String, String, Int32)
 }
 
 ///|
@@ -8,41 +8,49 @@ extern "C" fn host_init() -> Unit = "mm_cli_init"
 
 ///|
 #borrow(fallback)
-extern "C" fn host_arg(index : Int, fallback : String) -> String = "mm_cli_arg"
+extern "C" fn host_arg(index : Int32, fallback : String) -> String = "mm_cli_arg"
 
 ///|
 #borrow(path)
-extern "C" fn host_read(path : Bytes, limit : Int) -> Bytes = "mm_cli_read"
+extern "C" fn host_read(path : Bytes, limit : Int32) -> Bytes = "mm_cli_read"
 
 ///|
 #borrow(config, database)
 extern "C" fn host_resolve(config : Bytes, database : Bytes) -> Bytes = "mm_cli_resolve"
 
 ///|
-extern "C" fn host_error() -> Int = "mm_cli_error"
+extern "C" fn host_error() -> Int32 = "mm_cli_error"
 
 ///|
 #borrow(path)
-extern "C" fn host_open(path : Bytes, max_bytes : Int, max_line : Int) -> Unit = "mm_cli_open"
+extern "C" fn host_open(
+  path : Bytes,
+  max_bytes : Int32,
+  max_line : Int32,
+) -> Unit = "mm_cli_open"
 
 ///|
-extern "C" fn host_line(max_bytes : Int) -> Bytes = "mm_cli_line"
+extern "C" fn host_line(max_bytes : Int32) -> Bytes = "mm_cli_line"
 
 ///|
 extern "C" fn host_close() -> Unit = "mm_cli_close"
 
 ///|
 #borrow(bytes)
-extern "C" fn host_write(bytes : Bytes, length : Int, channel : Int) -> Int = "mm_cli_write"
+extern "C" fn host_write(
+  bytes : Bytes,
+  length : Int32,
+  channel : Int32,
+) -> Int32 = "mm_cli_write"
 
 ///|
-extern "C" fn exit_process(code : Int) -> Unit = "exit"
+extern "C" fn exit_process(code : Int32) -> Unit = "exit"
 
 ///|
 fn fail(
   code : String,
   message : String,
-  line? : Int = 0,
+  line~ : Int32 = 0,
 ) -> Unit raise CliError {
   raise CliError(code, message, line)
 }
@@ -56,7 +64,7 @@ fn c_path(path : String) -> Bytes raise CliError {
 }
 
 ///|
-fn write(text : String, channel? : Int = 0) -> Unit raise CliError {
+fn write(text : String, channel~ : Int32 = 0) -> Unit raise CliError {
   let bytes = @utf8.encode(text[:])
   if host_write(bytes, bytes.length(), channel) != 0 {
     fail("host-output-error", "Cannot write output")
@@ -64,12 +72,12 @@ fn write(text : String, channel? : Int = 0) -> Unit raise CliError {
 }
 
 ///|
-fn emit(value : Json, channel? : Int = 0) -> Unit raise CliError {
+fn emit(value : Json, channel~ : Int32 = 0) -> Unit raise CliError {
   write(value.stringify() + "\n", channel~)
 }
 
 ///|
-fn check_io(line? : Int = 0) -> Unit raise CliError {
+fn check_io(line~ : Int32 = 0) -> Unit raise CliError {
   let code = host_error()
   if code != 0 {
     fail(
@@ -86,14 +94,14 @@ fn check_io(line? : Int = 0) -> Unit raise CliError {
 }
 
 ///|
-fn read_file(path : String, limit : Int) -> Bytes raise CliError {
+fn read_file(path : String, limit : Int32) -> Bytes raise CliError {
   let bytes = host_read(c_path(path), limit)
   check_io()
   bytes
 }
 
 ///|
-fn decode(bytes : Bytes, line? : Int = 0) -> String raise CliError {
+fn decode(bytes : Bytes, line~ : Int32 = 0) -> String raise CliError {
   @utf8.decode(bytes[:]) catch {
     _ => raise CliError("invalid-utf8", "Input must be UTF-8", line)
   }
@@ -155,7 +163,7 @@ fn strings(value : Json) -> Array[String] raise CliError {
 }
 
 ///|
-fn positive(text : String, limit : Int) -> Int raise CliError {
+fn positive(text : String, limit : Int32) -> Int32 raise CliError {
   if text.is_empty() || text[0] < '1' || text[0] > '9' {
     fail("host-input-error", "Expected a positive decimal integer")
   }
@@ -209,10 +217,10 @@ fn select_ip(row : Json, tokens : Array[String]) -> String raise CliError {
 ///|
 struct SourceStats {
   provenance : Map[String, Json]
-  mut found : Int
-  mut not_found : Int
-  mut errors : Int
-  mut missing_fields : Int
+  mut found : Int32
+  mut not_found : Int32
+  mut errors : Int32
+  mut missing_fields : Int32
 }
 
 ///|
@@ -225,7 +233,7 @@ fn load_many(
   ) catch {
     _ => raise CliError("invalid-config", "Cannot read valid configuration", 0)
   }
-  if config.length() != 2 || required(config, "version") != (1).to_json() {
+  if config.length() != 2 || required(config, "version") != @json.to_json(1) {
     fail("invalid-config", "Expected version 1 and sources")
   }
   let items = match required(config, "sources") {
@@ -275,12 +283,15 @@ fn load_many(
     let reader = @mmdb.open_bytes(bytes)
     let metadata = reader.metadata()
     let provenance : Map[String, Json] = Map([
-      ("name", name.to_json()),
-      ("bytes", bytes.length().to_json()),
-      ("sha256", @crypto.bytes_to_hex_string(@crypto.sha256(bytes)).to_json()),
-      ("database_type", metadata.database_type.to_json()),
-      ("build_epoch", metadata.build_epoch.to_string().to_json()),
-      ("fields", fields.to_json()),
+      ("name", @json.to_json(name)),
+      ("bytes", @json.to_json(bytes.length())),
+      (
+        "sha256",
+        @json.to_json(@crypto.bytes_to_hex_string(@crypto.sha256(bytes))),
+      ),
+      ("database_type", @json.to_json(metadata.database_type)),
+      ("build_epoch", @json.to_json(metadata.build_epoch.to_string())),
+      ("fields", @json.to_json(fields)),
     ])
     stats[name] = {
       provenance,
@@ -295,7 +306,7 @@ fn load_many(
 }
 
 ///|
-fn enrich_many(args : Array[String]) -> Int raise {
+fn enrich_many(args : Array[String]) -> Int32 raise {
   if args.length() < 4 || args.length() % 2 != 0 {
     fail("invalid-config", "Expected CONFIG INPUT and option/value pairs")
   }
@@ -355,7 +366,7 @@ fn enrich_many(args : Array[String]) -> Int raise {
         invalid += 1
         code = 2
         emit({
-          "line": processed.to_json(),
+          "line": @json.to_json(processed),
           "status": "error",
           "code": "invalid-jsonl",
           "message": "Expected JSON object with IP string; nesting limit 128",
@@ -408,19 +419,19 @@ fn enrich_many(args : Array[String]) -> Int raise {
   let sources : Map[String, Json] = Map([])
   for name, state in stats {
     let p = state.provenance
-    p["found"] = state.found.to_json()
-    p["not_found"] = state.not_found.to_json()
-    p["errors"] = state.errors.to_json()
-    p["missing_fields"] = state.missing_fields.to_json()
-    sources[name] = p.to_json()
+    p["found"] = @json.to_json(state.found)
+    p["not_found"] = @json.to_json(state.not_found)
+    p["errors"] = @json.to_json(state.errors)
+    p["missing_fields"] = @json.to_json(state.missing_fields)
+    sources[name] = @json.to_json(p)
   }
   emit(
     {
       "status": "summary",
-      "processed": processed.to_json(),
-      "valid_ips": valid.to_json(),
-      "invalid_inputs": invalid.to_json(),
-      "sources": sources.to_json(),
+      "processed": @json.to_json(processed),
+      "valid_ips": @json.to_json(valid),
+      "invalid_inputs": @json.to_json(invalid),
+      "sources": @json.to_json(sources),
     },
     channel=1,
   )
@@ -428,7 +439,7 @@ fn enrich_many(args : Array[String]) -> Int raise {
 }
 
 ///|
-fn status_code(value : Json) -> Int {
+fn status_code(value : Json) -> Int32 {
   match value {
     Object(m) =>
       match m.get("status") {
@@ -441,14 +452,14 @@ fn status_code(value : Json) -> Int {
 }
 
 ///|
-fn run(args : Array[String]) -> Int raise {
+fn run(args : Array[String]) -> Int32 raise {
   if args.length() == 2 && args[1] == "--version" {
-    write("0.9.4\n")
+    write("0.9.5\n")
     return 0
   }
   if args.length() == 2 && args[1] == "--help" {
     write(
-      "MoonMMDB 0.9.4 — Native offline MMDB reader\nUsage:\n  moonmmdb metadata DATABASE\n  moonmmdb lookup DATABASE IP [IP ...]\n  moonmmdb project DATABASE IP POINTER [POINTER ...]\n  moonmmdb enrich-many CONFIG INPUT.jsonl|- [OPTIONS]\n  moonmmdb analyze CITY ASN INPUT.jsonl|- [OPTIONS]\n  moonmmdb diff BEFORE AFTER INPUT.jsonl|- [OPTIONS]\n  moonmmdb networks DATABASE CIDR [--max-records N] [--max-work N]\n  moonmmdb validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]\n  moonmmdb run-task TASK.json --bind ROLE FILE [--bind ROLE FILE ...] [--output FILE] [--overwrite]\n  moonmmdb verify-report REPORT.json [--bind ROLE FILE ...] [--output FILE] [--overwrite]\n  moonmmdb --help | --version\nOptions: --ip-path POINTER (default /ip), --max-records N (10000; cap 1000000),\n  --max-input-bytes N (8388608; cap 1073741824), --max-line-bytes N (8388608; cap 8388608).\nanalyze: --top N (10; cap 100), --max-groups N (10000; cap 10000), --diagnostic-limit N (0; cap 1000).\nDatabase total <=256 MiB; config <=64 KiB; JSON nesting <=128. UTF-8 JSONL.\nExit codes: 0 all found; 1 any miss; 2 any error. enrich-many fields come from configuration.\ndiff: --field POINTER (repeatable; default whole record); 0 unchanged, 1 changes, 2 errors.\nverify-report: 0 checked/consistent, 1 mismatch, 2 format/runtime error. Internal check is not recomputation.\nstdout: results. stderr: diagnostics and completed summary only. No network access.\n",
+      "MoonMMDB 0.9.5 — Native offline MMDB reader\nUsage:\n  moonmmdb metadata DATABASE\n  moonmmdb lookup DATABASE IP [IP ...]\n  moonmmdb project DATABASE IP POINTER [POINTER ...]\n  moonmmdb enrich-many CONFIG INPUT.jsonl|- [OPTIONS]\n  moonmmdb analyze CITY ASN INPUT.jsonl|- [OPTIONS]\n  moonmmdb diff BEFORE AFTER INPUT.jsonl|- [OPTIONS]\n  moonmmdb networks DATABASE CIDR [--max-records N] [--max-work N]\n  moonmmdb validate DATABASE [--decode-data] [--max-work N] [--max-state-bytes N]\n  moonmmdb run-task TASK.json --bind ROLE FILE [--bind ROLE FILE ...] [--output FILE] [--overwrite]\n  moonmmdb verify-report REPORT.json [--bind ROLE FILE ...] [--output FILE] [--overwrite]\n  moonmmdb --help | --version\nOptions: --ip-path POINTER (default /ip), --max-records N (10000; cap 1000000),\n  --max-input-bytes N (8388608; cap 1073741824), --max-line-bytes N (8388608; cap 8388608).\nanalyze: --top N (10; cap 100), --max-groups N (10000; cap 10000), --diagnostic-limit N (0; cap 1000).\nDatabase total <=256 MiB; config <=64 KiB; JSON nesting <=128. UTF-8 JSONL.\nExit codes: 0 all found; 1 any miss; 2 any error. enrich-many fields come from configuration.\ndiff: --field POINTER (repeatable; default whole record); 0 unchanged, 1 changes, 2 errors.\nverify-report: 0 checked/consistent, 1 mismatch, 2 format/runtime error. Internal check is not recomputation.\nstdout: results. stderr: diagnostics and completed summary only. No network access.\n",
     )
     return 0
   }
@@ -495,8 +506,8 @@ fn run(args : Array[String]) -> Int raise {
         e => e.to_json()
       }
     let out = object(result, "host-input-error")
-    out["ip"] = args[3].to_json()
-    emit(out.to_json())
+    out["ip"] = @json.to_json(args[3])
+    emit(@json.to_json(out))
     return status_code(result)
   }
   let mut code = 0
@@ -504,8 +515,8 @@ fn run(args : Array[String]) -> Int raise {
     let result = reader.lookup(args[i]).to_json() catch { e => e.to_json() }
     code = code.max(status_code(result))
     let out = object(result, "host-input-error")
-    out["ip"] = args[i].to_json()
-    emit(out.to_json())
+    out["ip"] = @json.to_json(args[i])
+    emit(@json.to_json(out))
   }
   code
 }
@@ -533,8 +544,8 @@ fn main {
     }
     DiffDatabaseError(side, e) => {
       let out = object(e.to_json(), "host-input-error") catch { _ => Map([]) }
-      out["database"] = side.to_json()
-      emit(out.to_json(), channel=1) catch {
+      out["database"] = @json.to_json(side)
+      emit(@json.to_json(out), channel=1) catch {
         _ => ()
       }
       2
@@ -542,13 +553,13 @@ fn main {
     CliError(code, message, line) => {
       let out : Map[String, Json] = Map([
         ("status", "error"),
-        ("code", code.to_json()),
-        ("message", message.to_json()),
+        ("code", @json.to_json(code)),
+        ("message", @json.to_json(message)),
       ])
       if line > 0 {
-        out["line"] = line.to_json()
+        out["line"] = @json.to_json(line)
       }
-      emit(out.to_json(), channel=1) catch {
+      emit(@json.to_json(out), channel=1) catch {
         _ => ()
       }
       2

@@ -2,5 +2,10 @@ warnings = "-alert_experimental"
 
 import {
   "moonbitlang/core/cmp",
-  "moonbitlang/core/v128",
 }
+
+#cfg(any(target="native", target="wasm"))
+import { "moonbitlang/core/v128" }
+
+// Preserve audited upstream implementation bytes during workspace formatting.
+formatter(ignore: ["aes.mbt", "byte_source.mbt", "chacha.mbt", "chacha_simd.mbt", "hmac.mbt", "md4.mbt", "md5.mbt", "ripemd160.mbt", "sha1.mbt", "sha224.mbt", "sha256.mbt", "sha384.mbt", "sha512.mbt", "simd.mbt", "sm3.mbt", "traits.mbt", "utils.mbt"])

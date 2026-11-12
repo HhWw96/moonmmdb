@@ -9,8 +9,8 @@ suberror DiffDatabaseError {
 fn diff_database(
   path : String,
   side : String,
-  remaining : Int,
-) -> (@mmdb.Reader, Json, Int) raise {
+  remaining : Int32,
+) -> (@mmdb.Reader, Json, Int32) raise {
   let bytes = read_file(path, remaining) catch {
     CliError(code, message, line) =>
       raise CliError(code, side + " database: " + message, line)
@@ -20,16 +20,16 @@ fn diff_database(
   }
   let meta = reader.metadata()
   let provenance : Json = {
-    "bytes": bytes.length().to_json(),
-    "sha256": @crypto.bytes_to_hex_string(@crypto.sha256(bytes)).to_json(),
-    "database_type": meta.database_type.to_json(),
-    "build_epoch": meta.build_epoch.to_string().to_json(),
+    "bytes": @json.to_json(bytes.length()),
+    "sha256": @json.to_json(@crypto.bytes_to_hex_string(@crypto.sha256(bytes))),
+    "database_type": @json.to_json(meta.database_type),
+    "build_epoch": @json.to_json(meta.build_epoch.to_string()),
   }
   (reader, provenance, bytes.length())
 }
 
 ///|
-fn diff(args : Array[String]) -> Int raise {
+fn diff(args : Array[String]) -> Int32 raise {
   if args.length() < 5 || (args.length() - 5) % 2 != 0 {
     fail(
       "host-input-error", "Expected BEFORE AFTER INPUT and option/value pairs",
@@ -112,7 +112,7 @@ fn diff(args : Array[String]) -> Int raise {
         errors += 1
         code = 2
         emit({
-          "line": processed.to_json(),
+          "line": @json.to_json(processed),
           "status": "error",
           "code": "invalid-jsonl",
           "message": "Expected JSON object with IP string; nesting limit 128",
@@ -151,11 +151,11 @@ fn diff(args : Array[String]) -> Int raise {
   emit(
     {
       "status": "summary",
-      "processed": processed.to_json(),
-      "changed": changed.to_json(),
-      "unchanged": unchanged.to_json(),
-      "errors": errors.to_json(),
-      "fields": fields.to_json(),
+      "processed": @json.to_json(processed),
+      "changed": @json.to_json(changed),
+      "unchanged": @json.to_json(unchanged),
+      "errors": @json.to_json(errors),
+      "fields": @json.to_json(fields),
       "databases": { "before": before_info, "after": after_info },
     },
     channel=1,

@@ -2,7 +2,7 @@
 // Eagerly decode the UTF-8 scalar boundaries for an unretained text value.
 // No field or byte sequence is deferred; materializing a String is unnecessary
 // when no prepared pointer can return it. Bounds are checked by the decoder.
-fn valid_text_range(data : Bytes, start : Int, size : Int) -> Bool {
+fn valid_text_range(data : Bytes, start : Int32, size : Int32) -> Bool {
   let end = start + size
   let mut pos = start
   while pos < end {

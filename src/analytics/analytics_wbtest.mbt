@@ -1,5 +1,5 @@
 ///|
-fn state(top? : Int = 10, max_groups? : Int = 10000) -> Analyzer {
+fn state(top~ : Int32 = 10, max_groups~ : Int32 = 10000) -> Analyzer {
   {
     enricher: None,
     limits: { top, max_groups, },
@@ -16,7 +16,7 @@ fn state(top? : Int = 10, max_groups? : Int = 10000) -> Analyzer {
 }
 
 ///|
-fn selected(value : @mmdb.Value?, found? : Bool = true) -> @mmdb.SourceResult {
+fn selected(value : @mmdb.Value?, found~ : Bool = true) -> @mmdb.SourceResult {
   Selected({ record_found: found, prefix_length: 24, fields: [("", value)], })
 }
 
@@ -29,7 +29,7 @@ fn pair(
 }
 
 ///|
-fn row(country : String, asn : UInt) -> @mmdb.Enrichment {
+fn row(country : String, asn : UInt32) -> @mmdb.Enrichment {
   pair(selected(Some(Text(country))), selected(Some(Unsigned32(asn))))
 }
 

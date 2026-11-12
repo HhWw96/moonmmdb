@@ -1,1 +1,4 @@
-members = [".", "../../native_cli/vendor/x"]
+members = [
+  ".",
+  "../../native_cli/vendor/x",
+]

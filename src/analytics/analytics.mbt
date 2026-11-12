@@ -1,7 +1,8 @@
 ///|
+#derive(@debug.Debug)
 pub suberror AnalyticsError {
   AnalyticsError(String, String)
-} derive(@debug.Debug)
+}
 
 ///|
 pub fn AnalyticsError::code(self : AnalyticsError) -> String {
@@ -12,14 +13,19 @@ pub fn AnalyticsError::code(self : AnalyticsError) -> String {
 ///|
 pub fn AnalyticsError::to_json(self : AnalyticsError) -> Json {
   let AnalyticsError(code, message) = self
-  { "status": "error", "code": code.to_json(), "message": message.to_json() }
+  {
+    "status": "error",
+    "code": @json.to_json(code),
+    "message": @json.to_json(message),
+  }
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct AnalyticsLimits {
-  top : Int
-  max_groups : Int
-} derive(Eq, @debug.Debug)
+  top : Int32
+  max_groups : Int32
+}
 
 ///|
 pub fn AnalyticsLimits::default() -> AnalyticsLimits {
@@ -27,48 +33,54 @@ pub fn AnalyticsLimits::default() -> AnalyticsLimits {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct GroupCount {
   key : String
   count : UInt64
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct DimensionReport {
   counted : UInt64
   not_found : UInt64
   missing_field : UInt64
   type_error : UInt64
   query_error : UInt64
-  group_count : Int
+  group_count : Int32
   other_requests : UInt64
   top : Array[GroupCount]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct AnalyticsReport {
   requests : UInt64
   valid_ips : UInt64
   invalid_inputs : UInt64
-  exit_code : Int
+  exit_code : Int32
   country : DimensionReport
   asn : DimensionReport
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 pub fn DimensionReport::to_json(self : DimensionReport) -> Json {
   {
-    "counted": self.counted.to_string().to_json(),
-    "not_found": self.not_found.to_string().to_json(),
-    "missing_field": self.missing_field.to_string().to_json(),
-    "type_error": self.type_error.to_string().to_json(),
-    "query_error": self.query_error.to_string().to_json(),
-    "group_count": self.group_count.to_string().to_json(),
-    "other_requests": self.other_requests.to_string().to_json(),
-    "top": self.top
-    .map(fn(row) {
-      { "key": row.key.to_json(), "count": row.count.to_string().to_json() }
-    })
-    .to_json(),
+    "counted": @json.to_json(self.counted.to_string()),
+    "not_found": @json.to_json(self.not_found.to_string()),
+    "missing_field": @json.to_json(self.missing_field.to_string()),
+    "type_error": @json.to_json(self.type_error.to_string()),
+    "query_error": @json.to_json(self.query_error.to_string()),
+    "group_count": @json.to_json(self.group_count.to_string()),
+    "other_requests": @json.to_json(self.other_requests.to_string()),
+    "top": @json.to_json(
+      self.top.map(fn(row) {
+        {
+          "key": @json.to_json(row.key),
+          "count": @json.to_json(row.count.to_string()),
+        }
+      }),
+    ),
   }
 }
 
@@ -76,10 +88,10 @@ pub fn DimensionReport::to_json(self : DimensionReport) -> Json {
 pub fn AnalyticsReport::to_json(self : AnalyticsReport) -> Json {
   {
     "status": "complete",
-    "requests": self.requests.to_string().to_json(),
-    "valid_ips": self.valid_ips.to_string().to_json(),
-    "invalid_inputs": self.invalid_inputs.to_string().to_json(),
-    "exit_code": self.exit_code.to_json(),
+    "requests": @json.to_json(self.requests.to_string()),
+    "valid_ips": @json.to_json(self.valid_ips.to_string()),
+    "invalid_inputs": @json.to_json(self.invalid_inputs.to_string()),
+    "exit_code": @json.to_json(self.exit_code),
     "country": self.country.to_json(),
     "asn": self.asn.to_json(),
   }
@@ -95,7 +107,7 @@ pub struct Analyzer {
   priv mut total : UInt64
   priv mut valid : UInt64
   priv mut invalid : UInt64
-  priv mut exit_code : Int
+  priv mut exit_code : Int32
   priv groups : Array[Map[String, UInt64]]
   // counted, not found, missing field, type error, query error
   priv counts : Array[Array[UInt64]]
@@ -105,7 +117,7 @@ pub struct Analyzer {
 pub fn Analyzer::new(
   city : @mmdb.Reader,
   asn : @mmdb.Reader,
-  limits? : AnalyticsLimits = AnalyticsLimits::default(),
+  limits~ : AnalyticsLimits = AnalyticsLimits::default(),
 ) -> Analyzer raise AnalyticsError {
   if limits.top < 1 ||
     limits.top > 100 ||
@@ -177,7 +189,7 @@ fn Analyzer::incrementable(
 }
 
 ///|
-fn classify(result : @mmdb.SourceResult, dimension : Int) -> (Int, String?) {
+fn classify(result : @mmdb.SourceResult, dimension : Int32) -> (Int32, String?) {
   match result {
     Failed(_) => (4, None)
     Selected(p) => {
@@ -289,7 +301,7 @@ pub fn Analyzer::invalid_input(self : Analyzer) -> Unit raise AnalyticsError {
 }
 
 ///|
-fn Analyzer::dimension(self : Analyzer, i : Int) -> DimensionReport {
+fn Analyzer::dimension(self : Analyzer, i : Int32) -> DimensionReport {
   let rows = self.groups[i].iter().to_array()
   rows.sort_by(fn(a, b) {
     if a.1 > b.1 {

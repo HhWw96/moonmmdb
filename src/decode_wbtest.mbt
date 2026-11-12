@@ -1,7 +1,7 @@
 ///|
 fn decode_sample(
   bytes : Bytes,
-  limits? : Limits = Limits::default(),
+  limits~ : Limits = Limits::default(),
 ) -> Value raise MmdbError {
   decode(decoder(bytes, 0, bytes.length(), limits), 0, 0).0
 }
@@ -41,7 +41,7 @@ test "duplicate detection is unchanged across small-map optimization threshold" 
 fn decode_error(
   bytes : Bytes,
   code : String,
-  limits? : Limits = Limits::default(),
+  limits~ : Limits = Limits::default(),
 ) -> Unit raise {
   let actual = try {
     ignore(decode_sample(bytes, limits~))

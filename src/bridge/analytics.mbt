@@ -3,8 +3,8 @@
 pub fn analysis_start(
   city : Handle,
   asn : Handle,
-  top : Int,
-  max_groups : Int,
+  top : Int32,
+  max_groups : Int32,
   ip_path : String,
 ) -> @analytics_bridge.AnalysisHandle {
   match (city.reader, asn.reader) {
@@ -66,7 +66,7 @@ pub fn analysis_line_detailed(
 
 ///|
 #export_name("diagnostics_create")
-pub fn diagnostics_create(limit : Int) -> @analytics_bridge.DiagnosticBuffer {
+pub fn diagnostics_create(limit : Int32) -> @analytics_bridge.DiagnosticBuffer {
   @analytics_bridge.diagnostics_create(limit)
 }
 
@@ -75,9 +75,9 @@ pub fn diagnostics_create(limit : Int) -> @analytics_bridge.DiagnosticBuffer {
 pub fn diagnostics_add(
   buffer : @analytics_bridge.DiagnosticBuffer,
   outcome : String,
-  line : Int,
-  start : Int,
-  end : Int,
+  line : Int32,
+  start : Int32,
+  end : Int32,
 ) -> Unit {
   @analytics_bridge.diagnostics_add(buffer, outcome, line, start, end)
 }

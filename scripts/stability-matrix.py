@@ -12,6 +12,8 @@ out=ROOT/'verification/local'/('stability-'+args.workload);out.mkdir(parents=Tru
 config={'version':1,'sources':[{'name':'geo','database':str(ROOT/'verification/local/production/dbip-city-lite-2026-09.mmdb'),'fields':['/country/iso_code','/city/names/en']},{'name':args.workload,'database':str(ROOT/f'verification/local/production/dbip-{args.workload}-lite-2026-09.mmdb'),'fields':['/country/iso_code'] if args.workload=='country' else ['/autonomous_system_number','/autonomous_system_organization']}]}
 cp=out/'config.json';cp.write_text(json.dumps(config))
 report={'status':'running','node':'v24.20.0','environment':{'platform':platform.platform(),'processor':platform.processor()},'workload':args.workload,'baseline_tag':'v0.8.0','historical_environment_note':'2026-09-20 Windows/Node24.13.0 failure is retained. This paired comparison fixes Node24.20.0 and runs both revisions sequentially on this same runner; it is not an exact recreation of the old OS/machine/runtime.','runs':[]}
+report['toolchains']={name:subprocess.check_output([node,'scripts/moon.mjs','version','--all'],cwd=directory,text=True) for name,directory in [('baseline',baseline),('candidate',ROOT)]}
+report['compiler_scope']='Frozen v0.8.0 uses its original toolchain; candidate uses the current pinned toolchain. Node runtime and workload are identical; compiler output is not held constant.'
 try:
  for name,directory in [('baseline',baseline),('candidate-1',ROOT),('candidate-2',ROOT),('candidate-3',ROOT)]:
   (directory/'verification/local').mkdir(parents=True,exist_ok=True)

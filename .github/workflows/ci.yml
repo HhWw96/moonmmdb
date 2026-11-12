@@ -16,7 +16,7 @@ jobs:
         shell: bash
     runs-on: ${{ matrix.os }}
     env:
-      MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
+      MOONBIT_INSTALL_VERSION: 0.10.20+65efd5b93
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.0.0
@@ -53,7 +53,8 @@ jobs:
         run: |
           set -euo pipefail
           node scripts/moon.mjs test --target native -p HhWw96/moonmmdb --deny-warn
-          node scripts/moon.mjs test --target native --release -p HhWw96/moonmmdb --deny-warn
+          node scripts/moon.mjs check --target native --deny-warn
+          node scripts/moon.mjs test --target native --release --deny-warn
           node scripts/moon.mjs test --target native --release -p HhWw96/moonmmdb/geo --deny-warn
           node --input-type=module -e "import {runMoon} from './scripts/moon.mjs'; runMoon(['test','--target','native','--release','-p','local/moonmmdb_typed_example','--deny-warn'],'examples/typed_consumer');"
           node --input-type=module -e "import {runMoon} from './scripts/moon.mjs'; runMoon(['test','--target','native','--release','-p','local/moonmmdb_log_analytics','--deny-warn'],'examples/log_analytics');"

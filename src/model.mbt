@@ -1,31 +1,34 @@
 ///|
 /// A machine-readable code, byte offset (-1 for non-file errors), and reason.
+#derive(@debug.Debug)
 pub suberror MmdbError {
-  MmdbError(String, Int, String)
-} derive(@debug.Debug)
+  MmdbError(String, Int32, String)
+}
 
 ///|
 /// Values retain their MMDB type. UInt128 is an exact decimal string.
+#derive(Eq, @debug.Debug)
 pub(all) enum Value {
   Text(String)
   Blob(Bytes)
   Boolean(Bool)
-  Unsigned16(UInt)
-  Unsigned32(UInt)
-  Signed32(Int)
+  Unsigned16(UInt32)
+  Unsigned32(UInt32)
+  Signed32(Int32)
   Unsigned64(UInt64)
   Unsigned128(String)
   Real32(Float32Value)
   Real64(Float64Value)
   List(Array[Value])
   Object(Array[(String, Value)])
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 /// Keep encoded bits authoritative; converting a signaling NaN can quiet it.
+#derive(Eq, @debug.Debug)
 pub(all) struct Float32Value {
-  bits : UInt
-} derive(Eq, @debug.Debug)
+  bits : UInt32
+}
 
 ///|
 pub fn Float32Value::number(self : Float32Value) -> Float {
@@ -33,9 +36,10 @@ pub fn Float32Value::number(self : Float32Value) -> Float {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct Float64Value {
   bits : UInt64
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 pub fn Float64Value::number(self : Float64Value) -> Double {
@@ -44,12 +48,13 @@ pub fn Float64Value::number(self : Float64Value) -> Double {
 
 ///|
 /// Limits apply independently to each open or lookup operation.
+#derive(Eq, @debug.Debug)
 pub(all) struct Limits {
-  max_depth : Int
-  max_values : Int
-  max_payload_bytes : Int
-  max_file_bytes : Int
-} derive(Eq, @debug.Debug)
+  max_depth : Int32
+  max_values : Int32
+  max_payload_bytes : Int32
+  max_file_bytes : Int32
+}
 
 ///|
 pub fn Limits::default() -> Limits {
@@ -62,37 +67,39 @@ pub fn Limits::default() -> Limits {
 }
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct Metadata {
-  node_count : UInt
-  record_size : Int
-  ip_version : Int
+  node_count : UInt32
+  record_size : Int32
+  ip_version : Int32
   database_type : String
-  format_major : Int
-  format_minor : Int
+  format_major : Int32
+  format_minor : Int32
   build_epoch : UInt64
   raw : Value
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 /// Opaque, reusable reader; opening validates metadata and section boundaries.
 pub struct Reader {
   priv data : Bytes
   priv meta : Metadata
-  priv tree_end : Int
-  priv data_end : Int
+  priv tree_end : Int32
+  priv data_end : Int32
   priv limits : Limits
 }
 
 ///|
 /// A missing record is distinct from an error. Prefix is in the input family.
+#derive(Eq, @debug.Debug)
 pub(all) struct Lookup {
   value : Value?
-  prefix_length : Int
-} derive(Eq, @debug.Debug)
+  prefix_length : Int32
+}
 
 ///|
 pub fn version() -> String {
-  "0.9.4"
+  "0.9.5"
 }
 
 ///|
@@ -127,7 +134,7 @@ pub fn MmdbError::code(self : MmdbError) -> String {
 }
 
 ///|
-pub fn MmdbError::offset(self : MmdbError) -> Int {
+pub fn MmdbError::offset(self : MmdbError) -> Int32 {
   let MmdbError(_, offset, _) = self
   offset
 }

@@ -19,7 +19,7 @@ pub struct Analytics {
   priv mut total : UInt64
   priv mut valid : UInt64
   priv mut invalid : UInt64
-  priv mut exit_code : Int
+  priv mut exit_code : Int32
   priv groups : Array[Map[String, UInt64]]
   priv counts : Array[Counts]
 }
@@ -166,11 +166,11 @@ fn top(groups : Map[String, UInt64]) -> Json {
   let output : Array[Json] = []
   for i in 0..<rows.length().min(10) {
     output.push({
-      "key": rows[i].0.to_json(),
-      "count": rows[i].1.to_string().to_json(),
+      "key": @json.to_json(rows[i].0),
+      "count": @json.to_json(rows[i].1.to_string()),
     })
   }
-  output.to_json()
+  @json.to_json(output)
 }
 
 ///|
@@ -183,21 +183,21 @@ pub fn Analytics::analytics_result(self : Analytics) -> String {
   for i in 0..<2 {
     let c = self.counts[i]
     sources[if i == 0 { "geo" } else { "asn" }] = {
-      "found": c.found.to_string().to_json(),
-      "not_found": c.not_found.to_string().to_json(),
-      "errors": c.errors.to_string().to_json(),
-      "missing_fields": c.missing.to_string().to_json(),
+      "found": @json.to_json(c.found.to_string()),
+      "not_found": @json.to_json(c.not_found.to_string()),
+      "errors": @json.to_json(c.errors.to_string()),
+      "missing_fields": @json.to_json(c.missing.to_string()),
     }
   }
   let output : Json = {
     "status": "summary",
-    "exit_code": self.exit_code.to_json(),
-    "requests": self.total.to_string().to_json(),
-    "valid_ips": self.valid.to_string().to_json(),
-    "invalid_inputs": self.invalid.to_string().to_json(),
+    "exit_code": @json.to_json(self.exit_code),
+    "requests": @json.to_json(self.total.to_string()),
+    "valid_ips": @json.to_json(self.valid.to_string()),
+    "invalid_inputs": @json.to_json(self.invalid.to_string()),
     "country_top10": top(self.groups[0]),
     "asn_top10": top(self.groups[1]),
-    "sources": sources.to_json(),
+    "sources": @json.to_json(sources),
   }
   output.stringify()
 }

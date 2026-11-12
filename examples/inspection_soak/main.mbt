@@ -3,21 +3,21 @@ extern "C" fn host_init() -> Unit = "mm_cli_init"
 
 ///|
 #borrow(fallback)
-extern "C" fn arg(index : Int, fallback : String) -> String = "mm_cli_arg"
+extern "C" fn arg(index : Int32, fallback : String) -> String = "mm_cli_arg"
 
 ///|
 #borrow(path)
-extern "C" fn read(path : Bytes, limit : Int) -> Bytes = "mm_cli_read"
+extern "C" fn read(path : Bytes, limit : Int32) -> Bytes = "mm_cli_read"
 
 ///|
 #borrow(path)
-extern "C" fn input(path : Bytes, limit : Int, line_limit : Int) -> Unit = "mm_cli_open"
+extern "C" fn input(path : Bytes, limit : Int32, line_limit : Int32) -> Unit = "mm_cli_open"
 
 ///|
-extern "C" fn line(limit : Int) -> Bytes = "mm_cli_line"
+extern "C" fn line(limit : Int32) -> Bytes = "mm_cli_line"
 
 ///|
-extern "C" fn error() -> Int = "mm_cli_error"
+extern "C" fn error() -> Int32 = "mm_cli_error"
 
 ///|
 extern "C" fn close() -> Unit = "mm_cli_close"
@@ -65,8 +65,8 @@ fn main raise {
     let checked = asn.validate(decode_data=true)
     let value : Json = {
       "status": "tick",
-      "checked_nodes": checked.checked_nodes.to_json(),
-      "decoded_records": checked.decoded_records.to_json(),
+      "checked_nodes": @json.to_json(checked.checked_nodes),
+      "decoded_records": @json.to_json(checked.decoded_records),
       "cursors": 8,
     }
     println(value.stringify())

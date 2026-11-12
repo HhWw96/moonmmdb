@@ -8,7 +8,7 @@
 | Python 参考读取器 | maxminddb 3.2.0，https://github.com/maxmind/MaxMind-DB-Reader-python | Apache-2.0；仅在验证环境使用，不作为运行时依赖 |
 | MoonBit core | 官方工具链 core 包 | Apache-2.0；使用 UTF-8、JSON、数值等基础能力 |
 | 真实验证数据库 | DB-IP Lite Country / City / ASN，2026-09；https://db-ip.com/db/lite.php | CC BY 4.0；署名 IP Geolocation by DB-IP https://db-ip.com/；原始数据库只存本地忽略目录，工程交付包包含来源与固定散列值及下载脚本 |
-| Native C 编译工具 | w64devkit 2.10.0 / GCC 16.2.0；https://github.com/skeeto/w64devkit/releases/tag/v2.10.0 | 外部验证工具，不捆绑工具链；各组件遵循上游各自许可证，GCC 运行库例外按上游条款适用 |
+| Native C 编译工具 | 当前 Windows 源码构建使用 Microsoft MSVC Build Tools + Windows SDK；Linux 使用 GCC；历史 0.9.4 使用 w64devkit 2.10.0 / GCC 16.2.0 | 编译器不捆绑分发；Microsoft CRT 及 GCC 运行库遵循各自分发条款，项目自身源码为 Apache-2.0 |
 | 编译工具解压器 | 7-Zip Reduced 26.03；https://www.7-zip.org/ | 仅在忽略目录解压固定散列值的工具归档，不作为项目运行时依赖 |
 
 MaxMind 测试数据版权归 MaxMind, Inc.。完整固定语料及原始 source-data JSON 的散列值在 tests/fixtures/corpus.json；既有分组清单继续保留。项目未捆绑生产 GeoLite2/GeoIP2 全量数据库。
@@ -23,7 +23,7 @@ tests/scenarios 中的四份数据库由本项目 scripts/prepare-scenarios.py �
 
 Native 工具使用 `moonbitlang/x@0.5.5` crypto 源码（International Digital Economy Academy，Apache-2.0）。历史版本为适配 MoonBit 0.10.11 将 AES 四处数组构造改为 `Array::new`；0.9.3 使用 MoonBit 0.10.14 后恢复上游数组语法，并在 `aes.mbt` 顶部保留显著的修改说明。SHA-256 与 AES 算法未改动。包内的 PROVENANCE.json 记录上游 URL、原始及本地文件散列。没有修改用户的全局包缓存，也没有增加核心读取库的依赖。源码子集不包含上游测试与基准，项目另验 SHA-256 标准向量。
 
-Native 分发包附带 MoonBit core 的 Apache-2.0 许可证、MinGW-w64 运行库声明，以及 GCC GPLv3 和 Runtime Library Exception 3.1 文本。GCC 工具链本身不随程序分发。文本分别取自固定工具链、官方 core 和 gcc-mirror/gcc 的 COPYING3 / COPYING.RUNTIME。二进制附带源码仓库地址，可核对构建版本与第三方修改。
+Native 分发包附带 MoonBit core 的 Apache-2.0 许可证。Windows 维护构建使用 MSVC 静态运行库（/MT），相关声明见 `native_cli/licenses/Microsoft-Visual-C-Runtime.txt`。原有 MinGW-w64、GCC GPLv3 和 Runtime Library Exception 3.1 文本保留，用于历史 Windows 版本和 Linux GCC 构建。GCC 工具链本身不随程序分发。文本分别取自固定工具链、官方 core 和 gcc-mirror/gcc 的 COPYING3 / COPYING.RUNTIME。二进制附带源码仓库地址，可核对构建版本与第三方修改。
 # 浏览器界面依赖
 
 浏览器模块的 React、React DOM 和 Scheduler 使用 MIT 许可证，版本和完整性固定在 `web/package-lock.json`。离线 HTML 内置对应许可证全文；不依赖 CDN。Vite、TypeScript、Playwright 仅用于构建或验证，不参与 MMDB 查询算法。内置数据库使用项目人工生成器，遵循本项目 Apache-2.0；不嵌入生产数据库。

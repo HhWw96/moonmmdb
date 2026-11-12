@@ -1,4 +1,5 @@
 import {
+  "moonbitlang/core/json",
   "HhWw96/moonmmdb" @mmdb,
 }
 

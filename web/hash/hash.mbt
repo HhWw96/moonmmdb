@@ -1,10 +1,14 @@
 ///|
 #export_name("hash_create")
-pub fn hash_create() -> @crypto.SHA256 { @crypto.SHA256::new() }
+pub fn hash_create() -> @crypto.SHA256 {
+  @crypto.SHA256::new()
+}
 
 ///|
 #export_name("hash_update")
-pub fn hash_update(hash : @crypto.SHA256, bytes : Bytes) -> Unit { hash.update(bytes) }
+pub fn hash_update(hash : @crypto.SHA256, bytes : Bytes) -> Unit {
+  hash.update(bytes)
+}
 
 ///|
 #export_name("hash_finish")

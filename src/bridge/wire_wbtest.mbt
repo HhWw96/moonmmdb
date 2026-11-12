@@ -70,7 +70,7 @@ test "wire writer matches JSON escaping for every control character" {
     let text = "before" + code.unsafe_to_char().to_string() + "after😀"
     let out = StringBuilder()
     wire_string(out, text)
-    assert_eq(out.to_string(), text.to_json().stringify())
+    assert_eq(out.to_string(), @json.to_json(text).stringify())
   }
 }
 

@@ -16,7 +16,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 145
     env:
-      MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
+      MOONBIT_INSTALL_VERSION: 0.10.20+65efd5b93
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/checkout@v7.0.1
@@ -44,8 +44,29 @@ jobs:
           set -euo pipefail
           curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- "$MOONBIT_INSTALL_VERSION"
           echo "$HOME/.moon/bin" >> "$GITHUB_PATH"
+      # The frozen v0.8.0 reader requires its original compiler. Do not rewrite it.
+      - name: Install isolated historical baseline toolchain (Windows)
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $env:MOON_HOME = Join-Path $env:RUNNER_TEMP 'moon-v0.8.0'
+          $env:MOONBIT_INSTALL_VERSION = '0.10.11+6ff76a5f9'
+          Invoke-RestMethod https://cli.moonbitlang.com/install/powershell.ps1 | Invoke-Expression
+          node -e 'require("fs").writeFileSync("verification/local/baseline/.local-toolchain.json",JSON.stringify({moonHome:process.env.MOON_HOME}))'
+          Remove-Item Env:MOON_HOME
+      - name: Install isolated historical baseline toolchain (Linux)
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          export MOON_HOME="$RUNNER_TEMP/moon-v0.8.0"
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- '0.10.11+6ff76a5f9'
+          node -e 'require("fs").writeFileSync("verification/local/baseline/.local-toolchain.json",JSON.stringify({moonHome:process.env.MOON_HOME}))'
       - name: Build both revisions and verify fixed database bytes
         run: |
+          node scripts/moon.mjs version --all
+          node verification/local/baseline/scripts/moon.mjs version --all
           node scripts/build.mjs
           node verification/local/baseline/scripts/build.mjs
           python scripts/download-production.py

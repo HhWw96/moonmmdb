@@ -20,7 +20,7 @@ test "task policy rejects extra path, duplicate role, version and deep documents
       { "role": "before", "name": "sample" },
     ] {
     let task = sample_task()
-    obj(task)["files"] = [replacement].to_json()
+    obj(task)["files"] = @json.to_json([replacement])
     let accepted = try {
       ignore(check_task(task))
       true
@@ -53,7 +53,7 @@ test "precise counters reject signs leading zeros fractions and overflow" {
   assert_eq(decimal("18446744073709551615"), 18446744073709551615UL)
   for text in ["-1", "01", "1.0", "18446744073709551616", ""] {
     let accepted = try {
-      ignore(decimal(text.to_json()))
+      ignore(decimal(@json.to_json(text)))
       true
     } catch {
       _ => false
@@ -112,7 +112,7 @@ test "constructed reports obey the same depth cap as parsed reports" {
   let report = complete_report()
   let mut value : Json = "leaf"
   for _ in 0..<129 {
-    value = [value].to_json()
+    value = @json.to_json([value])
   }
   obj(report)["extra"] = value
   let accepted = try {

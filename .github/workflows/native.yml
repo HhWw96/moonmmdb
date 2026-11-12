@@ -19,7 +19,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 60
     env:
-      MOONBIT_INSTALL_VERSION: 0.10.14+7d59c7ec9
+      MOONBIT_INSTALL_VERSION: 0.10.20+65efd5b93
     steps:
       - uses: actions/checkout@v7.0.1
       - uses: actions/setup-node@v7.0.0
@@ -47,7 +47,7 @@ jobs:
         run: |
           node scripts/build.mjs
           node scripts/native-build.mjs
-          node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs'; import {runMoon} from './scripts/moon.mjs'; nativeToolchain();runMoon(['fmt','--check'],'native_cli');runMoon(['test','--target','native','--release','-p','local/moonmmdb_native_cli','--deny-warn'],'native_cli');runMoon(['test','--target','native','--release','-p','HhWw96/moonmmdb','--deny-warn']);"
+          node --input-type=module -e "import {nativeToolchain} from './scripts/native-build.mjs'; import {runMoon} from './scripts/moon.mjs'; nativeToolchain();runMoon(['fmt','.','--check'],'native_cli');runMoon(['test','--target','native','--release','-p','local/moonmmdb_native_cli','--deny-warn'],'native_cli');runMoon(['check','--target','native','--deny-warn']);runMoon(['test','--target','native','--release','--deny-warn']);"
       - name: Native parity, transport and 100000 lines
         run: |
           node scripts/native-cli-verify.mjs

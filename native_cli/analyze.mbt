@@ -1,21 +1,21 @@
 ///|
-extern "C" fn host_raw_line(max_bytes : Int) -> Bytes = "mm_cli_raw_line"
+extern "C" fn host_raw_line(max_bytes : Int32) -> Bytes = "mm_cli_raw_line"
 
 ///|
 fn analysis_database(reader : @mmdb.Reader, bytes : Bytes) -> Json {
   let meta = reader.metadata()
   {
-    "database_type": meta.database_type.to_json(),
-    "build_epoch": meta.build_epoch.to_string().to_json(),
-    "bytes": bytes.length().to_string().to_json(),
-    "sha256": @crypto.bytes_to_hex_string(@crypto.sha256(bytes)).to_json(),
+    "database_type": @json.to_json(meta.database_type),
+    "build_epoch": @json.to_json(meta.build_epoch.to_string()),
+    "bytes": @json.to_json(bytes.length().to_string()),
+    "sha256": @json.to_json(@crypto.bytes_to_hex_string(@crypto.sha256(bytes))),
   }
 }
 
 ///|
 fn analyze_report(
   args : Array[String],
-  expected? : Array[Json] = [],
+  expected~ : Array[Json] = [],
 ) -> Json raise {
   if args.length() < 5 || args.length() % 2 != 1 {
     fail("host-input-error", "Expected CITY ASN INPUT and option/value pairs")
@@ -128,33 +128,33 @@ fn analyze_report(
     "analysis-error",
   )
   if result.get("status") == Some("error") {
-    check_analysis(result.to_json().stringify())
+    check_analysis(@json.to_json(result).stringify())
   }
-  result["tool_version"] = "0.9.4"
+  result["tool_version"] = "0.9.5"
   result["parameters"] = {
-    "ip_path": ip_path.to_json(),
-    "top": top.to_json(),
-    "max_groups": max_groups.to_json(),
-    "max_records": max_records.to_json(),
-    "max_input_bytes": max_bytes.to_json(),
-    "max_line_bytes": max_line.to_json(),
+    "ip_path": @json.to_json(ip_path),
+    "top": @json.to_json(top),
+    "max_groups": @json.to_json(max_groups),
+    "max_records": @json.to_json(max_records),
+    "max_input_bytes": @json.to_json(max_bytes),
+    "max_line_bytes": @json.to_json(max_line),
     "max_json_depth": 128,
   }
   result["databases"] = databases
   result["input"] = {
-    "bytes": input_bytes.to_string().to_json(),
-    "sha256": @crypto.bytes_to_hex_string(hash.finalize()).to_json(),
+    "bytes": @json.to_json(input_bytes.to_string()),
+    "sha256": @json.to_json(@crypto.bytes_to_hex_string(hash.finalize())),
   }
   if diagnostic_limit > 0 {
     result["diagnostics"] = diagnostics.to_json()
     let parameters = object(result["parameters"], "analysis-error")
-    parameters["diagnostic_limit"] = diagnostic_limit.to_json()
+    parameters["diagnostic_limit"] = @json.to_json(diagnostic_limit)
   }
-  result.to_json()
+  @json.to_json(result)
 }
 
 ///|
-fn analyze(args : Array[String]) -> Int raise {
+fn analyze(args : Array[String]) -> Int32 raise {
   let result = analyze_report(args)
   emit(result)
   @workflow.integer(@workflow.get(result, "exit_code"), 0, 2)

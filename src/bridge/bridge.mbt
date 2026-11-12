@@ -51,7 +51,6 @@ pub fn lookup(handle : Handle, ip : String) -> String {
 }
 
 ///|
-#export_name("project")
 pub fn project(handle : Handle, ip : String, paths : Array[String]) -> String {
   match handle.reader {
     Some(reader) =>
@@ -63,7 +62,6 @@ pub fn project(handle : Handle, ip : String, paths : Array[String]) -> String {
 }
 
 ///|
-#export_name("validate_paths")
 pub fn validate_paths(paths : Array[String]) -> String {
   try {
     @mmdb.validate_paths(paths)
@@ -81,7 +79,6 @@ pub struct SelectionHandle {
 }
 
 ///|
-#export_name("prepare_fields")
 pub fn prepare_fields(paths : Array[String]) -> SelectionHandle {
   { selector: Some(@mmdb.prepare_fields(paths)), error: None, } catch {
     e => { selector: None, error: Some(e.to_json().stringify()), }
@@ -149,7 +146,6 @@ pub struct EnrichmentHandle {
 }
 
 ///|
-#export_name("prepare_enrichment")
 pub fn prepare_enrichment(
   names : Array[String],
   readers : Array[Handle],
@@ -195,4 +191,41 @@ pub fn enrich_ip(handle : EnrichmentHandle, ip : String) -> String {
       }
     None => handle.error.unwrap()
   }
+}
+
+///|
+/// Keep JavaScript arrays at the FFI boundary; Array has an opaque runtime layout.
+#export_name("project")
+pub fn project_js(
+  handle : Handle,
+  ip : String,
+  paths : FixedArray[String],
+) -> String {
+  project(handle, ip, paths.iter().collect())
+}
+
+///|
+#export_name("validate_paths")
+pub fn validate_paths_js(paths : FixedArray[String]) -> String {
+  validate_paths(paths.iter().collect())
+}
+
+///|
+#export_name("prepare_fields")
+pub fn prepare_fields_js(paths : FixedArray[String]) -> SelectionHandle {
+  prepare_fields(paths.iter().collect())
+}
+
+///|
+#export_name("prepare_enrichment")
+pub fn prepare_enrichment_js(
+  names : FixedArray[String],
+  readers : FixedArray[Handle],
+  fields : FixedArray[SelectionHandle],
+) -> EnrichmentHandle {
+  prepare_enrichment(
+    names.iter().collect(),
+    readers.iter().collect(),
+    fields.iter().collect(),
+  )
 }

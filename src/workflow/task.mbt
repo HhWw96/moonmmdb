@@ -9,7 +9,7 @@ pub fn WorkflowError::to_json(self : WorkflowError) -> Json {
   {
     "status": "error",
     "code": "invalid-workflow",
-    "message": message.to_json(),
+    "message": @json.to_json(message),
   }
 }
 
@@ -54,9 +54,9 @@ pub fn get(value : Json, key : String) -> Json raise WorkflowError {
 ///|
 pub fn integer(
   value : Json,
-  minimum : Int,
-  maximum : Int,
-) -> Int raise WorkflowError {
+  minimum : Int32,
+  maximum : Int32,
+) -> Int32 raise WorkflowError {
   match value {
     Number(n, ..) => {
       if n < minimum.to_double() ||
@@ -141,7 +141,7 @@ pub fn check_hash(value : Json) -> Unit raise WorkflowError {
 
 ///|
 #warnings("-deprecated")
-pub fn parse_json(text : String, max_bytes : Int) -> Json raise WorkflowError {
+pub fn parse_json(text : String, max_bytes : Int32) -> Json raise WorkflowError {
   if @utf8.encode(text[:]).length() > max_bytes {
     reject("Document exceeds byte limit")
   }

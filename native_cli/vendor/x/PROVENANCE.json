@@ -89,5 +89,6 @@
       "upstream_sha256": "6bf70292a2376a277b19a2436558b0d0a8aa8b0826711ab2f93dcadf4fdda2b8",
       "local_sha256": "6bf70292a2376a277b19a2436558b0d0a8aa8b0826711ab2f93dcadf4fdda2b8"
     }
-  ]
+  ],
+  "manifest_patch": "2026-11 maintenance: restrict the v128 import to native/wasm, matching existing source cfg. All crypto implementation file bytes are retained."
 }
