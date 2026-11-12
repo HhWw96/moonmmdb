@@ -7,12 +7,17 @@ priv struct Address {
 
 ///|
 fn ipv4(text : String) -> Array[Int32] raise MmdbError {
-  let parts = text.split(".").to_array()
-  if parts.length() != 4 {
+  let mut dots = 0
+  for i in 0..<text.length() {
+    if text[i] == '.' {
+      dots = dots + 1
+    }
+  }
+  if dots != 3 {
     raise MmdbError("invalid-ip", -1, "Expected four IPv4 octets")
   }
-  let result : Array[Int32] = []
-  for part in parts {
+  let result : Array[Int32] = Array(capacity=4)
+  for part in text.split(".") {
     if part.length() == 0 ||
       part.length() > 3 ||
       (part.length() > 1 && part[0] == '0') {
@@ -62,12 +67,12 @@ fn ipv6_groups(
   if text.is_empty() {
     return []
   }
-  let parts = text.split(":").to_array()
-  let result : Array[Int32] = []
-  for i in 0..<parts.length() {
-    let p = parts[i]
+  let result : Array[Int32] = Array(capacity=8)
+  let mut consumed = 0
+  for p in text.split(":") {
+    consumed = consumed + p.length()
     if p.contains(".") {
-      if !allow_v4 || i != parts.length() - 1 {
+      if !allow_v4 || consumed != text.length() {
         raise MmdbError("invalid-ip", -1, "IPv4 tail must be last")
       }
       let tail = ipv4(p.to_owned())
@@ -76,6 +81,7 @@ fn ipv6_groups(
     } else {
       result.push(hex_group(p))
     }
+    consumed = consumed + 1
   }
   result
 }
@@ -89,7 +95,7 @@ fn parse_ip(text : String) -> Address raise MmdbError {
     return { bytes: ipv4(text), version: 4, }
   }
   let halves = text.split("::").to_array()
-  let groups : Array[Int32] = []
+  let groups : Array[Int32] = Array(capacity=8)
   if halves.length() == 1 {
     let whole = ipv6_groups(text[:], true)
     if whole.length() != 8 {
@@ -116,7 +122,7 @@ fn parse_ip(text : String) -> Address raise MmdbError {
   } else {
     raise MmdbError("invalid-ip", -1, "Multiple IPv6 compressions")
   }
-  let bytes : Array[Int32] = []
+  let bytes : Array[Int32] = Array(capacity=16)
   for n in groups {
     bytes.push(n >> 8)
     bytes.push(n & 255)
