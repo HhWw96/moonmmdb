@@ -3,7 +3,7 @@ import {resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {root,runMoon} from './moon.mjs';
 
-export const MOONBIT_VERSION='0.10.14+7d59c7ec9';
+export const MOONBIT_VERSION='0.10.20+65efd5b93';
 export function assertToolchain(output=runMoon(['version','--all'],root,true)) {
   const actual=output.match(/^moonc v([^\s]+)/m)?.[1];
   if(actual!==MOONBIT_VERSION)throw new Error(`Expected pinned moonc ${MOONBIT_VERSION}; found ${actual??'unknown'}`);

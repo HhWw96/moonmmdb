@@ -1,0 +1,18 @@
+Microsoft Visual C++ Runtime notice
+
+The Windows maintenance build uses the MSVC-compatible C compiler and static
+release C runtime selected by MoonBit (/MT). Microsoft compiler, SDK and runtime
+components are not licensed under MoonMMDB's Apache-2.0 license. Their use and
+redistribution remain subject to the applicable Microsoft Software License Terms.
+The compiler and Windows SDK themselves are not included in the distribution.
+
+Copyright Microsoft Corporation. All rights reserved.
+
+Official license and redistributable references:
+https://visualstudio.microsoft.com/license-terms/
+https://learn.microsoft.com/en-us/visualstudio/releases/2022/redistribution
+https://learn.microsoft.com/en-us/cpp/windows/redistributing-visual-cpp-files
+
+The package validation records imported DLL names and tests the extracted
+executable with developer tools removed from PATH. Historical MinGW and GCC
+notices are retained separately for the releases and platforms that used them.

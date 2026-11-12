@@ -36,7 +36,7 @@ pub fn Analyzer::push_detailed(
         let (category, _) = classify(source.1, i)
         if category != 0 {
           let fields : Map[String, Json] = Map([
-            ("dimension", source.0.to_json()),
+            ("dimension", @json.to_json(source.0)),
             (
               "category",
               match category {
@@ -48,13 +48,13 @@ pub fn Analyzer::push_detailed(
             ),
           ])
           if source.1 is Failed(e) {
-            fields["code"] = e.code().to_json()
-            fields["database_offset"] = e.offset().to_json()
+            fields["code"] = @json.to_json(e.code())
+            fields["database_offset"] = @json.to_json(e.offset())
           }
-          issues.push(fields.to_json())
+          issues.push(@json.to_json(fields))
         }
       }
-      { details: { "input": "valid", "issues": issues.to_json() }, }
+      { details: { "input": "valid", "issues": @json.to_json(issues) }, }
     }
   }
 }

@@ -1,17 +1,17 @@
 ///|
 /// IP parsing is strict: no DNS, zones, CIDR suffixes, brackets or octal IPv4.
 priv struct Address {
-  bytes : Array[Int]
-  version : Int
+  bytes : Array[Int32]
+  version : Int32
 }
 
 ///|
-fn ipv4(text : String) -> Array[Int] raise MmdbError {
+fn ipv4(text : String) -> Array[Int32] raise MmdbError {
   let parts = text.split(".").to_array()
   if parts.length() != 4 {
     raise MmdbError("invalid-ip", -1, "Expected four IPv4 octets")
   }
-  let result : Array[Int] = []
+  let result : Array[Int32] = []
   for part in parts {
     if part.length() == 0 ||
       part.length() > 3 ||
@@ -34,7 +34,7 @@ fn ipv4(text : String) -> Array[Int] raise MmdbError {
 }
 
 ///|
-fn hex_group(text : StringView) -> Int raise MmdbError {
+fn hex_group(text : StringView) -> Int32 raise MmdbError {
   if text.length() == 0 || text.length() > 4 {
     raise MmdbError("invalid-ip", -1, "Invalid IPv6 group")
   }
@@ -58,12 +58,12 @@ fn hex_group(text : StringView) -> Int raise MmdbError {
 fn ipv6_groups(
   text : StringView,
   allow_v4 : Bool,
-) -> Array[Int] raise MmdbError {
+) -> Array[Int32] raise MmdbError {
   if text.is_empty() {
     return []
   }
   let parts = text.split(":").to_array()
-  let result : Array[Int] = []
+  let result : Array[Int32] = []
   for i in 0..<parts.length() {
     let p = parts[i]
     if p.contains(".") {
@@ -89,7 +89,7 @@ fn parse_ip(text : String) -> Address raise MmdbError {
     return { bytes: ipv4(text), version: 4, }
   }
   let halves = text.split("::").to_array()
-  let groups : Array[Int] = []
+  let groups : Array[Int32] = []
   if halves.length() == 1 {
     let whole = ipv6_groups(text[:], true)
     if whole.length() != 8 {
@@ -116,7 +116,7 @@ fn parse_ip(text : String) -> Address raise MmdbError {
   } else {
     raise MmdbError("invalid-ip", -1, "Multiple IPv6 compressions")
   }
-  let bytes : Array[Int] = []
+  let bytes : Array[Int32] = []
   for n in groups {
     bytes.push(n >> 8)
     bytes.push(n & 255)

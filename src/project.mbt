@@ -1,10 +1,11 @@
 ///|
 /// A projected record keeps an IP miss distinct from an absent field.
+#derive(Eq, @debug.Debug)
 pub(all) struct Projection {
   record_found : Bool
-  prefix_length : Int
+  prefix_length : Int32
   fields : Array[(String, Value?)]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 fn pointer_tokens(pointer : String) -> Array[String] raise MmdbError {
@@ -102,8 +103,8 @@ pub fn Value::at_pointer(
 
 ///|
 priv struct SelectionBudget {
-  mut values : Int
-  mut payload : Int
+  mut values : Int32
+  mut payload : Int32
 }
 
 ///|
@@ -265,8 +266,14 @@ pub fn Projection::to_json(self : Projection) -> Json {
     }
   }
   {
-    "status": (if self.record_found { "found" } else { "not_found" }).to_json(),
-    "prefix_length": self.prefix_length.to_json(),
+    "status": @json.to_json(
+      if self.record_found {
+        "found"
+      } else {
+        "not_found"
+      },
+    ),
+    "prefix_length": @json.to_json(self.prefix_length),
     "fields": Json::object(fields),
   }
 }

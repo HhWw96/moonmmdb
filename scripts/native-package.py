@@ -46,10 +46,9 @@ platform='windows-x64' if os.name=='nt' else 'linux-x64';name='moonmmdb-'+VERSIO
 exe=ROOT/'dist'/('moonmmdb.exe' if os.name=='nt' else 'moonmmdb')
 report={'status':'running','platform':platform,'executable_sha256':digest(exe)}
 if os.name=='nt':
- tool=ROOT/'verification/local/toolchains/extracted/w64devkit/bin/objdump.exe'
- output=subprocess.check_output([str(tool),'-p',str(exe)],text=True,encoding='utf-8',errors='replace')
- imports=re.findall(r'DLL Name:\s*(\S+)',output);assert imports
- allowed={'kernel32.dll','msvcrt.dll','advapi32.dll','bcrypt.dll','user32.dll','shell32.dll'}
+ from pe_imports import pe_imports
+ imports=pe_imports(exe);assert imports
+ allowed={'kernel32.dll','msvcrt.dll','advapi32.dll','bcrypt.dll','user32.dll','shell32.dll','dbghelp.dll','ws2_32.dll','crypt32.dll','secur32.dll','iphlpapi.dll','ole32.dll','oleaut32.dll','ntdll.dll'}
  assert all(d.lower() in allowed for d in imports),imports
  report['system_dlls']=imports;report['dynamic_system_dll']='shell32.dll (Unicode argv via Windows API)'
 else:

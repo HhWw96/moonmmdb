@@ -2,9 +2,9 @@
 // Tiny hand-specified graphs, independent of production encoders. All data
 // terminals reference a text scalar; physical orphan nodes are deliberate.
 fn graph_reader(
-  edges : Array[(UInt, UInt)],
-  ipv? : Int = 4,
-  payload? : Bytes = b"\x41x",
+  edges : Array[(UInt32, UInt32)],
+  ipv~ : Int32 = 4,
+  payload~ : Bytes = b"\x41x",
 ) -> Reader raise MmdbError {
   let original = open_bytes(fixture_ipv4_24())
   let tree_end = edges.length() * 6

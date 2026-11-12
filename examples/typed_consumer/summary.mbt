@@ -21,7 +21,6 @@ fn country_label(country : @geo.Country?, locale : String) -> Json {
 
 ///|
 /// One Reader per batch. Host supplies bytes, addresses and locale only.
-#export_name("summarize")
 pub fn summarize(
   bytes : Bytes,
   ips : Array[String],
@@ -93,4 +92,15 @@ pub fn summarize(
     e => return e.to_json().stringify()
   }
   Json::array(results).stringify()
+}
+
+///|
+#export_name("summarize")
+pub fn summarize_js(
+  bytes : Bytes,
+  ips : FixedArray[String],
+  kind : String,
+  locale : String,
+) -> String {
+  summarize(bytes, ips.iter().collect(), kind, locale)
 }

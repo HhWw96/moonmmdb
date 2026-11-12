@@ -5,22 +5,16 @@ import {fileURLToPath} from 'node:url';
 import {root,runMoon} from './moon.mjs';
 import {sourceFingerprint,sha256} from './evidence.mjs';
 import {assertToolchain} from './toolchain.mjs';
+import {configureMsvc} from './msvc.mjs';
 
 export function nativeToolchain() {
   if(process.arch!=='x64'||!['win32','linux'].includes(process.platform))throw new Error('Native product builds support Windows/Linux x64');
-  const pinned=resolve(root,'verification/local/toolchains/extracted/w64devkit/bin/gcc.exe');
-  const compiler=process.env.MOONMMDB_GCC||process.env.MOON_CC||(process.platform==='win32'?pinned:'gcc');
+  if(process.platform==='win32')return configureMsvc();
+  const compiler=process.env.MOON_CC||'gcc';
   const version=spawnSync(compiler,['--version'],{encoding:'utf8'});
   if(version.status!==0)throw new Error('C compiler unavailable: '+compiler);
-  if(process.platform==='win32') {
-    const compat=resolve(root,'verification/local/toolchains/compat');mkdirSync(compat,{recursive:true});
-    const launcher=resolve(compat,'cc.exe');
-    const built=spawnSync(compiler,['-municode','-O2',resolve(root,'scripts/native-cc.c'),'-o',launcher],{encoding:'utf8'});
-    if(built.status!==0)throw new Error(built.stderr);
-    process.env.MOONMMDB_GCC=compiler;process.env.MOON_CC=launcher;
-    process.env.MOON_AR=resolve(dirname(compiler),'ar.exe');
-  } else process.env.MOON_CC=compiler;
-  return {compiler,version:version.stdout.trim()};
+  process.env.MOON_CC=compiler;
+  return {compiler,version:version.stdout.trim(),family:'gcc-compatible'};
 }
 
 export function buildNative() {

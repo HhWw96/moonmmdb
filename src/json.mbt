@@ -1,13 +1,13 @@
 ///|
 fn tagged(kind : String, value : Json) -> Json {
-  { "type": kind.to_json(), "value": value }
+  { "type": @json.to_json(kind), "value": value }
 }
 
 ///|
 /// Lossless JSON: all integer values are decimal strings; floats include bits.
 pub fn Value::to_tagged_json(self : Value) -> Json {
   match self {
-    Text(s) => tagged("string", s.to_json())
+    Text(s) => tagged("string", @json.to_json(s))
     Blob(bytes) => {
       let out = StringBuilder()
       for byte in bytes {
@@ -17,25 +17,25 @@ pub fn Value::to_tagged_json(self : Value) -> Json {
         }
         out.write_string(s)
       }
-      tagged("bytes", out.to_string().to_json())
+      tagged("bytes", @json.to_json(out.to_string()))
     }
-    Boolean(b) => tagged("boolean", b.to_json())
-    Unsigned16(n) => tagged("uint16", n.to_string().to_json())
-    Unsigned32(n) => tagged("uint32", n.to_string().to_json())
-    Signed32(n) => tagged("int32", n.to_string().to_json())
-    Unsigned64(n) => tagged("uint64", n.to_string().to_json())
-    Unsigned128(s) => tagged("uint128", s.to_json())
+    Boolean(b) => tagged("boolean", @json.to_json(b))
+    Unsigned16(n) => tagged("uint16", @json.to_json(n.to_string()))
+    Unsigned32(n) => tagged("uint32", @json.to_json(n.to_string()))
+    Signed32(n) => tagged("int32", @json.to_json(n.to_string()))
+    Unsigned64(n) => tagged("uint64", @json.to_json(n.to_string()))
+    Unsigned128(s) => tagged("uint128", @json.to_json(s))
     Real32(n) =>
       {
         "type": "float32",
-        "value": n.number().to_string().to_json(),
-        "bits": n.bits.to_string(radix=16).to_json(),
+        "value": @json.to_json(n.number().to_string()),
+        "bits": @json.to_json(n.bits.to_string(radix=16)),
       }
     Real64(n) =>
       {
         "type": "float64",
-        "value": n.number().to_string().to_json(),
-        "bits": n.bits.to_string(radix=16).to_json(),
+        "value": @json.to_json(n.number().to_string()),
+        "bits": @json.to_json(n.bits.to_string(radix=16)),
       }
     List(items) =>
       tagged("array", Json::array(items.map(item => item.to_tagged_json())))
@@ -52,8 +52,14 @@ pub fn Value::to_tagged_json(self : Value) -> Json {
 ///|
 pub fn Lookup::to_json(self : Lookup) -> Json {
   {
-    "status": (if self.value is Some(_) { "found" } else { "not_found" }).to_json(),
-    "prefix_length": self.prefix_length.to_json(),
+    "status": @json.to_json(
+      if self.value is Some(_) {
+        "found"
+      } else {
+        "not_found"
+      },
+    ),
+    "prefix_length": @json.to_json(self.prefix_length),
     "record": match self.value {
       Some(v) => v.to_tagged_json()
       None => Json::null()
@@ -65,8 +71,8 @@ pub fn Lookup::to_json(self : Lookup) -> Json {
 pub fn MmdbError::to_json(self : MmdbError) -> Json {
   {
     "status": "error",
-    "code": self.code().to_json(),
-    "offset": self.offset().to_json(),
-    "message": self.message().to_json(),
+    "code": @json.to_json(self.code()),
+    "offset": @json.to_json(self.offset()),
+    "message": @json.to_json(self.message()),
   }
 }

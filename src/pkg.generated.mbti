@@ -3,6 +3,7 @@ package "HhWw96/moonmmdb"
 
 import {
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }
 
 // Values
@@ -15,15 +16,16 @@ pub fn validate_paths(Array[String]) -> Unit raise MmdbError
 pub fn version() -> String
 
 // Errors
+#derive(@debug.Debug)
 pub suberror MmdbError {
-  MmdbError(String, Int, String)
-} derive(@debug.Debug)
+  MmdbError(String, Int32, String)
+}
 pub fn MmdbError::code(Self) -> String
 pub fn MmdbError::message(Self) -> String
-pub fn MmdbError::offset(Self) -> Int
-pub fn MmdbError::to_json(Self) -> Json
+pub fn MmdbError::offset(Self) -> Int32
+pub fn MmdbError::to_json(Self) -> @json.Json
 pub fn MmdbError::to_repr(Self) -> @debug.Repr
-pub fn MmdbError::to_validation_json(Self) -> Json
+pub fn MmdbError::to_validation_json(Self) -> @json.Json
 pub fn MmdbError::validation_status(Self) -> String
 
 // Types and methods
@@ -33,11 +35,12 @@ pub struct Enricher {
 pub fn Enricher::lookup(Self, String) -> Enrichment raise MmdbError
 pub fn Enricher::new(Array[EnrichmentSource]) -> Self raise MmdbError
 
+#derive(@debug.Debug)
 pub(all) struct Enrichment {
   sources : Array[(String, SourceResult)]
-} derive(@debug.Debug)
-pub fn Enrichment::status_code(Self) -> Int
-pub fn Enrichment::to_json(Self) -> Json
+}
+pub fn Enrichment::status_code(Self) -> Int32
+pub fn Enrichment::to_json(Self) -> @json.Json
 pub fn Enrichment::to_repr(Self) -> @debug.Repr
 
 pub(all) struct EnrichmentSource {
@@ -50,52 +53,57 @@ pub struct FieldSelector {
   // private fields
 }
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Float32Value {
-  bits : UInt
-} derive(Eq, @debug.Debug)
+  bits : UInt32
+}
 pub fn Float32Value::equal(Self, Self) -> Bool
 pub fn Float32Value::not_equal(Self, Self) -> Bool
 pub fn Float32Value::number(Self) -> Float
 pub fn Float32Value::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Float64Value {
   bits : UInt64
-} derive(Eq, @debug.Debug)
+}
 pub fn Float64Value::equal(Self, Self) -> Bool
 pub fn Float64Value::not_equal(Self, Self) -> Bool
 pub fn Float64Value::number(Self) -> Double
 pub fn Float64Value::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Limits {
-  max_depth : Int
-  max_values : Int
-  max_payload_bytes : Int
-  max_file_bytes : Int
-} derive(Eq, @debug.Debug)
+  max_depth : Int32
+  max_values : Int32
+  max_payload_bytes : Int32
+  max_file_bytes : Int32
+}
 pub fn Limits::default() -> Self
 pub fn Limits::equal(Self, Self) -> Bool
 pub fn Limits::not_equal(Self, Self) -> Bool
 pub fn Limits::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Lookup {
   value : Value?
-  prefix_length : Int
-} derive(Eq, @debug.Debug)
+  prefix_length : Int32
+}
 pub fn Lookup::equal(Self, Self) -> Bool
 pub fn Lookup::not_equal(Self, Self) -> Bool
-pub fn Lookup::to_json(Self) -> Json
+pub fn Lookup::to_json(Self) -> @json.Json
 pub fn Lookup::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Metadata {
-  node_count : UInt
-  record_size : Int
-  ip_version : Int
+  node_count : UInt32
+  record_size : Int32
+  ip_version : Int32
   database_type : String
-  format_major : Int
-  format_minor : Int
+  format_major : Int32
+  format_minor : Int32
   build_epoch : UInt64
   raw : Value
-} derive(Eq, @debug.Debug)
+}
 pub fn Metadata::equal(Self, Self) -> Bool
 pub fn Metadata::not_equal(Self, Self) -> Bool
 pub fn Metadata::to_repr(Self) -> @debug.Repr
@@ -104,27 +112,29 @@ pub struct NetworkCursor {
   // private fields
 }
 pub fn NetworkCursor::close(Self) -> Unit
-pub fn NetworkCursor::emitted_count(Self) -> Int
+pub fn NetworkCursor::emitted_count(Self) -> Int32
 pub fn NetworkCursor::next(Self) -> NetworkRecord? raise MmdbError
-pub fn NetworkCursor::work_used(Self) -> Int
+pub fn NetworkCursor::work_used(Self) -> Int32
 
+#derive(Eq, @debug.Debug)
 pub(all) struct NetworkRecord {
   network : String
   value : Value
-} derive(Eq, @debug.Debug)
+}
 pub fn NetworkRecord::equal(Self, Self) -> Bool
 pub fn NetworkRecord::not_equal(Self, Self) -> Bool
-pub fn NetworkRecord::to_json(Self) -> Json
+pub fn NetworkRecord::to_json(Self) -> @json.Json
 pub fn NetworkRecord::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct Projection {
   record_found : Bool
-  prefix_length : Int
+  prefix_length : Int32
   fields : Array[(String, Value?)]
-} derive(Eq, @debug.Debug)
+}
 pub fn Projection::equal(Self, Self) -> Bool
 pub fn Projection::not_equal(Self, Self) -> Bool
-pub fn Projection::to_json(Self) -> Json
+pub fn Projection::to_json(Self) -> @json.Json
 pub fn Projection::to_repr(Self) -> @debug.Repr
 
 pub struct Reader {
@@ -139,78 +149,84 @@ pub fn Reader::project(Self, String, Array[String]) -> Projection raise MmdbErro
 pub fn Reader::project_prepared(Self, String, FieldSelector) -> Projection raise MmdbError
 pub fn Reader::validate(Self, decode_data? : Bool, limits? : ValidationLimits) -> ValidationReport raise MmdbError
 
+#derive(Eq, @debug.Debug)
 pub(all) struct RecordDiff {
   before : Projection
   after : Projection
   record_changed : Bool
   prefix_changed : Bool
   changed_fields : Array[String]
-} derive(Eq, @debug.Debug)
+}
 pub fn RecordDiff::changed(Self) -> Bool
 pub fn RecordDiff::equal(Self, Self) -> Bool
 pub fn RecordDiff::not_equal(Self, Self) -> Bool
-pub fn RecordDiff::to_json(Self) -> Json
+pub fn RecordDiff::to_json(Self) -> @json.Json
 pub fn RecordDiff::to_repr(Self) -> @debug.Repr
 
+#derive(@debug.Debug)
 pub(all) enum SourceResult {
   Selected(Projection)
   Failed(MmdbError)
-} derive(@debug.Debug)
+}
 pub fn SourceResult::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct TraversalLimits {
-  max_records : Int
-  max_work : Int
-} derive(Eq, @debug.Debug)
+  max_records : Int32
+  max_work : Int32
+}
 pub fn TraversalLimits::default() -> Self
 pub fn TraversalLimits::equal(Self, Self) -> Bool
 pub fn TraversalLimits::not_equal(Self, Self) -> Bool
 pub fn TraversalLimits::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct ValidationLimits {
-  max_work : Int
-  max_state_bytes : Int
-} derive(Eq, @debug.Debug)
+  max_work : Int32
+  max_state_bytes : Int32
+}
 pub fn ValidationLimits::default() -> Self
 pub fn ValidationLimits::equal(Self, Self) -> Bool
 pub fn ValidationLimits::not_equal(Self, Self) -> Bool
 pub fn ValidationLimits::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct ValidationReport {
-  checked_nodes : Int
-  reachable_nodes : Int
-  unreachable_nodes : Int
-  decoded_records : Int
+  checked_nodes : Int32
+  reachable_nodes : Int32
+  unreachable_nodes : Int32
+  decoded_records : Int32
   decoded_data : Bool
-  work_used : Int
-  peak_state_bytes : Int
-} derive(Eq, @debug.Debug)
+  work_used : Int32
+  peak_state_bytes : Int32
+}
 pub fn ValidationReport::equal(Self, Self) -> Bool
 pub fn ValidationReport::not_equal(Self, Self) -> Bool
-pub fn ValidationReport::to_json(Self) -> Json
+pub fn ValidationReport::to_json(Self) -> @json.Json
 pub fn ValidationReport::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) enum Value {
   Text(String)
   Blob(Bytes)
   Boolean(Bool)
-  Unsigned16(UInt)
-  Unsigned32(UInt)
-  Signed32(Int)
+  Unsigned16(UInt32)
+  Unsigned32(UInt32)
+  Signed32(Int32)
   Unsigned64(UInt64)
   Unsigned128(String)
   Real32(Float32Value)
   Real64(Float64Value)
   List(Array[Value])
   Object(Array[(String, Value)])
-} derive(Eq, @debug.Debug)
+}
 pub fn Value::at_pointer(Self, String) -> Self? raise MmdbError
 pub fn Value::equal(Self, Self) -> Bool
 pub fn Value::get(Self, String) -> Self?
 pub fn Value::not_equal(Self, Self) -> Bool
 pub fn Value::text(Self) -> String?
 pub fn Value::to_repr(Self) -> @debug.Repr
-pub fn Value::to_tagged_json(Self) -> Json
+pub fn Value::to_tagged_json(Self) -> @json.Json
 
 // Type aliases
 

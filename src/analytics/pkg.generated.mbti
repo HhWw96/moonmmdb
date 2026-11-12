@@ -4,44 +4,48 @@ package "HhWw96/moonmmdb/analytics"
 import {
   "HhWw96/moonmmdb",
   "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }
 
 // Values
 
 // Errors
+#derive(@debug.Debug)
 pub suberror AnalyticsError {
   AnalyticsError(String, String)
-} derive(@debug.Debug)
+}
 pub fn AnalyticsError::code(Self) -> String
-pub fn AnalyticsError::to_json(Self) -> Json
+pub fn AnalyticsError::to_json(Self) -> @json.Json
 pub fn AnalyticsError::to_repr(Self) -> @debug.Repr
 
 // Types and methods
 pub struct AnalysisRowOutcome {
   // private fields
 }
-pub fn AnalysisRowOutcome::to_json(Self) -> Json
+pub fn AnalysisRowOutcome::to_json(Self) -> @json.Json
 
+#derive(Eq, @debug.Debug)
 pub(all) struct AnalyticsLimits {
-  top : Int
-  max_groups : Int
-} derive(Eq, @debug.Debug)
+  top : Int32
+  max_groups : Int32
+}
 pub fn AnalyticsLimits::default() -> Self
 pub fn AnalyticsLimits::equal(Self, Self) -> Bool
 pub fn AnalyticsLimits::not_equal(Self, Self) -> Bool
 pub fn AnalyticsLimits::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct AnalyticsReport {
   requests : UInt64
   valid_ips : UInt64
   invalid_inputs : UInt64
-  exit_code : Int
+  exit_code : Int32
   country : DimensionReport
   asn : DimensionReport
-} derive(Eq, @debug.Debug)
+}
 pub fn AnalyticsReport::equal(Self, Self) -> Bool
 pub fn AnalyticsReport::not_equal(Self, Self) -> Bool
-pub fn AnalyticsReport::to_json(Self) -> Json
+pub fn AnalyticsReport::to_json(Self) -> @json.Json
 pub fn AnalyticsReport::to_repr(Self) -> @debug.Repr
 
 pub struct Analyzer {
@@ -54,25 +58,27 @@ pub fn Analyzer::new(@moonmmdb.Reader, @moonmmdb.Reader, limits? : AnalyticsLimi
 pub fn Analyzer::push(Self, String) -> Unit raise AnalyticsError
 pub fn Analyzer::push_detailed(Self, String) -> AnalysisRowOutcome raise AnalyticsError
 
+#derive(Eq, @debug.Debug)
 pub(all) struct DimensionReport {
   counted : UInt64
   not_found : UInt64
   missing_field : UInt64
   type_error : UInt64
   query_error : UInt64
-  group_count : Int
+  group_count : Int32
   other_requests : UInt64
   top : Array[GroupCount]
-} derive(Eq, @debug.Debug)
+}
 pub fn DimensionReport::equal(Self, Self) -> Bool
 pub fn DimensionReport::not_equal(Self, Self) -> Bool
-pub fn DimensionReport::to_json(Self) -> Json
+pub fn DimensionReport::to_json(Self) -> @json.Json
 pub fn DimensionReport::to_repr(Self) -> @debug.Repr
 
+#derive(Eq, @debug.Debug)
 pub(all) struct GroupCount {
   key : String
   count : UInt64
-} derive(Eq, @debug.Debug)
+}
 pub fn GroupCount::equal(Self, Self) -> Bool
 pub fn GroupCount::not_equal(Self, Self) -> Bool
 pub fn GroupCount::to_repr(Self) -> @debug.Repr

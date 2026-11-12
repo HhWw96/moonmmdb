@@ -5,17 +5,30 @@ import {fileURLToPath} from 'node:url';
 import {root,runMoon} from './moon.mjs';
 import {sha256} from './evidence.mjs';
 
+// moonc 0.10.20 prints Int32/UInt32, qualified Json and prefix #derive.
+// Normalize only these documented aliases; retain members, traits and import identity.
 export function declarations(text) {
-  const clean=text.replace(/\/\/[^\n]*/g,'');
-  const starts=[...clean.matchAll(/^pub(?:\([^\n]*?\))?\s+/gm)].map(m=>m.index);
+  const clean=text.replace(/"(?:\\.|[^"\\])*"|\/\/[^\n]*/g,m=>m.startsWith('//')?'':m);
+  const starts=[...clean.matchAll(/^(?:#[^\n]*\r?\n)*pub(?:\([^\n]*?\))?\s+/gm)].map(m=>m.index);
+  const jsonAlias=[...(clean.match(/import\s*\{([\s\S]*?)\}/)?.[1]||'').matchAll(/"moonbitlang\/core\/json"(?:\s+@(\w+))?/g)].map(m=>m[1]||'json');
+  const shadowed=name=>new RegExp('(?:^pub(?:\\([^)]*\\))?\\s+(?:struct|enum|suberror|type|trait)\\s+'+name+'\\b|^\\s*'+name+'\\s*[:(])','m').test(clean);
+  const builtin=new Map([['Int','Int32'],['UInt','UInt32'],['Json','$core.json.Json']].filter(([name])=>!shadowed(name)));
+  const normalize=block=>block.replace(/"(?:\\.|[^"\\])*"|(?<![\w.@])(?:@\w+\.Json|Int|UInt|Json)\b/g,token=> {
+    if(token.startsWith('"'))return token;
+    if(jsonAlias.some(alias=>token==='@'+alias+'.Json'))return '$core.json.Json';
+    return builtin.get(token)||token;
+  }).replace(/\s+/g,' ').trim();
   const result=new Map();
   for(let i=0;i<starts.length;i++) {
-    const block=clean.slice(starts[i],starts[i+1]??clean.length).trim().replace(/\s+/g,' ');
+    let block=clean.slice(starts[i],starts[i+1]??clean.length).trim();
+    const derives=[];
+    block=block.replace(/^#derive\(([^\n]*)\)\r?\n/gm,(_,traits)=>{derives.push('derive('+traits+')');return '';});
+    if(derives.length)block+=' '+derives.join(' ');
     const match=block.match(/^pub(?:\([^)]*\))?\s+(fn|struct|enum|suberror|type|trait)\s+([^\s({=]+)/);
     if(!match)throw new Error('Unrecognized public declaration: '+block.slice(0,100));
     const key=match[1]+' '+match[2];
     if(result.has(key))throw new Error('Duplicate declaration: '+key);
-    result.set(key,block);
+    result.set(key,normalize(block));
   }
   if(result.size===0)throw new Error('Empty public interface');
   return result;

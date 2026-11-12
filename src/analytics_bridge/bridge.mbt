@@ -10,8 +10,8 @@ pub struct AnalysisHandle {
 pub fn analysis_from_readers(
   city : @mmdb.Reader,
   asn : @mmdb.Reader,
-  top : Int,
-  max_groups : Int,
+  top : Int32,
+  max_groups : Int32,
   ip_path : String,
 ) -> AnalysisHandle {
   let mut metadata : Json = null
@@ -22,8 +22,8 @@ pub fn analysis_from_readers(
       fn info(reader : @mmdb.Reader) -> Json {
         let m = reader.metadata()
         {
-          "database_type": m.database_type.to_json(),
-          "build_epoch": m.build_epoch.to_string().to_json(),
+          "database_type": @json.to_json(m.database_type),
+          "build_epoch": @json.to_json(m.build_epoch.to_string()),
         }
       }
       metadata = { "city": info(city), "asn": info(asn) }

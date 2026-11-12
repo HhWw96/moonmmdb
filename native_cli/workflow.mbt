@@ -3,17 +3,17 @@
 extern "C" fn host_output_check(
   output : Bytes,
   protected_path : Bytes,
-  overwrite : Int,
-) -> Int = "mm_cli_output_check"
+  overwrite : Int32,
+) -> Int32 = "mm_cli_output_check"
 
 ///|
 #borrow(path, bytes)
 extern "C" fn host_publish(
   path : Bytes,
   bytes : Bytes,
-  length : Int,
-  overwrite : Int,
-) -> Int = "mm_cli_publish"
+  length : Int32,
+  overwrite : Int32,
+) -> Int32 = "mm_cli_publish"
 
 ///|
 fn verify_source(expected : Json, actual : Json) -> Unit raise {
@@ -76,7 +76,7 @@ fn execute_task(task : Json, bindings : Map[String, String]) -> Json raise {
       }
       verify_source(file, source)
       actual_files.push({
-        "role": role.to_json(),
+        "role": @json.to_json(role),
         "name": @workflow.get(file, "name"),
         "bytes": @workflow.get(source, "bytes"),
         "sha256": @workflow.get(source, "sha256"),
@@ -90,10 +90,12 @@ fn execute_task(task : Json, bindings : Map[String, String]) -> Json raise {
       let bytes = read_file(bindings[role], remaining)
       remaining -= bytes.length()
       let source : Json = {
-        "role": role.to_json(),
+        "role": @json.to_json(role),
         "name": @workflow.get(file, "name"),
-        "bytes": bytes.length().to_string().to_json(),
-        "sha256": @crypto.bytes_to_hex_string(@crypto.sha256(bytes)).to_json(),
+        "bytes": @json.to_json(bytes.length().to_string()),
+        "sha256": @json.to_json(
+          @crypto.bytes_to_hex_string(@crypto.sha256(bytes)),
+        ),
       }
       verify_source(file, source)
       readers[role] = @mmdb.open_bytes(bytes)
@@ -147,18 +149,18 @@ fn execute_task(task : Json, bindings : Map[String, String]) -> Json raise {
   let executed : Json = {
     "format": "moonmmdb-task",
     "version": 1,
-    "operation": operation.to_json(),
+    "operation": @json.to_json(operation),
     "parameters": if operation == "analyze" {
       @workflow.get(result, "parameters")
     } else {
       parameters
     },
-    "files": actual_files.to_json(),
+    "files": @json.to_json(actual_files),
   }
   let report : Json = {
     "format": "moonmmdb-report",
     "version": 1,
-    "tool": { "name": "MoonMMDB", "version": @mmdb.version().to_json() },
+    "tool": { "name": "MoonMMDB", "version": @json.to_json(@mmdb.version()) },
     "task": executed,
     "result": result,
   }
@@ -167,7 +169,7 @@ fn execute_task(task : Json, bindings : Map[String, String]) -> Json raise {
 }
 
 ///|
-fn run_workflow(args : Array[String]) -> Int raise {
+fn run_workflow(args : Array[String]) -> Int32 raise {
   let command = args[1]
   let raw = decode(
     read_file(args[2], if command == "run-task" { 65536 } else { 8388608 }),

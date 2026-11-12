@@ -1,14 +1,14 @@
 ///|
 pub struct DiagnosticBuffer {
-  priv limit : Int
+  priv limit : Int32
   priv rows : Array[Json]
-  priv mut bytes : Int
+  priv mut bytes : Int32
   priv mut full : Bool
   priv mut omitted : UInt64
 }
 
 ///|
-pub fn DiagnosticBuffer::new(limit : Int) -> DiagnosticBuffer {
+pub fn DiagnosticBuffer::new(limit : Int32) -> DiagnosticBuffer {
   {
     limit: limit.max(0).min(1000),
     rows: [],
@@ -23,9 +23,9 @@ pub fn DiagnosticBuffer::new(limit : Int) -> DiagnosticBuffer {
 pub fn DiagnosticBuffer::add(
   self : DiagnosticBuffer,
   outcome : Json,
-  line : Int,
-  start : Int,
-  end : Int,
+  line : Int32,
+  start : Int32,
+  end : Int32,
 ) -> Unit {
   let abnormal = match outcome {
     { "input": String(input), "issues": Array(issues), .. } =>
@@ -40,9 +40,9 @@ pub fn DiagnosticBuffer::add(
     return
   }
   let row : Json = {
-    "line": line.to_string().to_json(),
-    "start": start.to_string().to_json(),
-    "end": end.to_string().to_json(),
+    "line": @json.to_json(line.to_string()),
+    "start": @json.to_json(start.to_string()),
+    "end": @json.to_json(end.to_string()),
     "outcome": @json.parse(outcome.stringify()) catch {
       _ => null
     },
@@ -61,10 +61,10 @@ pub fn DiagnosticBuffer::add(
 #warnings("-deprecated")
 pub fn DiagnosticBuffer::to_json(self : DiagnosticBuffer) -> Json {
   {
-    "limit": self.limit.to_json(),
-    "retained": self.rows.length().to_string().to_json(),
-    "omitted": self.omitted.to_string().to_json(),
-    "rows": @json.parse(self.rows.to_json().stringify()) catch {
+    "limit": @json.to_json(self.limit),
+    "retained": @json.to_json(self.rows.length().to_string()),
+    "omitted": @json.to_json(self.omitted.to_string()),
+    "rows": @json.parse(@json.to_json(self.rows).stringify()) catch {
       _ => []
     },
   }
@@ -130,7 +130,7 @@ pub fn analysis_line_detailed(handle : AnalysisHandle, text : String) -> String 
           Some(ip) => analyzer.push_detailed(ip).to_json().stringify()
           None => {
             analyzer.invalid_input()
-            let result : Json = { "input": reason.to_json(), "issues": [] }
+            let result : Json = { "input": @json.to_json(reason), "issues": [] }
             result.stringify()
           }
         }
@@ -146,7 +146,7 @@ pub fn analysis_line_detailed(handle : AnalysisHandle, text : String) -> String 
 
 ///|
 #export_name("diagnostics_create")
-pub fn diagnostics_create(limit : Int) -> DiagnosticBuffer {
+pub fn diagnostics_create(limit : Int32) -> DiagnosticBuffer {
   DiagnosticBuffer::new(limit)
 }
 
@@ -156,9 +156,9 @@ pub fn diagnostics_create(limit : Int) -> DiagnosticBuffer {
 pub fn diagnostics_add(
   buffer : DiagnosticBuffer,
   outcome : String,
-  line : Int,
-  start : Int,
-  end : Int,
+  line : Int32,
+  start : Int32,
+  end : Int32,
 ) -> Unit {
   let value = @json.parse(outcome[:], max_nesting_depth=128) catch { _ => null }
   buffer.add(value, line, start, end)
@@ -199,7 +199,7 @@ pub fn extract_input_ip(text : String, path : String) -> String {
   }
   let value : Json = {
     "ip": match ip {
-      Some(s) => s.to_json()
+      Some(s) => @json.to_json(s)
       None => null
     },
   }

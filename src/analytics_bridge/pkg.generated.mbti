@@ -3,18 +3,19 @@ package "HhWw96/moonmmdb/analytics_bridge"
 
 import {
   "HhWw96/moonmmdb",
+  "moonbitlang/core/json",
 }
 
 // Values
 pub fn analysis_close(AnalysisHandle) -> Unit
 
-pub fn analysis_create(Bytes, Bytes, Int, Int, String) -> AnalysisHandle
+pub fn analysis_create(Bytes, Bytes, Int32, Int32, String) -> AnalysisHandle
 
 pub fn analysis_error(AnalysisHandle) -> String
 
 pub fn analysis_finish(AnalysisHandle) -> String
 
-pub fn analysis_from_readers(@moonmmdb.Reader, @moonmmdb.Reader, Int, Int, String) -> AnalysisHandle
+pub fn analysis_from_readers(@moonmmdb.Reader, @moonmmdb.Reader, Int32, Int32, String) -> AnalysisHandle
 
 pub fn analysis_line(AnalysisHandle, String) -> String
 
@@ -24,9 +25,9 @@ pub fn analysis_metadata(AnalysisHandle) -> String
 
 pub fn analysis_rejected(String) -> AnalysisHandle
 
-pub fn diagnostics_add(DiagnosticBuffer, String, Int, Int, Int) -> Unit
+pub fn diagnostics_add(DiagnosticBuffer, String, Int32, Int32, Int32) -> Unit
 
-pub fn diagnostics_create(Int) -> DiagnosticBuffer
+pub fn diagnostics_create(Int32) -> DiagnosticBuffer
 
 pub fn diagnostics_finish(DiagnosticBuffer) -> String
 
@@ -42,9 +43,9 @@ pub struct AnalysisHandle {
 pub struct DiagnosticBuffer {
   // private fields
 }
-pub fn DiagnosticBuffer::add(Self, Json, Int, Int, Int) -> Unit
-pub fn DiagnosticBuffer::new(Int) -> Self
-pub fn DiagnosticBuffer::to_json(Self) -> Json
+pub fn DiagnosticBuffer::add(Self, @json.Json, Int32, Int32, Int32) -> Unit
+pub fn DiagnosticBuffer::new(Int32) -> Self
+pub fn DiagnosticBuffer::to_json(Self) -> @json.Json
 
 // Type aliases
 

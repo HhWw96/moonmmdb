@@ -1,5 +1,9 @@
 ///|
-fn required_u16(raw : Value, key : String, offset : Int) -> Int raise MmdbError {
+fn required_u16(
+  raw : Value,
+  key : String,
+  offset : Int32,
+) -> Int32 raise MmdbError {
   match raw.get(key) {
     Some(Unsigned16(value)) => value.reinterpret_as_int()
     _ =>
@@ -15,7 +19,7 @@ fn required_u16(raw : Value, key : String, offset : Int) -> Int raise MmdbError 
 /// All untrusted size products are widened before indexing a byte buffer.
 pub fn open_bytes(
   data : Bytes,
-  limits? : Limits = Limits::default(),
+  limits~ : Limits = Limits::default(),
 ) -> Reader raise MmdbError {
   if limits.max_depth < 1 ||
     limits.max_depth > 256 ||
@@ -158,10 +162,10 @@ pub fn open_bytes(
 }
 
 ///|
-fn Reader::branch(self : Reader, node : UInt, bit : Int) -> UInt {
+fn Reader::branch(self : Reader, node : UInt32, bit : Int32) -> UInt32 {
   let size = self.meta.record_size
   let at = node.reinterpret_as_int() * (size / 4)
-  let mut value : UInt = 0
+  let mut value : UInt32 = 0
   if size == 28 {
     let nibble = self.data[at + 3].to_uint()
     value = if bit == 0 { nibble >> 4 } else { nibble & 15 }
@@ -189,7 +193,7 @@ pub fn Reader::lookup(self : Reader, ip : String) -> Lookup raise MmdbError {
 fn Reader::lookup_address(
   self : Reader,
   addr : Address,
-  retention? : Retention = All,
+  retention~ : Retention = All,
 ) -> Lookup raise MmdbError {
   if addr.version == 6 && self.meta.ip_version == 4 {
     raise MmdbError(
@@ -198,7 +202,7 @@ fn Reader::lookup_address(
   }
   let bits = if self.meta.ip_version == 4 { 32 } else { 128 }
   let padding = if addr.version == 4 && bits == 128 { 96 } else { 0 }
-  let mut node : UInt = 0
+  let mut node : UInt32 = 0
   let mut depth = 0
   while node < self.meta.node_count && depth < bits {
     let bit = if depth < padding {

@@ -1,9 +1,10 @@
 ///|
 /// Schema failures preserve the field path; database failures preserve the core error.
+#derive(@debug.Debug)
 pub suberror GeoError {
   SchemaMismatch(String, String)
   DatabaseError(@mmdb.MmdbError)
-} derive(@debug.Debug)
+}
 
 ///|
 pub fn GeoError::code(self : GeoError) -> String {
@@ -31,43 +32,49 @@ pub fn GeoError::message(self : GeoError) -> String {
 
 ///|
 /// Optional schema adapters. Missing fields remain None; wrong types raise.
+#derive(Eq, @debug.Debug)
 pub(all) struct AsnRecord {
-  autonomous_system_number : UInt?
+  autonomous_system_number : UInt32?
   autonomous_system_organization : String?
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct Country {
   iso_code : String?
-  geoname_id : UInt?
+  geoname_id : UInt32?
   names : Map[String, String]
   is_in_european_union : Bool?
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct Place {
-  geoname_id : UInt?
+  geoname_id : UInt32?
   names : Map[String, String]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct Subdivision {
   iso_code : String?
-  geoname_id : UInt?
+  geoname_id : UInt32?
   names : Map[String, String]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct Location {
   latitude : Double?
   longitude : Double?
-  accuracy_radius : UInt?
+  accuracy_radius : UInt32?
   time_zone : String?
-  metro_code : UInt?
-} derive(Eq, @debug.Debug)
+  metro_code : UInt32?
+}
 
 ///|
 /// Selected common City fields; unknown vendor-specific fields are ignored.
+#derive(Eq, @debug.Debug)
 pub(all) struct CityRecord {
   continent_code : String?
   country : Country?
@@ -76,19 +83,21 @@ pub(all) struct CityRecord {
   subdivisions : Array[Subdivision]
   postal_code : String?
   location : Location?
-} derive(Eq, @debug.Debug)
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct AsnLookup {
   record : AsnRecord?
-  prefix_length : Int
-} derive(Eq, @debug.Debug)
+  prefix_length : Int32
+}
 
 ///|
+#derive(Eq, @debug.Debug)
 pub(all) struct CityLookup {
   record : CityRecord?
-  prefix_length : Int
-} derive(Eq, @debug.Debug)
+  prefix_length : Int32
+}
 
 ///|
 fn mismatch(path : String, expected : String) -> GeoError {
@@ -133,7 +142,7 @@ fn uint(
   value : @mmdb.Value,
   key : String,
   path : String,
-) -> UInt? raise GeoError {
+) -> UInt32? raise GeoError {
   match value.get(key) {
     None => None
     Some(Unsigned16(n)) | Some(Unsigned32(n)) => Some(n)

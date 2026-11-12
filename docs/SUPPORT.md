@@ -1,6 +1,6 @@
 # 支持范围
 
-v0.9.4 支持范围见本页；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_4.md)。
+已发布 v0.9.4 的支持范围及历史回执见本页。维护源码 0.9.5 的当前工具链验证另见 [维护报告](MAINTENANCE_2026_11_12.md)；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_4.md)。
 
 0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
@@ -70,7 +70,7 @@ CLI diff 未给 --field 时选择整个记录（空路径），只检查输入�
 
 ## 后端
 
-后端验证范围为 JavaScript、WasmGC 及固定 MoonBit 0.10.14 的 Windows/Linux x64 Native。Windows 使用 GCC 16.2.0；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、MSVC、macOS、ARM64、Alpine 或 WASI Component 支持。
+后端验证范围为 JavaScript、WasmGC 及维护源码固定 MoonBit 0.10.20+65efd5b93 的 Windows/Linux x64 Native。Windows 构建需要 MSVC C++ Build Tools 和 Windows SDK，0.9.4 的 GCC 16.2.0 结论仅适用于历史版本；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、macOS、ARM64、Alpine 或 WASI Component 支持。
 
 Native 产品提供 metadata、lookup、project、enrich-many、networks、validate、diff、analyze、run-task、verify-report；Node.js 保留 enrich、diff 和分析示例等完整功能。Native 的参数、JSON、查询与统计在 MoonBit 实现，C 只负责宿主输入输出，不依赖 C/Python MMDB 读取器。Unicode 路径、十万行流式输入、慢消费者与提前关闭管道已在 Windows/Linux 验证。Native JSON 上限 128 层，拒绝未配对 Unicode 代理项转义，其他边界见 [Native 说明](NATIVE_CLI.md)。
 

@@ -1,7 +1,7 @@
 ///|
 /// A separate MoonBit module consuming only the public reader API.
 pub fn summarize(reader : @mmdb.Reader, ips : Array[String]) -> Json {
-  let counts : Map[String, Int] = Map([])
+  let counts : Map[String, Int32] = Map([])
   let mut found = 0
   let mut not_found = 0
   let mut errors = 0
@@ -29,11 +29,11 @@ pub fn summarize(reader : @mmdb.Reader, ips : Array[String]) -> Json {
     }
   }
   {
-    "found": found.to_json(),
-    "not_found": not_found.to_json(),
-    "errors": errors.to_json(),
-    "found_without_asn": without_asn.to_json(),
-    "asn_counts": counts.to_json(),
+    "found": @json.to_json(found),
+    "not_found": @json.to_json(not_found),
+    "errors": @json.to_json(errors),
+    "found_without_asn": @json.to_json(without_asn),
+    "asn_counts": @json.to_json(counts),
   }
 }
 

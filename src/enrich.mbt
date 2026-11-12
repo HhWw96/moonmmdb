@@ -7,15 +7,17 @@ pub(all) struct EnrichmentSource {
 }
 
 ///|
+#derive(@debug.Debug)
 pub(all) enum SourceResult {
   Selected(Projection)
   Failed(MmdbError)
-} derive(@debug.Debug)
+}
 
 ///|
+#derive(@debug.Debug)
 pub(all) struct Enrichment {
   sources : Array[(String, SourceResult)]
-} derive(@debug.Debug)
+}
 
 ///|
 pub struct Enricher {
@@ -72,7 +74,7 @@ pub fn Enricher::lookup(
 }
 
 ///|
-pub fn Enrichment::status_code(self : Enrichment) -> Int {
+pub fn Enrichment::status_code(self : Enrichment) -> Int32 {
   let mut code = 0
   for item in self.sources {
     match item.1 {
@@ -93,11 +95,13 @@ pub fn Enrichment::to_json(self : Enrichment) -> Json {
     }
   }
   {
-    "status": (match self.status_code() {
-      2 => "error"
-      1 => "not_found"
-      _ => "found"
-    }).to_json(),
+    "status": @json.to_json(
+      match self.status_code() {
+        2 => "error"
+        1 => "not_found"
+        _ => "found"
+      },
+    ),
     "sources": Json::object(sources),
   }
 }

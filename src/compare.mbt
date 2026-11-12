@@ -33,13 +33,14 @@ fn same_value(left : Value, right : Value) -> Bool {
 
 ///|
 /// Difference for one IP and selected paths, not an exhaustive database diff.
+#derive(Eq, @debug.Debug)
 pub(all) struct RecordDiff {
   before : Projection
   after : Projection
   record_changed : Bool
   prefix_changed : Bool
   changed_fields : Array[String]
-} derive(Eq, @debug.Debug)
+}
 
 ///|
 pub fn RecordDiff::changed(self : RecordDiff) -> Bool {
@@ -99,10 +100,16 @@ pub fn Reader::compare_prepared(
 ///|
 pub fn RecordDiff::to_json(self : RecordDiff) -> Json {
   {
-    "status": (if self.changed() { "changed" } else { "unchanged" }).to_json(),
-    "record_changed": self.record_changed.to_json(),
-    "prefix_changed": self.prefix_changed.to_json(),
-    "changed_fields": self.changed_fields.to_json(),
+    "status": @json.to_json(
+      if self.changed() {
+        "changed"
+      } else {
+        "unchanged"
+      },
+    ),
+    "record_changed": @json.to_json(self.record_changed),
+    "prefix_changed": @json.to_json(self.prefix_changed),
+    "changed_fields": @json.to_json(self.changed_fields),
     "before": self.before.to_json(),
     "after": self.after.to_json(),
   }

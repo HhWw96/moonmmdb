@@ -1,5 +1,5 @@
 ///|
-fn inspection(args : Array[String]) -> Int raise {
+fn inspection(args : Array[String]) -> Int32 raise {
   let networks = args[1] == "networks"
   if networks && args.length() < 4 {
     fail("host-input-error", "Expected CIDR")
@@ -50,10 +50,13 @@ fn inspection(args : Array[String]) -> Int raise {
   }
   let metadata = reader.metadata()
   let provenance : Map[String, Json] = Map([
-    ("sha256", @crypto.bytes_to_hex_string(@crypto.sha256(bytes)).to_json()),
-    ("bytes", bytes.length().to_json()),
-    ("database_type", metadata.database_type.to_json()),
-    ("build_epoch", metadata.build_epoch.to_string().to_json()),
+    (
+      "sha256",
+      @json.to_json(@crypto.bytes_to_hex_string(@crypto.sha256(bytes))),
+    ),
+    ("bytes", @json.to_json(bytes.length())),
+    ("database_type", @json.to_json(metadata.database_type)),
+    ("build_epoch", @json.to_json(metadata.build_epoch.to_string())),
   ])
   if !networks {
     let result = reader
@@ -65,8 +68,12 @@ fn inspection(args : Array[String]) -> Int raise {
     for key, value in provenance {
       report[key] = value
     }
-    emit(report.to_json())
-    return if report.get("status") == Some("valid".to_json()) { 0 } else { 2 }
+    emit(@json.to_json(report))
+    return if report.get("status") == Some(@json.to_json("valid")) {
+      0
+    } else {
+      2
+    }
   }
   let cursor = reader.networks(args[3], limits={ max_records, max_work, })
   defer cursor.close()
@@ -74,10 +81,10 @@ fn inspection(args : Array[String]) -> Int raise {
     emit(record.to_json())
   }
   provenance["status"] = "summary"
-  provenance["scope"] = args[3].to_json()
-  provenance["records"] = cursor.emitted_count().to_json()
-  provenance["work_used"] = cursor.work_used().to_json()
-  emit(provenance.to_json(), channel=1)
+  provenance["scope"] = @json.to_json(args[3])
+  provenance["records"] = @json.to_json(cursor.emitted_count())
+  provenance["work_used"] = @json.to_json(cursor.work_used())
+  emit(@json.to_json(provenance), channel=1)
   if cursor.emitted_count() == 0 {
     1
   } else {

@@ -4,7 +4,7 @@ test "bounded diagnostics isolate caller objects and count omitted abnormal rows
   let issues : Array[Json] = [
     { "dimension": "country", "category": "not_found" },
   ]
-  let value : Json = { "input": "valid", "issues": issues.to_json() }
+  let value : Json = { "input": "valid", "issues": @json.to_json(issues) }
   buffer.add(value, 1, 0, 10)
   issues.clear()
   buffer.add({ "input": "missing-ip", "issues": [] }, 2, 10, 13)

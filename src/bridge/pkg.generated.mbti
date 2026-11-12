@@ -18,15 +18,15 @@ pub fn analysis_line_detailed(@analytics_bridge.AnalysisHandle, String) -> Strin
 
 pub fn analysis_metadata(@analytics_bridge.AnalysisHandle) -> String
 
-pub fn analysis_start(Handle, Handle, Int, Int, String) -> @analytics_bridge.AnalysisHandle
+pub fn analysis_start(Handle, Handle, Int32, Int32, String) -> @analytics_bridge.AnalysisHandle
 
 pub fn close_networks(NetworkHandle) -> Unit
 
 pub fn compare_prepared(Handle, Handle, String, SelectionHandle) -> String
 
-pub fn diagnostics_add(@analytics_bridge.DiagnosticBuffer, String, Int, Int, Int) -> Unit
+pub fn diagnostics_add(@analytics_bridge.DiagnosticBuffer, String, Int32, Int32, Int32) -> Unit
 
-pub fn diagnostics_create(Int) -> @analytics_bridge.DiagnosticBuffer
+pub fn diagnostics_create(Int32) -> @analytics_bridge.DiagnosticBuffer
 
 pub fn diagnostics_finish(@analytics_bridge.DiagnosticBuffer) -> String
 
@@ -48,19 +48,27 @@ pub fn open_database(Bytes) -> Handle
 
 pub fn prepare_enrichment(Array[String], Array[Handle], Array[SelectionHandle]) -> EnrichmentHandle
 
+pub fn prepare_enrichment_js(FixedArray[String], FixedArray[Handle], FixedArray[SelectionHandle]) -> EnrichmentHandle
+
 pub fn prepare_fields(Array[String]) -> SelectionHandle
 
-pub fn prepare_networks(Handle, String, Int, Int) -> NetworkHandle
+pub fn prepare_fields_js(FixedArray[String]) -> SelectionHandle
+
+pub fn prepare_networks(Handle, String, Int32, Int32) -> NetworkHandle
 
 pub fn project(Handle, String, Array[String]) -> String
+
+pub fn project_js(Handle, String, FixedArray[String]) -> String
 
 pub fn project_prepared(Handle, String, SelectionHandle) -> String
 
 pub fn selection_status(SelectionHandle) -> String
 
-pub fn validate_database(Handle, Bool, Int, Int) -> String
+pub fn validate_database(Handle, Bool, Int32, Int32) -> String
 
 pub fn validate_paths(Array[String]) -> String
+
+pub fn validate_paths_js(FixedArray[String]) -> String
 
 // Errors
 

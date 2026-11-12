@@ -1,3 +1,9 @@
-import { "moonbitlang/x/crypto" }
+import {
+  "moonbitlang/x/crypto",
+}
+
 pkgtype(kind: "foreign_library")
-options(link: { "js": { "format": "esm" } })
+
+options(
+  link: { "js": { "format": "esm" } },
+)

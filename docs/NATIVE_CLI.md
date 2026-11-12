@@ -6,7 +6,7 @@ Native 工具的入口为 `native_cli` 独立模块。核心查询和 JSON 处�
 
 十个命令及离线样例见 [随包快速入门](../native_cli/QUICKSTART.md)。0.9.0 新增 `analyze`，使用与报告口径见 [正式日志分析](ANALYTICS.md)；发布状态以 [版本验证](VERIFICATION_0_9_4.md) 为准。本目录的原生程序与 `examples/native_probe` 验证探针用途不同：产品命令有完整参数、退出码、输入上限、错误隔离和输出完成检查。
 
-开发环境沿用 MoonBit 0.10.14+7d59c7ec9；Windows 使用固定 w64devkit 2.10.0 / GCC 16.2.0，Linux 在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
+当前维护源码使用 MoonBit 0.10.20+65efd5b93。Windows 需要 MSVC C++ Build Tools（cl.exe 或 clang-cl.exe）和 Windows SDK；新版 MoonBit 不支持 MinGW。Linux 使用 GCC，在 Ubuntu 22.04 构建。Node.js/Python 只用于开发、构建和验证，不是分发二进制的运行依赖。
 
 ```text
 python scripts/setup-native-windows.py
@@ -17,9 +17,9 @@ python scripts/inspection-fixtures.py
 python scripts/native-package.py
 ```
 
-Linux 跳过第一个命令，使用 GCC。Windows 不修改系统 PATH 或 MoonBit 运行时。支持使用 `MOON_CC` 指向兼容 GCC；自定义编译器不自动获得已验证工具链的支持声明。
+Linux 跳过第一个命令，使用 GCC。Windows 不修改系统 PATH 或 MoonBit 运行时。脚本自动发现已安装的 Visual Studio C++ Build Tools，也可在 x64 Developer PowerShell 中设置 `MOON_CC` 为 cl.exe / clang-cl.exe。Linux 可用 `MOON_CC` 指向 GCC 兼容编译器。旧版 MinGW 的验证记录仍属于对应历史版本。
 
-SHA-256 来自固定 `moonbitlang/x@0.5.5`。该版本 crypto 包的旧数组构造语法不能直接通过固定工具链，因此仓库保留其实现子集及四处 AES 构造语法兼容补丁。SHA-256 实现未改动，标准向量、真实数据库散列与宿主参考均参与验证；来源、逐文件散列及许可证保存在 `native_cli/vendor/x`。供应链和第三方实现不计作原创算法。
+SHA-256 来自固定 `moonbitlang/x@0.5.5`。仓库保留其实现子集；0.9.3 已恢复 AES 上游构造语法。0.9.5 仅调整 v128 的条件导入并阻止格式化器重写已审计的第三方实现文件。SHA-256 实现未改动，标准向量、真实数据库散列与宿主参考均参与验证；来源、逐文件散列及许可证保存在 `native_cli/vendor/x`。供应链和第三方实现不计作原创算法。
 
 ## 行为边界
 
