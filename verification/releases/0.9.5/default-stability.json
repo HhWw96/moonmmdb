@@ -1,0 +1,449 @@
+{
+  "status": "passed",
+  "implementation_commit": "c4a4844f235b4c742906d663d6d0f97aa23c4383",
+  "run_id": 43290594886,
+  "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43290594886",
+  "node": "v24.20.0",
+  "candidate_runs": 12,
+  "workloads": [
+    {
+      "platform": "windows-2022",
+      "workload": "country",
+      "runs": [
+        {
+          "name": "baseline",
+          "passed": true,
+          "elapsed_seconds": 1800.0113789,
+          "queries": 46084000,
+          "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+          "rss": {
+            "first_median": 148041728.0,
+            "last_median": 135759872.0,
+            "growth_bytes": -12281856.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 249081856
+          },
+          "private": {
+            "first_median": 300929024.0,
+            "last_median": 300929024.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 75232256.0,
+            "passed": true,
+            "peak": 300961792
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "50def45dade74b6850b3c5d1db266751031378413c1210ccebfe7f788f153183"
+        },
+        {
+          "name": "candidate-1",
+          "passed": true,
+          "elapsed_seconds": 1800.0085384,
+          "queries": 134227000,
+          "core_sha256": "9fe65ec905e401042115d1e4f346ccb2d1db89219dd31ff1b3e6d578d5758709",
+          "rss": {
+            "first_median": 40327168.0,
+            "last_median": 72155136.0,
+            "growth_bytes": 31827968.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 197828608
+          },
+          "private": {
+            "first_median": 195383296.0,
+            "last_median": 229867520.0,
+            "growth_bytes": 34484224.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 229867520
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "a42f52785bbd8e663c84f3eb37d565406ee328ef835278d835ef35748f99743c"
+        },
+        {
+          "name": "candidate-2",
+          "passed": true,
+          "elapsed_seconds": 1800.0051985,
+          "queries": 134645000,
+          "core_sha256": "9fe65ec905e401042115d1e4f346ccb2d1db89219dd31ff1b3e6d578d5758709",
+          "rss": {
+            "first_median": 40019968.0,
+            "last_median": 71985152.0,
+            "growth_bytes": 31965184.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 197619712
+          },
+          "private": {
+            "first_median": 195094528.0,
+            "last_median": 229687296.0,
+            "growth_bytes": 34592768.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 229687296
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "72df7c49aaeb96defbb57ece2625dc5b7ab494065a1ddee3d39a90383fbcaa96"
+        },
+        {
+          "name": "candidate-3",
+          "passed": true,
+          "elapsed_seconds": 1800.002702,
+          "queries": 135274000,
+          "core_sha256": "9fe65ec905e401042115d1e4f346ccb2d1db89219dd31ff1b3e6d578d5758709",
+          "rss": {
+            "first_median": 42989568.0,
+            "last_median": 72214528.0,
+            "growth_bytes": 29224960.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 198160384
+          },
+          "private": {
+            "first_median": 196177920.0,
+            "last_median": 230723584.0,
+            "growth_bytes": 34545664.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 230723584
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "9761e7f94748ec517af828f352a70cbf92f58c4f5c66ec1ab0746a6175e8054c"
+        }
+      ]
+    },
+    {
+      "platform": "windows-2022",
+      "workload": "asn",
+      "runs": [
+        {
+          "name": "baseline",
+          "passed": true,
+          "elapsed_seconds": 1800.0210653000001,
+          "queries": 88247000,
+          "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+          "rss": {
+            "first_median": 145760256.0,
+            "last_median": 144121856.0,
+            "growth_bytes": -1638400.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 250556416
+          },
+          "private": {
+            "first_median": 303767552.0,
+            "last_median": 303767552.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 75941888.0,
+            "passed": true,
+            "peak": 303804416
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "ac0cfe2f86a28a242f1009ba52007ef299c1cc72f65fb79dd8a9ce4dda3328d6"
+        },
+        {
+          "name": "candidate-1",
+          "passed": true,
+          "elapsed_seconds": 1800.0036227,
+          "queries": 218759000,
+          "core_sha256": "9fe65ec905e401042115d1e4f346ccb2d1db89219dd31ff1b3e6d578d5758709",
+          "rss": {
+            "first_median": 40820736.0,
+            "last_median": 71198720.0,
+            "growth_bytes": 30377984.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 199348224
+          },
+          "private": {
+            "first_median": 197969920.0,
+            "last_median": 231841792.0,
+            "growth_bytes": 33871872.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 231874560
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "3d064d4c98f8803e43cc778592137f6ec2b57ed809c7e4a755872a51a4733aec"
+        },
+        {
+          "name": "candidate-2",
+          "passed": true,
+          "elapsed_seconds": 1800.0085229,
+          "queries": 218577000,
+          "core_sha256": "9fe65ec905e401042115d1e4f346ccb2d1db89219dd31ff1b3e6d578d5758709",
+          "rss": {
+            "first_median": 40179712.0,
+            "last_median": 70991872.0,
+            "growth_bytes": 30812160.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 199438336
+          },
+          "private": {
+            "first_median": 198070272.0,
+            "last_median": 231759872.0,
+            "growth_bytes": 33689600.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 231759872
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "408dd3f4e29218618416e1327d10d91969fcdaa3705db869b1ebbb8daf205cf7"
+        },
+        {
+          "name": "candidate-3",
+          "passed": true,
+          "elapsed_seconds": 1800.0051386,
+          "queries": 219128000,
+          "core_sha256": "9fe65ec905e401042115d1e4f346ccb2d1db89219dd31ff1b3e6d578d5758709",
+          "rss": {
+            "first_median": 40120320.0,
+            "last_median": 70111232.0,
+            "growth_bytes": 29990912.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 199507968
+          },
+          "private": {
+            "first_median": 196904960.0,
+            "last_median": 230952960.0,
+            "growth_bytes": 34048000.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 231354368
+          },
+          "settled_handles_range": [
+            165,
+            165
+          ],
+          "report_sha256": "1c965d5c9b4c7d482a477b05ee3d8be8e580dc7a55520537e43eac9157058682"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-22.04",
+      "workload": "country",
+      "runs": [
+        {
+          "name": "baseline",
+          "passed": true,
+          "elapsed_seconds": 1800.004029594,
+          "queries": 70004000,
+          "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+          "rss": {
+            "first_median": 345862144.0,
+            "last_median": 345862144.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 86465536.0,
+            "passed": true,
+            "peak": 345862144
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "9ec8b4360a0616bab0b05826d43ece45a11ff08f9fb4255ff97abfd04288c894"
+        },
+        {
+          "name": "candidate-1",
+          "passed": true,
+          "elapsed_seconds": 1800.009456141,
+          "queries": 181700000,
+          "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+          "rss": {
+            "first_median": 247386112.0,
+            "last_median": 277598208.0,
+            "growth_bytes": 30212096.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 277602304
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "53f16bd25216448a60d8e1203ef574c1d9be4d2fbe32b9edf414d7f2ccec93c7"
+        },
+        {
+          "name": "candidate-2",
+          "passed": true,
+          "elapsed_seconds": 1800.009318686,
+          "queries": 180442000,
+          "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+          "rss": {
+            "first_median": 249102336.0,
+            "last_median": 281841664.0,
+            "growth_bytes": 32739328.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 281845760
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "679246b6fde2ecf5544c2003f57e8b1aa6100cb191f8f83ab134311826607717"
+        },
+        {
+          "name": "candidate-3",
+          "passed": true,
+          "elapsed_seconds": 1800.01030129,
+          "queries": 183004000,
+          "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+          "rss": {
+            "first_median": 243339264.0,
+            "last_median": 275873792.0,
+            "growth_bytes": 32534528.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 275873792
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "958e8c2d6e3557dfd1f3b51b9883b2034257edf43c54e5f9c6ab81689bd3782b"
+        }
+      ]
+    },
+    {
+      "platform": "ubuntu-22.04",
+      "workload": "asn",
+      "runs": [
+        {
+          "name": "baseline",
+          "passed": true,
+          "elapsed_seconds": 1800.0117916059999,
+          "queries": 67094000,
+          "core_sha256": "e162adf212476a42853a91994ae8be521045264f74d3c2605a82afcdfe0717af",
+          "rss": {
+            "first_median": 350361600.0,
+            "last_median": 350394368.0,
+            "growth_bytes": 32768.0,
+            "allowed_growth_bytes": 87590400.0,
+            "passed": true,
+            "peak": 350400512
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "3df76a01a35695c36ea7951c4b53d2018407763f911d55603043c44333514cf1"
+        },
+        {
+          "name": "candidate-1",
+          "passed": true,
+          "elapsed_seconds": 1800.0093743690002,
+          "queries": 182857000,
+          "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+          "rss": {
+            "first_median": 244559872.0,
+            "last_median": 275992576.0,
+            "growth_bytes": 31432704.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 275992576
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "d51699189aed9ca4a5cf52e65c24fea61f760cd47e4845d22b0a5c0485de45a6"
+        },
+        {
+          "name": "candidate-2",
+          "passed": true,
+          "elapsed_seconds": 1800.005085734,
+          "queries": 174067000,
+          "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+          "rss": {
+            "first_median": 243843072.0,
+            "last_median": 276127744.0,
+            "growth_bytes": 32284672.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 276127744
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "4cee45d796cb574d5a4fbe82611dd5713025f3c6673434f16d5f105894636c7d"
+        },
+        {
+          "name": "candidate-3",
+          "passed": true,
+          "elapsed_seconds": 1800.0071036180002,
+          "queries": 175579000,
+          "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+          "rss": {
+            "first_median": 243677184.0,
+            "last_median": 276004864.0,
+            "growth_bytes": 32327680.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 276008960
+          },
+          "private": null,
+          "settled_handles_range": [
+            20,
+            20
+          ],
+          "report_sha256": "e95376cb6b13162154aac0e29f94e823bfb689db950318f3f2075406f4cbd82b"
+        }
+      ]
+    }
+  ],
+  "raw_reports": {
+    "windows-2022/country/baseline.json": "50def45dade74b6850b3c5d1db266751031378413c1210ccebfe7f788f153183",
+    "windows-2022/country/candidate-1.json": "a42f52785bbd8e663c84f3eb37d565406ee328ef835278d835ef35748f99743c",
+    "windows-2022/country/candidate-2.json": "72df7c49aaeb96defbb57ece2625dc5b7ab494065a1ddee3d39a90383fbcaa96",
+    "windows-2022/country/candidate-3.json": "9761e7f94748ec517af828f352a70cbf92f58c4f5c66ec1ab0746a6175e8054c",
+    "windows-2022/country/report.json": "65c90899f5f1edbd103129b3334b5fb7070396b8beff454deb1d6edc952b23e8",
+    "windows-2022/asn/baseline.json": "ac0cfe2f86a28a242f1009ba52007ef299c1cc72f65fb79dd8a9ce4dda3328d6",
+    "windows-2022/asn/candidate-1.json": "3d064d4c98f8803e43cc778592137f6ec2b57ed809c7e4a755872a51a4733aec",
+    "windows-2022/asn/candidate-2.json": "408dd3f4e29218618416e1327d10d91969fcdaa3705db869b1ebbb8daf205cf7",
+    "windows-2022/asn/candidate-3.json": "1c965d5c9b4c7d482a477b05ee3d8be8e580dc7a55520537e43eac9157058682",
+    "windows-2022/asn/report.json": "dcf59aa87dd76640e49e0e481e29f404b5c2f17f5231458b0f9390abd913b657",
+    "ubuntu-22.04/country/baseline.json": "9ec8b4360a0616bab0b05826d43ece45a11ff08f9fb4255ff97abfd04288c894",
+    "ubuntu-22.04/country/candidate-1.json": "53f16bd25216448a60d8e1203ef574c1d9be4d2fbe32b9edf414d7f2ccec93c7",
+    "ubuntu-22.04/country/candidate-2.json": "679246b6fde2ecf5544c2003f57e8b1aa6100cb191f8f83ab134311826607717",
+    "ubuntu-22.04/country/candidate-3.json": "958e8c2d6e3557dfd1f3b51b9883b2034257edf43c54e5f9c6ab81689bd3782b",
+    "ubuntu-22.04/country/report.json": "1949d36889bf794b415f615bf8d1fc2a18b776658c67e53cb6d54974a9ab26f7",
+    "ubuntu-22.04/asn/baseline.json": "3df76a01a35695c36ea7951c4b53d2018407763f911d55603043c44333514cf1",
+    "ubuntu-22.04/asn/candidate-1.json": "d51699189aed9ca4a5cf52e65c24fea61f760cd47e4845d22b0a5c0485de45a6",
+    "ubuntu-22.04/asn/candidate-2.json": "4cee45d796cb574d5a4fbe82611dd5713025f3c6673434f16d5f105894636c7d",
+    "ubuntu-22.04/asn/candidate-3.json": "e95376cb6b13162154aac0e29f94e823bfb689db950318f3f2075406f4cbd82b",
+    "ubuntu-22.04/asn/report.json": "c205fef74dd8c71fbeabb7fc7db61b80022107094dec4f305c021c8cf246cb82"
+  },
+  "finished": "2026-11-12T21:30:57.983038+00:00"
+}

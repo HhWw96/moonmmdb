@@ -1,0 +1,324 @@
+{
+  "implementation_commit": "c4a4844f235b4c742906d663d6d0f97aa23c4383",
+  "status": "passed",
+  "browser_run": 43290581558,
+  "analytics_run": 43290587523,
+  "platforms": {
+    "windows-2022": {
+      "browsers": [
+        {
+          "engine": "chromium",
+          "version": "145.0.7632.6",
+          "transport": "http",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        },
+        {
+          "engine": "chromium",
+          "version": "145.0.7632.6",
+          "transport": "file",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        },
+        {
+          "engine": "firefox",
+          "version": "146.0.1",
+          "transport": "http",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        },
+        {
+          "engine": "firefox",
+          "version": "146.0.1",
+          "transport": "file",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        }
+      ],
+      "analysis_soaks": [
+        {
+          "host": "node",
+          "elapsed_seconds": 1804.3600000000001,
+          "rss_trend": {
+            "first_median": 21278720.0,
+            "last_median": 17166336.0,
+            "growth_bytes": -4112384.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 192659456
+          },
+          "handle_trend": {
+            "early": 170.0,
+            "late": 170.0,
+            "growth": 0.0,
+            "allowed": 4
+          },
+          "requests": 180000,
+          "private_memory_trend": {
+            "first_median": 183040000.0,
+            "last_median": 182775808.0,
+            "growth_bytes": -264192.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 184201216
+          }
+        },
+        {
+          "host": "native",
+          "elapsed_seconds": 1805.781,
+          "rss_trend": {
+            "first_median": 17051648.0,
+            "last_median": 16969728.0,
+            "growth_bytes": -81920.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 144064512
+          },
+          "handle_trend": {
+            "early": 74.0,
+            "late": 74.0,
+            "growth": 0.0,
+            "allowed": 4
+          },
+          "requests": 180000,
+          "private_memory_trend": {
+            "first_median": 148918272.0,
+            "last_median": 148918272.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 148951040
+          }
+        }
+      ],
+      "browser_soak": {
+        "browser": "145.0.7632.6",
+        "elapsed_seconds": 1800.1165984999998,
+        "max_workers": 1,
+        "cycles": 9115,
+        "reloads": 15,
+        "analyses": 9115,
+        "cancellations": 14,
+        "gates": {
+          "rss": {
+            "early_median": 345825280,
+            "late_median": 334587904,
+            "growth": -11237376,
+            "allowed": 86456320
+          },
+          "private": {
+            "early_median": 359440384,
+            "late_median": 353921024,
+            "growth": -5519360,
+            "allowed": 89860096
+          }
+        }
+      },
+      "production_reference": {
+        "reference": "maxminddb 3.2.0 MODE_MEMORY, independent Python Counter aggregation",
+        "addresses_per_database": 7114,
+        "input_sha256": "6d2bb87bc3956e605fef4bd30ee5961f6d9c93d036544b0cb9667faefe46dbd3",
+        "databases": [
+          {
+            "file": "dbip-city-lite-2026-09.mmdb",
+            "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+          },
+          {
+            "file": "dbip-asn-lite-2026-09.mmdb",
+            "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+          }
+        ],
+        "hosts": [
+          {
+            "command": [
+              "node",
+              "bin/moonmmdb.mjs"
+            ],
+            "exit_code": 1,
+            "report_sha256": "b2b99222e53187f92bbcb91cceea455cddb2cf0ceb1e82558f8021c96e75e9c9"
+          },
+          {
+            "command": [
+              "D:\\a\\moonmmdb\\moonmmdb\\dist\\moonmmdb.exe"
+            ],
+            "exit_code": 1,
+            "report_sha256": "8432f45b2136f3d83c65328034cbf2ec8678b41cfc514ae3fd39a8a05b028a88"
+          }
+        ]
+      }
+    },
+    "ubuntu-22.04": {
+      "browsers": [
+        {
+          "engine": "chromium",
+          "version": "145.0.7632.6",
+          "transport": "http",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        },
+        {
+          "engine": "chromium",
+          "version": "145.0.7632.6",
+          "transport": "file",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        },
+        {
+          "engine": "firefox",
+          "version": "146.0.1",
+          "transport": "http",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        },
+        {
+          "engine": "firefox",
+          "version": "146.0.1",
+          "transport": "file",
+          "checks": 14,
+          "corpus_files": 75,
+          "queries": 31259,
+          "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892"
+        }
+      ],
+      "analysis_soaks": [
+        {
+          "host": "node",
+          "elapsed_seconds": 1803.7036708389999,
+          "rss_trend": {
+            "first_median": 225583104.0,
+            "last_median": 223678464.0,
+            "growth_bytes": -1904640.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 232755200
+          },
+          "handle_trend": {
+            "early": 21.0,
+            "late": 21.0,
+            "growth": 0.0,
+            "allowed": 4
+          },
+          "requests": 180000,
+          "private_memory_trend": null
+        },
+        {
+          "host": "native",
+          "elapsed_seconds": 1803.205330668,
+          "rss_trend": {
+            "first_median": 140812288.0,
+            "last_median": 140812288.0,
+            "growth_bytes": 0.0,
+            "allowed_growth_bytes": 67108864,
+            "passed": true,
+            "peak": 140812288
+          },
+          "handle_trend": {
+            "early": 3.0,
+            "late": 3.0,
+            "growth": 0.0,
+            "allowed": 4
+          },
+          "requests": 180000,
+          "private_memory_trend": null
+        }
+      ],
+      "browser_soak": {
+        "browser": "145.0.7632.6",
+        "elapsed_seconds": 1800.097799268,
+        "max_workers": 1,
+        "cycles": 9075,
+        "reloads": 15,
+        "analyses": 9075,
+        "cancellations": 14,
+        "gates": {
+          "rss": {
+            "early_median": 731090944,
+            "late_median": 741263360,
+            "growth": 10172416,
+            "allowed": 182772736
+          }
+        }
+      },
+      "production_reference": {
+        "reference": "maxminddb 3.2.0 MODE_MEMORY, independent Python Counter aggregation",
+        "addresses_per_database": 7114,
+        "input_sha256": "6d2bb87bc3956e605fef4bd30ee5961f6d9c93d036544b0cb9667faefe46dbd3",
+        "databases": [
+          {
+            "file": "dbip-city-lite-2026-09.mmdb",
+            "sha256": "05a10861259c7966cb54d7181ef8c360de8c8829d182098c0e62a9b7d54cd50d"
+          },
+          {
+            "file": "dbip-asn-lite-2026-09.mmdb",
+            "sha256": "ab07c764a10c4f8c2f3539377fa86e5c928243084aafd359d1be4cb8543d7406"
+          }
+        ],
+        "hosts": [
+          {
+            "command": [
+              "node",
+              "bin/moonmmdb.mjs"
+            ],
+            "exit_code": 1,
+            "report_sha256": "b2b99222e53187f92bbcb91cceea455cddb2cf0ceb1e82558f8021c96e75e9c9"
+          },
+          {
+            "command": [
+              "/home/runner/work/moonmmdb/moonmmdb/dist/moonmmdb"
+            ],
+            "exit_code": 1,
+            "report_sha256": "8432f45b2136f3d83c65328034cbf2ec8678b41cfc514ae3fd39a8a05b028a88"
+          }
+        ]
+      }
+    }
+  },
+  "raw_report_sha256": {
+    "browser/windows-2022/chromium-http.json": "7288746992e0d29aed0383893a459787962ce377e093f672c841758672b1ac6d",
+    "browser/windows-2022/analytics-chromium-http.json": "ff5568b064da62333d28f1b35eec43cfdae45b317978c57a9869affca145cd95",
+    "browser/windows-2022/workflow-chromium-http/report.json": "c1002d58ec24c9b0d3dda8124b3e68b0865810cdabfe3d22379d10673cbeb093",
+    "browser/windows-2022/chromium-file-offline.json": "caeef86e52dc96ef1727cb9ba85c44ce5e81990bc2f18aae15c1f03dad8f18d8",
+    "browser/windows-2022/analytics-chromium-file.json": "f3702bb02d0ed7b3210740ba381ad537bb48015d0e66f0f2c94adee865a9be39",
+    "browser/windows-2022/workflow-chromium-file/report.json": "8041eff8db86c32107bc72cbbf99becfd240289e7cc52561abb80b8cc81b5ce8",
+    "browser/windows-2022/firefox-http.json": "225006159b22cc3449152a4e917cbd1d7dba3e75b62379a092bd7815c17c8a95",
+    "browser/windows-2022/analytics-firefox-http.json": "3962adf54d75979ba33087e633f46f75962a7180207045f054b6d6e88b886208",
+    "browser/windows-2022/workflow-firefox-http/report.json": "c8f9e3fbdf9b7ff9bc57a774cd5fe08b3a21d16604e7e530fa1a7c74c0b3aeea",
+    "browser/windows-2022/firefox-file-offline.json": "547ddcf2c0f9ccdc15517c29a3fbace0b3f5319f637041f6111e030657d7d79b",
+    "browser/windows-2022/analytics-firefox-file.json": "46e39a896057dfc3e5d0ba7b5f10d41e199b921eaa60a14e809ffcab947bce59",
+    "browser/windows-2022/workflow-firefox-file/report.json": "907c9e9f4697d061f1cf5f381d93406733bafb155259b2c538166267eda2cb9f",
+    "browser/windows-2022/soak.json": "8d82ef4cb03dbaf8f3ff3ee2ab7c1de942f431eacc9ba24c6db2f363af715e11",
+    "analytics/windows-2022/analytics-soak-node.json": "78c84f4efbaf406ff7cac8ab694e34ad7aaea300c32aee1a7ca139472e6b2cab",
+    "analytics/windows-2022/analytics-soak-native.json": "33663804bbdb8f4859a47d2c9bfcaf02f30cd326ad1cdb71c156b5c8dc64d3cb",
+    "analytics/windows-2022/analytics-production.json": "da4fd01d8117bed567de1553fc411bf449fcc716d18e236e4d0d73e6af696d0d",
+    "browser/ubuntu-22.04/chromium-http.json": "de9908fd7e73443dc4ba7b93c4b453b093e01e6a8edcdac208ebc9e4daba86b2",
+    "browser/ubuntu-22.04/analytics-chromium-http.json": "a2a607d1d40fea106339bdba449124b50f1a88f18ffdc0ddb009432d6e7786e6",
+    "browser/ubuntu-22.04/workflow-chromium-http/report.json": "c1002d58ec24c9b0d3dda8124b3e68b0865810cdabfe3d22379d10673cbeb093",
+    "browser/ubuntu-22.04/chromium-file-offline.json": "e1c6d5f5f4024d0abe891d3256928e1e9bdffcb93a19701e8215cf6351110767",
+    "browser/ubuntu-22.04/analytics-chromium-file.json": "5436786fbc1a2ef0fd1b7222893704a516d3fa14926520a84aab8e19106fc9cd",
+    "browser/ubuntu-22.04/workflow-chromium-file/report.json": "8041eff8db86c32107bc72cbbf99becfd240289e7cc52561abb80b8cc81b5ce8",
+    "browser/ubuntu-22.04/firefox-http.json": "67d9bbc394e10a5c32fb6126c712e4848a84042b1f69a78985571881684782ea",
+    "browser/ubuntu-22.04/analytics-firefox-http.json": "a5e46354f6d57a86d3211a3932f4133a12953bf1fbf10b32ac808563076e8c0d",
+    "browser/ubuntu-22.04/workflow-firefox-http/report.json": "c8f9e3fbdf9b7ff9bc57a774cd5fe08b3a21d16604e7e530fa1a7c74c0b3aeea",
+    "browser/ubuntu-22.04/firefox-file-offline.json": "7fe109465bad83b8370e21ba11b2d072978825d570a497fa9b7783d7407aa1d2",
+    "browser/ubuntu-22.04/analytics-firefox-file.json": "46e39a896057dfc3e5d0ba7b5f10d41e199b921eaa60a14e809ffcab947bce59",
+    "browser/ubuntu-22.04/workflow-firefox-file/report.json": "907c9e9f4697d061f1cf5f381d93406733bafb155259b2c538166267eda2cb9f",
+    "browser/ubuntu-22.04/soak.json": "17e11749121abd16780f6c7af829d17a6941f6b63eda2ce7aa468f61c4bbeafc",
+    "analytics/ubuntu-22.04/analytics-soak-node.json": "c95e093dfb7e979d2135f491e8bde14954710c59654bd780313a2c539c65311f",
+    "analytics/ubuntu-22.04/analytics-soak-native.json": "7c83ca68ef9cb091bfbd6c65994ccc7ec08b8dc388bfc76681793de230dc5d7e",
+    "analytics/ubuntu-22.04/analytics-production.json": "cf5ee720c14a4797fe1595ac9a458417572d6a8377cccb4d0d25489fbdaf17e1"
+  }
+}

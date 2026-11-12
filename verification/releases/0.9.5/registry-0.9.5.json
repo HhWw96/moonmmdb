@@ -1,0 +1,25 @@
+{
+  "started": "2026-11-12T21:35:06.549Z",
+  "status": "passed",
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.5",
+  "scope": "New standalone consumer; no workspace dependency; registry download and version assertion.",
+  "steps": [
+    {
+      "name": "add",
+      "output": ""
+    },
+    {
+      "target": "js",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    },
+    {
+      "target": "wasm-gc",
+      "output": "Total tests: 1, passed: 1, failed: 0.\n"
+    }
+  ],
+  "downloaded_manifest_sha256": "b2ebdfb6fd0faf048c9452dd53dc483d5c78db1788078fc8c5cb714d7915517b",
+  "finished": "2026-11-12T21:35:24.883Z",
+  "workspace_ancestor_check": "No moon.work in consumer temporary directory ancestors",
+  "publish_session_file_removed_before_install": true
+}

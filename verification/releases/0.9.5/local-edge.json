@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "source_commit": "c4a4844f235b4c742906d663d6d0f97aa23c4383",
+  "node": "v24.20.0",
+  "browser": "Microsoft Edge 157.0.4341.46",
+  "transport": "file://, dedicated empty context and network disabled",
+  "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892",
+  "corpus_files": 75,
+  "queries": 31259,
+  "query_checks": 14,
+  "workflow_checks": 14,
+  "analysis_checks": 7,
+  "total_directed_checks": 35,
+  "production_addresses_per_source": 7114,
+  "console_errors": [],
+  "native_without_developer_paths": {
+    "status": "passed",
+    "archive": "moonmmdb-0.9.5-windows-x64.zip",
+    "sha256": "221b18f14119ffaf15e97a94cbe443270290af287943dc64d8bde31175b38f88",
+    "executable_sha256": "8cfd4d12f29aca1e50052a77a9a0f39f3994ed0a70d9c992952b0e95f6370e7c",
+    "without_developer_tools": true,
+    "commands": 23
+  },
+  "scope": "Project Playwright harness with explicitly selected isolated Edge. Public online browser verification follows actual deployment.",
+  "recorded_at": "2026-11-12T20:12:32.454446+00:00"
+}

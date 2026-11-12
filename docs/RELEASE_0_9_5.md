@@ -10,3 +10,5 @@ MoonMMDB v0.9.5 适配当前官方 MoonBit 0.10.20+65efd5b93，保持已有公�
 安装：`moon add HhWw96/moonmmdb@0.9.5`。也可下载 Windows/Linux x64 程序或独立离线 HTML，或打开 https://hhww96.github.io/moonmmdb/。
 
 最终通过的验证、产物和数据库散列由 FINAL_VERIFICATION.json 绑定；发布后的下载、注册表安装与在线页面复验另见 POST_PUBLICATION.json。SHA256SUMS 校验实际发行文件。历史失败记录保持原样。
+
+原始持续运行及跨端验收记录见 `DEFAULT_NODE_REPORTS.zip` 和 `VALIDATION_REPORTS.zip`；额外验证文件的散列见 `EVIDENCE_SHA256SUMS`。

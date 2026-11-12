@@ -1,0 +1,77 @@
+{
+  "module": "HhWw96/moonmmdb",
+  "version": "0.9.5",
+  "status": "verified",
+  "implementation_commit": "c4a4844f235b4c742906d663d6d0f97aa23c4383",
+  "package_source_commit": "3ad79fa88cf00b22ae19584746ea36f6dca75d53",
+  "source_tree": "2e23d9117c8b4c00f68f3be08a2f61f5f1c56268",
+  "registry_archive_sha256": "8038334dfe2db42722affe2eb9e16171498d2a2f8a8dc024d805397a1c80c084",
+  "registry_archive_bytes": 4834118,
+  "public_archive_matches_upload": true,
+  "temporary_project_publish_session_removed": true,
+  "runs": {
+    "stability": {
+      "id": 43290594886,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43290594886",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "c4a4844f235b4c742906d663d6d0f97aa23c4383"
+    },
+    "analytics": {
+      "id": 43290587523,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43290587523",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "c4a4844f235b4c742906d663d6d0f97aa23c4383"
+    },
+    "regression": {
+      "id": 43290581786,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43290581786",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "c4a4844f235b4c742906d663d6d0f97aa23c4383"
+    },
+    "native": {
+      "id": 43290581581,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43290581581",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "c4a4844f235b4c742906d663d6d0f97aa23c4383"
+    },
+    "browser": {
+      "id": 43290581558,
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43290581558",
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "c4a4844f235b4c742906d663d6d0f97aa23c4383"
+    }
+  },
+  "artifacts": {
+    "windows": {
+      "file": "moonmmdb-0.9.5-windows-x64.zip",
+      "bytes": 328725,
+      "sha256": "221b18f14119ffaf15e97a94cbe443270290af287943dc64d8bde31175b38f88",
+      "executable_sha256": "8cfd4d12f29aca1e50052a77a9a0f39f3994ed0a70d9c992952b0e95f6370e7c"
+    },
+    "linux": {
+      "file": "moonmmdb-0.9.5-linux-x64.tar.gz",
+      "bytes": 345279,
+      "sha256": "9532f384511492a5f77fa885143edb50b023a1e1c27012754dfe7937d3476ab5",
+      "executable_sha256": "0a9a719af7fc52340985fa382cc464576bb42c97a94ccef907be7dff6787b993"
+    },
+    "offline_html": {
+      "file": "moonmmdb-0.9.5-offline.html",
+      "bytes": 622061,
+      "sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892",
+      "build": {
+        "version": "0.9.5",
+        "source_sha256": "93a09d1aa7f05f0f36d122f7e666b9efe01a289fe26d2e41c4e0239665c6e298",
+        "html_sha256": "2e7738896aed7fd373301721fa033e6bfac3f71414f65a7fdca16246e7236892",
+        "core_sha256": "6f5274dfaa0f96b9617fd8f1dd4de5ba531fcdd86ba15a1c75a61f161a72f693",
+        "workflow_sha256": "1d947a3f8da25832dac5a405a9e54efe88046783c92c546421e842df4f4adc09",
+        "bytes": 622061
+      }
+    }
+  },
+  "scope": "Implementation gates, exact public Mooncakes archive and fresh registry consumers passed. Public GitHub asset downloads and Pages are verified separately after publication."
+}
