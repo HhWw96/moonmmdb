@@ -1,10 +1,10 @@
 # 浏览器本地数据库工作台
 
-0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.4/moonmmdb-0.9.4-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_9_4.md)。
+0.8.0 增加独立的浏览器产品。[网页入口](https://hhww96.github.io/moonmmdb/)与[独立 HTML](https://github.com/HhWw96/moonmmdb/releases/download/v0.9.5/moonmmdb-0.9.5-offline.html)的公开发布状态见[验证报告](VERIFICATION_0_9_5.md)。
 
 ## 使用
 
-网页和离线 HTML 使用同一份构建产物。离线版保存到本机后直接用桌面浏览器打开，无需服务器、Node.js、Python 或 MoonBit。页面内置项目人工样例、帮助及许可证；人工 IP 标签不是实际归属。0.9.1 增加 City＋ASN 日志分析样例，发布状态见 [当前版本验证](VERIFICATION_0_9_4.md)。
+网页和离线 HTML 使用同一份构建产物。离线版保存到本机后直接用桌面浏览器打开，无需服务器、Node.js、Python 或 MoonBit。页面内置项目人工样例、帮助及许可证；人工 IP 标签不是实际归属。0.9.1 增加 City＋ASN 日志分析样例，发布状态见 [当前版本验证](VERIFICATION_0_9_5.md)。
 
 1. 选择或拖入 `.mmdb` 文件，等待元数据与 SHA-256 计算完成。
 2. **IP 查询**：输入一个 IPv4/IPv6 地址；字段框每行一个 JSON Pointer，留空查询完整记录。
@@ -59,7 +59,7 @@ node web/analytics-verify.mjs --production
 node web/analytics-verify.mjs --file --production
 ```
 
-前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.14+7d59c7ec9。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机可用 `node web/serve.mjs` 在 http://127.0.0.1:4173/ 预览；服务器只返回生成的 HTML，不提供工作区文件访问。Linux 缺少浏览器系统库时，在隔离测试环境使用 `npx playwright install --with-deps chromium firefox`。
+前端 npm 依赖仅用于浏览器模块，不增加 MoonBit 核心或旧 Node CLI 的运行依赖。使用 Node.js 24 与固定 MoonBit 0.10.20+65efd5b93。浏览器测试通过 web 模块内固定 Playwright 执行；CI 安装 Chromium、Firefox，在隔离 runner 中额外执行 `node web/verify.mjs --file`。本机可用 `node web/serve.mjs` 在 http://127.0.0.1:4173/ 预览；服务器只返回生成的 HTML，不提供工作区文件访问。Linux 缺少浏览器系统库时，在隔离测试环境使用 `npx playwright install --with-deps chromium firefox`。
 
 `python web/oracle.py --production` 使用固定 Python maxminddb 3.2.0、原始物理树检查和已审阅异常策略生成答案。Anonymous 等已知参考器枚举缺陷沿用官方源地址；参考失败不会算作通过。真实数据仅用于验证，不内置在 HTML 中。
 
@@ -67,4 +67,4 @@ node web/analytics-verify.mjs --file --production
 
 ## 跨端任务、诊断与复核
 
-四种操作支持导出/导入任务、显示命令行绑定方式，以及重新打开报告进行内部检查或原文件复验。任务导入只恢复参数，需重新选择文件后手动运行；目标库通过角色选择框明确指定。取消会作废旧任务，错误后焦点转到诊断区域。标签页采用手动激活：方向键及 Home/End 移动焦点，Enter/Space 激活。完整流程见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [当前验证](VERIFICATION_0_9_4.md)。
+四种操作支持导出/导入任务、显示命令行绑定方式，以及重新打开报告进行内部检查或原文件复验。任务导入只恢复参数，需重新选择文件后手动运行；目标库通过角色选择框明确指定。取消会作废旧任务，错误后焦点转到诊断区域。标签页采用手动激活：方向键及 Home/End 移动焦点，Enter/Space 激活。完整流程见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [当前验证](VERIFICATION_0_9_5.md)。

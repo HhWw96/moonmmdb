@@ -1,0 +1,47 @@
+{
+  "status": "historical_failures_retained",
+  "records": [
+    {
+      "run": 43228471211,
+      "job": 131217730025,
+      "platform": "windows-2022",
+      "workload": "City+Country",
+      "private_growth_bytes": 71577600,
+      "allowed_growth_bytes": 67108864,
+      "rss_passed": true,
+      "source_head": "75a288020502508d1f374344055ac3611a067e5e",
+      "status": "failed",
+      "receipt_sha256": "67579e676a3811af11febca91429af62f44e4252343c38695e1225624a85ef28",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43228471211"
+    },
+    {
+      "run": 43260603543,
+      "job": 131330525596,
+      "platform": "windows-2022",
+      "workload": "City+ASN",
+      "source_head": "ef52d29c88c6ac82c20c774ce7cebded5f54e366",
+      "private_growth_bytes": 70852608,
+      "allowed_growth_bytes": 67108864,
+      "rss_passed": true,
+      "status": "failed",
+      "receipt_sha256": "bdb40229bf61ce1c35be8faf584b32caacf9399ceef6f11b3f1291a3ba0486a4",
+      "url": "https://github.com/HhWw96/moonmmdb/actions/runs/43260603543"
+    },
+    {
+      "status": "failed",
+      "scope": "Local experimental precheck, retained; not a formal CI pass",
+      "source_commit": "cf9538aacdb72e3b33e9009f4c1866fe76db5c6c",
+      "rss_passed": true,
+      "private_memory_trend": {
+        "first_median": 230903808.0,
+        "last_median": 301498368.0,
+        "growth_bytes": 70594560.0,
+        "allowed_growth_bytes": 67108864,
+        "passed": false,
+        "peak": 301535232
+      },
+      "receipt_sha256": "1f1220c4cdab404eda59d36f012f28034a8e97a8a1c32cbe026cad41057dd47b"
+    }
+  ],
+  "earlier_records": "Historical version reports remain unchanged."
+}

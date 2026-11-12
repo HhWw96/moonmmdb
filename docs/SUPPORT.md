@@ -1,6 +1,6 @@
 # 支持范围
 
-已发布 v0.9.4 的支持范围及历史回执见本页。维护源码 0.9.5 的当前工具链验证另见 [维护报告](MAINTENANCE_2026_11_12.md)；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_4.md)。
+0.9.5 的支持范围和实际交付回执见本页及版本报告。当前工具链兼容维护记录另见 [维护报告](MAINTENANCE_2026_11_12.md)；Native 产品宿主已通过跨平台验收，使用与结果见 [Native 说明](NATIVE_CLI.md) 和 [版本验证](VERIFICATION_0_9_5.md)。
 
 0.6.0 包含 [完整官方语料验证](CORPUS.md)、[City／ASN 可选包](GEO.md) 和 [网段导出与数据库检查](INSPECTION.md)。后续正式版本遵循 [兼容政策](COMPATIBILITY.md)。
 
@@ -70,7 +70,7 @@ CLI diff 未给 --field 时选择整个记录（空路径），只检查输入�
 
 ## 后端
 
-后端验证范围为 JavaScript、WasmGC 及维护源码固定 MoonBit 0.10.20+65efd5b93 的 Windows/Linux x64 Native。Windows 构建需要 MSVC C++ Build Tools 和 Windows SDK，0.9.4 的 GCC 16.2.0 结论仅适用于历史版本；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、macOS、ARM64、Alpine 或 WASI Component 支持。
+后端验证范围为 JavaScript、WasmGC 及 0.9.5 固定 MoonBit 0.10.20+65efd5b93 的 Windows/Linux x64 Native。Windows 构建需要 MSVC C++ Build Tools 和 Windows SDK，0.9.4 的 GCC 16.2.0 结论仅适用于历史版本；Linux 在 Ubuntu 22.04 构建，最低声明 glibc 2.35，同一压缩包另在 Ubuntu 24.04 验证。未声明最新 nightly、macOS、ARM64、Alpine 或 WASI Component 支持。
 
 Native 产品提供 metadata、lookup、project、enrich-many、networks、validate、diff、analyze、run-task、verify-report；Node.js 保留 enrich、diff 和分析示例等完整功能。Native 的参数、JSON、查询与统计在 MoonBit 实现，C 只负责宿主输入输出，不依赖 C/Python MMDB 读取器。Unicode 路径、十万行流式输入、慢消费者与提前关闭管道已在 Windows/Linux 验证。Native JSON 上限 128 层，拒绝未配对 Unicode 代理项转义，其他边界见 [Native 说明](NATIVE_CLI.md)。
 
@@ -78,9 +78,11 @@ Native 产品提供 metadata、lookup、project、enrich-many、networks、valid
 
 Native 0.7.0 增加 `diff`，按输入 IP 比较两个快照；字段选择、变化状态、文件合计限制及完成汇总见 [更新对比](NATIVE_DIFF.md)。
 
-浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [当前版本验证](VERIFICATION_0_9_4.md)。不扩大到 Safari 或手机大数据库性能。
+浏览器工作台已通过 Windows/Linux Chromium、Firefox 的网页与离线验收，以及本机 Edge 验证；实际支持范围与发布验证见 [浏览器说明](BROWSER.md) 和 [当前版本验证](VERIFICATION_0_9_5.md)。不扩大到 Safari 或手机大数据库性能。
 
 正式 `analytics` 包与 Native/Node `analyze` 的互斥计数、精确整数、来源散列及资源边界见 [日志分析](ANALYTICS.md)。旧分析示例输出保持不变。
+
+0.9.5 在固定 Node 24.20.0 下重新完成 Windows/Linux 的 City＋Country、City＋ASN 四组同机对照，每组连续三次候选、每次 30 分钟均通过。Windows 同时检查 RSS 与私有内存，文件句柄保持稳定；本次优化前两次私有内存失败及原有历史记录保留，见 [0.9.5 验证](VERIFICATION_0_9_5.md)。
 
 0.9.0 默认 Node 稳定性在固定 Node 24.20.0 的 Windows/Linux City＋Country 和 City＋ASN 负载下各连续通过三次 30 分钟验证；本轮 v0.8.0 基线也通过。该结论不覆盖所有 Node 版本，也不撤销历史 Node 24.13.0 失败记录，详见 [0.9.0 验证](VERIFICATION_0_9.md)。
 
@@ -88,4 +90,4 @@ Native 0.7.0 增加 `diff`，按输入 IP 比较两个快照；字段选择、�
 
 ## 跨端任务、诊断与复核
 
-任务文件最多 64 KiB、JSON 深度 128；完整报告最多 8 MiB，页面预览最多 64 KiB。文件只能显式绑定；导入不自动执行。诊断最多 1,000 条异常行/512 KiB，不保存原行或 IP。报告内部自洽与同实现重算不能替代独立正确性证明。Node diff 单库及两库合计限制统一为 256 MiB。功能、错误与退出码见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [当前验证](VERIFICATION_0_9_4.md)。
+任务文件最多 64 KiB、JSON 深度 128；完整报告最多 8 MiB，页面预览最多 64 KiB。文件只能显式绑定；导入不自动执行。诊断最多 1,000 条异常行/512 KiB，不保存原行或 IP。报告内部自洽与同实现重算不能替代独立正确性证明。Node diff 单库及两库合计限制统一为 256 MiB。功能、错误与退出码见 [WORKFLOWS.md](WORKFLOWS.md)。 验证回执见 [当前验证](VERIFICATION_0_9_5.md)。

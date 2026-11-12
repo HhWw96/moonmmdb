@@ -40,3 +40,9 @@ Node bridge 的公开导出、已声明的 CLI 参数、退出码、JSON 既有�
 ## 跨端任务、诊断与复核
 
 新增 workflow 包、Analyzer.push_detailed、AnalysisRowOutcome 及桥接声明，冻结 0.9.2 基线；保留全部旧基线和原有统计口径。任务与报告 version:1 的规则见 [WORKFLOWS.md](WORKFLOWS.md)。Node diff 现在同时执行单库及两库合计 256 MiB 限制，这是资源接受范围的收紧。报告超过 128 层时统一拒绝，可提取较浅字段重新生成；正常受支持输入的接口和结果语义不变。 验证回执见 [0.9.2 验证](VERIFICATION_0_9_2.md)。
+
+## 0.9.5 工具链适配
+
+0.9.5 源码按官方 MoonBit `0.10.20+65efd5b93` 构建与验证；旧版本对应的工具链记录保留，不据此推断新源码也可用旧编译器构建。Native 程序和独立 HTML 无需安装 MoonBit。
+
+本版迁移编译器等价类型名称、派生和 JSON 转换语法。既有 MoonBit 函数继续保留；JavaScript 导出通过新增 FixedArray 包装保持原调用名称和数组入参，冻结接口检查仍核对旧声明、导入身份及行为回归。Windows Native 源码构建使用 MSVC 和 Windows SDK，历史 MinGW 构建记录不代表当前工具链支持。完整环境与发布回执见 [0.9.5 验证](VERIFICATION_0_9_5.md)。

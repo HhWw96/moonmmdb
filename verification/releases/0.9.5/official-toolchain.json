@@ -1,0 +1,27 @@
+{
+  "status": "verified",
+  "version_all": "moon 0.1.20261104 (940aa18 2026-11-04) E:\\Project\\Competition\\MoonBit\\.moonmmdb-tools\\moon-current\\bin\\moon.exe\nmoonc v0.10.20+65efd5b93 (2026-11-05) E:\\Project\\Competition\\MoonBit\\.moonmmdb-tools\\moon-current\\bin\\moonc.exe\nmoonrun 0.1.20261104 (940aa18 2026-11-04) E:\\Project\\Competition\\MoonBit\\.moonmmdb-tools\\moon-current\\bin\\moonrun.exe\n\nFeature flags enabled: rr_moon_mod,rr_moon_pkg\n",
+  "verification": {
+    "checked_utc": "2026-11-12T20:35:24.827630+00:00",
+    "url": "https://cli.moonbitlang.com/binaries/latest/moonbit-windows-x86_64.sha256",
+    "manifest_sha256": "eceaef2237901eb81e144da641fed17069509d80f95243059079e2a6958c4684",
+    "components": {
+      "moonc.exe": {
+        "installed_sha256": "dc7486ac14f6807cd04e3b2ff59eaf1a1c33fb80dd8c87d18a8535f844991778",
+        "official_sha256": "dc7486ac14f6807cd04e3b2ff59eaf1a1c33fb80dd8c87d18a8535f844991778",
+        "matches": true
+      },
+      "moon.exe": {
+        "installed_sha256": "f8942cf2826c19b7b948b283cc1c77ae9c3c61a9d3c83b86f0ed945f1cf21dc5",
+        "official_sha256": "f8942cf2826c19b7b948b283cc1c77ae9c3c61a9d3c83b86f0ed945f1cf21dc5",
+        "matches": true
+      },
+      "moonrun.exe": {
+        "installed_sha256": "8dba42c842dabfe3973be0f304a38be5d3b1ce3f59b102301aab4d73960e9c13",
+        "official_sha256": "8dba42c842dabfe3973be0f304a38be5d3b1ce3f59b102301aab4d73960e9c13",
+        "matches": true
+      }
+    },
+    "matches_official_latest": true
+  }
+}
