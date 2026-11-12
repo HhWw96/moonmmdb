@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.9.5（维护源码）
+## 0.9.5
 
 - 适配 MoonBit 0.10.20+65efd5b93，显式导入 JSON 转换，迁移派生语法和类型名称，保持精确值及错误结果。
 - JavaScript 数组通过 FixedArray 桥接到 MoonBit，修复字段提取、联合查询和独立 City／ASN 示例；既有 MoonBit 接口与 JavaScript 调用方式保持兼容。
