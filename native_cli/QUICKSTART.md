@@ -45,7 +45,7 @@ stdout 为逐条 JSON 结果，原始日志保存在 input 下，联合结果在
 汇总包括行数、各库计数、数据库类型、构建时间及 SHA-256。请同时检查退出码和汇总。
 
 Native 不提供单库 enrich 命令；可使用 enrich-many 或现有 Node.js 工具。
-目前只交付 Windows/Linux x64，不声明 macOS、ARM64、Alpine 或 MSVC 支持。
+目前交付 Windows/Linux x64。Windows 源码构建使用 MSVC 兼容工具链与 Windows SDK；不声明 macOS、ARM64 或 Alpine 支持。
 
 项目与源码：https://github.com/HhWw96/moonmmdb
 许可证及第三方来源见 LICENSE、THIRD_PARTY.md、licenses/。
