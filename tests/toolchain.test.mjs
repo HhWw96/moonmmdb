@@ -30,3 +30,21 @@ test('Windows builds accept only MSVC-compatible drivers',async()=>{
   for(const name of ['cl.exe','clang-cl.exe','C:/Tools/VC/cl.exe'])assert.doesNotThrow(()=>assertMsvcName(name));
   for(const name of ['gcc.exe','cc.exe','clang.exe'])assert.throws(()=>assertMsvcName(name),/MinGW is not supported/);
 });
+
+test('Windows MSVC setup handles spaces and exposes only compiler environment', {skip:process.platform!=='win32'},async()=>{
+  const {mkdtempSync,mkdirSync,writeFileSync,rmSync}=await import('node:fs');
+  const {tmpdir}=await import('node:os');
+  const {join}=await import('node:path');
+  const {msvcEnvironment}=await import('../scripts/msvc.mjs');
+  const directory=mkdtempSync(join(tmpdir(),'moonmmdb-msvc-'));
+  try {
+    const nested=join(directory,'Visual Studio','Common7','Tools');mkdirSync(nested,{recursive:true});
+    const batch=join(nested,'VsDevCmd.bat');
+    writeFileSync(batch,'@echo off\r\nset "INCLUDE=C:\\msvc-test-include"\r\nset "MOONMMDB_TEST_PRIVATE=must-not-escape"\r\nexit /b 0\r\n');
+    const env=msvcEnvironment(batch);
+    assert.equal(env.INCLUDE,'C:\\msvc-test-include');
+    assert.ok(!Object.hasOwn(env,'MOONMMDB_TEST_PRIVATE'));
+    assert.ok(Object.keys(env).every(k=>/^(PATH|INCLUDE|LIB|LIBPATH|VCTOOLSINSTALLDIR|WINDOWSSDKDIR|WINDOWSSDKVERSION)$/.test(k)));
+    assert.throws(()=>msvcEnvironment('C:/invalid&path/VsDevCmd.bat'),/Invalid MSVC setup path/);
+  } finally {rmSync(directory,{recursive:true,force:true});}
+});

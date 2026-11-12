@@ -6,6 +6,19 @@ import {spawnSync} from 'node:child_process';
 export function assertMsvcName(compiler) {
   if(!/^(cl|clang-cl)(\.exe)?$/i.test(basename(compiler.replaceAll('\\','/'))))throw new Error('Current MoonBit on Windows requires MSVC cl.exe or clang-cl.exe and the Windows SDK; MinGW is not supported.');
 }
+// cmd.exe needs its quoted /c payload verbatim when the VS path contains spaces.
+export function msvcEnvironment(batch) {
+  if(/["%&|<>\r\n]/.test(batch))throw new Error('Invalid MSVC setup path.');
+  const dev=spawnSync('cmd.exe',['/d','/s','/c',`""${batch}" -no_logo -arch=amd64 -host_arch=amd64 >nul && set"`],{encoding:'utf8',windowsVerbatimArguments:true});
+  if(dev.status!==0)throw new Error('Unable to initialize the x64 MSVC developer environment.');
+  const result={};
+  // Never return or print the full captured environment: it can contain credentials.
+  for(const line of dev.stdout.split(/\r?\n/)) {
+    const match=line.match(/^([^=]+)=(.*)$/);
+    if(match&&/^(path|include|lib|libpath|vctoolsinstalldir|windowssdkdir|windowssdkversion)$/i.test(match[1]))result[match[1].toUpperCase()]=match[2];
+  }
+  return result;
+}
 export function configureMsvc() {
   let compiler=process.env.MOON_CC;
   if(compiler)assertMsvcName(compiler);
@@ -19,15 +32,9 @@ export function configureMsvc() {
       const home=located.stdout?.trim();
       if(located.status!==0||!home||/["%&|<>\r\n]/.test(home))throw new Error('No usable Visual Studio C++ Build Tools installation found.');
       const bat=resolve(home,'Common7/Tools/VsDevCmd.bat');
-      const dev=spawnSync('cmd.exe',['/d','/s','/c',`""${bat}" -no_logo -arch=amd64 -host_arch=amd64 >nul && set"`],{encoding:'utf8'});
-      if(dev.status!==0)throw new Error('Unable to initialize the x64 MSVC developer environment.');
-      // Never print the captured environment: it can contain unrelated credentials.
-      for(const line of dev.stdout.split(/\r?\n/)) {
-        const match=line.match(/^([^=]+)=(.*)$/);
-        if(match&&/^(path|include|lib|libpath|vctoolsinstalldir|windowssdkdir|windowssdkversion)$/i.test(match[1])) {
-          for(const key of Object.keys(process.env))if(key.toLowerCase()===match[1].toLowerCase())delete process.env[key];
-          process.env[match[1].toUpperCase()]=match[2];
-        }
+      for(const [key,value] of Object.entries(msvcEnvironment(bat))) {
+        for(const old of Object.keys(process.env))if(old.toUpperCase()===key)delete process.env[old];
+        process.env[key]=value;
       }
       const found=spawnSync('where.exe',['cl.exe'],{encoding:'utf8'});
       if(found.status!==0)throw new Error('MSVC environment did not provide cl.exe.');
