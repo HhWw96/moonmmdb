@@ -102,6 +102,8 @@ node examples/log_analytics/run.mjs tests/scenarios/geo.mmdb tests/scenarios/asn
 moon add HhWw96/moonmmdb@0.9.4
 ```
 
+注册表稳定包 0.9.4 按 `moonc v0.10.14+7d59c7ec9` 验证。使用当前 `0.10.20+65efd5b93` 时，请使用本仓库 0.9.5 维护源码及下述独立 workspace 示例；维护版尚未发布到注册表。已下载的 Native 程序和离线 HTML 无需安装 MoonBit。
+
 完整例子在 `examples/log_consumer` 和 `examples/log_analytics`；它们有独立的 `moon.mod`，只调用核心公开接口。仓库内示例使用本地 workspace 便于开发，注册表安装验证另在全新目录执行。发布和安装结果见 [版本验证](docs/VERIFICATION_0_9_4.md)。
 
 ```moonbit

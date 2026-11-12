@@ -37,6 +37,7 @@ Feature flags enabled: rr_moon_mod,rr_moon_pkg
 | 固定官方 MMDB 语料 | 全部 73 个文件按既有正常／损坏预期核对，保留参考器分歧的独立判定 |
 | 强类型 City／ASN 独立参考 | 7,860 次比较通过 |
 | `node scripts/native-verify.mjs` | 8 个阶段通过；核心 debug／release 各 58 项，geo 8 项及独立消费者通过 |
+| Native 全包检查／release 测试 | 全部 85 项通过，包含 analytics、workflow 与桥接层；已加入 Windows／Linux 自动检查 |
 | Native CLI／diff 验证 | 分别 39／40 项检查通过，含 100,000 行更新对比 |
 | Native analyze／workflow 定向回归 | 21 项通过，含 100,000 行统计与有界诊断 |
 | `python scripts/native-package.py` | 解压后在移除开发工具 PATH 的环境运行 23 个命令通过；仅导入 Windows 系统 DLL |
