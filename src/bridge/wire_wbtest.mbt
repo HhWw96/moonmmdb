@@ -90,3 +90,30 @@ test "wire writer keeps bounded nested records and independent calls" {
     @mmdb.Value::Text("next").to_tagged_json().stringify(),
   )
 }
+
+///|
+test "wire errors preserve codes offsets messages and JSON escaping" {
+  let errors : Array[@mmdb.MmdbError] = []
+  for paths in [["bad"], ["/same", "/same"], []] {
+    let error = try {
+      @mmdb.validate_paths(paths)
+      abort("Expected field configuration error")
+    } catch {
+      error => error
+    }
+    errors.push(error)
+  }
+  for data in [b"", b"bad", b"\xab\xcd\xefMaxMind.com\x00"] {
+    let error = try {
+      ignore(@mmdb.open_bytes(data))
+      abort("Expected database error")
+    } catch {
+      error => error
+    }
+    errors.push(error)
+  }
+  assert_eq(errors.length(), 6)
+  for error in errors {
+    assert_eq(wire_error(error), error.to_json().stringify())
+  }
+}

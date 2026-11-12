@@ -46,21 +46,33 @@ fn wire_string(out : StringBuilder, text : String) -> Unit {
 }
 
 ///|
-fn wire_tag(out : StringBuilder, kind : String) -> Unit {
-  out.write_string("{\"type\":")
-  wire_string(out, kind)
-  out.write_string(",\"value\":")
+// Errors on a log row need no intermediate Json map or boxed scalar values.
+fn wire_error_into(out : StringBuilder, error : @mmdb.MmdbError) -> Unit {
+  out.write_string("{\"status\":\"error\",\"code\":")
+  wire_string(out, error.code())
+  out.write_string(",\"offset\":")
+  out.write_string(error.offset().to_string())
+  out.write_string(",\"message\":")
+  wire_string(out, error.message())
+  out.write_char('}')
+}
+
+///|
+fn wire_error(error : @mmdb.MmdbError) -> String {
+  let out = StringBuilder()
+  wire_error_into(out, error)
+  out.to_string()
 }
 
 ///|
 fn wire_value(out : StringBuilder, value : @mmdb.Value) -> Unit {
   match value {
     Text(text) => {
-      wire_tag(out, "string")
+      out.write_string("{\"type\":\"string\",\"value\":")
       wire_string(out, text)
     }
     Blob(bytes) => {
-      wire_tag(out, "bytes")
+      out.write_string("{\"type\":\"bytes\",\"value\":")
       out.write_char('"')
       for byte in bytes {
         let code = byte.to_int()
@@ -72,43 +84,43 @@ fn wire_value(out : StringBuilder, value : @mmdb.Value) -> Unit {
       out.write_char('"')
     }
     Boolean(value) => {
-      wire_tag(out, "boolean")
+      out.write_string("{\"type\":\"boolean\",\"value\":")
       out.write_string(if value { "true" } else { "false" })
     }
     Unsigned16(value) => {
-      wire_tag(out, "uint16")
+      out.write_string("{\"type\":\"uint16\",\"value\":")
       wire_string(out, value.to_string())
     }
     Unsigned32(value) => {
-      wire_tag(out, "uint32")
+      out.write_string("{\"type\":\"uint32\",\"value\":")
       wire_string(out, value.to_string())
     }
     Signed32(value) => {
-      wire_tag(out, "int32")
+      out.write_string("{\"type\":\"int32\",\"value\":")
       wire_string(out, value.to_string())
     }
     Unsigned64(value) => {
-      wire_tag(out, "uint64")
+      out.write_string("{\"type\":\"uint64\",\"value\":")
       wire_string(out, value.to_string())
     }
     Unsigned128(value) => {
-      wire_tag(out, "uint128")
+      out.write_string("{\"type\":\"uint128\",\"value\":")
       wire_string(out, value)
     }
     Real32(value) => {
-      wire_tag(out, "float32")
+      out.write_string("{\"type\":\"float32\",\"value\":")
       wire_string(out, value.number().to_string())
       out.write_string(",\"bits\":")
       wire_string(out, value.bits.to_string(radix=16))
     }
     Real64(value) => {
-      wire_tag(out, "float64")
+      out.write_string("{\"type\":\"float64\",\"value\":")
       wire_string(out, value.number().to_string())
       out.write_string(",\"bits\":")
       wire_string(out, value.bits.to_string(radix=16))
     }
     List(items) => {
-      wire_tag(out, "array")
+      out.write_string("{\"type\":\"array\",\"value\":")
       out.write_char('[')
       for i in 0..<items.length() {
         if i > 0 {
@@ -119,7 +131,7 @@ fn wire_value(out : StringBuilder, value : @mmdb.Value) -> Unit {
       out.write_char(']')
     }
     Object(items) => {
-      wire_tag(out, "map")
+      out.write_string("{\"type\":\"map\",\"value\":")
       out.write_char('{')
       for i in 0..<items.length() {
         if i > 0 {
@@ -137,9 +149,13 @@ fn wire_value(out : StringBuilder, value : @mmdb.Value) -> Unit {
 
 ///|
 fn wire_projection(out : StringBuilder, value : @mmdb.Projection) -> Unit {
-  out.write_string("{\"status\":")
-  wire_string(out, if value.record_found { "found" } else { "not_found" })
-  out.write_string(",\"prefix_length\":")
+  out.write_string(
+    if value.record_found {
+      "{\"status\":\"found\",\"prefix_length\":"
+    } else {
+      "{\"status\":\"not_found\",\"prefix_length\":"
+    },
+  )
   out.write_string(value.prefix_length.to_string())
   out.write_string(",\"fields\":{")
   for i in 0..<value.fields.length() {
@@ -163,16 +179,13 @@ fn wire_projection(out : StringBuilder, value : @mmdb.Projection) -> Unit {
 ///|
 fn wire_enrichment(value : @mmdb.Enrichment) -> String {
   let out = StringBuilder()
-  out.write_string("{\"status\":")
-  wire_string(
-    out,
+  out.write_string(
     match value.status_code() {
-      0 => "found"
-      1 => "not_found"
-      _ => "error"
+      0 => "{\"status\":\"found\",\"sources\":{"
+      1 => "{\"status\":\"not_found\",\"sources\":{"
+      _ => "{\"status\":\"error\",\"sources\":{"
     },
   )
-  out.write_string(",\"sources\":{")
   for i in 0..<value.sources.length() {
     if i > 0 {
       out.write_char(',')
@@ -181,7 +194,7 @@ fn wire_enrichment(value : @mmdb.Enrichment) -> String {
     out.write_char(':')
     match value.sources[i].1 {
       Selected(projection) => wire_projection(out, projection)
-      Failed(error) => out.write_string(error.to_json().stringify())
+      Failed(error) => wire_error_into(out, error)
     }
   }
   out.write_string("}}")
