@@ -31,7 +31,9 @@ fn decoder(
     remaining: limits.max_values,
     payload: limits.max_payload_bytes,
     next: base,
-    active: [],
+    // A small operation-local reserve avoids repeated growth on common paths.
+    // It is independent of untrusted encoded container lengths.
+    active: Array(capacity=8),
     work,
     failure: None,
     key_text: "",
@@ -282,7 +284,8 @@ fn decode_value(
     // Large maps keep hash lookup to avoid quadratic hostile-input work.
     let seen : Map[String, Bool]? = if size > 16 { Some(Map([])) } else { None }
     let names : Array[String]? = if size <= 16 && !(retention is All) {
-      Some([])
+      // This branch is bounded to sixteen keys, even for hostile input.
+      Some(Array(capacity=size))
     } else {
       None
     }

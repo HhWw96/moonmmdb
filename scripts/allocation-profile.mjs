@@ -23,7 +23,7 @@ const records = ips.map(ip => probe_query(handle, ip)), texts = records.map(prob
 const sink = new Writable({ write(_chunk, _encoding, callback) { callback(); } });
 const session = new Session(); session.connect();
 const report = { status: 'running', node: process.version, platform: process.platform, source_sha256: sourceFingerprint(), probe_sha256: sha256(readFileSync(path)), databases: [city, country].map(sha256), scope: 'Inspector sampled allocation diagnostics, fixed 20000 operations per independent stage; synthetic drained output, not filesystem throughput or formal soak.', stages: [] };
-for (const stage of ['query', 'typed_serialization', 'production_bridge', 'host_parse', 'host_stringify_and_output']) {
+for (const stage of ['query', 'typed_serialization', 'production_bridge', 'production_bridge_invalid', 'host_parse', 'host_stringify_and_output']) {
   await session.post('HeapProfiler.startSampling', { samplingInterval: 32768, includeObjectsCollectedByMajorGC: true, includeObjectsCollectedByMinorGC: true });
   const before = process.memoryUsage(), started = performance.now();
   for (let i = 0; i < 20000; i++) {
@@ -31,6 +31,7 @@ for (const stage of ['query', 'typed_serialization', 'production_bridge', 'host_
     if (stage === 'query') probe_query(handle, ips[j]);
     else if (stage === 'typed_serialization') probe_serialize(records[j]);
     else if (stage === 'production_bridge') bridge.enrich_ip(joint, ips[j]);
+    else if (stage === 'production_bridge_invalid') bridge.enrich_ip(joint, 'bad-ip');
     else if (stage === 'host_parse') JSON.parse(texts[j]);
     else await new Promise((resolve, reject) => sink.write(JSON.stringify(JSON.parse(texts[j])) + '\n', e => e ? reject(e) : resolve()));
   }

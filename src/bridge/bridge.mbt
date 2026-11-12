@@ -187,7 +187,7 @@ pub fn enrich_ip(handle : EnrichmentHandle, ip : String) -> String {
   match handle.enricher {
     Some(enricher) =>
       wire_enrichment(enricher.lookup(ip)) catch {
-        e => e.to_json().stringify()
+        e => wire_error(e)
       }
     None => handle.error.unwrap()
   }
