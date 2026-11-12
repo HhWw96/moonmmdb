@@ -2,7 +2,7 @@
 // This writer is private to the bridge. Its inputs are Reader results, whose
 // map keys and prepared field/source names have already been checked for
 // duplicates. Public to_json methods still return independent JSON objects.
-fn wire_string(out : StringBuilder, text : String) -> Unit {
+fn wire_string(out : WireBuffer, text : String) -> Unit {
   out.write_char('"')
   let mut needs_escape = false
   // Escaping only depends on ASCII code units. Scan without a Unicode
@@ -47,7 +47,7 @@ fn wire_string(out : StringBuilder, text : String) -> Unit {
 
 ///|
 // Errors on a log row need no intermediate Json map or boxed scalar values.
-fn wire_error_into(out : StringBuilder, error : @mmdb.MmdbError) -> Unit {
+fn wire_error_into(out : WireBuffer, error : @mmdb.MmdbError) -> Unit {
   out.write_string("{\"status\":\"error\",\"code\":")
   wire_string(out, error.code())
   out.write_string(",\"offset\":")
@@ -59,13 +59,13 @@ fn wire_error_into(out : StringBuilder, error : @mmdb.MmdbError) -> Unit {
 
 ///|
 fn wire_error(error : @mmdb.MmdbError) -> String {
-  let out = StringBuilder()
+  let out = WireBuffer::new()
   wire_error_into(out, error)
   out.to_string()
 }
 
 ///|
-fn wire_value(out : StringBuilder, value : @mmdb.Value) -> Unit {
+fn wire_value(out : WireBuffer, value : @mmdb.Value) -> Unit {
   match value {
     Text(text) => {
       out.write_string("{\"type\":\"string\",\"value\":")
@@ -148,7 +148,7 @@ fn wire_value(out : StringBuilder, value : @mmdb.Value) -> Unit {
 }
 
 ///|
-fn wire_projection(out : StringBuilder, value : @mmdb.Projection) -> Unit {
+fn wire_projection(out : WireBuffer, value : @mmdb.Projection) -> Unit {
   out.write_string(
     if value.record_found {
       "{\"status\":\"found\",\"prefix_length\":"
@@ -178,7 +178,7 @@ fn wire_projection(out : StringBuilder, value : @mmdb.Projection) -> Unit {
 
 ///|
 fn wire_enrichment(value : @mmdb.Enrichment) -> String {
-  let out = StringBuilder()
+  let out = WireBuffer::new()
   out.write_string(
     match value.status_code() {
       0 => "{\"status\":\"found\",\"sources\":{"

@@ -68,7 +68,7 @@ test "wire enrichment preserves all decoded types, escaping and source outcomes"
 test "wire writer matches JSON escaping for every control character" {
   for code in 0..<32 {
     let text = "before" + code.unsafe_to_char().to_string() + "after😀"
-    let out = StringBuilder()
+    let out = WireBuffer::new()
     wire_string(out, text)
     assert_eq(out.to_string(), @json.to_json(text).stringify())
   }
@@ -80,10 +80,10 @@ test "wire writer keeps bounded nested records and independent calls" {
   for _ in 0..<256 {
     value = List([value])
   }
-  let out = StringBuilder()
+  let out = WireBuffer::new()
   wire_value(out, value)
   assert_eq(out.to_string(), value.to_tagged_json().stringify())
-  let another = StringBuilder()
+  let another = WireBuffer::new()
   wire_value(another, Text("next"))
   assert_eq(
     another.to_string(),
@@ -115,5 +115,20 @@ test "wire errors preserve codes offsets messages and JSON escaping" {
   assert_eq(errors.length(), 6)
   for error in errors {
     assert_eq(wire_error(error), error.to_json().stringify())
+  }
+}
+
+///|
+test "wire buffer preserves chunk boundaries and returned string snapshots" {
+  for size in [0, 31, 63, 64, 65, 127, 128, 129, 256] {
+    let value : @mmdb.Value = Blob(Bytes::makei(size, i => (i % 256).to_byte()))
+    let out = WireBuffer::new()
+    wire_value(out, value)
+    let snapshot = out.to_string()
+    assert_eq(snapshot, value.to_tagged_json().stringify())
+    assert_eq(out.to_string(), snapshot)
+    out.write_string("next😀")
+    assert_eq(out.to_string(), snapshot + "next😀")
+    assert_eq(snapshot, value.to_tagged_json().stringify())
   }
 }

@@ -13,6 +13,8 @@ priv struct Decode {
   mut failure : MmdbError?
   mut key_text : String
   mut key_valid : Bool
+  mut key_offset : Int32
+  mut key_size : Int32
 }
 
 ///|
@@ -38,6 +40,8 @@ fn decoder(
     failure: None,
     key_text: "",
     key_valid: false,
+    key_offset: 0,
+    key_size: 0,
   }
 }
 
@@ -180,7 +184,7 @@ fn decode_into(
     }
   }
   ctx.active.push(offset)
-  if retention is MapKey {
+  if retention is MapKey || retention is MapKeyRange {
     ctx.key_valid = false
   }
   let result = decode_value(ctx, offset, depth, retention~)
@@ -273,10 +277,47 @@ fn decode_value(
         pos = ctx.next
       }
       ctx.next = pos
-      if retention is MapKey {
+      if retention is MapKey || retention is MapKeyRange {
         ctx.key_valid = false
       }
       return if retention is Discard { discarded_value } else { List(items) }
+    }
+    if retention is Discard && size <= 16 {
+      // Validate every key and value, but compare canonical UTF-8 byte ranges
+      // instead of allocating strings which cannot escape this discarded map.
+      // The at-most-sixteen-key scan has the same bounded duplicate work.
+      let keys : Array[Int32] = Array(capacity=size * 2)
+      for _ in 0..<size {
+        ignore(decode_into(ctx, pos, depth + 1, retention=MapKeyRange))
+        if ctx.failure is Some(_) {
+          return discarded_value
+        }
+        let next = ctx.next
+        if !ctx.key_valid {
+          return decode_failure(
+            ctx, "invalid-map-key", pos, "Map key must be a UTF-8 string",
+          )
+        }
+        let key_offset = ctx.key_offset
+        let key_size = ctx.key_size
+        for i = 0; i < keys.length(); i = i + 2 {
+          if keys[i + 1] == key_size &&
+            equal_key_range(ctx.data, keys[i], key_offset, key_size) {
+            return decode_failure(
+              ctx, "duplicate-key", pos, "Duplicate map key is outside reader profile",
+            )
+          }
+        }
+        keys.push(key_offset)
+        keys.push(key_size)
+        ignore(decode_into(ctx, next, depth + 1, retention=Discard))
+        if ctx.failure is Some(_) {
+          return discarded_value
+        }
+        pos = ctx.next
+      }
+      ctx.next = pos
+      return discarded_value
     }
     let items : Array[(String, Value)] = []
     // Small MMDB maps already retain their keys in items. Reuse that storage
@@ -347,7 +388,7 @@ fn decode_value(
       pos = ctx.next
     }
     ctx.next = pos
-    if retention is MapKey {
+    if retention is MapKey || retention is MapKeyRange {
       ctx.key_valid = false
     }
     return if retention is Discard { discarded_value } else { Object(items) }
@@ -421,6 +462,11 @@ fn decode_value(
               ctx, "invalid-utf8", pos, "String is not valid UTF-8",
             )
           }
+          if retention is MapKeyRange {
+            ctx.key_offset = pos
+            ctx.key_size = size
+            ctx.key_valid = true
+          }
           discarded_value
         }
       } else if !(retention is All) {
@@ -492,4 +538,20 @@ fn decode_value(
   }
   ctx.next = end
   value
+}
+
+///|
+// Both spans have already passed section bounds and strict UTF-8 validation.
+fn equal_key_range(
+  data : Bytes,
+  left : Int32,
+  right : Int32,
+  size : Int32,
+) -> Bool {
+  for i in 0..<size {
+    if data[left + i] != data[right + i] {
+      return false
+    }
+  }
+  true
 }
